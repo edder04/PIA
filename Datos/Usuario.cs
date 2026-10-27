@@ -6,19 +6,18 @@ namespace PIA.Datos
 {
     public class Usuario
     {
-        public int UsuarioId { get; set; }
-
-        public string NombreUsuario { get; set; } = "";
-
-        public string NombreCompleto { get; set; } = "";
-
-        public string PasswordHash { get; set; } = "";
-
-        public int Rol { get; set; }
-
-        public bool Activo { get; set; } = true;
-
-        public DateTime FechaCreacion { get; set; } = DateTime.Now;
+        public int IdUsuario { get; set; }
+        public string Nombres { get; set; } = string.Empty; 
+        public string ApPaterno { get; set; } = string.Empty;
+        public string? ApMaterno { get; set; }          
+        public DateTime FechaNacimiento { get; set; }
+        public string NumeroNomina { get; set; } = string.Empty;
+        public string CorreoElectronico { get; set; } = string.Empty;
+        public string? Rol { get; set; }
+        public string NombreUsuario { get; set; } = string.Empty;
+        public string PasswordHash { get; set; } = string.Empty;
+        public bool Activo { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public int? UsuarioRegistro { get; set; }
     }
-
-    }
+}

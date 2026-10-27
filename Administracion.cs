@@ -15,21 +15,16 @@ namespace PIA
         {
             InitializeComponent();
             pnlMenuInAdmin.Visible = false;
+            //GlassEffect.Apply(pnlMenuInAdmin);
             GlassEffect.Apply(this);
 
 
-            RedondearBoton.Aplicar(btnInicio, 20);
-            RedondearBoton.Aplicar(btnVentasVentas, 20);
-            RedondearBoton.Aplicar(btnClientesVentas, 20);
-            RedondearBoton.Aplicar(btnPartidosVentas, 20);
-            RedondearBoton.Aplicar(btnFacturasVentas, 20);
-            RedondearBoton.Aplicar(btnReportesVentas, 20);
             RedondearBoton.Aplicar(btnAjustesInAdmin, 20);
             RedondearBoton.Aplicar(btnHoyInPartidos, 20);
             RedondearBoton.Aplicar(btnProximosInPartidos, 20);
             RedondearBoton.Aplicar(btnTodosInPartidos, 20);
             RedondearBoton.Aplicar(btnEstaSemanaInPartidos, 20);
-            RedondearBoton.Aplicar(btnSalir, 20);
+
 
             tabCtrl.Show();
 
@@ -116,6 +111,16 @@ namespace PIA
         private void btnEditarCliente_Click(object sender, EventArgs e)
         {
             tabClientesInAdmin.SelectedIndex = 2;
+        }
+
+        private void label65_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

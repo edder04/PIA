@@ -291,7 +291,7 @@
             tabCtrlVentas.Controls.Add(tabPgReportes);
             tabCtrlVentas.ItemSize = new Size(0, 1);
             tabCtrlVentas.Location = new Point(29, 90);
-            tabCtrlVentas.Margin = new Padding(0, 0, 0, 0);
+            tabCtrlVentas.Margin = new Padding(0);
             tabCtrlVentas.Name = "tabCtrlVentas";
             tabCtrlVentas.SelectedIndex = 0;
             tabCtrlVentas.Size = new Size(1400, 850);
@@ -2910,15 +2910,15 @@
             // 
             // btnAjustes
             // 
-            btnAjustes.BackColor = Color.Transparent;
-            btnAjustes.Font = new Font("Avenir LT Pro 65 Medium", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAjustes.BackColor = Color.White;
+            btnAjustes.Font = new Font("Avenir LT Pro 65 Medium", 20.2499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAjustes.ForeColor = Color.Black;
-            btnAjustes.Location = new Point(1339, 53);
+            btnAjustes.Location = new Point(1339, 32);
             btnAjustes.Margin = new Padding(2);
             btnAjustes.Name = "btnAjustes";
-            btnAjustes.Size = new Size(104, 30);
+            btnAjustes.Size = new Size(50, 50);
             btnAjustes.TabIndex = 1;
-            btnAjustes.Text = "AJUSTES";
+            btnAjustes.Text = "≡";
             btnAjustes.UseVisualStyleBackColor = false;
             btnAjustes.Click += btnAjustes_Click;
             // 
@@ -2927,7 +2927,7 @@
             lblNombreUsuario.AutoSize = true;
             lblNombreUsuario.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblNombreUsuario.ForeColor = Color.White;
-            lblNombreUsuario.Location = new Point(1223, 57);
+            lblNombreUsuario.Location = new Point(1223, 44);
             lblNombreUsuario.Margin = new Padding(2, 0, 2, 0);
             lblNombreUsuario.Name = "lblNombreUsuario";
             lblNombreUsuario.RightToLeft = RightToLeft.Yes;
@@ -2937,11 +2937,10 @@
             // 
             // btnVentasVentas
             // 
-            btnVentasVentas.BackColor = Color.Black;
+            btnVentasVentas.BackColor = Color.White;
             btnVentasVentas.Cursor = Cursors.Hand;
-            btnVentasVentas.FlatStyle = FlatStyle.Popup;
             btnVentasVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnVentasVentas.ForeColor = Color.White;
+            btnVentasVentas.ForeColor = Color.Black;
             btnVentasVentas.Location = new Point(29, 75);
             btnVentasVentas.Margin = new Padding(2);
             btnVentasVentas.Name = "btnVentasVentas";
@@ -2953,11 +2952,10 @@
             // 
             // btnClientesVentas
             // 
-            btnClientesVentas.BackColor = Color.Black;
+            btnClientesVentas.BackColor = Color.White;
             btnClientesVentas.Cursor = Cursors.Hand;
-            btnClientesVentas.FlatStyle = FlatStyle.Popup;
             btnClientesVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClientesVentas.ForeColor = Color.White;
+            btnClientesVentas.ForeColor = Color.Black;
             btnClientesVentas.Location = new Point(29, 125);
             btnClientesVentas.Margin = new Padding(2);
             btnClientesVentas.Name = "btnClientesVentas";
@@ -2969,11 +2967,10 @@
             // 
             // btnPartidosVentas
             // 
-            btnPartidosVentas.BackColor = Color.Black;
+            btnPartidosVentas.BackColor = Color.White;
             btnPartidosVentas.Cursor = Cursors.Hand;
-            btnPartidosVentas.FlatStyle = FlatStyle.Popup;
             btnPartidosVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPartidosVentas.ForeColor = Color.White;
+            btnPartidosVentas.ForeColor = Color.Black;
             btnPartidosVentas.Location = new Point(29, 175);
             btnPartidosVentas.Margin = new Padding(2);
             btnPartidosVentas.Name = "btnPartidosVentas";
@@ -2985,11 +2982,10 @@
             // 
             // btnFacturasVentas
             // 
-            btnFacturasVentas.BackColor = Color.Black;
+            btnFacturasVentas.BackColor = Color.White;
             btnFacturasVentas.Cursor = Cursors.Hand;
-            btnFacturasVentas.FlatStyle = FlatStyle.Popup;
             btnFacturasVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnFacturasVentas.ForeColor = Color.White;
+            btnFacturasVentas.ForeColor = Color.Black;
             btnFacturasVentas.Location = new Point(29, 225);
             btnFacturasVentas.Margin = new Padding(2);
             btnFacturasVentas.Name = "btnFacturasVentas";
@@ -3001,11 +2997,10 @@
             // 
             // btnReportesVentas
             // 
-            btnReportesVentas.BackColor = Color.Black;
+            btnReportesVentas.BackColor = Color.White;
             btnReportesVentas.Cursor = Cursors.Hand;
-            btnReportesVentas.FlatStyle = FlatStyle.Popup;
             btnReportesVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReportesVentas.ForeColor = Color.White;
+            btnReportesVentas.ForeColor = Color.Black;
             btnReportesVentas.Location = new Point(29, 275);
             btnReportesVentas.Margin = new Padding(2);
             btnReportesVentas.Name = "btnReportesVentas";
@@ -3017,7 +3012,7 @@
             // 
             // pnlMenu
             // 
-            pnlMenu.BackColor = Color.Black;
+            pnlMenu.BackColor = Color.FromArgb(90, 90, 90);
             pnlMenu.Controls.Add(btnInicio);
             pnlMenu.Controls.Add(btnSalir);
             pnlMenu.Controls.Add(btnReportesVentas);
@@ -3025,7 +3020,7 @@
             pnlMenu.Controls.Add(btnFacturasVentas);
             pnlMenu.Controls.Add(btnClientesVentas);
             pnlMenu.Controls.Add(btnPartidosVentas);
-            pnlMenu.Location = new Point(1093, 83);
+            pnlMenu.Location = new Point(1093, 91);
             pnlMenu.Margin = new Padding(2);
             pnlMenu.Name = "pnlMenu";
             pnlMenu.Size = new Size(350, 422);
@@ -3033,12 +3028,11 @@
             // 
             // btnInicio
             // 
-            btnInicio.BackColor = Color.Black;
+            btnInicio.BackColor = Color.White;
             btnInicio.BackgroundImageLayout = ImageLayout.None;
             btnInicio.Cursor = Cursors.Hand;
-            btnInicio.FlatStyle = FlatStyle.Popup;
             btnInicio.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnInicio.ForeColor = Color.White;
+            btnInicio.ForeColor = Color.Black;
             btnInicio.Location = new Point(29, 25);
             btnInicio.Margin = new Padding(2);
             btnInicio.Name = "btnInicio";
@@ -3050,11 +3044,10 @@
             // 
             // btnSalir
             // 
-            btnSalir.BackColor = Color.Black;
+            btnSalir.BackColor = Color.White;
             btnSalir.Cursor = Cursors.Hand;
-            btnSalir.FlatStyle = FlatStyle.Popup;
             btnSalir.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSalir.ForeColor = Color.White;
+            btnSalir.ForeColor = Color.Black;
             btnSalir.Location = new Point(29, 325);
             btnSalir.Margin = new Padding(2);
             btnSalir.Name = "btnSalir";
@@ -3075,6 +3068,8 @@
             Controls.Add(tabCtrlVentas);
             Controls.Add(pnlMenu);
             Margin = new Padding(2);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Ventas";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ventas";

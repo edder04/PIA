@@ -18,18 +18,13 @@ namespace PIA
             InitializeComponent();
             pnlMenu.Visible = false;
             GlassEffect.Apply(this);
-            RedondearBoton.Aplicar(btnInicio, 20);
-            RedondearBoton.Aplicar(btnVentasVentas, 20);
-            RedondearBoton.Aplicar(btnClientesVentas, 20);
-            RedondearBoton.Aplicar(btnPartidosVentas, 20);
-            RedondearBoton.Aplicar(btnFacturasVentas, 20);
-            RedondearBoton.Aplicar(btnReportesVentas, 20);
+   
             RedondearBoton.Aplicar(btnAjustes, 20);
             RedondearBoton.Aplicar(btnHoyInPartidos, 20);
             RedondearBoton.Aplicar(btnProximosInPartidos, 20);
             RedondearBoton.Aplicar(btnTodosInPartidos, 20);
             RedondearBoton.Aplicar(btnEstaSemanaInPartidos, 20);
-            RedondearBoton.Aplicar(btnSalir, 20);
+        
 
             tabCtrlVentas.Show();
 

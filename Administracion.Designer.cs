@@ -296,6 +296,62 @@
             label2 = new Label();
             label1 = new Label();
             tabPageUsuarios = new TabPage();
+            tabCtrlUsauriosInAdmin = new TabControl();
+            BuscarUsuario = new TabPage();
+            button9 = new Button();
+            dataGridView3 = new DataGridView();
+            button11 = new Button();
+            button12 = new Button();
+            textBox29 = new TextBox();
+            label47 = new Label();
+            label48 = new Label();
+            NuevoUsuario = new TabPage();
+            textBox30 = new TextBox();
+            label49 = new Label();
+            button13 = new Button();
+            textBox36 = new TextBox();
+            textBox37 = new TextBox();
+            textBox38 = new TextBox();
+            textBox39 = new TextBox();
+            textBox40 = new TextBox();
+            textBox41 = new TextBox();
+            textBox42 = new TextBox();
+            textBox43 = new TextBox();
+            label57 = new Label();
+            label58 = new Label();
+            label59 = new Label();
+            label60 = new Label();
+            label61 = new Label();
+            label62 = new Label();
+            label63 = new Label();
+            label64 = new Label();
+            label65 = new Label();
+            tabEditarUsuario = new TabPage();
+            textBox31 = new TextBox();
+            label50 = new Label();
+            textBox32 = new TextBox();
+            textBox33 = new TextBox();
+            textBox34 = new TextBox();
+            textBox35 = new TextBox();
+            textBox44 = new TextBox();
+            textBox45 = new TextBox();
+            textBox46 = new TextBox();
+            textBox47 = new TextBox();
+            label51 = new Label();
+            label52 = new Label();
+            label53 = new Label();
+            label54 = new Label();
+            label55 = new Label();
+            label56 = new Label();
+            label66 = new Label();
+            label67 = new Label();
+            label68 = new Label();
+            button14 = new Button();
+            IDUSUARIO = new DataGridViewTextBoxColumn();
+            NOMBRECOMPLETO = new DataGridViewTextBoxColumn();
+            NOMBREUSUARIO = new DataGridViewTextBoxColumn();
+            CORREOINUSUARIO = new DataGridViewTextBoxColumn();
+            ESTADOINUSUARIO = new DataGridViewTextBoxColumn();
             pnlMenuInAdmin.SuspendLayout();
             tabCtrl.SuspendLayout();
             tabPgInicio.SuspendLayout();
@@ -319,11 +375,17 @@
             tabPgFacturas.SuspendLayout();
             tabPgReportes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            tabPageUsuarios.SuspendLayout();
+            tabCtrlUsauriosInAdmin.SuspendLayout();
+            BuscarUsuario.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
+            NuevoUsuario.SuspendLayout();
+            tabEditarUsuario.SuspendLayout();
             SuspendLayout();
             // 
             // pnlMenuInAdmin
             // 
-            pnlMenuInAdmin.BackColor = Color.Black;
+            pnlMenuInAdmin.BackColor = Color.FromArgb(90, 90, 90);
             pnlMenuInAdmin.Controls.Add(btnUsuarios);
             pnlMenuInAdmin.Controls.Add(btnInicio);
             pnlMenuInAdmin.Controls.Add(btnSalir);
@@ -332,7 +394,7 @@
             pnlMenuInAdmin.Controls.Add(btnFacturasVentas);
             pnlMenuInAdmin.Controls.Add(btnClientesVentas);
             pnlMenuInAdmin.Controls.Add(btnPartidosVentas);
-            pnlMenuInAdmin.Location = new Point(1093, 94);
+            pnlMenuInAdmin.Location = new Point(1093, 113);
             pnlMenuInAdmin.Margin = new Padding(2);
             pnlMenuInAdmin.Name = "pnlMenuInAdmin";
             pnlMenuInAdmin.Size = new Size(350, 422);
@@ -340,11 +402,10 @@
             // 
             // btnUsuarios
             // 
-            btnUsuarios.BackColor = Color.Black;
+            btnUsuarios.BackColor = Color.White;
             btnUsuarios.Cursor = Cursors.Hand;
-            btnUsuarios.FlatStyle = FlatStyle.Popup;
             btnUsuarios.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnUsuarios.ForeColor = Color.White;
+            btnUsuarios.ForeColor = Color.Black;
             btnUsuarios.Location = new Point(29, 325);
             btnUsuarios.Margin = new Padding(2);
             btnUsuarios.Name = "btnUsuarios";
@@ -356,15 +417,17 @@
             // 
             // btnInicio
             // 
-            btnInicio.BackColor = Color.Black;
+            btnInicio.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnInicio.AutoSize = true;
+            btnInicio.BackColor = Color.White;
+            btnInicio.BackgroundImageLayout = ImageLayout.None;
             btnInicio.Cursor = Cursors.Hand;
-            btnInicio.FlatStyle = FlatStyle.Popup;
             btnInicio.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnInicio.ForeColor = Color.White;
+            btnInicio.ForeColor = Color.Black;
             btnInicio.Location = new Point(29, 25);
             btnInicio.Margin = new Padding(2);
             btnInicio.Name = "btnInicio";
-            btnInicio.Size = new Size(292, 35);
+            btnInicio.Size = new Size(292, 39);
             btnInicio.TabIndex = 9;
             btnInicio.Text = "INICIO";
             btnInicio.UseVisualStyleBackColor = false;
@@ -372,11 +435,10 @@
             // 
             // btnSalir
             // 
-            btnSalir.BackColor = Color.Black;
+            btnSalir.BackColor = Color.White;
             btnSalir.Cursor = Cursors.Hand;
-            btnSalir.FlatStyle = FlatStyle.Popup;
             btnSalir.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSalir.ForeColor = Color.White;
+            btnSalir.ForeColor = Color.Black;
             btnSalir.Location = new Point(29, 375);
             btnSalir.Margin = new Padding(2);
             btnSalir.Name = "btnSalir";
@@ -388,11 +450,10 @@
             // 
             // btnReportesVentas
             // 
-            btnReportesVentas.BackColor = Color.Black;
+            btnReportesVentas.BackColor = Color.White;
             btnReportesVentas.Cursor = Cursors.Hand;
-            btnReportesVentas.FlatStyle = FlatStyle.Popup;
             btnReportesVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReportesVentas.ForeColor = Color.White;
+            btnReportesVentas.ForeColor = Color.Black;
             btnReportesVentas.Location = new Point(29, 275);
             btnReportesVentas.Margin = new Padding(2);
             btnReportesVentas.Name = "btnReportesVentas";
@@ -404,11 +465,10 @@
             // 
             // btnVentasVentas
             // 
-            btnVentasVentas.BackColor = Color.Black;
+            btnVentasVentas.BackColor = Color.White;
             btnVentasVentas.Cursor = Cursors.Hand;
-            btnVentasVentas.FlatStyle = FlatStyle.Popup;
             btnVentasVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnVentasVentas.ForeColor = Color.White;
+            btnVentasVentas.ForeColor = Color.Black;
             btnVentasVentas.Location = new Point(29, 75);
             btnVentasVentas.Margin = new Padding(2);
             btnVentasVentas.Name = "btnVentasVentas";
@@ -420,11 +480,10 @@
             // 
             // btnFacturasVentas
             // 
-            btnFacturasVentas.BackColor = Color.Black;
+            btnFacturasVentas.BackColor = Color.White;
             btnFacturasVentas.Cursor = Cursors.Hand;
-            btnFacturasVentas.FlatStyle = FlatStyle.Popup;
             btnFacturasVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnFacturasVentas.ForeColor = Color.White;
+            btnFacturasVentas.ForeColor = Color.Black;
             btnFacturasVentas.Location = new Point(29, 225);
             btnFacturasVentas.Margin = new Padding(2);
             btnFacturasVentas.Name = "btnFacturasVentas";
@@ -436,11 +495,10 @@
             // 
             // btnClientesVentas
             // 
-            btnClientesVentas.BackColor = Color.Black;
+            btnClientesVentas.BackColor = Color.White;
             btnClientesVentas.Cursor = Cursors.Hand;
-            btnClientesVentas.FlatStyle = FlatStyle.Popup;
             btnClientesVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClientesVentas.ForeColor = Color.White;
+            btnClientesVentas.ForeColor = Color.Black;
             btnClientesVentas.Location = new Point(29, 125);
             btnClientesVentas.Margin = new Padding(2);
             btnClientesVentas.Name = "btnClientesVentas";
@@ -452,11 +510,10 @@
             // 
             // btnPartidosVentas
             // 
-            btnPartidosVentas.BackColor = Color.Black;
+            btnPartidosVentas.BackColor = Color.White;
             btnPartidosVentas.Cursor = Cursors.Hand;
-            btnPartidosVentas.FlatStyle = FlatStyle.Popup;
             btnPartidosVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPartidosVentas.ForeColor = Color.White;
+            btnPartidosVentas.ForeColor = Color.Black;
             btnPartidosVentas.Location = new Point(29, 175);
             btnPartidosVentas.Margin = new Padding(2);
             btnPartidosVentas.Name = "btnPartidosVentas";
@@ -483,14 +540,14 @@
             // btnAjustesInAdmin
             // 
             btnAjustesInAdmin.BackColor = Color.Transparent;
-            btnAjustesInAdmin.Font = new Font("Segoe UI", 14.1428576F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAjustesInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 20.2499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAjustesInAdmin.ForeColor = Color.Black;
-            btnAjustesInAdmin.Location = new Point(1350, 64);
+            btnAjustesInAdmin.Location = new Point(1352, 56);
             btnAjustesInAdmin.Margin = new Padding(2);
             btnAjustesInAdmin.Name = "btnAjustesInAdmin";
-            btnAjustesInAdmin.Size = new Size(47, 30);
+            btnAjustesInAdmin.Size = new Size(50, 50);
             btnAjustesInAdmin.TabIndex = 5;
-            btnAjustesInAdmin.Text = "⚙️";
+            btnAjustesInAdmin.Text = "≡";
             btnAjustesInAdmin.UseVisualStyleBackColor = false;
             btnAjustesInAdmin.Click += btnAjustesInAdmin_Click;
             // 
@@ -2770,7 +2827,7 @@
             flowPanelPartidos.Margin = new Padding(2);
             flowPanelPartidos.Name = "flowPanelPartidos";
             flowPanelPartidos.Padding = new Padding(6, 5, 6, 5);
-            flowPanelPartidos.Size = new Size(1392, 690);
+            flowPanelPartidos.Size = new Size(714, 690);
             flowPanelPartidos.TabIndex = 18;
             // 
             // btnProximosInPartidos
@@ -3572,6 +3629,7 @@
             // tabPageUsuarios
             // 
             tabPageUsuarios.BackColor = Color.Black;
+            tabPageUsuarios.Controls.Add(tabCtrlUsauriosInAdmin);
             tabPageUsuarios.Location = new Point(4, 24);
             tabPageUsuarios.Margin = new Padding(2);
             tabPageUsuarios.Name = "tabPageUsuarios";
@@ -3579,6 +3637,633 @@
             tabPageUsuarios.Size = new Size(1392, 822);
             tabPageUsuarios.TabIndex = 6;
             tabPageUsuarios.Text = "Usuarios";
+            // 
+            // tabCtrlUsauriosInAdmin
+            // 
+            tabCtrlUsauriosInAdmin.Controls.Add(BuscarUsuario);
+            tabCtrlUsauriosInAdmin.Controls.Add(NuevoUsuario);
+            tabCtrlUsauriosInAdmin.Controls.Add(tabEditarUsuario);
+            tabCtrlUsauriosInAdmin.Location = new Point(3, 11);
+            tabCtrlUsauriosInAdmin.Name = "tabCtrlUsauriosInAdmin";
+            tabCtrlUsauriosInAdmin.SelectedIndex = 0;
+            tabCtrlUsauriosInAdmin.Size = new Size(1386, 800);
+            tabCtrlUsauriosInAdmin.TabIndex = 2;
+            // 
+            // BuscarUsuario
+            // 
+            BuscarUsuario.BackColor = Color.Black;
+            BuscarUsuario.Controls.Add(button9);
+            BuscarUsuario.Controls.Add(dataGridView3);
+            BuscarUsuario.Controls.Add(button11);
+            BuscarUsuario.Controls.Add(button12);
+            BuscarUsuario.Controls.Add(textBox29);
+            BuscarUsuario.Controls.Add(label47);
+            BuscarUsuario.Controls.Add(label48);
+            BuscarUsuario.Location = new Point(4, 24);
+            BuscarUsuario.Name = "BuscarUsuario";
+            BuscarUsuario.Padding = new Padding(3);
+            BuscarUsuario.Size = new Size(1378, 772);
+            BuscarUsuario.TabIndex = 0;
+            BuscarUsuario.Text = "BuscarUsuario";
+            // 
+            // button9
+            // 
+            button9.FlatStyle = FlatStyle.System;
+            button9.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button9.Location = new Point(106, 614);
+            button9.Margin = new Padding(2);
+            button9.Name = "button9";
+            button9.Size = new Size(175, 35);
+            button9.TabIndex = 36;
+            button9.Text = "EDITAR 🖋️";
+            button9.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.BackgroundColor = Color.Black;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Columns.AddRange(new DataGridViewColumn[] { IDUSUARIO, NOMBRECOMPLETO, NOMBREUSUARIO, CORREOINUSUARIO, ESTADOINUSUARIO });
+            dataGridView3.Location = new Point(106, 306);
+            dataGridView3.Margin = new Padding(2);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.RowHeadersWidth = 72;
+            dataGridView3.Size = new Size(1167, 288);
+            dataGridView3.TabIndex = 35;
+            // 
+            // button11
+            // 
+            button11.FlatStyle = FlatStyle.System;
+            button11.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button11.Location = new Point(578, 255);
+            button11.Margin = new Padding(2);
+            button11.Name = "button11";
+            button11.Size = new Size(233, 35);
+            button11.TabIndex = 34;
+            button11.Text = "NUEVO USUARIO ➕";
+            button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            button12.FlatStyle = FlatStyle.System;
+            button12.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button12.Location = new Point(1127, 216);
+            button12.Margin = new Padding(2);
+            button12.Name = "button12";
+            button12.Size = new Size(146, 35);
+            button12.TabIndex = 33;
+            button12.Text = "BUSCAR 🔍";
+            button12.UseVisualStyleBackColor = true;
+            // 
+            // textBox29
+            // 
+            textBox29.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox29.Location = new Point(566, 223);
+            textBox29.Margin = new Padding(2);
+            textBox29.Name = "textBox29";
+            textBox29.Size = new Size(555, 23);
+            textBox29.TabIndex = 32;
+            // 
+            // label47
+            // 
+            label47.AutoSize = true;
+            label47.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label47.ForeColor = Color.White;
+            label47.Location = new Point(112, 220);
+            label47.Margin = new Padding(2, 0, 2, 0);
+            label47.Name = "label47";
+            label47.Size = new Size(452, 27);
+            label47.TabIndex = 31;
+            label47.Text = "BUSCAR POR APELLIDO, CORREO O NN:";
+            // 
+            // label48
+            // 
+            label48.AutoSize = true;
+            label48.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label48.ForeColor = Color.White;
+            label48.Location = new Point(636, 145);
+            label48.Margin = new Padding(2, 0, 2, 0);
+            label48.Name = "label48";
+            label48.Size = new Size(125, 27);
+            label48.TabIndex = 30;
+            label48.Text = "USUARIOS";
+            // 
+            // NuevoUsuario
+            // 
+            NuevoUsuario.BackColor = Color.Black;
+            NuevoUsuario.Controls.Add(textBox30);
+            NuevoUsuario.Controls.Add(label49);
+            NuevoUsuario.Controls.Add(button13);
+            NuevoUsuario.Controls.Add(textBox36);
+            NuevoUsuario.Controls.Add(textBox37);
+            NuevoUsuario.Controls.Add(textBox38);
+            NuevoUsuario.Controls.Add(textBox39);
+            NuevoUsuario.Controls.Add(textBox40);
+            NuevoUsuario.Controls.Add(textBox41);
+            NuevoUsuario.Controls.Add(textBox42);
+            NuevoUsuario.Controls.Add(textBox43);
+            NuevoUsuario.Controls.Add(label57);
+            NuevoUsuario.Controls.Add(label58);
+            NuevoUsuario.Controls.Add(label59);
+            NuevoUsuario.Controls.Add(label60);
+            NuevoUsuario.Controls.Add(label61);
+            NuevoUsuario.Controls.Add(label62);
+            NuevoUsuario.Controls.Add(label63);
+            NuevoUsuario.Controls.Add(label64);
+            NuevoUsuario.Controls.Add(label65);
+            NuevoUsuario.Location = new Point(4, 24);
+            NuevoUsuario.Name = "NuevoUsuario";
+            NuevoUsuario.Padding = new Padding(3);
+            NuevoUsuario.Size = new Size(1378, 772);
+            NuevoUsuario.TabIndex = 1;
+            NuevoUsuario.Text = "NuevoUsuario";
+            NuevoUsuario.Click += tabPage6_Click;
+            // 
+            // textBox30
+            // 
+            textBox30.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox30.Location = new Point(629, 461);
+            textBox30.Margin = new Padding(2);
+            textBox30.Name = "textBox30";
+            textBox30.Size = new Size(196, 27);
+            textBox30.TabIndex = 85;
+            // 
+            // label49
+            // 
+            label49.AutoSize = true;
+            label49.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label49.ForeColor = Color.White;
+            label49.Location = new Point(635, 446);
+            label49.Margin = new Padding(2, 0, 2, 0);
+            label49.Name = "label49";
+            label49.Size = new Size(126, 19);
+            label49.TabIndex = 84;
+            label49.Text = "CONTRASEÑA:";
+            // 
+            // button13
+            // 
+            button13.BackColor = Color.White;
+            button13.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button13.Location = new Point(635, 571);
+            button13.Margin = new Padding(2);
+            button13.Name = "button13";
+            button13.Size = new Size(131, 35);
+            button13.TabIndex = 83;
+            button13.Text = "AGREGAR ➕";
+            button13.UseVisualStyleBackColor = false;
+            // 
+            // textBox36
+            // 
+            textBox36.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox36.Location = new Point(400, 409);
+            textBox36.Margin = new Padding(2);
+            textBox36.Name = "textBox36";
+            textBox36.Size = new Size(174, 27);
+            textBox36.TabIndex = 76;
+            // 
+            // textBox37
+            // 
+            textBox37.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox37.Location = new Point(400, 461);
+            textBox37.Margin = new Padding(2);
+            textBox37.Name = "textBox37";
+            textBox37.Size = new Size(196, 27);
+            textBox37.TabIndex = 75;
+            // 
+            // textBox38
+            // 
+            textBox38.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox38.Location = new Point(620, 409);
+            textBox38.Margin = new Padding(2);
+            textBox38.Name = "textBox38";
+            textBox38.Size = new Size(143, 27);
+            textBox38.TabIndex = 74;
+            // 
+            // textBox39
+            // 
+            textBox39.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox39.Location = new Point(571, 359);
+            textBox39.Margin = new Padding(2);
+            textBox39.Name = "textBox39";
+            textBox39.Size = new Size(423, 27);
+            textBox39.TabIndex = 73;
+            // 
+            // textBox40
+            // 
+            textBox40.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox40.Location = new Point(401, 359);
+            textBox40.Margin = new Padding(2);
+            textBox40.Name = "textBox40";
+            textBox40.Size = new Size(143, 27);
+            textBox40.TabIndex = 72;
+            // 
+            // textBox41
+            // 
+            textBox41.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox41.Location = new Point(714, 309);
+            textBox41.Margin = new Padding(2);
+            textBox41.Name = "textBox41";
+            textBox41.Size = new Size(280, 27);
+            textBox41.TabIndex = 71;
+            // 
+            // textBox42
+            // 
+            textBox42.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox42.Location = new Point(401, 309);
+            textBox42.Margin = new Padding(2);
+            textBox42.Name = "textBox42";
+            textBox42.Size = new Size(280, 27);
+            textBox42.TabIndex = 70;
+            // 
+            // textBox43
+            // 
+            textBox43.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox43.Location = new Point(401, 259);
+            textBox43.Margin = new Padding(2);
+            textBox43.Name = "textBox43";
+            textBox43.Size = new Size(390, 27);
+            textBox43.TabIndex = 69;
+            // 
+            // label57
+            // 
+            label57.AutoSize = true;
+            label57.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label57.ForeColor = Color.White;
+            label57.Location = new Point(406, 446);
+            label57.Margin = new Padding(2, 0, 2, 0);
+            label57.Name = "label57";
+            label57.Size = new Size(190, 19);
+            label57.TabIndex = 60;
+            label57.Text = "NOMBRE DE USUARIO:";
+            // 
+            // label58
+            // 
+            label58.AutoSize = true;
+            label58.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label58.ForeColor = Color.White;
+            label58.Location = new Point(626, 394);
+            label58.Margin = new Padding(2, 0, 2, 0);
+            label58.Name = "label58";
+            label58.Size = new Size(46, 19);
+            label58.TabIndex = 59;
+            label58.Text = "ROL:";
+            // 
+            // label59
+            // 
+            label59.AutoSize = true;
+            label59.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label59.ForeColor = Color.White;
+            label59.Location = new Point(407, 394);
+            label59.Margin = new Padding(2, 0, 2, 0);
+            label59.Name = "label59";
+            label59.Size = new Size(179, 19);
+            label59.TabIndex = 58;
+            label59.Text = "FECHA NACIMIENTO:";
+            // 
+            // label60
+            // 
+            label60.AutoSize = true;
+            label60.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label60.ForeColor = Color.White;
+            label60.Location = new Point(577, 344);
+            label60.Margin = new Padding(2, 0, 2, 0);
+            label60.Name = "label60";
+            label60.Size = new Size(81, 19);
+            label60.TabIndex = 57;
+            label60.Text = "CORREO:";
+            // 
+            // label61
+            // 
+            label61.AutoSize = true;
+            label61.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label61.ForeColor = Color.White;
+            label61.Location = new Point(407, 344);
+            label61.Margin = new Padding(2, 0, 2, 0);
+            label61.Name = "label61";
+            label61.Size = new Size(85, 19);
+            label61.TabIndex = 56;
+            label61.Text = "NOMINA:";
+            // 
+            // label62
+            // 
+            label62.AutoSize = true;
+            label62.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label62.ForeColor = Color.White;
+            label62.Location = new Point(720, 294);
+            label62.Margin = new Padding(2, 0, 2, 0);
+            label62.Name = "label62";
+            label62.Size = new Size(180, 19);
+            label62.TabIndex = 55;
+            label62.Text = "APELLIDO MATERNO:";
+            // 
+            // label63
+            // 
+            label63.AutoSize = true;
+            label63.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label63.ForeColor = Color.White;
+            label63.Location = new Point(406, 294);
+            label63.Margin = new Padding(2, 0, 2, 0);
+            label63.Name = "label63";
+            label63.Size = new Size(174, 19);
+            label63.TabIndex = 54;
+            label63.Text = "APELLIDO PATERNO:";
+            // 
+            // label64
+            // 
+            label64.AutoSize = true;
+            label64.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label64.ForeColor = Color.White;
+            label64.Location = new Point(407, 244);
+            label64.Margin = new Padding(2, 0, 2, 0);
+            label64.Name = "label64";
+            label64.Size = new Size(104, 19);
+            label64.TabIndex = 53;
+            label64.Text = "NOMBRE(S):";
+            // 
+            // label65
+            // 
+            label65.AutoSize = true;
+            label65.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label65.ForeColor = Color.White;
+            label65.Location = new Point(602, 139);
+            label65.Margin = new Padding(2, 0, 2, 0);
+            label65.Name = "label65";
+            label65.Size = new Size(200, 27);
+            label65.TabIndex = 52;
+            label65.Text = "NUEVO USUARIO";
+            label65.Click += label65_Click;
+            // 
+            // tabEditarUsuario
+            // 
+            tabEditarUsuario.BackColor = Color.Black;
+            tabEditarUsuario.Controls.Add(textBox31);
+            tabEditarUsuario.Controls.Add(label50);
+            tabEditarUsuario.Controls.Add(textBox32);
+            tabEditarUsuario.Controls.Add(textBox33);
+            tabEditarUsuario.Controls.Add(textBox34);
+            tabEditarUsuario.Controls.Add(textBox35);
+            tabEditarUsuario.Controls.Add(textBox44);
+            tabEditarUsuario.Controls.Add(textBox45);
+            tabEditarUsuario.Controls.Add(textBox46);
+            tabEditarUsuario.Controls.Add(textBox47);
+            tabEditarUsuario.Controls.Add(label51);
+            tabEditarUsuario.Controls.Add(label52);
+            tabEditarUsuario.Controls.Add(label53);
+            tabEditarUsuario.Controls.Add(label54);
+            tabEditarUsuario.Controls.Add(label55);
+            tabEditarUsuario.Controls.Add(label56);
+            tabEditarUsuario.Controls.Add(label66);
+            tabEditarUsuario.Controls.Add(label67);
+            tabEditarUsuario.Controls.Add(label68);
+            tabEditarUsuario.Controls.Add(button14);
+            tabEditarUsuario.Location = new Point(4, 24);
+            tabEditarUsuario.Name = "tabEditarUsuario";
+            tabEditarUsuario.Size = new Size(1378, 772);
+            tabEditarUsuario.TabIndex = 2;
+            tabEditarUsuario.Text = "EditarUsuario";
+            // 
+            // textBox31
+            // 
+            textBox31.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox31.Location = new Point(621, 471);
+            textBox31.Margin = new Padding(2);
+            textBox31.Name = "textBox31";
+            textBox31.Size = new Size(196, 27);
+            textBox31.TabIndex = 134;
+            // 
+            // label50
+            // 
+            label50.AutoSize = true;
+            label50.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label50.ForeColor = Color.White;
+            label50.Location = new Point(627, 456);
+            label50.Margin = new Padding(2, 0, 2, 0);
+            label50.Name = "label50";
+            label50.Size = new Size(126, 19);
+            label50.TabIndex = 133;
+            label50.Text = "CONTRASEÑA:";
+            // 
+            // textBox32
+            // 
+            textBox32.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox32.Location = new Point(392, 419);
+            textBox32.Margin = new Padding(2);
+            textBox32.Name = "textBox32";
+            textBox32.Size = new Size(174, 27);
+            textBox32.TabIndex = 132;
+            // 
+            // textBox33
+            // 
+            textBox33.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox33.Location = new Point(392, 471);
+            textBox33.Margin = new Padding(2);
+            textBox33.Name = "textBox33";
+            textBox33.Size = new Size(196, 27);
+            textBox33.TabIndex = 131;
+            // 
+            // textBox34
+            // 
+            textBox34.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox34.Location = new Point(612, 419);
+            textBox34.Margin = new Padding(2);
+            textBox34.Name = "textBox34";
+            textBox34.Size = new Size(143, 27);
+            textBox34.TabIndex = 130;
+            // 
+            // textBox35
+            // 
+            textBox35.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox35.Location = new Point(563, 369);
+            textBox35.Margin = new Padding(2);
+            textBox35.Name = "textBox35";
+            textBox35.Size = new Size(423, 27);
+            textBox35.TabIndex = 129;
+            // 
+            // textBox44
+            // 
+            textBox44.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox44.Location = new Point(393, 369);
+            textBox44.Margin = new Padding(2);
+            textBox44.Name = "textBox44";
+            textBox44.Size = new Size(143, 27);
+            textBox44.TabIndex = 128;
+            // 
+            // textBox45
+            // 
+            textBox45.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox45.Location = new Point(706, 319);
+            textBox45.Margin = new Padding(2);
+            textBox45.Name = "textBox45";
+            textBox45.Size = new Size(280, 27);
+            textBox45.TabIndex = 127;
+            // 
+            // textBox46
+            // 
+            textBox46.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox46.Location = new Point(393, 319);
+            textBox46.Margin = new Padding(2);
+            textBox46.Name = "textBox46";
+            textBox46.Size = new Size(280, 27);
+            textBox46.TabIndex = 126;
+            // 
+            // textBox47
+            // 
+            textBox47.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            textBox47.Location = new Point(393, 269);
+            textBox47.Margin = new Padding(2);
+            textBox47.Name = "textBox47";
+            textBox47.Size = new Size(390, 27);
+            textBox47.TabIndex = 125;
+            // 
+            // label51
+            // 
+            label51.AutoSize = true;
+            label51.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label51.ForeColor = Color.White;
+            label51.Location = new Point(398, 456);
+            label51.Margin = new Padding(2, 0, 2, 0);
+            label51.Name = "label51";
+            label51.Size = new Size(190, 19);
+            label51.TabIndex = 124;
+            label51.Text = "NOMBRE DE USUARIO:";
+            // 
+            // label52
+            // 
+            label52.AutoSize = true;
+            label52.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label52.ForeColor = Color.White;
+            label52.Location = new Point(618, 404);
+            label52.Margin = new Padding(2, 0, 2, 0);
+            label52.Name = "label52";
+            label52.Size = new Size(46, 19);
+            label52.TabIndex = 123;
+            label52.Text = "ROL:";
+            // 
+            // label53
+            // 
+            label53.AutoSize = true;
+            label53.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label53.ForeColor = Color.White;
+            label53.Location = new Point(399, 404);
+            label53.Margin = new Padding(2, 0, 2, 0);
+            label53.Name = "label53";
+            label53.Size = new Size(179, 19);
+            label53.TabIndex = 122;
+            label53.Text = "FECHA NACIMIENTO:";
+            // 
+            // label54
+            // 
+            label54.AutoSize = true;
+            label54.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label54.ForeColor = Color.White;
+            label54.Location = new Point(569, 354);
+            label54.Margin = new Padding(2, 0, 2, 0);
+            label54.Name = "label54";
+            label54.Size = new Size(81, 19);
+            label54.TabIndex = 121;
+            label54.Text = "CORREO:";
+            // 
+            // label55
+            // 
+            label55.AutoSize = true;
+            label55.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label55.ForeColor = Color.White;
+            label55.Location = new Point(399, 354);
+            label55.Margin = new Padding(2, 0, 2, 0);
+            label55.Name = "label55";
+            label55.Size = new Size(85, 19);
+            label55.TabIndex = 120;
+            label55.Text = "NOMINA:";
+            // 
+            // label56
+            // 
+            label56.AutoSize = true;
+            label56.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label56.ForeColor = Color.White;
+            label56.Location = new Point(712, 304);
+            label56.Margin = new Padding(2, 0, 2, 0);
+            label56.Name = "label56";
+            label56.Size = new Size(180, 19);
+            label56.TabIndex = 119;
+            label56.Text = "APELLIDO MATERNO:";
+            // 
+            // label66
+            // 
+            label66.AutoSize = true;
+            label66.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+            label66.ForeColor = Color.White;
+            label66.Location = new Point(398, 304);
+            label66.Margin = new Padding(2, 0, 2, 0);
+            label66.Name = "label66";
+            label66.Size = new Size(174, 19);
+            label66.TabIndex = 118;
+            label66.Text = "APELLIDO PATERNO:";
+            // 
+            // label67
+            // 
+            label67.AutoSize = true;
+            label67.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label67.ForeColor = Color.White;
+            label67.Location = new Point(399, 254);
+            label67.Margin = new Padding(2, 0, 2, 0);
+            label67.Name = "label67";
+            label67.Size = new Size(104, 19);
+            label67.TabIndex = 117;
+            label67.Text = "NOMBRE(S):";
+            // 
+            // label68
+            // 
+            label68.AutoSize = true;
+            label68.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label68.ForeColor = Color.White;
+            label68.Location = new Point(594, 149);
+            label68.Margin = new Padding(2, 0, 2, 0);
+            label68.Name = "label68";
+            label68.Size = new Size(198, 27);
+            label68.TabIndex = 116;
+            label68.Text = "EDITAR USUARIO";
+            // 
+            // button14
+            // 
+            button14.BackColor = Color.White;
+            button14.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button14.Location = new Point(621, 626);
+            button14.Margin = new Padding(2);
+            button14.Name = "button14";
+            button14.Size = new Size(187, 35);
+            button14.TabIndex = 115;
+            button14.Text = "GUARDAR CAMBIOS";
+            button14.UseVisualStyleBackColor = false;
+            // 
+            // IDUSUARIO
+            // 
+            IDUSUARIO.HeaderText = "IDUSUARIO";
+            IDUSUARIO.MinimumWidth = 9;
+            IDUSUARIO.Name = "IDUSUARIO";
+            // 
+            // NOMBRECOMPLETO
+            // 
+            NOMBRECOMPLETO.HeaderText = "NOMBRECOMPLETO";
+            NOMBRECOMPLETO.MinimumWidth = 9;
+            NOMBRECOMPLETO.Name = "NOMBRECOMPLETO";
+            // 
+            // NOMBREUSUARIO
+            // 
+            NOMBREUSUARIO.HeaderText = "NOMBREUSUARIO";
+            NOMBREUSUARIO.MinimumWidth = 9;
+            NOMBREUSUARIO.Name = "NOMBREUSUARIO";
+            // 
+            // CORREOINUSUARIO
+            // 
+            CORREOINUSUARIO.HeaderText = "CORREO";
+            CORREOINUSUARIO.MinimumWidth = 9;
+            CORREOINUSUARIO.Name = "CORREOINUSUARIO";
+            // 
+            // ESTADOINUSUARIO
+            // 
+            ESTADOINUSUARIO.HeaderText = "ESTADO";
+            ESTADOINUSUARIO.MinimumWidth = 9;
+            ESTADOINUSUARIO.Name = "ESTADOINUSUARIO";
             // 
             // Administracion
             // 
@@ -3590,6 +4275,7 @@
             Controls.Add(btnAjustesInAdmin);
             Controls.Add(tabCtrl);
             Controls.Add(pnlMenuInAdmin);
+            ForeColor = Color.Black;
             Margin = new Padding(2);
             MaximizeBox = false;
             MinimizeBox = false;
@@ -3598,6 +4284,7 @@
             Text = "Administracion";
             Load += Administracion_Load;
             pnlMenuInAdmin.ResumeLayout(false);
+            pnlMenuInAdmin.PerformLayout();
             tabCtrl.ResumeLayout(false);
             tabPgInicio.ResumeLayout(false);
             tabPgInicio.PerformLayout();
@@ -3632,6 +4319,15 @@
             tabPgReportes.ResumeLayout(false);
             tabPgReportes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            tabPageUsuarios.ResumeLayout(false);
+            tabCtrlUsauriosInAdmin.ResumeLayout(false);
+            BuscarUsuario.ResumeLayout(false);
+            BuscarUsuario.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
+            NuevoUsuario.ResumeLayout(false);
+            NuevoUsuario.PerformLayout();
+            tabEditarUsuario.ResumeLayout(false);
+            tabEditarUsuario.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -3906,5 +4602,61 @@
         private Label label44;
         private Label label45;
         private Label label46;
+        private TabControl tabCtrlUsauriosInAdmin;
+        private TabPage BuscarUsuario;
+        private Button button9;
+        private DataGridView dataGridView3;
+        private Button button11;
+        private Button button12;
+        private TextBox textBox29;
+        private Label label47;
+        private Label label48;
+        private TabPage tabEditarUsuario;
+        private Button button14;
+        private TabPage NuevoUsuario;
+        private TextBox textBox30;
+        private Label label49;
+        private Button button13;
+        private TextBox textBox36;
+        private TextBox textBox37;
+        private TextBox textBox38;
+        private TextBox textBox39;
+        private TextBox textBox40;
+        private TextBox textBox41;
+        private TextBox textBox42;
+        private TextBox textBox43;
+        private Label label57;
+        private Label label58;
+        private Label label59;
+        private Label label60;
+        private Label label61;
+        private Label label62;
+        private Label label63;
+        private Label label64;
+        private Label label65;
+        private TextBox textBox31;
+        private Label label50;
+        private TextBox textBox32;
+        private TextBox textBox33;
+        private TextBox textBox34;
+        private TextBox textBox35;
+        private TextBox textBox44;
+        private TextBox textBox45;
+        private TextBox textBox46;
+        private TextBox textBox47;
+        private Label label51;
+        private Label label52;
+        private Label label53;
+        private Label label54;
+        private Label label55;
+        private Label label56;
+        private Label label66;
+        private Label label67;
+        private Label label68;
+        private DataGridViewTextBoxColumn IDUSUARIO;
+        private DataGridViewTextBoxColumn NOMBRECOMPLETO;
+        private DataGridViewTextBoxColumn NOMBREUSUARIO;
+        private DataGridViewTextBoxColumn CORREOINUSUARIO;
+        private DataGridViewTextBoxColumn ESTADOINUSUARIO;
     }
 }

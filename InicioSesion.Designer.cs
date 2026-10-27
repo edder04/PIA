@@ -77,6 +77,8 @@ namespace PIA
             txtUsuario.Size = new Size(300, 27);
             txtUsuario.TabIndex = 4;
             txtUsuario.TextAlign = HorizontalAlignment.Center;
+            txtUsuario.TextChanged += txtUsuario_TextChanged;
+            txtUsuario.KeyDown += txtUsuario_KeyDown;
             // 
             // txtContraseña
             // 
@@ -86,6 +88,7 @@ namespace PIA
             txtContraseña.Size = new Size(300, 27);
             txtContraseña.TabIndex = 6;
             txtContraseña.TextAlign = HorizontalAlignment.Center;
+            txtContraseña.KeyDown += txtContraseña_KeyDown;
             // 
             // lblContraseña
             // 

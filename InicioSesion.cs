@@ -10,30 +10,27 @@ namespace PIA
         {
             InitializeComponent();
             BarraTitulo.Agregar(this, "NEXO TICKET  |  Inicio de sesión");
-            this.AcceptButton = btnAceptar;
             GlassEffect.Apply(this);
-
+            txtUsuario.Focus();
         }
-        public string UsuarioActivo { get; private set; } = "";
 
+
+        public string UsuarioActivo { get; private set; } = "";
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             string nombreUsuario = txtUsuario.Text;
             string contraseña = txtContraseña.Text;
 
+            Form ventanaDestino;
 
-        Form ventanaDestino;
-
-            if (nombreUsuario == "Admin01" && contraseña == "admin")
+            /*if (nombreUsuario == "Admin01" && contraseña == "admin")
             {
                 ventanaDestino = new Administracion();
                 this.Hide();
                 ventanaDestino.Show();
                 UsuarioActivo = txtUsuario.Text;
-                
-
             }
-            if(nombreUsuario =="Operativo01" && contraseña == "op01")
+            if (nombreUsuario == "Operativo01" && contraseña == "op01")
             {
                 ventanaDestino = new Ventas();
                 this.Hide();
@@ -44,9 +41,9 @@ namespace PIA
             {
                 MessageBox.Show("Ingresa tu usuario y contraseña.", "Inicio de sesion",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            }*/
 
-            /*if (string.IsNullOrWhiteSpace(nombreUsuario) || string.IsNullOrWhiteSpace(contraseña))
+            if (string.IsNullOrWhiteSpace(nombreUsuario) || string.IsNullOrWhiteSpace(contraseña))
             {
                 MessageBox.Show("Ingresa tu usuario y contraseña.", "Inicio de sesion",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -55,7 +52,7 @@ namespace PIA
 
             try
             {
-                using var db = new AppDbContext();
+                using var db = new AppDbContext();  
 
                 var usuario = db.Usuario
                     .AsNoTracking()
@@ -67,12 +64,10 @@ namespace PIA
                     return;
                 }
 
-                Form ventanaDestino;
-
                 switch (usuario.Rol)
                 {
-                    case 1: ventanaDestino = new Administracion(); break;
-                    case 2: ventanaDestino = new Ventas(); break;
+                    case "Administrador": ventanaDestino = new Administracion(); break;
+                    case "Operativo": ventanaDestino = new Ventas(); break;
                     default:
                         MessageBox.Show("El usuario tiene un rol no válido.", "Acceso denegado",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -86,7 +81,7 @@ namespace PIA
             {
                 MessageBox.Show("No se pudo validar el acceso.\n" + ex.Message, "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            }
         }
 
         private void InicioSesion_Load(object sender, EventArgs e) { }
@@ -94,6 +89,30 @@ namespace PIA
         private void InicioSesion_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                txtContraseña.Focus();
+            }
+
+        }
+
+        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnAceptar.PerformClick();
+            }
         }
     }
 }
