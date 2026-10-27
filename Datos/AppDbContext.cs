@@ -23,6 +23,7 @@ namespace PIA.Datos{                                                            
         //==============================================
         // Mapeo de la tabla Usuario
         public DbSet<Usuario> Usuario => Set<Usuario>();                                                // Represento la tabla Usuario para poder consultar y trabajar con sus registros.
+        public DbSet<Cliente> Cliente => Set<Cliente>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)                              // Configuro cómo se relaciona la clase Usuario con la tabla de SQL Server.
         {
@@ -93,5 +94,7 @@ namespace PIA.Datos{                                                            
             });
         }
         //==============================================
+
+        
     }
 }

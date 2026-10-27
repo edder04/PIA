@@ -35,7 +35,7 @@ namespace PIA.Diseños
             {
                 Name = "pnlBarraTitulo",
                 Dock = DockStyle.Top,
-                Height = 42,
+                Height = 30,
                 BackColor = Color.FromArgb(25, 25, 25)
             };
 
@@ -46,8 +46,8 @@ namespace PIA.Diseños
                 Font = new Font("Segoe UI", 10, FontStyle.Bold),
                 AutoSize = false,
                 TextAlign = ContentAlignment.MiddleLeft,
-                Location = new Point(14, 0),
-                Height = 42,
+                Location = new Point(7, 0),
+                Height = 30,
                 BackColor = Color.Transparent,
                 AutoEllipsis = true,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left |
@@ -62,7 +62,7 @@ namespace PIA.Diseños
                     ForeColor = Color.White,
                     BackColor = Color.FromArgb(25, 25, 25),
                     FlatStyle = FlatStyle.Flat,
-                    Size = new Size(46, 42),
+                    Size = new Size(46, 30),
                     Font = new Font("Segoe UI Symbol", 11),
                     Cursor = Cursors.Hand,
                     TabStop = false,
