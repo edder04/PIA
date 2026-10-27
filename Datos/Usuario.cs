@@ -4,6 +4,8 @@ using System.Text;
 
 namespace PIA.Datos
 {
+    // =============================================
+    // Creacion de la clase Usuario que representa la tabla Usuario
     public class Usuario
     {
         public int IdUsuario { get; set; }

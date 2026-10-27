@@ -22,8 +22,8 @@ namespace PIA.Datos
             }
         }
         //==============================================
+        // Mapeo de la tabla Usuario
         public DbSet<Usuario> Usuario => Set<Usuario>();
-        //==============================================
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
