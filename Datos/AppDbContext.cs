@@ -20,11 +20,11 @@ namespace PIA.Datos{                                                            
                     "TrustServerCertificate=True;");                                                    // Permito confiar en el certificado del servidor durante la conexión.
             }
         }
-        //==============================================
-        // Mapeo de la tabla Usuario
         public DbSet<Usuario> Usuario => Set<Usuario>();                                                // Represento la tabla Usuario para poder consultar y trabajar con sus registros.
         public DbSet<Cliente> Cliente => Set<Cliente>();
 
+        //==============================================
+        // Mapeo de la tabla Usuario
         protected override void OnModelCreating(ModelBuilder modelBuilder)                              // Configuro cómo se relaciona la clase Usuario con la tabla de SQL Server.
         {
             base.OnModelCreating(modelBuilder);                                                         // Ejecuto la configuración básica que proporciona Entity Framework Core.
@@ -92,8 +92,59 @@ namespace PIA.Datos{                                                            
                 entity.Property(u => u.UsuarioRegistro)                                                 // Configuro la propiedad que guarda el identificador de quien registró al usuario.
                     .HasColumnName("UsuarioRegistró");                                                  // Indico el nombre de la columna correspondiente en la base de datos.
             });
+			//==============================================
+			// Mapeo de la tabla Cliente
+			modelBuilder.Entity<Cliente>(entity =>
+            {
+                entity.ToTable("Cliente");
+                entity.HasKey(c => c.IdCliente);
+                entity.Property(c => c.IdCliente)
+                    .ValueGeneratedOnAdd();
+                entity.Property(c => c.Nombres)
+                    .HasColumnName("Nombre(s)")
+                    .HasMaxLength(100)
+                    .IsRequired();
+                entity.Property(c => c.ApPaterno)
+                    .HasMaxLength(100)
+                    .IsRequired();
+                entity.Property(c => c.ApMaterno)
+                    .HasMaxLength(100);
+                entity.Property(c => c.FechaNacimiento)
+                    .HasColumnType("date")
+                    .IsRequired();
+                entity.Property(c => c.Domicilio)
+                    .HasMaxLength(250)
+                    .IsRequired();
+                entity.Property(c => c.RFC)
+                    .HasMaxLength(13)
+                    .IsRequired();
+                entity.HasIndex(c => c.RFC)
+                    .IsUnique();
+                entity.Property(c => c.CorreoElectronico)
+                    .HasMaxLength(100)
+                    .IsRequired();
+                entity.Property(c => c.TelefonoCasa)
+                    .HasMaxLength(15);
+                entity.Property(c => c.Celular)
+                    .HasMaxLength(15);
+                entity.Property(c => c.Activo)
+                    .IsRequired();
+                entity.Property(c => c.FechaCreacion)
+                    .HasColumnType("datetime")
+                    .IsRequired();
+                entity.Property(c => c.FechaModificacion)
+                    .HasColumnType("datetime");
+
+                // Las dos llaves foráneas hacia Usuario (opcional, la BD ya las valida)
+                entity.HasOne<Usuario>().WithMany()
+                    .HasForeignKey(c => c.UsuarioCreacion)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne<Usuario>().WithMany()
+                    .HasForeignKey(c => c.UsuarioModificacion)
+                    .OnDelete(DeleteBehavior.Restrict);
+                });
         }
-        //==============================================
+        
 
         
     }
