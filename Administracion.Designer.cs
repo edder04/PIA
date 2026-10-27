@@ -3777,7 +3777,6 @@
             NuevoUsuario.Size = new Size(1378, 772);
             NuevoUsuario.TabIndex = 1;
             NuevoUsuario.Text = "NuevoUsuario";
-            NuevoUsuario.Click += tabPage6_Click;
             // 
             // textBox30
             // 
@@ -3991,7 +3990,6 @@
             label65.Size = new Size(200, 27);
             label65.TabIndex = 52;
             label65.Text = "NUEVO USUARIO";
-            label65.Click += label65_Click;
             // 
             // tabEditarUsuario
             // 

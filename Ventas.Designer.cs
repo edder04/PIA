@@ -319,7 +319,6 @@
             tabPgInicio.Size = new Size(1392, 841);
             tabPgInicio.TabIndex = 0;
             tabPgInicio.Text = "Inicio";
-            tabPgInicio.Click += tabPgInicio_Click;
             // 
             // dataGridView1
             // 
@@ -2060,8 +2059,7 @@
             label22.Size = new Size(149, 19);
             label22.TabIndex = 59;
             label22.Text = "TELEFONO CASA:";
-            label22.Click += label22_Click;
-            // 
+            //
             // label23
             // 
             label23.AutoSize = true;
@@ -2866,7 +2864,6 @@
             label4.Size = new Size(115, 27);
             label4.TabIndex = 24;
             label4.Text = "ESTADIO:";
-            label4.Click += label4_Click;
             // 
             // label3
             // 
@@ -2880,7 +2877,6 @@
             label3.Size = new Size(92, 27);
             label3.TabIndex = 23;
             label3.Text = "HASTA:";
-            label3.Click += label3_Click;
             // 
             // label2
             // 

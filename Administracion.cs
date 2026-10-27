@@ -1,126 +1,97 @@
-﻿using PIA.Diseños;
+﻿
+using PIA.Diseños; 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+using System.Drawing; 
+using System.Text; 
+using System.Windows.Forms; 
 
-namespace PIA
-{
-    public partial class Administracion : Form
-    {
-        public Administracion()
-        {
-            InitializeComponent();
-            pnlMenuInAdmin.Visible = false;
-            //GlassEffect.Apply(pnlMenuInAdmin);
-            GlassEffect.Apply(this);
+namespace PIA{                                                                                          // Indico que este código pertenece al proyecto PIA.
+    public partial class Administracion : Form{                                                         // Creo la ventana de administración que hereda las funciones de Form.
+        public Administracion(){                                                                        // Este es el constructor que se ejecuta cuando abro la ventana.
 
+            InitializeComponent();                                                                      // Cargo todos los controles y elementos de la ventana.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú de administración al iniciar.
+            GlassEffect.Apply(this);                                                                    // Aplico el efecto visual de vidrio a la ventana.
 
-            RedondearBoton.Aplicar(btnAjustesInAdmin, 20);
-            RedondearBoton.Aplicar(btnHoyInPartidos, 20);
-            RedondearBoton.Aplicar(btnProximosInPartidos, 20);
-            RedondearBoton.Aplicar(btnTodosInPartidos, 20);
-            RedondearBoton.Aplicar(btnEstaSemanaInPartidos, 20);
+            RedondearBoton.Aplicar(btnAjustesInAdmin, 20);                                              // Redondeo las esquinas del botón de ajustes.
+            RedondearBoton.Aplicar(btnHoyInPartidos, 20);                                               // Redondeo las esquinas del botón de partidos de hoy.
+            RedondearBoton.Aplicar(btnProximosInPartidos, 20);                                          // Redondeo las esquinas del botón de próximos partidos.
+            RedondearBoton.Aplicar(btnTodosInPartidos, 20);                                             // Redondeo las esquinas del botón para ver todos los partidos.
+            RedondearBoton.Aplicar(btnEstaSemanaInPartidos, 20);                                        // Redondeo las esquinas del botón de partidos de esta semana.
 
+            tabCtrl.Show();                                                                             // Muestro el control de pestañas de la ventana.
 
-            tabCtrl.Show();
+            BarraTitulo.Agregar(this, "NEXO TICKET  |  Ventana de Administrador");                      // Agrego la barra de título personalizada con el nombre de la ventana.
 
-            BarraTitulo.Agregar(this, "NEXO TICKET  |  Ventana de Administrador");
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.None;                                                // Quito los bordes predeterminados de la ventana.
+            this.StartPosition = FormStartPosition.CenterScreen;                                        // Hago que la ventana aparezca en el centro de la pantalla.
         }
 
-
-        private void Administracion_Load(object sender, EventArgs e)
-        {
-
-            pictureBox1.Image = Image.FromFile(@"C:\Users\edcru\Downloads\UANL\Agosto-Diciembre 2026\checkMark.gif");
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        private void Administracion_Load(object sender, EventArgs e){                                   // Este método se ejecuta cuando se carga la ventana de administración.
+            pictureBox1.Image = Image
+                .FromFile(@"C:\Users\edcru\Downloads\UANL\Agosto-Diciembre 2026\checkMark.gif");        // Cargo el GIF desde la ruta donde tengo guardado el archivo.
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;                                     // Ajusto la imagen para que ocupe el espacio del PictureBox.
         }
 
-
-        private void btnInicio_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 0;
-            pnlMenuInAdmin.Visible = false;
+        private void btnInicio_Click(object sender, EventArgs e){                                       // Este método se ejecuta cuando presiono el botón Inicio.
+            tabCtrl.SelectedIndex = 0;                                                                  // Cambio a la primera pestaña del menú principal.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Inicio.
         }
 
-        private void btnVentasVentas_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 1;
-            pnlMenuInAdmin.Visible = false;
+        private void btnVentasVentas_Click(object sender, EventArgs e){                                 // Este método se ejecuta cuando presiono el botón Ventas.
+            tabCtrl.SelectedIndex = 1;                                                                  // Cambio a la segunda pestaña, donde se encuentra la sección de ventas.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Ventas.
         }
 
-        private void btnClientesVentas_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 2;
-            pnlMenuInAdmin.Visible = false;
+        private void btnClientesVentas_Click(object sender, EventArgs e){                               // Este método se ejecuta cuando presiono el botón Clientes.
+            tabCtrl.SelectedIndex = 2;                                                                  // Cambio a la tercera pestaña, donde se encuentra la sección de clientes.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Clientes.
         }
 
-        private void btnPartidosVentas_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 3;
-            pnlMenuInAdmin.Visible = false;
+        private void btnPartidosVentas_Click(object sender, EventArgs e){                               // Este método se ejecuta cuando presiono el botón Partidos.
+            tabCtrl.SelectedIndex = 3;                                                                  // Cambio a la cuarta pestaña, donde se encuentra la sección de partidos.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Partidos.
         }
 
-        private void btnFacturasVentas_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 4;
-            pnlMenuInAdmin.Visible = false;
+        private void btnFacturasVentas_Click(object sender, EventArgs e){                               // Este método se ejecuta cuando presiono el botón Facturas.
+            tabCtrl.SelectedIndex = 4;                                                                  // Cambio a la quinta pestaña, donde se encuentra la sección de facturas.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Facturas.
         }
 
-        private void btnReportesVentas_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 5;
-            pnlMenuInAdmin.Visible = false;
-        }
-        private void btnUsuarios_Click(object sender, EventArgs e)
-        {
-            tabCtrl.SelectedIndex = 6;
-            pnlMenuInAdmin.Visible = false;
+        private void btnReportesVentas_Click(object sender, EventArgs e){                               // Este método se ejecuta cuando presiono el botón Reportes.
+            tabCtrl.SelectedIndex = 5;                                                                  // Cambio a la sexta pestaña, donde se encuentra la sección de reportes.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Reportes.
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            pnlMenuInAdmin.Visible = false;
-            InicioSesion ventanaActual = new InicioSesion();
-            ventanaActual.Show();
-            this.Close();
+        private void btnUsuarios_Click(object sender, EventArgs e){                                     // Este método se ejecuta cuando presiono el botón Usuarios.
+            tabCtrl.SelectedIndex = 6;                                                                  // Cambio a la séptima pestaña, donde se encuentra la sección de usuarios.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú después de seleccionar Usuarios.
         }
 
-        private void btnAjustesInAdmin_Click(object sender, EventArgs e)
-        {
-            pnlMenuInAdmin.Visible = !pnlMenuInAdmin.Visible;
+        private void btnSalir_Click(object sender, EventArgs e){                                        // Este método se ejecuta cuando presiono el botón Salir.
+            pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú antes de salir de la ventana.
+            InicioSesion ventanaActual = new InicioSesion();                                            // Creo una nueva ventana de inicio de sesión.
+            ventanaActual.Show();                                                                       // Muestro la ventana de inicio de sesión.
+            this.Close();                                                                               // Cierro la ventana actual de administración.
+        }
 
-            if (pnlMenuInAdmin.Visible)
-            {
-                pnlMenuInAdmin.BringToFront();
+        private void btnAjustesInAdmin_Click(object sender, EventArgs e){                               // Este método se ejecuta cuando presiono el botón de ajustes.
+            pnlMenuInAdmin.Visible = !pnlMenuInAdmin.Visible;                                           // Muestro el menú si está oculto o lo oculto si está visible.
+
+            if (pnlMenuInAdmin.Visible){                                                                // Compruebo si el menú está visible.
+                pnlMenuInAdmin.BringToFront();                                                          // Coloco el menú al frente para que no quede detrás de otros controles.
             }
-
         }
 
-        private void btnNuevoClienteInCliente_Click(object sender, EventArgs e)
-        {
-            tabClientesInAdmin.SelectedIndex = 1;
+        private void btnNuevoClienteInCliente_Click(object sender, EventArgs e){                        // Este método se ejecuta cuando presiono el botón para registrar un nuevo cliente.
+            tabClientesInAdmin.SelectedIndex = 1;                                                       // Cambio a la segunda pestaña de la sección de clientes.
         }
 
-        private void btnEditarCliente_Click(object sender, EventArgs e)
-        {
-            tabClientesInAdmin.SelectedIndex = 2;
-        }
-
-        private void label65_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage6_Click(object sender, EventArgs e)
-        {
-
+        private void btnEditarCliente_Click(object sender, EventArgs e){                                // Este método se ejecuta cuando presiono el botón para editar un cliente.
+            tabClientesInAdmin.SelectedIndex = 2;                                                       // Cambio a la tercera pestaña de la sección de clientes.
         }
     }
 }
