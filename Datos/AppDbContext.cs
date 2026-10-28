@@ -22,6 +22,8 @@ namespace PIA.Datos{                                                            
         }
         public DbSet<Usuario> Usuario => Set<Usuario>();                                                // Represento la tabla Usuario para poder consultar y trabajar con sus registros.
         public DbSet<Cliente> Cliente => Set<Cliente>();
+        public DbSet<vw_ConsultaUsuario> vw_ConsultaUsuario => Set<vw_ConsultaUsuario>();
+		public DbSet<vw_ConsultaCliente> vw_ConsultaCliente => Set <vw_ConsultaCliente> ();
 
         //==============================================
         // Mapeo de la tabla Usuario
@@ -143,6 +145,22 @@ namespace PIA.Datos{                                                            
                     .HasForeignKey(c => c.UsuarioModificacion)
                     .OnDelete(DeleteBehavior.Restrict);
                 });
+			//==============================================
+			// Mapeo de la vista ConsultaCliente
+			modelBuilder.Entity<vw_ConsultaCliente>(entity =>
+            {
+                entity.HasNoKey();                               
+                entity.ToView("vw_ConsultaCliente", "dbo");
+            });
+
+			//==============================================
+			// Mapeo de la vista ConsultaUsuario
+			modelBuilder.Entity<vw_ConsultaUsuario>(entity =>
+            {
+                entity.HasNoKey();                               
+                entity.ToView("vw_ConsultaUsuario", "dbo");
+            });
+
         }
         
 

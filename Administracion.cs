@@ -1,4 +1,5 @@
 ﻿
+using PIA.Datos;
 using PIA.Diseños; 
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,27 @@ namespace PIA{                                                                  
 
 			this.FormBorderStyle = FormBorderStyle.None;                                                // Quito los bordes predeterminados de la ventana.
 			this.StartPosition = FormStartPosition.CenterScreen;                                        // Hago que la ventana aparezca en el centro de la pantalla.
+
+			GridClientesInClientes.Columns.Add("IdCliente", "ID");
+			GridClientesInClientes.Columns.Add("NombreCompleto", "Nombre");
+			GridClientesInClientes.Columns.Add("FechaNacimiento", "Fecha de nacimiento");
+			GridClientesInClientes.Columns.Add("Domicilio", "Domicilio");
+			GridClientesInClientes.Columns.Add("RFC", "RFC");
+			GridClientesInClientes.Columns.Add("CorreoElectronico", "Correo");
+			GridClientesInClientes.Columns.Add("TelefonoCasa", "Teléfono casa");
+			GridClientesInClientes.Columns.Add("Celular", "Celular");
+			GridClientesInClientes.Columns.Add("Activo", "Activo");
+
+			GridClientesInClientes.ReadOnly = true;
+			GridClientesInClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			GridClientesInClientes.MultiSelect = false;
+			GridClientesInClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			GridClientesInClientes.Columns["IdCliente"].Visible = false;
+
+
+			CargarGridClientes();
+
+
 		}
 
 		private void Administracion_Load(object sender, EventArgs e)
@@ -185,14 +207,110 @@ namespace PIA{                                                                  
 
 		private void button5_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);     // Muestro un mensaje indicando que el usuario se agregó correctamente.
+			if (string.IsNullOrWhiteSpace(txtNombreClienteInAdmin.Text) ||
+				string.IsNullOrWhiteSpace(txtApPaternoClienteInAdmin.Text) ||
+				string.IsNullOrWhiteSpace(txtApMaternoClienteInAdmin.Text) ||
+				string.IsNullOrWhiteSpace(dateFechaNacimientoClienteinAdmin.Text) ||
+				string.IsNullOrWhiteSpace(txtRFCClienteInAdmin.Text) ||
+				string.IsNullOrWhiteSpace(txtCorreoClienteInAdmin.Text) ||
+				string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text) ||
+				string.IsNullOrWhiteSpace(txtTelefonoCasaInAdmin.Text))
+			{
+				MessageBox.Show("Complete los campos obligatorios.");
+				return;
+			}
+
+			Cliente nuevoCliente = new Cliente
+			{
+				Nombres = txtNombreClienteInAdmin.Text.Trim(),
+				ApPaterno = txtApPaternoClienteInAdmin.Text.Trim(),
+				ApMaterno = string.IsNullOrWhiteSpace(txtApMaternoClienteInAdmin.Text) ? null : txtApMaternoClienteInAdmin.Text.Trim(),
+				FechaNacimiento = dateFechaNacimientoClienteinAdmin.Value.Date,
+				RFC = txtRFCClienteInAdmin.Text.Trim().ToUpper(),
+				CorreoElectronico = txtCorreoClienteInAdmin.Text.Trim(),
+				TelefonoCasa = string.IsNullOrWhiteSpace(txtTelefonoCasaInAdmin.Text) ? null : txtTelefonoCasaInAdmin.Text.Trim(),
+				Celular = string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text) ? null : txtCelularClienteInAdmin.Text.Trim(),
+				Activo = true,
+				FechaCreacion = DateTime.Now,
+				UsuarioCreacion = Sesion.IdUsuario
+			};
+			try
+			{
+				using var db = new AppDbContext();
+				db.Cliente.Add(nuevoCliente);
+				db.SaveChanges();
+
+				MessageBox.Show("Cliente registrado correctamente.");
+				LimpiarCamposNuevoCliente();
+				CargarGridClientes();   // refresca el grid de la vista
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("No se pudo guardar el cliente.\n" + ex.InnerException?.Message ?? ex.Message);
+			}
+		
+		MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.None);     // Muestro un mensaje indicando que el usuario se agregó correctamente.
 			tabClientesInAdmin.SelectedIndex = 0;
 		}
 
 		private void button7_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);     // Muestro un mensaje indicando que el usuario se editó correctamente.
+			MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.None);     // Muestro un mensaje indicando que el usuario se editó correctamente.
 			tabClientesInAdmin.SelectedIndex = 0;
 		}
+
+		private void GridClientesInClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
+
+		private void txtBuscarCliente_TextChanged(object sender, EventArgs e)
+		{
+			CargarGridClientes();
+		}
+
+		private void CargarGridClientes()
+		{
+			string texto = txtBuscarCliente.Text;
+			using var db = new AppDbContext();
+			var clientes = db.vw_ConsultaCliente
+				.Where(c => c.Nombre.Contains(texto) || c.CorreoElectronico.Contains(texto) || c.RFC.Contains(texto));
+
+			GridClientesInClientes.Rows.Clear();
+
+			foreach (vw_ConsultaCliente c in clientes)
+			{
+				GridClientesInClientes.Rows.Add(
+				c.IdCliente,
+				c.Nombre,
+				c.FechaNacimiento.ToShortDateString(),
+				c.Domicilio,
+				c.RFC,
+				c.CorreoElectronico,
+				c.TelefonoCasa,
+				c.Celular,
+				c.Activo);
+			}
+		}
+
+		private void LimpiarCamposNuevoCliente()
+		{
+			txtNombreClienteInAdmin.Clear();
+			txtApPaternoClienteInAdmin.Clear();
+			txtApMaternoClienteInAdmin.Clear();
+			txtRFCClienteInAdmin.Clear();
+			txtCorreoClienteInAdmin.Clear();
+			txtTelefonoCasaInAdmin.Clear();
+			txtCelularClienteInAdmin.Clear();
+			dateFechaNacimientoClienteinAdmin.Value = DateTime.Today;
+			txtNombreClienteInAdmin.Focus();
+		}
+
+
+
+
+
+
 	}
+	
 }

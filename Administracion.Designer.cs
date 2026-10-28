@@ -28,6 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
 			pnlMenuInAdmin = new Panel();
 			btnUsuarios = new Button();
 			btnInicio = new Button();
@@ -151,32 +153,22 @@
 			btnHistorialCliente = new Button();
 			btnEditarCliente = new Button();
 			GridClientesInClientes = new DataGridView();
-			dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-			dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-			dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-			CORREO = new DataGridViewTextBoxColumn();
-			ESTADO = new DataGridViewTextBoxColumn();
 			btnNuevoClienteInCliente = new Button();
 			btnBuscarCliente = new Button();
 			txtBuscarCliente = new TextBox();
 			lblBuscarClienteInCliente = new Label();
 			lblClientesInCliente = new Label();
 			NuevoCliente = new TabPage();
+			dateFechaNacimientoClienteinAdmin = new DateTimePicker();
 			button5 = new Button();
-			textBox13 = new TextBox();
-			textBox12 = new TextBox();
-			textBox11 = new TextBox();
-			textBox10 = new TextBox();
-			textBox9 = new TextBox();
-			textBox8 = new TextBox();
-			textBox7 = new TextBox();
-			textBox6 = new TextBox();
-			textBox5 = new TextBox();
-			textBox4 = new TextBox();
-			textBox3 = new TextBox();
-			textBox2 = new TextBox();
-			textBox1 = new TextBox();
-			textBox14 = new TextBox();
+			txtCiudadClienteInAdmin = new TextBox();
+			txtColoniaClienteInAdmin = new TextBox();
+			txtTelefonoCasaInAdmin = new TextBox();
+			txtCorreoClienteInAdmin = new TextBox();
+			txtRFCClienteInAdmin = new TextBox();
+			txtApMaternoClienteInAdmin = new TextBox();
+			txtApPaternoClienteInAdmin = new TextBox();
+			txtNombreClienteInAdmin = new TextBox();
 			label16 = new Label();
 			label15 = new Label();
 			label14 = new Label();
@@ -352,6 +344,7 @@
 			label67 = new Label();
 			label68 = new Label();
 			button14 = new Button();
+			txtCelularClienteInAdmin = new TextBox();
 			pnlMenuInAdmin.SuspendLayout();
 			tabCtrlInAdmin.SuspendLayout();
 			tabPgInicio.SuspendLayout();
@@ -1945,46 +1938,25 @@
 			// 
 			// GridClientesInClientes
 			// 
+			dataGridViewCellStyle1.BackColor = Color.Black;
+			dataGridViewCellStyle1.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle1.ForeColor = Color.White;
+			GridClientesInClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
 			GridClientesInClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			GridClientesInClientes.BackgroundColor = Color.Black;
+			GridClientesInClientes.BackgroundColor = Color.FromArgb(90, 90, 90);
 			GridClientesInClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			GridClientesInClientes.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, CORREO, ESTADO });
+			GridClientesInClientes.GridColor = Color.FromArgb(90, 90, 90);
 			GridClientesInClientes.Location = new Point(106, 306);
 			GridClientesInClientes.Margin = new Padding(2);
 			GridClientesInClientes.Name = "GridClientesInClientes";
 			GridClientesInClientes.RowHeadersWidth = 72;
+			dataGridViewCellStyle2.BackColor = Color.Black;
+			dataGridViewCellStyle2.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle2.ForeColor = Color.White;
+			GridClientesInClientes.RowsDefaultCellStyle = dataGridViewCellStyle2;
 			GridClientesInClientes.Size = new Size(1167, 288);
 			GridClientesInClientes.TabIndex = 35;
-			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			dataGridViewTextBoxColumn1.HeaderText = "CLIENTE";
-			dataGridViewTextBoxColumn1.MinimumWidth = 9;
-			dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			// 
-			// dataGridViewTextBoxColumn2
-			// 
-			dataGridViewTextBoxColumn2.HeaderText = "RFC";
-			dataGridViewTextBoxColumn2.MinimumWidth = 9;
-			dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			dataGridViewTextBoxColumn3.HeaderText = "TELEFONO";
-			dataGridViewTextBoxColumn3.MinimumWidth = 9;
-			dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			// 
-			// CORREO
-			// 
-			CORREO.HeaderText = "CORREO";
-			CORREO.MinimumWidth = 9;
-			CORREO.Name = "CORREO";
-			// 
-			// ESTADO
-			// 
-			ESTADO.HeaderText = "ESTADO";
-			ESTADO.MinimumWidth = 9;
-			ESTADO.Name = "ESTADO";
+			GridClientesInClientes.CellContentClick += GridClientesInClientes_CellContentClick;
 			// 
 			// btnNuevoClienteInCliente
 			// 
@@ -2019,6 +1991,7 @@
 			txtBuscarCliente.Name = "txtBuscarCliente";
 			txtBuscarCliente.Size = new Size(555, 33);
 			txtBuscarCliente.TabIndex = 32;
+			txtBuscarCliente.TextChanged += txtBuscarCliente_TextChanged;
 			// 
 			// lblBuscarClienteInCliente
 			// 
@@ -2047,21 +2020,17 @@
 			// NuevoCliente
 			// 
 			NuevoCliente.BackColor = Color.Black;
+			NuevoCliente.Controls.Add(txtCelularClienteInAdmin);
+			NuevoCliente.Controls.Add(dateFechaNacimientoClienteinAdmin);
 			NuevoCliente.Controls.Add(button5);
-			NuevoCliente.Controls.Add(textBox13);
-			NuevoCliente.Controls.Add(textBox12);
-			NuevoCliente.Controls.Add(textBox11);
-			NuevoCliente.Controls.Add(textBox10);
-			NuevoCliente.Controls.Add(textBox9);
-			NuevoCliente.Controls.Add(textBox8);
-			NuevoCliente.Controls.Add(textBox7);
-			NuevoCliente.Controls.Add(textBox6);
-			NuevoCliente.Controls.Add(textBox5);
-			NuevoCliente.Controls.Add(textBox4);
-			NuevoCliente.Controls.Add(textBox3);
-			NuevoCliente.Controls.Add(textBox2);
-			NuevoCliente.Controls.Add(textBox1);
-			NuevoCliente.Controls.Add(textBox14);
+			NuevoCliente.Controls.Add(txtCiudadClienteInAdmin);
+			NuevoCliente.Controls.Add(txtColoniaClienteInAdmin);
+			NuevoCliente.Controls.Add(txtTelefonoCasaInAdmin);
+			NuevoCliente.Controls.Add(txtCorreoClienteInAdmin);
+			NuevoCliente.Controls.Add(txtRFCClienteInAdmin);
+			NuevoCliente.Controls.Add(txtApMaternoClienteInAdmin);
+			NuevoCliente.Controls.Add(txtApPaternoClienteInAdmin);
+			NuevoCliente.Controls.Add(txtNombreClienteInAdmin);
 			NuevoCliente.Controls.Add(label16);
 			NuevoCliente.Controls.Add(label15);
 			NuevoCliente.Controls.Add(label14);
@@ -2086,6 +2055,13 @@
 			NuevoCliente.TabIndex = 1;
 			NuevoCliente.Text = "NuevoCliente";
 			// 
+			// dateFechaNacimientoClienteinAdmin
+			// 
+			dateFechaNacimientoClienteinAdmin.Location = new Point(396, 332);
+			dateFechaNacimientoClienteinAdmin.Name = "dateFechaNacimientoClienteinAdmin";
+			dateFechaNacimientoClienteinAdmin.Size = new Size(200, 23);
+			dateFechaNacimientoClienteinAdmin.TabIndex = 84;
+			// 
 			// button5
 			// 
 			button5.BackColor = Color.White;
@@ -2099,131 +2075,77 @@
 			button5.UseVisualStyleBackColor = false;
 			button5.Click += button5_Click;
 			// 
-			// textBox13
+			// txtCiudadClienteInAdmin
 			// 
-			textBox13.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox13.Location = new Point(688, 603);
-			textBox13.Margin = new Padding(2);
-			textBox13.Name = "textBox13";
-			textBox13.Size = new Size(298, 27);
-			textBox13.TabIndex = 82;
+			txtCiudadClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCiudadClienteInAdmin.Location = new Point(688, 603);
+			txtCiudadClienteInAdmin.Margin = new Padding(2);
+			txtCiudadClienteInAdmin.Name = "txtCiudadClienteInAdmin";
+			txtCiudadClienteInAdmin.Size = new Size(298, 27);
+			txtCiudadClienteInAdmin.TabIndex = 82;
 			// 
-			// textBox12
+			// txtColoniaClienteInAdmin
 			// 
-			textBox12.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox12.Location = new Point(393, 603);
-			textBox12.Margin = new Padding(2);
-			textBox12.Name = "textBox12";
-			textBox12.Size = new Size(264, 27);
-			textBox12.TabIndex = 81;
+			txtColoniaClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtColoniaClienteInAdmin.Location = new Point(393, 603);
+			txtColoniaClienteInAdmin.Margin = new Padding(2);
+			txtColoniaClienteInAdmin.Name = "txtColoniaClienteInAdmin";
+			txtColoniaClienteInAdmin.Size = new Size(264, 27);
+			txtColoniaClienteInAdmin.TabIndex = 81;
 			// 
-			// textBox11
+			// txtTelefonoCasaInAdmin
 			// 
-			textBox11.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox11.Location = new Point(766, 552);
-			textBox11.Margin = new Padding(2);
-			textBox11.Name = "textBox11";
-			textBox11.Size = new Size(143, 27);
-			textBox11.TabIndex = 80;
+			txtTelefonoCasaInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtTelefonoCasaInAdmin.Location = new Point(612, 332);
+			txtTelefonoCasaInAdmin.Margin = new Padding(2);
+			txtTelefonoCasaInAdmin.Name = "txtTelefonoCasaInAdmin";
+			txtTelefonoCasaInAdmin.Size = new Size(143, 27);
+			txtTelefonoCasaInAdmin.TabIndex = 74;
 			// 
-			// textBox10
+			// txtCorreoClienteInAdmin
 			// 
-			textBox10.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox10.Location = new Point(564, 553);
-			textBox10.Margin = new Padding(2);
-			textBox10.Name = "textBox10";
-			textBox10.Size = new Size(143, 27);
-			textBox10.TabIndex = 79;
+			txtCorreoClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCorreoClienteInAdmin.Location = new Point(563, 282);
+			txtCorreoClienteInAdmin.Margin = new Padding(2);
+			txtCorreoClienteInAdmin.Name = "txtCorreoClienteInAdmin";
+			txtCorreoClienteInAdmin.Size = new Size(423, 27);
+			txtCorreoClienteInAdmin.TabIndex = 73;
 			// 
-			// textBox9
+			// txtRFCClienteInAdmin
 			// 
-			textBox9.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox9.Location = new Point(393, 553);
-			textBox9.Margin = new Padding(2);
-			textBox9.Name = "textBox9";
-			textBox9.Size = new Size(143, 27);
-			textBox9.TabIndex = 78;
+			txtRFCClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtRFCClienteInAdmin.Location = new Point(393, 282);
+			txtRFCClienteInAdmin.Margin = new Padding(2);
+			txtRFCClienteInAdmin.Name = "txtRFCClienteInAdmin";
+			txtRFCClienteInAdmin.Size = new Size(143, 27);
+			txtRFCClienteInAdmin.TabIndex = 72;
 			// 
-			// textBox8
+			// txtApMaternoClienteInAdmin
 			// 
-			textBox8.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox8.Location = new Point(393, 492);
-			textBox8.Margin = new Padding(2);
-			textBox8.Name = "textBox8";
-			textBox8.Size = new Size(297, 27);
-			textBox8.TabIndex = 77;
+			txtApMaternoClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtApMaternoClienteInAdmin.Location = new Point(706, 232);
+			txtApMaternoClienteInAdmin.Margin = new Padding(2);
+			txtApMaternoClienteInAdmin.Name = "txtApMaternoClienteInAdmin";
+			txtApMaternoClienteInAdmin.Size = new Size(280, 27);
+			txtApMaternoClienteInAdmin.TabIndex = 71;
 			// 
-			// textBox7
+			// txtApPaternoClienteInAdmin
 			// 
-			textBox7.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox7.Location = new Point(392, 332);
-			textBox7.Margin = new Padding(2);
-			textBox7.Name = "textBox7";
-			textBox7.Size = new Size(174, 27);
-			textBox7.TabIndex = 76;
+			txtApPaternoClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtApPaternoClienteInAdmin.Location = new Point(393, 232);
+			txtApPaternoClienteInAdmin.Margin = new Padding(2);
+			txtApPaternoClienteInAdmin.Name = "txtApPaternoClienteInAdmin";
+			txtApPaternoClienteInAdmin.Size = new Size(280, 27);
+			txtApPaternoClienteInAdmin.TabIndex = 70;
 			// 
-			// textBox6
+			// txtNombreClienteInAdmin
 			// 
-			textBox6.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox6.Location = new Point(783, 332);
-			textBox6.Margin = new Padding(2);
-			textBox6.Name = "textBox6";
-			textBox6.Size = new Size(143, 27);
-			textBox6.TabIndex = 75;
-			// 
-			// textBox5
-			// 
-			textBox5.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox5.Location = new Point(612, 332);
-			textBox5.Margin = new Padding(2);
-			textBox5.Name = "textBox5";
-			textBox5.Size = new Size(143, 27);
-			textBox5.TabIndex = 74;
-			// 
-			// textBox4
-			// 
-			textBox4.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox4.Location = new Point(563, 282);
-			textBox4.Margin = new Padding(2);
-			textBox4.Name = "textBox4";
-			textBox4.Size = new Size(423, 27);
-			textBox4.TabIndex = 73;
-			// 
-			// textBox3
-			// 
-			textBox3.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox3.Location = new Point(393, 282);
-			textBox3.Margin = new Padding(2);
-			textBox3.Name = "textBox3";
-			textBox3.Size = new Size(143, 27);
-			textBox3.TabIndex = 72;
-			// 
-			// textBox2
-			// 
-			textBox2.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox2.Location = new Point(706, 232);
-			textBox2.Margin = new Padding(2);
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(280, 27);
-			textBox2.TabIndex = 71;
-			// 
-			// textBox1
-			// 
-			textBox1.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox1.Location = new Point(393, 232);
-			textBox1.Margin = new Padding(2);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(280, 27);
-			textBox1.TabIndex = 70;
-			// 
-			// textBox14
-			// 
-			textBox14.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox14.Location = new Point(393, 182);
-			textBox14.Margin = new Padding(2);
-			textBox14.Name = "textBox14";
-			textBox14.Size = new Size(390, 27);
-			textBox14.TabIndex = 69;
+			txtNombreClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNombreClienteInAdmin.Location = new Point(393, 182);
+			txtNombreClienteInAdmin.Margin = new Padding(2);
+			txtNombreClienteInAdmin.Name = "txtNombreClienteInAdmin";
+			txtNombreClienteInAdmin.Size = new Size(390, 27);
+			txtNombreClienteInAdmin.TabIndex = 69;
 			// 
 			// label16
 			// 
@@ -4279,6 +4201,15 @@
 			button14.UseVisualStyleBackColor = false;
 			button14.Click += button14_Click;
 			// 
+			// txtCelularClienteInAdmin
+			// 
+			txtCelularClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCelularClienteInAdmin.Location = new Point(786, 332);
+			txtCelularClienteInAdmin.Margin = new Padding(2);
+			txtCelularClienteInAdmin.Name = "txtCelularClienteInAdmin";
+			txtCelularClienteInAdmin.Size = new Size(143, 27);
+			txtCelularClienteInAdmin.TabIndex = 85;
+			// 
 			// Administracion
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -4540,11 +4471,6 @@
         private Button btnHistorialCliente;
         private Button btnEditarCliente;
         private DataGridView GridClientesInClientes;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn CORREO;
-        private DataGridViewTextBoxColumn ESTADO;
         private Button btnNuevoClienteInCliente;
         private Button btnBuscarCliente;
         private TextBox txtBuscarCliente;
@@ -4552,20 +4478,20 @@
         private Label lblClientesInCliente;
         private TabPage NuevoCliente;
         private Button button5;
-        private TextBox textBox13;
-        private TextBox textBox12;
+        private TextBox txtCiudadClienteInAdmin;
+        private TextBox txtColoniaClienteInAdmin;
         private TextBox textBox11;
         private TextBox textBox10;
         private TextBox textBox9;
         private TextBox textBox8;
         private TextBox textBox7;
         private TextBox textBox6;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private TextBox textBox14;
+        private TextBox txtTelefonoCasaInAdmin;
+        private TextBox txtCorreoClienteInAdmin;
+        private TextBox txtRFCClienteInAdmin;
+        private TextBox txtApMaternoClienteInAdmin;
+        private TextBox txtApPaternoClienteInAdmin;
+        private TextBox txtNombreClienteInAdmin;
         private Label label16;
         private Label label15;
         private Label label14;
@@ -4672,5 +4598,7 @@
         private DataGridViewTextBoxColumn NOMBREUSUARIO;
         private DataGridViewTextBoxColumn CORREOINUSUARIO;
         private DataGridViewTextBoxColumn ESTADOINUSUARIO;
-    }
+		private DateTimePicker dateFechaNacimientoClienteinAdmin;
+		private TextBox txtCelularClienteInAdmin;
+	}
 }

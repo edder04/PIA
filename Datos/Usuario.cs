@@ -25,8 +25,8 @@ namespace PIA.Datos{                                                            
 	//====================
 	// Tabla de Cliente
 	public class Cliente{
-        public int IdCliente { get; set; }
-        public string Nombres { get; set; } = string.Empty;
+    public int IdCliente { get; set; }
+    public string Nombres { get; set; } = string.Empty;
     public string ApPaterno { get; set; } = string.Empty;
     public string? ApMaterno { get; set; }
     public DateTime FechaNacimiento { get; set; }
@@ -40,5 +40,28 @@ namespace PIA.Datos{                                                            
     public int UsuarioCreacion { get; set; }             
     public DateTime? FechaModificacion { get; set; }
     public int? UsuarioModificacion { get; set; }
+    }
+
+    public class vw_ConsultaCliente
+	{
+    public int IdCliente { get; set; }
+    public string Nombre { get; set; } = string.Empty;
+    public DateTime FechaNacimiento { get; set; }
+    public string Domicilio { get; set; } = string.Empty;
+    public string RFC { get; set; } = string.Empty;
+    public string CorreoElectronico { get; set; } = string.Empty;
+    public string? TelefonoCasa { get; set; }
+    public string? Celular { get; set; }
+    public bool Activo { get; set; }
+    }
+
+    public class vw_ConsultaUsuario{
+    public int IdUsuario { get; set; }
+    public string Nombre { get; set; } = string.Empty;
+    public string NumeroNomina { get; set; } = string.Empty;
+    public string CorreoElectronico { get; set; } = string.Empty;
+    public string rol { get; set; } = string.Empty;
+    public string NombreUsuario { get; set; } = string.Empty;
+    public bool Activo{get; set;}
     }
 }

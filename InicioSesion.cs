@@ -67,7 +67,12 @@ namespace PIA{                                                                  
 
                         return;                                                                         // Detengo el proceso porque el rol no es válido.
                 }
-                this.Hide();                                                                            // Oculto la ventana de inicio de sesión cuando el acceso es correcto.
+
+				Sesion.IdUsuario = usuario.IdUsuario;
+				Sesion.NombreUsuario = usuario.NombreUsuario;
+				Sesion.Rol = usuario.Rol;
+
+				this.Hide();                                                                            // Oculto la ventana de inicio de sesión cuando el acceso es correcto.
                 ventanaDestino.Show();                                                                  // Abro la ventana que corresponde al rol del usuario.
             }
             catch (Exception ex){                                                                       // Capturo cualquier error que ocurra durante la validación.                                                                                                                  
