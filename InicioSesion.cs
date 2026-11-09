@@ -53,7 +53,7 @@ namespace PIA{                                                                  
                     .AsNoTracking()                                                                     // Hago la consulta sin que Entity Framework tenga que seguir los cambios del usuario.
                     .SingleOrDefault(u => u.NombreUsuario == nombreUsuario && u.Activo);                // Obtengo el usuario si existe y está activo.
                 
-                if (usuario == null || usuario.PasswordHash != contraseña){                             // Compruebo si el usuario no existe o si la contraseña no coincide.                
+                if (usuario == null || usuario.Contraseña != contraseña){                             // Compruebo si el usuario no existe o si la contraseña no coincide.                
                     MessageBox.Show("Usuario o contraseña incorrectos.");                               // Muestro un mensaje si los datos no son correctos.
                     return;                                                                             // Detengo el proceso porque no se puede permitir el acceso.
                 }

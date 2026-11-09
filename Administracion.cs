@@ -229,10 +229,10 @@ namespace PIA{                                                                  
 				RFC = txtRFCClienteInAdmin.Text.Trim().ToUpper(),
 				CorreoElectronico = txtCorreoClienteInAdmin.Text.Trim(),
 				TelefonoCasa = string.IsNullOrWhiteSpace(txtTelefonoCasaInAdmin.Text) ? null : txtTelefonoCasaInAdmin.Text.Trim(),
-				Celular = string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text) ? null : txtCelularClienteInAdmin.Text.Trim(),
+				TelefonoCelular = string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text) ? null : txtCelularClienteInAdmin.Text.Trim(),
 				Activo = true,
-				FechaCreacion = DateTime.Now,
-				UsuarioCreacion = Sesion.IdUsuario
+				FechaHoraRegistro = DateTime.Now,
+				CreadoPor = Sesion.IdUsuario
 			};
 			try
 			{

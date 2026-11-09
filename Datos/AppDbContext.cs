@@ -21,13 +21,34 @@ namespace PIA.Datos{                                                            
             }
         }
         public DbSet<Usuario> Usuario => Set<Usuario>();                                                // Represento la tabla Usuario para poder consultar y trabajar con sus registros.
+		public DbSet<AuditoriaUsuario> AuditoriaUsuario => Set<AuditoriaUsuario>();
         public DbSet<Cliente> Cliente => Set<Cliente>();
-        public DbSet<vw_ConsultaUsuario> vw_ConsultaUsuario => Set<vw_ConsultaUsuario>();
-		public DbSet<vw_ConsultaCliente> vw_ConsultaCliente => Set <vw_ConsultaCliente> ();
+		public DbSet<AuditoriaCliente> AuditoriaCliente => Set<AuditoriaCliente>();
+		public DbSet<Estadio> Estadio => Set<Estadio>();
+		public DbSet<Zona> Zona => Set<Zona>();
+		public DbSet<Partido> Partido => Set<Partido>();
+		public DbSet<Venta> Venta => Set<Venta>();
+		public DbSet<DetalleVenta> DetalleVenta => Set<DetalleVenta>();
+		public DbSet<Boleto> Boleto => Set<Boleto>();
+		public DbSet<Factura> Factura => Set<Factura>();
+		public DbSet<Cancelacion> Cancelacion => Set<Cancelacion>();
+        public DbSet<vw_Usuarios> vw_Usuarios => Set<vw_Usuarios>();
+		public DbSet<vw_Clientes> vw_Clientes => Set <vw_Clientes> ();
+		public DbSet<vw_Estadios> vw_Estadios => Set<vw_Estadios>();
+		public DbSet<vw_Partidos> vw_Partidos => Set<vw_Partidos>();
+		public DbSet<vw_DisponibilidadZonas> vw_DisponibilidadZonas => Set<vw_DisponibilidadZonas>();
+		public DbSet<vw_Ventas> vw_Ventas => Set<vw_Ventas>();
+		public DbSet<vw_BoletosVendidos> vw_BoletosVendidos => Set<vw_BoletosVendidos>();
+		public DbSet<vw_Facturas> vw_Facturas => Set<vw_Facturas>();
+		public DbSet<vw_Cancelaciones> vw_Cancelaciones => Set<vw_Cancelaciones>();
+		public DbSet<vw_IngresosPorPartido> vw_IngresosPorPartido => Set<vw_IngresosPorPartido>();
+		public DbSet<vw_AsientosOcupados> vw_AsientosOcupados => Set<vw_AsientosOcupados>();
+		public DbSet<vw_AuditoriaUsuarios> vw_AuditoriaUsuarios => Set<vw_AuditoriaUsuarios>();
+		public DbSet<vw_AuditoriaClientes> vw_AuditoriaClientes => Set<vw_AuditoriaClientes>();
 
-        //==============================================
-        // Mapeo de la tabla Usuario
-        protected override void OnModelCreating(ModelBuilder modelBuilder)                              // Configuro cómo se relaciona la clase Usuario con la tabla de SQL Server.
+		//==============================================
+		// Mapeo de la tabla Usuario
+		protected override void OnModelCreating(ModelBuilder modelBuilder)                              // Configuro cómo se relaciona la clase Usuario con la tabla de SQL Server.
         {
             base.OnModelCreating(modelBuilder);                                                         // Ejecuto la configuración básica que proporciona Entity Framework Core.
 
