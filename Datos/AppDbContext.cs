@@ -14,8 +14,8 @@ namespace PIA.Datos{                                                            
             if (!optionsBuilder.IsConfigured)                                                           // Compruebo si la conexión todavía no ha sido configurada.
             {
                 optionsBuilder.UseSqlServer(                                                            // Indico que voy a utilizar SQL Server como motor de base de datos.
-                    "Server=ED\\SQLEXPRESS;" +                                                          // Indico el nombre del servidor y la instancia de SQL Server.
-                    "Database=piaMadAndPa;" +                                                           // Indico el nombre de la base de datos a la que me voy a conectar.
+                    "Server=Edder\\SQLEXPRESS;" +                                                          // Indico el nombre del servidor y la instancia de SQL Server.
+                    "Database=PIA_V3;" +                                                           // Indico el nombre de la base de datos a la que me voy a conectar.
                     "Trusted_Connection=True;" +                                                        // Utilizo la autenticación de Windows para conectarme al servidor.
                     "TrustServerCertificate=True;");                                                    // Permito confiar en el certificado del servidor durante la conexión.
             }
@@ -31,139 +31,230 @@ namespace PIA.Datos{                                                            
         {
             base.OnModelCreating(modelBuilder);                                                         // Ejecuto la configuración básica que proporciona Entity Framework Core.
 
-            modelBuilder.Entity<Usuario>(entity => {                                                    // Indico que voy a configurar la estructura de la entidad Usuario.            
-                entity.ToTable("Usuario");                                                              // Indico que la entidad se guarda en la tabla llamada Usuario.
-                entity.HasKey(u => u.IdUsuario);                                                        // Establezco IdUsuario como la llave primaria de la tabla.
+			modelBuilder.Entity<Usuario>(entity =>
+			{
+				entity.ToTable("Usuarios", t => t.HasCheckConstraint("CK_Usuarios_Rol", "[Rol] IN ('Administrador', 'Operativo')"));
+				entity.HasKey(e => e.IdUsuario);
+				entity.Property(e => e.IdUsuario).HasColumnName("IdUsuario").ValueGeneratedOnAdd();
+				entity.Property(e => e.Nombres).HasColumnName("Nombre(s)").HasColumnType("varchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.ApPaterno).HasColumnType("varchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.ApMaterno).HasColumnType("varchar(100)").HasMaxLength(100);
+				entity.Property(e => e.FechaNacimiento).HasColumnType("date").IsRequired();
+				entity.Property(e => e.NumeroNomina).HasColumnType("nvarchar(50)").HasMaxLength(50).IsRequired();
+				entity.HasIndex(e => e.NumeroNomina).IsUnique();
+				entity.Property(e => e.CorreoElectronico).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.HasIndex(e => e.CorreoElectronico).IsUnique();
+				entity.Property(e => e.Rol).HasColumnType("varchar(50)").HasMaxLength(50);
+				entity.Property(e => e.NombreUsuario).HasColumnType("varchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.Contraseña).HasColumnName("Contraseña").HasColumnType("nvarchar(255)").HasMaxLength(255).IsRequired();
+				entity.Property(e => e.Activo).HasDefaultValue(true).IsRequired();
+				entity.Property(e => e.CreadoPor).HasColumnType("int");
+				entity.Property(e => e.FechaRegistro).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+			});
 
-                entity.Property(u => u.IdUsuario)                                                       // Configuro la propiedad que identifica a cada usuario.
-                    .HasColumnName("IdUsuario")                                                         // Indico que esta propiedad corresponde a la columna IdUsuario.
-                    .ValueGeneratedOnAdd();                                                             // Indico que el valor se genera automáticamente al agregar un registro.
+			modelBuilder.Entity<AuditoriaUsuario>(entity =>
+			{
+				entity.ToTable("AuditoriaUsuario");
+				entity.HasKey(e => e.IdAuditoria);
+				entity.Property(e => e.IdAuditoria).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdUsuario).HasColumnType("varchar(100)").HasMaxLength(100);
+				entity.Property(e => e.DatoACambiar).HasColumnType("nvarchar(255)").HasMaxLength(255);
+				entity.Property(e => e.DatoAnterior).HasColumnType("nvarchar(max)");
+				entity.Property(e => e.DatoNuevo).HasColumnType("nvarchar(max)");
+				entity.Property(e => e.ModificadoPor).IsRequired();
+				entity.Property(e => e.FechaModificacion).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.ModificadoPor).HasConstraintName("FK_Usuario_Modifico_Usuario");
+			});
 
-                entity.Property(u => u.Nombres)                                                         // Configuro la propiedad donde guardo los nombres del usuario.
-                    .HasColumnName("Nombre(s)")                                                         // Indico que en la base de datos la columna se llama Nombre(s).
-                    .HasMaxLength(100).IsRequired();                                                    // Establezco un máximo de 100 caracteres y hago que el campo sea obligatorio.
 
-                entity.Property(u => u.ApPaterno)                                                       // Configuro la propiedad del apellido paterno.
-                    .HasColumnName("ApPaterno")                                                         // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(100).IsRequired();                                                    // Permito hasta 100 caracteres y hago que el campo sea obligatorio.
 
-                entity.Property(u => u.ApMaterno)                                                       // Configuro la propiedad del apellido materno.
-                    .HasColumnName("ApMaterno")                                                         // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(100);                                                                 // Establezco un máximo de 100 caracteres para este campo.
-
-                entity.Property(u => u.FechaNacimiento)                                                 // Configuro la propiedad de la fecha de nacimiento.
-                    .HasColumnName("FechaNacimiento")                                                   // Indico el nombre de la columna en la base de datos.
-                    .HasColumnType("date")                                                              // Indico que el tipo de dato será date, para guardar solamente la fecha.
-                    .IsRequired();                                                                      // Hago que la fecha de nacimiento sea obligatoria.
-
-                entity.Property(u => u.NumeroNomina)                                                    // Configuro la propiedad del número de nómina.
-                    .HasColumnName("NumeroNomina")                                                      // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(30)                                                                   // Establezco un máximo de 30 caracteres.
-                    .IsRequired();                                                                      // Hago que el número de nómina sea obligatorio.
-
-                entity.HasIndex(u => u.NumeroNomina).IsUnique();                                        // Evito que dos usuarios tengan el mismo número de nómina.
-
-                entity.Property(u => u.CorreoElectronico)                                               // Configuro la propiedad del correo electrónico.
-                    .HasColumnName("CorreoElectronico")                                                 // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(100)                                                                  // Establezco un máximo de 100 caracteres.
-                    .IsRequired();                                                                      // Hago que el correo electrónico sea obligatorio.
-
-                entity.Property(u => u.Rol)                                                             // Configuro la propiedad que indica el rol del usuario.
-                    .HasColumnName("Rol")                                                               // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(50);                                                                  // Establezco un máximo de 50 caracteres para el rol.
-
-                entity.Property(u => u.NombreUsuario)                                                   // Configuro la propiedad del nombre de usuario para iniciar sesión.
-                    .HasColumnName("NombreUsuario")                                                     // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(100)                                                                  // Establezco un máximo de 100 caracteres.
-                    .IsRequired();                                                                      // Hago que el nombre de usuario sea obligatorio.
-
-                entity.Property(u => u.PasswordHash)                                                    // Configuro la propiedad donde guardo el valor de la contraseña o su hash.
-                    .HasColumnName("PasswordHash")                                                      // Indico el nombre de la columna en la base de datos.
-                    .HasMaxLength(255)                                                                  // Establezco un máximo de 255 caracteres.
-                    .IsRequired();                                                                      // Hago que este campo sea obligatorio.
-
-                entity.Property(u => u.Activo)                                                          // Configuro la propiedad que indica si la cuenta está activa.
-                    .HasColumnName("Activo")                                                            // Indico el nombre de la columna en la base de datos.
-                    .IsRequired();                                                                      // Hago que el estado de la cuenta sea obligatorio.
-
-                entity.Property(u => u.FechaCreacion)                                                   // Configuro la propiedad de la fecha de creación del registro.
-                    .HasColumnName("FechaCreacion")                                                     // Indico el nombre de la columna en la base de datos.
-                    .HasColumnType("datetime")                                                          // Indico que se guardará la fecha junto con la hora.
-                    .IsRequired();                                                                      // Hago que la fecha de creación sea obligatoria.
-
-                entity.Property(u => u.UsuarioRegistro)                                                 // Configuro la propiedad que guarda el identificador de quien registró al usuario.
-                    .HasColumnName("UsuarioRegistró");                                                  // Indico el nombre de la columna correspondiente en la base de datos.
-            });
-			//==============================================
-			// Mapeo de la tabla Cliente
 			modelBuilder.Entity<Cliente>(entity =>
-            {
-                entity.ToTable("Cliente");
-                entity.HasKey(c => c.IdCliente);
-                entity.Property(c => c.IdCliente)
-                    .ValueGeneratedOnAdd();
-                entity.Property(c => c.Nombres)
-                    .HasColumnName("Nombre(s)")
-                    .HasMaxLength(100)
-                    .IsRequired();
-                entity.Property(c => c.ApPaterno)
-                    .HasMaxLength(100)
-                    .IsRequired();
-                entity.Property(c => c.ApMaterno)
-                    .HasMaxLength(100);
-                entity.Property(c => c.FechaNacimiento)
-                    .HasColumnType("date")
-                    .IsRequired();
-                entity.Property(c => c.Domicilio)
-                    .HasMaxLength(250)
-                    .IsRequired();
-                entity.Property(c => c.RFC)
-                    .HasMaxLength(13)
-                    .IsRequired();
-                entity.HasIndex(c => c.RFC)
-                    .IsUnique();
-                entity.Property(c => c.CorreoElectronico)
-                    .HasMaxLength(100)
-                    .IsRequired();
-                entity.Property(c => c.TelefonoCasa)
-                    .HasMaxLength(15);
-                entity.Property(c => c.Celular)
-                    .HasMaxLength(15);
-                entity.Property(c => c.Activo)
-                    .IsRequired();
-                entity.Property(c => c.FechaCreacion)
-                    .HasColumnType("datetime")
-                    .IsRequired();
-                entity.Property(c => c.FechaModificacion)
-                    .HasColumnType("datetime");
+			{
+				entity.ToTable("Clientes", t => t.HasCheckConstraint("CHK_RFC_Longitud", "LEN([RFC]) IN (12, 13)"));
+				entity.HasKey(e => e.IdCliente);
+				entity.Property(e => e.IdCliente).ValueGeneratedOnAdd();
+				entity.Property(e => e.Nombres).HasColumnName("Nombre(s)").HasColumnType("nvarchar(150)").HasMaxLength(150).IsRequired();
+				entity.Property(e => e.ApPaterno).HasColumnType("varchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.ApMaterno).HasColumnType("varchar(100)").HasMaxLength(100);
+				entity.Property(e => e.FechaNacimiento).HasColumnType("date").IsRequired();
+				entity.Property(e => e.Domicilio).HasColumnType("nvarchar(250)").HasMaxLength(250).IsRequired();
+				entity.Property(e => e.RFC).HasColumnType("nvarchar(13)").HasMaxLength(13).IsRequired();
+				entity.HasIndex(e => e.RFC).IsUnique();
+				entity.Property(e => e.CorreoElectronico).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.TelefonoCasa).HasColumnType("nvarchar(15)").HasMaxLength(15);
+				entity.Property(e => e.TelefonoCelular).HasColumnType("nvarchar(15)").HasMaxLength(15).IsRequired();
+				entity.Property(e => e.Activo).HasDefaultValue(true).IsRequired();
+				entity.Property(e => e.CreadoPor).IsRequired();
+				entity.Property(e => e.FechaHoraRegistro).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.CreadoPor).HasConstraintName("FK_Clientes_Usuarios_Creador");
+			});
 
-                // Las dos llaves foráneas hacia Usuario (opcional, la BD ya las valida)
-                entity.HasOne<Usuario>().WithMany()
-                    .HasForeignKey(c => c.UsuarioCreacion)
-                    .OnDelete(DeleteBehavior.Restrict);
-                entity.HasOne<Usuario>().WithMany()
-                    .HasForeignKey(c => c.UsuarioModificacion)
-                    .OnDelete(DeleteBehavior.Restrict);
-                });
-			//==============================================
-			// Mapeo de la vista ConsultaCliente
-			modelBuilder.Entity<vw_ConsultaCliente>(entity =>
-            {
-                entity.HasNoKey();                               
-                entity.ToView("vw_ConsultaCliente", "dbo");
-            });
+	
+			modelBuilder.Entity<AuditoriaCliente>(entity =>
+			{
+				entity.ToTable("AuditoriaCliente");
+				entity.HasKey(e => e.IdAuditoria);
+				entity.Property(e => e.IdAuditoria).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdCliente).HasColumnType("varchar(100)").HasMaxLength(100);
+				entity.Property(e => e.DatoACambiar).HasColumnType("nvarchar(255)").HasMaxLength(255);
+				entity.Property(e => e.DatoAnterior).HasColumnType("nvarchar(max)");
+				entity.Property(e => e.DatoNuevo).HasColumnType("nvarchar(max)");
+				entity.Property(e => e.ModificadoPor).IsRequired();
+				entity.Property(e => e.FechaModificacion).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.ModificadoPor).HasConstraintName("FK_Usuario_Modifico_Cliente");
+			});
 
-			//==============================================
-			// Mapeo de la vista ConsultaUsuario
-			modelBuilder.Entity<vw_ConsultaUsuario>(entity =>
-            {
-                entity.HasNoKey();                               
-                entity.ToView("vw_ConsultaUsuario", "dbo");
-            });
+			modelBuilder.Entity<Estadio>(entity =>
+			{
+				entity.ToTable("Estadios", t => t.HasCheckConstraint("CK_Estadios_CapacidadTotal", "[CapacidadTotal] > 0"));
+				entity.HasKey(e => e.IdEstadio);
+				entity.Property(e => e.IdEstadio).ValueGeneratedOnAdd();
+				entity.Property(e => e.Nombre).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.HasIndex(e => e.Nombre).IsUnique();
+				entity.Property(e => e.Ciudad).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.CapacidadTotal).IsRequired();
+				entity.Property(e => e.MapaEstadio).HasColumnType("varchar(500)").HasMaxLength(500);
+				entity.Property(e => e.CreadoPor).IsRequired();
+				entity.Property(e => e.FechaHoraRegistro).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.CreadoPor).HasConstraintName("FK_Estadios_Usuarios");
+			});
 
-        }
-        
+			modelBuilder.Entity<Zona>(entity =>
+			{
+				entity.ToTable("Zonas", t =>
+				{
+					t.HasCheckConstraint("CK_Zonas_PrecioBase", "[PrecioBase] >= 0");
+					t.HasCheckConstraint("CK_Zonas_CupoZona", "[CupoZona] > 0");
+				});
+				entity.HasKey(e => e.IdZona);
+				entity.Property(e => e.IdZona).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdEstadio).IsRequired();
+				entity.Property(e => e.NombreZona).HasColumnType("nvarchar(50)").HasMaxLength(50).IsRequired();
+				entity.Property(e => e.PrecioBase).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.CupoZona).IsRequired();
+				entity.Property(e => e.CreadoPor).IsRequired();
+				entity.Property(e => e.FechaHoraRegistro).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.HasIndex(e => new { e.IdEstadio, e.NombreZona }).IsUnique().HasDatabaseName("UQ_Zona_Estadio");
+				entity.HasOne<Estadio>().WithMany().HasForeignKey(e => e.IdEstadio).HasConstraintName("FK_Zonas_Estadios");
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.CreadoPor).HasConstraintName("FK_Zonas_Usuarios");
+			});
 
-        
-    }
+			modelBuilder.Entity<Partido>(entity =>
+			{
+				entity.ToTable("Partidos", t => t.HasCheckConstraint("CHK_EstadoPartido", "[Estado] IN ('Programado', 'Terminado', 'Cancelado')"));
+				entity.HasKey(e => e.IdPartido);
+				entity.Property(e => e.IdPartido).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdEstadio).IsRequired();
+				entity.Property(e => e.FechaHora).HasColumnType("datetime").IsRequired();
+				entity.Property(e => e.EquipoLocal).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.EquipoVisitante).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.Estado).HasColumnType("nvarchar(20)").HasMaxLength(20).HasDefaultValue("Programado").IsRequired();
+				entity.Property(e => e.CreadoPor).IsRequired();
+				entity.Property(e => e.FechaHoraRegistro).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.HasOne<Estadio>().WithMany().HasForeignKey(e => e.IdEstadio).HasConstraintName("FK_Partidos_Estadios");
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.CreadoPor).HasConstraintName("FK_Partidos_Usuarios");
+			});
+
+			modelBuilder.Entity<Venta>(entity =>
+			{
+				entity.ToTable("Ventas", t =>
+				{
+					t.HasCheckConstraint("CHK_MetodoPago", "[MetodoPago] IN ('Crédito', 'Débito', 'Efectivo')");
+					t.HasCheckConstraint("CHK_EstadoVenta", "[EstadoVenta] IN ('Activa', 'Cancelada')");
+				});
+				entity.HasKey(e => e.IdVenta);
+				entity.Property(e => e.IdVenta).ValueGeneratedOnAdd();
+				entity.Property(e => e.Folio).HasColumnType("uniqueidentifier").HasDefaultValueSql("NEWID()").IsRequired();
+				entity.HasIndex(e => e.Folio).IsUnique();
+				entity.Property(e => e.IdCliente).IsRequired();
+				entity.Property(e => e.IdUsuario).IsRequired();
+				entity.Property(e => e.FechaHoraVenta).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.Property(e => e.Subtotal).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.IVA).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.Total).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.MetodoPago).HasColumnType("nvarchar(20)").HasMaxLength(20).IsRequired();
+				entity.Property(e => e.EstadoVenta).HasColumnType("nvarchar(20)").HasMaxLength(20).HasDefaultValue("Activa").IsRequired();
+				entity.Property(e => e.TarjetaTitular).HasColumnType("nvarchar(150)").HasMaxLength(150);
+				entity.Property(e => e.TarjetaNumero).HasColumnType("nvarchar(20)").HasMaxLength(20);
+				entity.Property(e => e.TarjetaExpiracion).HasColumnType("nvarchar(5)").HasMaxLength(5);
+				entity.Property(e => e.TarjetaCVV).HasColumnType("nvarchar(4)").HasMaxLength(4);
+				entity.HasOne<Cliente>().WithMany().HasForeignKey(e => e.IdCliente).HasConstraintName("FK_Ventas_Clientes");
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.IdUsuario).HasConstraintName("FK_Ventas_Usuarios");
+			});
+
+			modelBuilder.Entity<DetalleVenta>(entity =>
+			{
+				entity.ToTable("DetalleVenta");
+				entity.HasKey(e => e.IdDetalleVenta);
+				entity.Property(e => e.IdDetalleVenta).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdVenta).IsRequired();
+				entity.Property(e => e.IdPartido).IsRequired();
+				entity.Property(e => e.IdZona).IsRequired();
+				entity.Property(e => e.Cantidad).IsRequired();
+				entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.Subtotal).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.IVA).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.Total).HasColumnType("decimal(10,2)").IsRequired();
+				entity.HasOne<Venta>().WithMany().HasForeignKey(e => e.IdVenta).HasConstraintName("FK_DetalleVenta_Venta");
+				entity.HasOne<Partido>().WithMany().HasForeignKey(e => e.IdPartido).HasConstraintName("FK_DetalleVenta_Partido");
+				entity.HasOne<Zona>().WithMany().HasForeignKey(e => e.IdZona).HasConstraintName("FK_DetalleVenta_Zona");
+			});
+
+			modelBuilder.Entity<Boleto>(entity =>
+			{
+				entity.ToTable("Boletos", t => t.HasCheckConstraint("CHK_EstadoBoleto", "[EstadoBoleto] IN ('Vendido', 'Cancelado')"));
+				entity.HasKey(e => e.IdBoleto);
+				entity.Property(e => e.IdBoleto).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdVenta).IsRequired();
+				entity.Property(e => e.IdPartido).IsRequired();
+				entity.Property(e => e.IdZona).IsRequired();
+				entity.Property(e => e.Fila).HasColumnType("nvarchar(10)").HasMaxLength(10).IsRequired();
+				entity.Property(e => e.Asiento).HasColumnType("nvarchar(10)").HasMaxLength(10).IsRequired();
+				entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.EstadoBoleto).HasColumnType("nvarchar(20)").HasMaxLength(20).HasDefaultValue("Vendido").IsRequired();
+				entity.HasIndex(e => new { e.IdPartido, e.IdZona, e.Fila, e.Asiento }).IsUnique().HasDatabaseName("UQ_Asiento_Partido");
+				entity.HasOne<Venta>().WithMany().HasForeignKey(e => e.IdVenta).HasConstraintName("FK_Boletos_Ventas");
+				entity.HasOne<Partido>().WithMany().HasForeignKey(e => e.IdPartido).HasConstraintName("FK_Boletos_Partidos");
+				entity.HasOne<Zona>().WithMany().HasForeignKey(e => e.IdZona).HasConstraintName("FK_Boletos_Zonas");
+			});
+
+			modelBuilder.Entity<Factura>(entity =>
+			{
+				entity.ToTable("Facturas");
+				entity.HasKey(e => e.IdFactura);
+				entity.Property(e => e.IdFactura).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdVenta).IsRequired();
+				entity.HasIndex(e => e.IdVenta).IsUnique();
+				entity.Property(e => e.FolioFactura).HasColumnType("nvarchar(50)").HasMaxLength(50).IsRequired();
+				entity.HasIndex(e => e.FolioFactura).IsUnique();
+				entity.Property(e => e.FechaHoraEmision).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.Property(e => e.EmisorNombre).HasColumnType("nvarchar(150)").HasMaxLength(150).IsRequired();
+				entity.Property(e => e.EmisorRFC).HasColumnType("nvarchar(13)").HasMaxLength(13).IsRequired();
+				entity.Property(e => e.EmisorDomicilio).HasColumnType("nvarchar(250)").HasMaxLength(250).IsRequired();
+				entity.Property(e => e.ReceptorNombre).HasColumnType("nvarchar(150)").HasMaxLength(150).IsRequired();
+				entity.Property(e => e.ReceptorRFC).HasColumnType("nvarchar(13)").HasMaxLength(13).IsRequired();
+				entity.Property(e => e.ReceptorDomicilio).HasColumnType("nvarchar(250)").HasMaxLength(250).IsRequired();
+				entity.Property(e => e.UsoCFDI).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
+				entity.Property(e => e.MetodoPago).HasColumnType("nvarchar(20)").HasMaxLength(20).IsRequired();
+				entity.Property(e => e.Subtotal).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.IVA).HasColumnType("decimal(10,2)").IsRequired();
+				entity.Property(e => e.Total).HasColumnType("decimal(10,2)").IsRequired();
+				entity.HasOne<Venta>().WithMany().HasForeignKey(e => e.IdVenta).HasConstraintName("FK_Facturas_Ventas");
+			});
+
+			modelBuilder.Entity<Cancelacion>(entity =>
+			{
+				entity.ToTable("Cancelaciones");
+				entity.HasKey(e => e.IdCancelacion);
+				entity.Property(e => e.IdCancelacion).ValueGeneratedOnAdd();
+				entity.Property(e => e.IdVenta).IsRequired();
+				entity.HasIndex(e => e.IdVenta).IsUnique();
+				entity.Property(e => e.IdUsuario).IsRequired();
+				entity.Property(e => e.FechaHoraCancelacion).HasColumnType("datetime").HasDefaultValueSql("GETDATE()").IsRequired();
+				entity.Property(e => e.Motivo).HasColumnType("nvarchar(max)").IsRequired();
+				entity.HasOne<Venta>().WithMany().HasForeignKey(e => e.IdVenta).HasConstraintName("FK_Cancelaciones_Ventas");
+				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.IdUsuario).HasConstraintName("FK_Cancelaciones_Usuarios");
+			});
+		}
+	}
 }
