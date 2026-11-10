@@ -32,7 +32,7 @@ namespace PIA.Datos{                                                            
 		public DbSet<Boleto> Boleto => Set<Boleto>();
 		public DbSet<Factura> Factura => Set<Factura>();
 		public DbSet<Cancelacion> Cancelacion => Set<Cancelacion>();
-        public DbSet<vw_Usuarios> vw_Usuarios => Set<vw_Usuarios>();
+       public DbSet<vw_Usuarios> vw_Usuarios => Set<vw_Usuarios>();
 		public DbSet<vw_Clientes> vw_Clientes => Set <vw_Clientes> ();
 		public DbSet<vw_Estadios> vw_Estadios => Set<vw_Estadios>();
 		public DbSet<vw_Partidos> vw_Partidos => Set<vw_Partidos>();
@@ -54,7 +54,10 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<Usuario>(entity =>
 			{
-				entity.ToTable("Usuarios", t => t.HasCheckConstraint("CK_Usuarios_Rol", "[Rol] IN ('Administrador', 'Operativo')"));
+				entity.ToTable("Usuarios", t => {
+					t.HasCheckConstraint("CK_Usuarios_Rol", "[Rol] IN ('Administrador', 'Operativo')");
+					t.HasTrigger("trg_AuditoriaUsuarios_Update");
+				});
 				entity.HasKey(e => e.IdUsuario);
 				entity.Property(e => e.IdUsuario).HasColumnName("IdUsuario").ValueGeneratedOnAdd();
 				entity.Property(e => e.Nombres).HasColumnName("Nombre(s)").HasColumnType("varchar(100)").HasMaxLength(100).IsRequired();
@@ -91,7 +94,12 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<Cliente>(entity =>
 			{
-				entity.ToTable("Clientes", t => t.HasCheckConstraint("CHK_RFC_Longitud", "LEN([RFC]) IN (12, 13)"));
+				entity.ToTable("Clientes", t =>
+				{
+				t.HasCheckConstraint("CHK_RFC_Longitud", "LEN([RFC]) IN (12, 13)");
+				t.HasTrigger("trg_AuditoriaClientes_Update");
+
+				});
 				entity.HasKey(e => e.IdCliente);
 				entity.Property(e => e.IdCliente).ValueGeneratedOnAdd();
 				entity.Property(e => e.Nombres).HasColumnName("Nombre(s)").HasColumnType("nvarchar(150)").HasMaxLength(150).IsRequired();
@@ -276,6 +284,77 @@ namespace PIA.Datos{                                                            
 				entity.HasOne<Venta>().WithMany().HasForeignKey(e => e.IdVenta).HasConstraintName("FK_Cancelaciones_Ventas");
 				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.IdUsuario).HasConstraintName("FK_Cancelaciones_Usuarios");
 			});
+
+			modelBuilder.Entity<vw_Usuarios>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Usuarios", "dbo");
+			});
+			modelBuilder.Entity<vw_Clientes>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Clientes", "dbo");
+			});
+			modelBuilder.Entity<vw_Estadios>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Estadios", "dbo");
+			});
+			modelBuilder.Entity<vw_Partidos>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Partidos", "dbo");
+			});
+			modelBuilder.Entity<vw_DisponibilidadZonas>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_DisponibilidadZonas", "dbo");
+			});
+			modelBuilder.Entity<vw_Ventas>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Ventas", "dbo");
+			});
+			modelBuilder.Entity<vw_BoletosVendidos>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_BoletosVendidos", "dbo");
+			});
+			modelBuilder.Entity<vw_Facturas>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Facturas", "dbo");
+			});
+			modelBuilder.Entity<vw_Cancelaciones>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_Cancelaciones", "dbo");
+			});
+			modelBuilder.Entity<vw_IngresosPorPartido>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_IngresosPorPartido", "dbo");
+			});
+			modelBuilder.Entity<vw_AsientosOcupados>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_AsientosOcupados", "dbo");
+			});
+			modelBuilder.Entity<vw_AuditoriaUsuarios>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_AuditoriaUsuarios", "dbo");
+			});
+			modelBuilder.Entity<vw_AuditoriaClientes>(entity =>
+			{
+				entity.HasNoKey();
+				entity.ToView("vw_AuditoriaClientes", "dbo");
+			});
+
+
+
+
+
 		}
 	}
 }

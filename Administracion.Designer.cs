@@ -150,17 +150,25 @@
 			tabPgClientes = new TabPage();
 			tabClientesInAdmin = new TabControl();
 			BuscarCliente = new TabPage();
-			btnHistorialCliente = new Button();
-			btnEditarCliente = new Button();
+			btnEditarClienteAdmin = new Button();
+			btnHistorialClienteInAdmin = new Button();
 			GridClientesInClientes = new DataGridView();
-			btnNuevoClienteInCliente = new Button();
-			btnBuscarCliente = new Button();
+			btnNuevoClienteInAdmin = new Button();
 			txtBuscarCliente = new TextBox();
 			lblBuscarClienteInCliente = new Label();
 			lblClientesInCliente = new Label();
 			NuevoCliente = new TabPage();
+			txtPaisClienteInAdmin = new TextBox();
+			label70 = new Label();
+			txtEstadoClienteInAdmin = new TextBox();
+			lblEstadoClienteInAdmin = new Label();
+			txtCPClienteInAdmin = new TextBox();
+			txtNoInteriorClienteInAdmin = new TextBox();
+			txtNoExteriorCleinteInAdmin = new TextBox();
+			txtCalleClienteInAdmin = new TextBox();
+			txtCelularClienteInAdmin = new TextBox();
 			dateFechaNacimientoClienteinAdmin = new DateTimePicker();
-			button5 = new Button();
+			btnAgregarClienteInAdmin = new Button();
 			txtCiudadClienteInAdmin = new TextBox();
 			txtColoniaClienteInAdmin = new TextBox();
 			txtTelefonoCasaInAdmin = new TextBox();
@@ -186,38 +194,31 @@
 			label27 = new Label();
 			label28 = new Label();
 			label29 = new Label();
-			EditarCliente = new TabPage();
-			button7 = new Button();
-			textBox15 = new TextBox();
-			textBox16 = new TextBox();
-			textBox17 = new TextBox();
-			textBox18 = new TextBox();
-			textBox19 = new TextBox();
-			textBox20 = new TextBox();
-			textBox21 = new TextBox();
-			textBox22 = new TextBox();
-			textBox23 = new TextBox();
-			textBox24 = new TextBox();
-			textBox25 = new TextBox();
-			textBox26 = new TextBox();
-			textBox27 = new TextBox();
-			textBox28 = new TextBox();
-			label30 = new Label();
-			label31 = new Label();
-			label32 = new Label();
-			label33 = new Label();
-			label34 = new Label();
-			label35 = new Label();
-			label36 = new Label();
+			EditarClienteInAdmin = new TabPage();
+			btnGuardarCambiosEditarClienteInAdmin = new Button();
+			lblNuevoDatoEditarClienteInAdmin = new Label();
+			txtPaisEditarClienteInAdmin = new TextBox();
+			lblPaisEditarClienteInAdmin = new Label();
+			txtEstadoEditarClienteInAdmin = new TextBox();
+			lblEstadoEditarClienteInAdmin = new Label();
+			cboBoxEditarClienteInAdmin = new ComboBox();
+			lblNombreCompletoEditarClienteInAdmin = new Label();
+			txtCiudadEditarClienteInAdmin = new TextBox();
+			txtColoniaEditarClienteInAdmin = new TextBox();
+			txtCPEditarClienteInAdmin = new TextBox();
+			txtNoInteriorEditarClienteInAdmin = new TextBox();
+			txtNoExteriorEditarClienteInAdmin = new TextBox();
+			txtCalleEditarClienteInAdmin = new TextBox();
+			txtNuevoDatoEditarClienteInAdmin = new TextBox();
+			lblCPEditarClienteInAdmin = new Label();
+			lblCiudadEditarClienteInAdmin = new Label();
+			lblColoniaEditarClienteInAdmin = new Label();
+			lblNoInteriorEditarClienteInAdmin = new Label();
+			lblNoExteriorEditarClienteInAdmin = new Label();
+			lblCalleEditarClienteInAdmin = new Label();
 			label37 = new Label();
-			label38 = new Label();
-			label39 = new Label();
-			label40 = new Label();
-			label41 = new Label();
-			label42 = new Label();
-			label43 = new Label();
-			label44 = new Label();
-			label45 = new Label();
+			lblFechaNacimientoEditarClienteInAdmin = new Label();
+			lblCampoAEditarClienteInAdmin = new Label();
 			label46 = new Label();
 			tabPgPartidos = new TabPage();
 			flowPanelPartidos = new FlowLayoutPanel();
@@ -298,7 +299,6 @@
 			CORREOINUSUARIO = new DataGridViewTextBoxColumn();
 			ESTADOINUSUARIO = new DataGridViewTextBoxColumn();
 			button11 = new Button();
-			button12 = new Button();
 			textBox29 = new TextBox();
 			label47 = new Label();
 			label48 = new Label();
@@ -344,7 +344,6 @@
 			label67 = new Label();
 			label68 = new Label();
 			button14 = new Button();
-			txtCelularClienteInAdmin = new TextBox();
 			pnlMenuInAdmin.SuspendLayout();
 			tabCtrlInAdmin.SuspendLayout();
 			tabPgInicio.SuspendLayout();
@@ -363,7 +362,7 @@
 			BuscarCliente.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)GridClientesInClientes).BeginInit();
 			NuevoCliente.SuspendLayout();
-			EditarCliente.SuspendLayout();
+			EditarClienteInAdmin.SuspendLayout();
 			tabPgPartidos.SuspendLayout();
 			tabPgFacturas.SuspendLayout();
 			tabPgReportes.SuspendLayout();
@@ -1886,7 +1885,7 @@
 			// 
 			tabClientesInAdmin.Controls.Add(BuscarCliente);
 			tabClientesInAdmin.Controls.Add(NuevoCliente);
-			tabClientesInAdmin.Controls.Add(EditarCliente);
+			tabClientesInAdmin.Controls.Add(EditarClienteInAdmin);
 			tabClientesInAdmin.Location = new Point(3, 11);
 			tabClientesInAdmin.Name = "tabClientesInAdmin";
 			tabClientesInAdmin.SelectedIndex = 0;
@@ -1896,11 +1895,10 @@
 			// BuscarCliente
 			// 
 			BuscarCliente.BackColor = Color.Black;
-			BuscarCliente.Controls.Add(btnHistorialCliente);
-			BuscarCliente.Controls.Add(btnEditarCliente);
+			BuscarCliente.Controls.Add(btnEditarClienteAdmin);
+			BuscarCliente.Controls.Add(btnHistorialClienteInAdmin);
 			BuscarCliente.Controls.Add(GridClientesInClientes);
-			BuscarCliente.Controls.Add(btnNuevoClienteInCliente);
-			BuscarCliente.Controls.Add(btnBuscarCliente);
+			BuscarCliente.Controls.Add(btnNuevoClienteInAdmin);
 			BuscarCliente.Controls.Add(txtBuscarCliente);
 			BuscarCliente.Controls.Add(lblBuscarClienteInCliente);
 			BuscarCliente.Controls.Add(lblClientesInCliente);
@@ -1911,30 +1909,30 @@
 			BuscarCliente.TabIndex = 0;
 			BuscarCliente.Text = "BuscarCliente";
 			// 
-			// btnHistorialCliente
+			// btnEditarClienteAdmin
 			// 
-			btnHistorialCliente.FlatStyle = FlatStyle.System;
-			btnHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnHistorialCliente.Location = new Point(310, 614);
-			btnHistorialCliente.Margin = new Padding(2);
-			btnHistorialCliente.Name = "btnHistorialCliente";
-			btnHistorialCliente.Size = new Size(175, 35);
-			btnHistorialCliente.TabIndex = 37;
-			btnHistorialCliente.Text = "HISTORIAL 📋";
-			btnHistorialCliente.UseVisualStyleBackColor = true;
+			btnEditarClienteAdmin.FlatStyle = FlatStyle.System;
+			btnEditarClienteAdmin.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnEditarClienteAdmin.Location = new Point(106, 614);
+			btnEditarClienteAdmin.Margin = new Padding(2);
+			btnEditarClienteAdmin.Name = "btnEditarClienteAdmin";
+			btnEditarClienteAdmin.Size = new Size(175, 35);
+			btnEditarClienteAdmin.TabIndex = 38;
+			btnEditarClienteAdmin.Text = "EDITAR 🖋️";
+			btnEditarClienteAdmin.UseVisualStyleBackColor = true;
+			btnEditarClienteAdmin.Click += btnEditarClienteAdmin_Click;
 			// 
-			// btnEditarCliente
+			// btnHistorialClienteInAdmin
 			// 
-			btnEditarCliente.FlatStyle = FlatStyle.System;
-			btnEditarCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnEditarCliente.Location = new Point(106, 614);
-			btnEditarCliente.Margin = new Padding(2);
-			btnEditarCliente.Name = "btnEditarCliente";
-			btnEditarCliente.Size = new Size(175, 35);
-			btnEditarCliente.TabIndex = 36;
-			btnEditarCliente.Text = "EDITAR 🖋️";
-			btnEditarCliente.UseVisualStyleBackColor = true;
-			btnEditarCliente.Click += btnEditarCliente_Click;
+			btnHistorialClienteInAdmin.FlatStyle = FlatStyle.System;
+			btnHistorialClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnHistorialClienteInAdmin.Location = new Point(310, 614);
+			btnHistorialClienteInAdmin.Margin = new Padding(2);
+			btnHistorialClienteInAdmin.Name = "btnHistorialClienteInAdmin";
+			btnHistorialClienteInAdmin.Size = new Size(175, 35);
+			btnHistorialClienteInAdmin.TabIndex = 37;
+			btnHistorialClienteInAdmin.Text = "HISTORIAL 📋";
+			btnHistorialClienteInAdmin.UseVisualStyleBackColor = true;
 			// 
 			// GridClientesInClientes
 			// 
@@ -1958,35 +1956,23 @@
 			GridClientesInClientes.TabIndex = 35;
 			GridClientesInClientes.CellContentClick += GridClientesInClientes_CellContentClick;
 			// 
-			// btnNuevoClienteInCliente
+			// btnNuevoClienteInAdmin
 			// 
-			btnNuevoClienteInCliente.FlatStyle = FlatStyle.System;
-			btnNuevoClienteInCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnNuevoClienteInCliente.Location = new Point(106, 239);
-			btnNuevoClienteInCliente.Margin = new Padding(2);
-			btnNuevoClienteInCliente.Name = "btnNuevoClienteInCliente";
-			btnNuevoClienteInCliente.Size = new Size(233, 35);
-			btnNuevoClienteInCliente.TabIndex = 34;
-			btnNuevoClienteInCliente.Text = "NUEVO CLIENTE ➕";
-			btnNuevoClienteInCliente.UseVisualStyleBackColor = true;
-			btnNuevoClienteInCliente.Click += btnNuevoClienteInCliente_Click;
-			// 
-			// btnBuscarCliente
-			// 
-			btnBuscarCliente.FlatStyle = FlatStyle.System;
-			btnBuscarCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnBuscarCliente.Location = new Point(1127, 207);
-			btnBuscarCliente.Margin = new Padding(2);
-			btnBuscarCliente.Name = "btnBuscarCliente";
-			btnBuscarCliente.Size = new Size(146, 35);
-			btnBuscarCliente.TabIndex = 33;
-			btnBuscarCliente.Text = "BUSCAR 🔍";
-			btnBuscarCliente.UseVisualStyleBackColor = true;
+			btnNuevoClienteInAdmin.FlatStyle = FlatStyle.System;
+			btnNuevoClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnNuevoClienteInAdmin.Location = new Point(106, 239);
+			btnNuevoClienteInAdmin.Margin = new Padding(2);
+			btnNuevoClienteInAdmin.Name = "btnNuevoClienteInAdmin";
+			btnNuevoClienteInAdmin.Size = new Size(233, 35);
+			btnNuevoClienteInAdmin.TabIndex = 34;
+			btnNuevoClienteInAdmin.Text = "NUEVO CLIENTE ➕";
+			btnNuevoClienteInAdmin.UseVisualStyleBackColor = true;
+			btnNuevoClienteInAdmin.Click += btnNuevoClienteInCliente_Click;
 			// 
 			// txtBuscarCliente
 			// 
 			txtBuscarCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			txtBuscarCliente.Location = new Point(556, 212);
+			txtBuscarCliente.Location = new Point(566, 216);
 			txtBuscarCliente.Margin = new Padding(2);
 			txtBuscarCliente.Name = "txtBuscarCliente";
 			txtBuscarCliente.Size = new Size(555, 33);
@@ -2020,9 +2006,17 @@
 			// NuevoCliente
 			// 
 			NuevoCliente.BackColor = Color.Black;
+			NuevoCliente.Controls.Add(txtPaisClienteInAdmin);
+			NuevoCliente.Controls.Add(label70);
+			NuevoCliente.Controls.Add(txtEstadoClienteInAdmin);
+			NuevoCliente.Controls.Add(lblEstadoClienteInAdmin);
+			NuevoCliente.Controls.Add(txtCPClienteInAdmin);
+			NuevoCliente.Controls.Add(txtNoInteriorClienteInAdmin);
+			NuevoCliente.Controls.Add(txtNoExteriorCleinteInAdmin);
+			NuevoCliente.Controls.Add(txtCalleClienteInAdmin);
 			NuevoCliente.Controls.Add(txtCelularClienteInAdmin);
 			NuevoCliente.Controls.Add(dateFechaNacimientoClienteinAdmin);
-			NuevoCliente.Controls.Add(button5);
+			NuevoCliente.Controls.Add(btnAgregarClienteInAdmin);
 			NuevoCliente.Controls.Add(txtCiudadClienteInAdmin);
 			NuevoCliente.Controls.Add(txtColoniaClienteInAdmin);
 			NuevoCliente.Controls.Add(txtTelefonoCasaInAdmin);
@@ -2055,6 +2049,93 @@
 			NuevoCliente.TabIndex = 1;
 			NuevoCliente.Text = "NuevoCliente";
 			// 
+			// txtPaisClienteInAdmin
+			// 
+			txtPaisClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtPaisClienteInAdmin.Location = new Point(688, 658);
+			txtPaisClienteInAdmin.Margin = new Padding(2);
+			txtPaisClienteInAdmin.Name = "txtPaisClienteInAdmin";
+			txtPaisClienteInAdmin.Size = new Size(298, 27);
+			txtPaisClienteInAdmin.TabIndex = 93;
+			// 
+			// label70
+			// 
+			label70.AutoSize = true;
+			label70.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			label70.ForeColor = Color.White;
+			label70.Location = new Point(691, 640);
+			label70.Margin = new Padding(2, 0, 2, 0);
+			label70.Name = "label70";
+			label70.Size = new Size(49, 19);
+			label70.TabIndex = 92;
+			label70.Text = "PAIS:";
+			// 
+			// txtEstadoClienteInAdmin
+			// 
+			txtEstadoClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtEstadoClienteInAdmin.Location = new Point(393, 658);
+			txtEstadoClienteInAdmin.Margin = new Padding(2);
+			txtEstadoClienteInAdmin.Name = "txtEstadoClienteInAdmin";
+			txtEstadoClienteInAdmin.Size = new Size(266, 27);
+			txtEstadoClienteInAdmin.TabIndex = 91;
+			// 
+			// lblEstadoClienteInAdmin
+			// 
+			lblEstadoClienteInAdmin.AutoSize = true;
+			lblEstadoClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblEstadoClienteInAdmin.ForeColor = Color.White;
+			lblEstadoClienteInAdmin.Location = new Point(396, 640);
+			lblEstadoClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblEstadoClienteInAdmin.Name = "lblEstadoClienteInAdmin";
+			lblEstadoClienteInAdmin.Size = new Size(78, 19);
+			lblEstadoClienteInAdmin.TabIndex = 90;
+			lblEstadoClienteInAdmin.Text = "ESTADO:";
+			// 
+			// txtCPClienteInAdmin
+			// 
+			txtCPClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCPClienteInAdmin.Location = new Point(733, 555);
+			txtCPClienteInAdmin.Margin = new Padding(2);
+			txtCPClienteInAdmin.Name = "txtCPClienteInAdmin";
+			txtCPClienteInAdmin.Size = new Size(140, 27);
+			txtCPClienteInAdmin.TabIndex = 89;
+			// 
+			// txtNoInteriorClienteInAdmin
+			// 
+			txtNoInteriorClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoInteriorClienteInAdmin.Location = new Point(566, 555);
+			txtNoInteriorClienteInAdmin.Margin = new Padding(2);
+			txtNoInteriorClienteInAdmin.Name = "txtNoInteriorClienteInAdmin";
+			txtNoInteriorClienteInAdmin.Size = new Size(140, 27);
+			txtNoInteriorClienteInAdmin.TabIndex = 88;
+			// 
+			// txtNoExteriorCleinteInAdmin
+			// 
+			txtNoExteriorCleinteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoExteriorCleinteInAdmin.Location = new Point(396, 555);
+			txtNoExteriorCleinteInAdmin.Margin = new Padding(2);
+			txtNoExteriorCleinteInAdmin.Name = "txtNoExteriorCleinteInAdmin";
+			txtNoExteriorCleinteInAdmin.Size = new Size(140, 27);
+			txtNoExteriorCleinteInAdmin.TabIndex = 87;
+			// 
+			// txtCalleClienteInAdmin
+			// 
+			txtCalleClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCalleClienteInAdmin.Location = new Point(395, 495);
+			txtCalleClienteInAdmin.Margin = new Padding(2);
+			txtCalleClienteInAdmin.Name = "txtCalleClienteInAdmin";
+			txtCalleClienteInAdmin.Size = new Size(264, 27);
+			txtCalleClienteInAdmin.TabIndex = 86;
+			// 
+			// txtCelularClienteInAdmin
+			// 
+			txtCelularClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCelularClienteInAdmin.Location = new Point(786, 332);
+			txtCelularClienteInAdmin.Margin = new Padding(2);
+			txtCelularClienteInAdmin.Name = "txtCelularClienteInAdmin";
+			txtCelularClienteInAdmin.Size = new Size(143, 27);
+			txtCelularClienteInAdmin.TabIndex = 85;
+			// 
 			// dateFechaNacimientoClienteinAdmin
 			// 
 			dateFechaNacimientoClienteinAdmin.Location = new Point(396, 332);
@@ -2062,18 +2143,20 @@
 			dateFechaNacimientoClienteinAdmin.Size = new Size(200, 23);
 			dateFechaNacimientoClienteinAdmin.TabIndex = 84;
 			// 
-			// button5
+			// btnAgregarClienteInAdmin
 			// 
-			button5.BackColor = Color.White;
-			button5.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button5.Location = new Point(621, 689);
-			button5.Margin = new Padding(2);
-			button5.Name = "button5";
-			button5.Size = new Size(131, 35);
-			button5.TabIndex = 83;
-			button5.Text = "AGREGAR ➕";
-			button5.UseVisualStyleBackColor = false;
-			button5.Click += button5_Click;
+			btnAgregarClienteInAdmin.BackColor = Color.White;
+			btnAgregarClienteInAdmin.Cursor = Cursors.Hand;
+			btnAgregarClienteInAdmin.FlatStyle = FlatStyle.Popup;
+			btnAgregarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarClienteInAdmin.Location = new Point(621, 700);
+			btnAgregarClienteInAdmin.Margin = new Padding(2);
+			btnAgregarClienteInAdmin.Name = "btnAgregarClienteInAdmin";
+			btnAgregarClienteInAdmin.Size = new Size(131, 35);
+			btnAgregarClienteInAdmin.TabIndex = 83;
+			btnAgregarClienteInAdmin.Text = "AGREGAR ➕";
+			btnAgregarClienteInAdmin.UseVisualStyleBackColor = false;
+			btnAgregarClienteInAdmin.Click += btnAgregarClienteInAdmin_Click;
 			// 
 			// txtCiudadClienteInAdmin
 			// 
@@ -2351,269 +2434,268 @@
 			label29.TabIndex = 52;
 			label29.Text = "NUEVO CLIENTE";
 			// 
-			// EditarCliente
+			// EditarClienteInAdmin
 			// 
-			EditarCliente.BackColor = Color.Black;
-			EditarCliente.Controls.Add(button7);
-			EditarCliente.Controls.Add(textBox15);
-			EditarCliente.Controls.Add(textBox16);
-			EditarCliente.Controls.Add(textBox17);
-			EditarCliente.Controls.Add(textBox18);
-			EditarCliente.Controls.Add(textBox19);
-			EditarCliente.Controls.Add(textBox20);
-			EditarCliente.Controls.Add(textBox21);
-			EditarCliente.Controls.Add(textBox22);
-			EditarCliente.Controls.Add(textBox23);
-			EditarCliente.Controls.Add(textBox24);
-			EditarCliente.Controls.Add(textBox25);
-			EditarCliente.Controls.Add(textBox26);
-			EditarCliente.Controls.Add(textBox27);
-			EditarCliente.Controls.Add(textBox28);
-			EditarCliente.Controls.Add(label30);
-			EditarCliente.Controls.Add(label31);
-			EditarCliente.Controls.Add(label32);
-			EditarCliente.Controls.Add(label33);
-			EditarCliente.Controls.Add(label34);
-			EditarCliente.Controls.Add(label35);
-			EditarCliente.Controls.Add(label36);
-			EditarCliente.Controls.Add(label37);
-			EditarCliente.Controls.Add(label38);
-			EditarCliente.Controls.Add(label39);
-			EditarCliente.Controls.Add(label40);
-			EditarCliente.Controls.Add(label41);
-			EditarCliente.Controls.Add(label42);
-			EditarCliente.Controls.Add(label43);
-			EditarCliente.Controls.Add(label44);
-			EditarCliente.Controls.Add(label45);
-			EditarCliente.Controls.Add(label46);
-			EditarCliente.Location = new Point(4, 24);
-			EditarCliente.Name = "EditarCliente";
-			EditarCliente.Size = new Size(1378, 772);
-			EditarCliente.TabIndex = 2;
-			EditarCliente.Text = "EditarCliente";
+			EditarClienteInAdmin.BackColor = Color.Black;
+			EditarClienteInAdmin.Controls.Add(btnGuardarCambiosEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblNuevoDatoEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtPaisEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblPaisEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtEstadoEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblEstadoEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(cboBoxEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblNombreCompletoEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtCiudadEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtColoniaEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtCPEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtNoInteriorEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtNoExteriorEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtCalleEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(txtNuevoDatoEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblCPEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblCiudadEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblColoniaEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblNoInteriorEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblNoExteriorEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblCalleEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(label37);
+			EditarClienteInAdmin.Controls.Add(lblFechaNacimientoEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(lblCampoAEditarClienteInAdmin);
+			EditarClienteInAdmin.Controls.Add(label46);
+			EditarClienteInAdmin.Location = new Point(4, 24);
+			EditarClienteInAdmin.Name = "EditarClienteInAdmin";
+			EditarClienteInAdmin.Size = new Size(1378, 772);
+			EditarClienteInAdmin.TabIndex = 2;
+			EditarClienteInAdmin.Text = "EditarCliente";
 			// 
-			// button7
+			// btnGuardarCambiosEditarClienteInAdmin
 			// 
-			button7.BackColor = Color.White;
-			button7.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button7.Location = new Point(621, 689);
-			button7.Margin = new Padding(2);
-			button7.Name = "button7";
-			button7.Size = new Size(187, 35);
-			button7.TabIndex = 115;
-			button7.Text = "GUARDAR CAMBIOS";
-			button7.UseVisualStyleBackColor = false;
-			button7.Click += button7_Click;
+			btnGuardarCambiosEditarClienteInAdmin.BackColor = Color.Black;
+			btnGuardarCambiosEditarClienteInAdmin.Cursor = Cursors.Hand;
+			btnGuardarCambiosEditarClienteInAdmin.FlatStyle = FlatStyle.Flat;
+			btnGuardarCambiosEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnGuardarCambiosEditarClienteInAdmin.ForeColor = Color.White;
+			btnGuardarCambiosEditarClienteInAdmin.Location = new Point(556, 597);
+			btnGuardarCambiosEditarClienteInAdmin.Margin = new Padding(2);
+			btnGuardarCambiosEditarClienteInAdmin.Name = "btnGuardarCambiosEditarClienteInAdmin";
+			btnGuardarCambiosEditarClienteInAdmin.Size = new Size(223, 35);
+			btnGuardarCambiosEditarClienteInAdmin.TabIndex = 124;
+			btnGuardarCambiosEditarClienteInAdmin.Text = "GUARDAR CAMBIOS ✔️";
+			btnGuardarCambiosEditarClienteInAdmin.UseVisualStyleBackColor = false;
+			btnGuardarCambiosEditarClienteInAdmin.Click += button7_Click;
 			// 
-			// textBox15
+			// lblNuevoDatoEditarClienteInAdmin
 			// 
-			textBox15.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox15.Location = new Point(688, 603);
-			textBox15.Margin = new Padding(2);
-			textBox15.Name = "textBox15";
-			textBox15.Size = new Size(298, 27);
-			textBox15.TabIndex = 114;
+			lblNuevoDatoEditarClienteInAdmin.AutoSize = true;
+			lblNuevoDatoEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNuevoDatoEditarClienteInAdmin.ForeColor = Color.White;
+			lblNuevoDatoEditarClienteInAdmin.Location = new Point(392, 285);
+			lblNuevoDatoEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblNuevoDatoEditarClienteInAdmin.Name = "lblNuevoDatoEditarClienteInAdmin";
+			lblNuevoDatoEditarClienteInAdmin.Size = new Size(123, 19);
+			lblNuevoDatoEditarClienteInAdmin.TabIndex = 122;
+			lblNuevoDatoEditarClienteInAdmin.Text = "NUEVO DATO:";
 			// 
-			// textBox16
+			// txtPaisEditarClienteInAdmin
 			// 
-			textBox16.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox16.Location = new Point(393, 603);
-			textBox16.Margin = new Padding(2);
-			textBox16.Name = "textBox16";
-			textBox16.Size = new Size(264, 27);
-			textBox16.TabIndex = 113;
+			txtPaisEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtPaisEditarClienteInAdmin.Location = new Point(688, 512);
+			txtPaisEditarClienteInAdmin.Margin = new Padding(2);
+			txtPaisEditarClienteInAdmin.Name = "txtPaisEditarClienteInAdmin";
+			txtPaisEditarClienteInAdmin.Size = new Size(298, 27);
+			txtPaisEditarClienteInAdmin.TabIndex = 121;
 			// 
-			// textBox17
+			// lblPaisEditarClienteInAdmin
 			// 
-			textBox17.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox17.Location = new Point(766, 552);
-			textBox17.Margin = new Padding(2);
-			textBox17.Name = "textBox17";
-			textBox17.Size = new Size(143, 27);
-			textBox17.TabIndex = 112;
+			lblPaisEditarClienteInAdmin.AutoSize = true;
+			lblPaisEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblPaisEditarClienteInAdmin.ForeColor = Color.White;
+			lblPaisEditarClienteInAdmin.Location = new Point(691, 494);
+			lblPaisEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblPaisEditarClienteInAdmin.Name = "lblPaisEditarClienteInAdmin";
+			lblPaisEditarClienteInAdmin.Size = new Size(49, 19);
+			lblPaisEditarClienteInAdmin.TabIndex = 120;
+			lblPaisEditarClienteInAdmin.Text = "PAIS:";
 			// 
-			// textBox18
+			// txtEstadoEditarClienteInAdmin
 			// 
-			textBox18.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox18.Location = new Point(564, 553);
-			textBox18.Margin = new Padding(2);
-			textBox18.Name = "textBox18";
-			textBox18.Size = new Size(143, 27);
-			textBox18.TabIndex = 111;
+			txtEstadoEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtEstadoEditarClienteInAdmin.Location = new Point(393, 512);
+			txtEstadoEditarClienteInAdmin.Margin = new Padding(2);
+			txtEstadoEditarClienteInAdmin.Name = "txtEstadoEditarClienteInAdmin";
+			txtEstadoEditarClienteInAdmin.Size = new Size(266, 27);
+			txtEstadoEditarClienteInAdmin.TabIndex = 119;
 			// 
-			// textBox19
+			// lblEstadoEditarClienteInAdmin
 			// 
-			textBox19.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox19.Location = new Point(393, 553);
-			textBox19.Margin = new Padding(2);
-			textBox19.Name = "textBox19";
-			textBox19.Size = new Size(143, 27);
-			textBox19.TabIndex = 110;
+			lblEstadoEditarClienteInAdmin.AutoSize = true;
+			lblEstadoEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblEstadoEditarClienteInAdmin.ForeColor = Color.White;
+			lblEstadoEditarClienteInAdmin.Location = new Point(396, 494);
+			lblEstadoEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblEstadoEditarClienteInAdmin.Name = "lblEstadoEditarClienteInAdmin";
+			lblEstadoEditarClienteInAdmin.Size = new Size(78, 19);
+			lblEstadoEditarClienteInAdmin.TabIndex = 118;
+			lblEstadoEditarClienteInAdmin.Text = "ESTADO:";
 			// 
-			// textBox20
+			// cboBoxEditarClienteInAdmin
 			// 
-			textBox20.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox20.Location = new Point(393, 492);
-			textBox20.Margin = new Padding(2);
-			textBox20.Name = "textBox20";
-			textBox20.Size = new Size(297, 27);
-			textBox20.TabIndex = 109;
+			cboBoxEditarClienteInAdmin.AutoCompleteCustomSource.AddRange(new string[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			cboBoxEditarClienteInAdmin.FormattingEnabled = true;
+			cboBoxEditarClienteInAdmin.Items.AddRange(new object[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			cboBoxEditarClienteInAdmin.Location = new Point(580, 254);
+			cboBoxEditarClienteInAdmin.Name = "cboBoxEditarClienteInAdmin";
+			cboBoxEditarClienteInAdmin.Size = new Size(205, 23);
+			cboBoxEditarClienteInAdmin.TabIndex = 117;
+			cboBoxEditarClienteInAdmin.SelectedIndexChanged += cboBoxEditarClienteInAdmin_SelectedIndexChanged;
 			// 
-			// textBox21
+			// lblNombreCompletoEditarClienteInAdmin
 			// 
-			textBox21.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox21.Location = new Point(392, 332);
-			textBox21.Margin = new Padding(2);
-			textBox21.Name = "textBox21";
-			textBox21.Size = new Size(174, 27);
-			textBox21.TabIndex = 108;
+			lblNombreCompletoEditarClienteInAdmin.AutoSize = true;
+			lblNombreCompletoEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreCompletoEditarClienteInAdmin.ForeColor = Color.White;
+			lblNombreCompletoEditarClienteInAdmin.Location = new Point(393, 205);
+			lblNombreCompletoEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblNombreCompletoEditarClienteInAdmin.Name = "lblNombreCompletoEditarClienteInAdmin";
+			lblNombreCompletoEditarClienteInAdmin.Size = new Size(85, 19);
+			lblNombreCompletoEditarClienteInAdmin.TabIndex = 116;
+			lblNombreCompletoEditarClienteInAdmin.Text = "NOMBRE:";
 			// 
-			// textBox22
+			// txtCiudadEditarClienteInAdmin
 			// 
-			textBox22.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox22.Location = new Point(783, 332);
-			textBox22.Margin = new Padding(2);
-			textBox22.Name = "textBox22";
-			textBox22.Size = new Size(143, 27);
-			textBox22.TabIndex = 107;
+			txtCiudadEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCiudadEditarClienteInAdmin.Location = new Point(688, 463);
+			txtCiudadEditarClienteInAdmin.Margin = new Padding(2);
+			txtCiudadEditarClienteInAdmin.Name = "txtCiudadEditarClienteInAdmin";
+			txtCiudadEditarClienteInAdmin.Size = new Size(298, 27);
+			txtCiudadEditarClienteInAdmin.TabIndex = 114;
 			// 
-			// textBox23
+			// txtColoniaEditarClienteInAdmin
 			// 
-			textBox23.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox23.Location = new Point(612, 332);
-			textBox23.Margin = new Padding(2);
-			textBox23.Name = "textBox23";
-			textBox23.Size = new Size(143, 27);
-			textBox23.TabIndex = 106;
+			txtColoniaEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtColoniaEditarClienteInAdmin.Location = new Point(393, 463);
+			txtColoniaEditarClienteInAdmin.Margin = new Padding(2);
+			txtColoniaEditarClienteInAdmin.Name = "txtColoniaEditarClienteInAdmin";
+			txtColoniaEditarClienteInAdmin.Size = new Size(264, 27);
+			txtColoniaEditarClienteInAdmin.TabIndex = 113;
 			// 
-			// textBox24
+			// txtCPEditarClienteInAdmin
 			// 
-			textBox24.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox24.Location = new Point(563, 282);
-			textBox24.Margin = new Padding(2);
-			textBox24.Name = "textBox24";
-			textBox24.Size = new Size(423, 27);
-			textBox24.TabIndex = 105;
+			txtCPEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCPEditarClienteInAdmin.Location = new Point(766, 412);
+			txtCPEditarClienteInAdmin.Margin = new Padding(2);
+			txtCPEditarClienteInAdmin.Name = "txtCPEditarClienteInAdmin";
+			txtCPEditarClienteInAdmin.Size = new Size(143, 27);
+			txtCPEditarClienteInAdmin.TabIndex = 112;
 			// 
-			// textBox25
+			// txtNoInteriorEditarClienteInAdmin
 			// 
-			textBox25.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox25.Location = new Point(393, 282);
-			textBox25.Margin = new Padding(2);
-			textBox25.Name = "textBox25";
-			textBox25.Size = new Size(143, 27);
-			textBox25.TabIndex = 104;
+			txtNoInteriorEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoInteriorEditarClienteInAdmin.Location = new Point(564, 413);
+			txtNoInteriorEditarClienteInAdmin.Margin = new Padding(2);
+			txtNoInteriorEditarClienteInAdmin.Name = "txtNoInteriorEditarClienteInAdmin";
+			txtNoInteriorEditarClienteInAdmin.Size = new Size(143, 27);
+			txtNoInteriorEditarClienteInAdmin.TabIndex = 111;
 			// 
-			// textBox26
+			// txtNoExteriorEditarClienteInAdmin
 			// 
-			textBox26.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox26.Location = new Point(706, 232);
-			textBox26.Margin = new Padding(2);
-			textBox26.Name = "textBox26";
-			textBox26.Size = new Size(280, 27);
-			textBox26.TabIndex = 103;
+			txtNoExteriorEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoExteriorEditarClienteInAdmin.Location = new Point(393, 413);
+			txtNoExteriorEditarClienteInAdmin.Margin = new Padding(2);
+			txtNoExteriorEditarClienteInAdmin.Name = "txtNoExteriorEditarClienteInAdmin";
+			txtNoExteriorEditarClienteInAdmin.Size = new Size(143, 27);
+			txtNoExteriorEditarClienteInAdmin.TabIndex = 110;
 			// 
-			// textBox27
+			// txtCalleEditarClienteInAdmin
 			// 
-			textBox27.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox27.Location = new Point(393, 232);
-			textBox27.Margin = new Padding(2);
-			textBox27.Name = "textBox27";
-			textBox27.Size = new Size(280, 27);
-			textBox27.TabIndex = 102;
+			txtCalleEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCalleEditarClienteInAdmin.Location = new Point(393, 352);
+			txtCalleEditarClienteInAdmin.Margin = new Padding(2);
+			txtCalleEditarClienteInAdmin.Name = "txtCalleEditarClienteInAdmin";
+			txtCalleEditarClienteInAdmin.Size = new Size(297, 27);
+			txtCalleEditarClienteInAdmin.TabIndex = 109;
 			// 
-			// textBox28
+			// txtNuevoDatoEditarClienteInAdmin
 			// 
-			textBox28.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox28.Location = new Point(393, 182);
-			textBox28.Margin = new Padding(2);
-			textBox28.Name = "textBox28";
-			textBox28.Size = new Size(390, 27);
-			textBox28.TabIndex = 101;
+			txtNuevoDatoEditarClienteInAdmin.AutoCompleteCustomSource.AddRange(new string[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			txtNuevoDatoEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNuevoDatoEditarClienteInAdmin.Location = new Point(519, 282);
+			txtNuevoDatoEditarClienteInAdmin.Margin = new Padding(2);
+			txtNuevoDatoEditarClienteInAdmin.Name = "txtNuevoDatoEditarClienteInAdmin";
+			txtNuevoDatoEditarClienteInAdmin.Size = new Size(423, 27);
+			txtNuevoDatoEditarClienteInAdmin.TabIndex = 105;
 			// 
-			// label30
+			// lblCPEditarClienteInAdmin
 			// 
-			label30.AutoSize = true;
-			label30.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label30.ForeColor = Color.White;
-			label30.Location = new Point(766, 531);
-			label30.Margin = new Padding(2, 0, 2, 0);
-			label30.Name = "label30";
-			label30.Size = new Size(42, 19);
-			label30.TabIndex = 100;
-			label30.Text = "C.P.:";
+			lblCPEditarClienteInAdmin.AutoSize = true;
+			lblCPEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCPEditarClienteInAdmin.ForeColor = Color.White;
+			lblCPEditarClienteInAdmin.Location = new Point(766, 391);
+			lblCPEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblCPEditarClienteInAdmin.Name = "lblCPEditarClienteInAdmin";
+			lblCPEditarClienteInAdmin.Size = new Size(42, 19);
+			lblCPEditarClienteInAdmin.TabIndex = 100;
+			lblCPEditarClienteInAdmin.Text = "C.P.:";
 			// 
-			// label31
+			// lblCiudadEditarClienteInAdmin
 			// 
-			label31.AutoSize = true;
-			label31.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label31.ForeColor = Color.White;
-			label31.Location = new Point(688, 582);
-			label31.Margin = new Padding(2, 0, 2, 0);
-			label31.Name = "label31";
-			label31.Size = new Size(78, 19);
-			label31.TabIndex = 99;
-			label31.Text = "CIUDAD:";
+			lblCiudadEditarClienteInAdmin.AutoSize = true;
+			lblCiudadEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCiudadEditarClienteInAdmin.ForeColor = Color.White;
+			lblCiudadEditarClienteInAdmin.Location = new Point(688, 442);
+			lblCiudadEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblCiudadEditarClienteInAdmin.Name = "lblCiudadEditarClienteInAdmin";
+			lblCiudadEditarClienteInAdmin.Size = new Size(78, 19);
+			lblCiudadEditarClienteInAdmin.TabIndex = 99;
+			lblCiudadEditarClienteInAdmin.Text = "CIUDAD:";
 			// 
-			// label32
+			// lblColoniaEditarClienteInAdmin
 			// 
-			label32.AutoSize = true;
-			label32.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label32.ForeColor = Color.White;
-			label32.Location = new Point(393, 582);
-			label32.Margin = new Padding(2, 0, 2, 0);
-			label32.Name = "label32";
-			label32.Size = new Size(90, 19);
-			label32.TabIndex = 98;
-			label32.Text = "COLONIA:";
+			lblColoniaEditarClienteInAdmin.AutoSize = true;
+			lblColoniaEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblColoniaEditarClienteInAdmin.ForeColor = Color.White;
+			lblColoniaEditarClienteInAdmin.Location = new Point(393, 442);
+			lblColoniaEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblColoniaEditarClienteInAdmin.Name = "lblColoniaEditarClienteInAdmin";
+			lblColoniaEditarClienteInAdmin.Size = new Size(90, 19);
+			lblColoniaEditarClienteInAdmin.TabIndex = 98;
+			lblColoniaEditarClienteInAdmin.Text = "COLONIA:";
 			// 
-			// label33
+			// lblNoInteriorEditarClienteInAdmin
 			// 
-			label33.AutoSize = true;
-			label33.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label33.ForeColor = Color.White;
-			label33.Location = new Point(564, 531);
-			label33.Margin = new Padding(2, 0, 2, 0);
-			label33.Name = "label33";
-			label33.Size = new Size(126, 19);
-			label33.TabIndex = 97;
-			label33.Text = "NO° INTERIOR:";
+			lblNoInteriorEditarClienteInAdmin.AutoSize = true;
+			lblNoInteriorEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblNoInteriorEditarClienteInAdmin.ForeColor = Color.White;
+			lblNoInteriorEditarClienteInAdmin.Location = new Point(564, 391);
+			lblNoInteriorEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblNoInteriorEditarClienteInAdmin.Name = "lblNoInteriorEditarClienteInAdmin";
+			lblNoInteriorEditarClienteInAdmin.Size = new Size(126, 19);
+			lblNoInteriorEditarClienteInAdmin.TabIndex = 97;
+			lblNoInteriorEditarClienteInAdmin.Text = "NO° INTERIOR:";
 			// 
-			// label34
+			// lblNoExteriorEditarClienteInAdmin
 			// 
-			label34.AutoSize = true;
-			label34.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label34.ForeColor = Color.White;
-			label34.Location = new Point(393, 531);
-			label34.Margin = new Padding(2, 0, 2, 0);
-			label34.Name = "label34";
-			label34.Size = new Size(130, 19);
-			label34.TabIndex = 96;
-			label34.Text = "NO° EXTERIOR:";
+			lblNoExteriorEditarClienteInAdmin.AutoSize = true;
+			lblNoExteriorEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblNoExteriorEditarClienteInAdmin.ForeColor = Color.White;
+			lblNoExteriorEditarClienteInAdmin.Location = new Point(393, 391);
+			lblNoExteriorEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblNoExteriorEditarClienteInAdmin.Name = "lblNoExteriorEditarClienteInAdmin";
+			lblNoExteriorEditarClienteInAdmin.Size = new Size(130, 19);
+			lblNoExteriorEditarClienteInAdmin.TabIndex = 96;
+			lblNoExteriorEditarClienteInAdmin.Text = "NO° EXTERIOR:";
 			// 
-			// label35
+			// lblCalleEditarClienteInAdmin
 			// 
-			label35.AutoSize = true;
-			label35.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label35.ForeColor = Color.White;
-			label35.Location = new Point(393, 471);
-			label35.Margin = new Padding(2, 0, 2, 0);
-			label35.Name = "label35";
-			label35.Size = new Size(65, 19);
-			label35.TabIndex = 95;
-			label35.Text = "CALLE:";
-			// 
-			// label36
-			// 
-			label36.AutoSize = true;
-			label36.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label36.ForeColor = Color.White;
-			label36.Location = new Point(621, 425);
-			label36.Margin = new Padding(2, 0, 2, 0);
-			label36.Name = "label36";
-			label36.Size = new Size(134, 27);
-			label36.TabIndex = 94;
-			label36.Text = "DOMICILIO";
+			lblCalleEditarClienteInAdmin.AutoSize = true;
+			lblCalleEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCalleEditarClienteInAdmin.ForeColor = Color.White;
+			lblCalleEditarClienteInAdmin.Location = new Point(393, 331);
+			lblCalleEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblCalleEditarClienteInAdmin.Name = "lblCalleEditarClienteInAdmin";
+			lblCalleEditarClienteInAdmin.Size = new Size(65, 19);
+			lblCalleEditarClienteInAdmin.TabIndex = 95;
+			lblCalleEditarClienteInAdmin.Text = "CALLE:";
 			// 
 			// label37
 			// 
@@ -2627,101 +2709,29 @@
 			label37.TabIndex = 93;
 			label37.Text = "DATOS";
 			// 
-			// label38
+			// lblFechaNacimientoEditarClienteInAdmin
 			// 
-			label38.AutoSize = true;
-			label38.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label38.ForeColor = Color.White;
-			label38.Location = new Point(783, 311);
-			label38.Margin = new Padding(2, 0, 2, 0);
-			label38.Name = "label38";
-			label38.Size = new Size(87, 19);
-			label38.TabIndex = 92;
-			label38.Text = "CELULAR:";
+			lblFechaNacimientoEditarClienteInAdmin.AutoSize = true;
+			lblFechaNacimientoEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblFechaNacimientoEditarClienteInAdmin.ForeColor = Color.White;
+			lblFechaNacimientoEditarClienteInAdmin.Location = new Point(393, 232);
+			lblFechaNacimientoEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblFechaNacimientoEditarClienteInAdmin.Name = "lblFechaNacimientoEditarClienteInAdmin";
+			lblFechaNacimientoEditarClienteInAdmin.Size = new Size(179, 19);
+			lblFechaNacimientoEditarClienteInAdmin.TabIndex = 90;
+			lblFechaNacimientoEditarClienteInAdmin.Text = "FECHA NACIMIENTO:";
 			// 
-			// label39
+			// lblCampoAEditarClienteInAdmin
 			// 
-			label39.AutoSize = true;
-			label39.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label39.ForeColor = Color.White;
-			label39.Location = new Point(612, 311);
-			label39.Margin = new Padding(2, 0, 2, 0);
-			label39.Name = "label39";
-			label39.Size = new Size(149, 19);
-			label39.TabIndex = 91;
-			label39.Text = "TELEFONO CASA:";
-			// 
-			// label40
-			// 
-			label40.AutoSize = true;
-			label40.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label40.ForeColor = Color.White;
-			label40.Location = new Point(393, 311);
-			label40.Margin = new Padding(2, 0, 2, 0);
-			label40.Name = "label40";
-			label40.Size = new Size(179, 19);
-			label40.TabIndex = 90;
-			label40.Text = "FECHA NACIMIENTO:";
-			// 
-			// label41
-			// 
-			label41.AutoSize = true;
-			label41.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label41.ForeColor = Color.White;
-			label41.Location = new Point(563, 261);
-			label41.Margin = new Padding(2, 0, 2, 0);
-			label41.Name = "label41";
-			label41.Size = new Size(81, 19);
-			label41.TabIndex = 89;
-			label41.Text = "CORREO:";
-			// 
-			// label42
-			// 
-			label42.AutoSize = true;
-			label42.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label42.ForeColor = Color.White;
-			label42.Location = new Point(393, 261);
-			label42.Margin = new Padding(2, 0, 2, 0);
-			label42.Name = "label42";
-			label42.Size = new Size(44, 19);
-			label42.TabIndex = 88;
-			label42.Text = "RFC:";
-			// 
-			// label43
-			// 
-			label43.AutoSize = true;
-			label43.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label43.ForeColor = Color.White;
-			label43.Location = new Point(706, 211);
-			label43.Margin = new Padding(2, 0, 2, 0);
-			label43.Name = "label43";
-			label43.Size = new Size(180, 19);
-			label43.TabIndex = 87;
-			label43.Text = "APELLIDO MATERNO:";
-			// 
-			// label44
-			// 
-			label44.AutoSize = true;
-			label44.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label44.ForeColor = Color.White;
-			label44.Location = new Point(392, 211);
-			label44.Margin = new Padding(2, 0, 2, 0);
-			label44.Name = "label44";
-			label44.Size = new Size(174, 19);
-			label44.TabIndex = 86;
-			label44.Text = "APELLIDO PATERNO:";
-			// 
-			// label45
-			// 
-			label45.AutoSize = true;
-			label45.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label45.ForeColor = Color.White;
-			label45.Location = new Point(393, 161);
-			label45.Margin = new Padding(2, 0, 2, 0);
-			label45.Name = "label45";
-			label45.Size = new Size(104, 19);
-			label45.TabIndex = 85;
-			label45.Text = "NOMBRE(S):";
+			lblCampoAEditarClienteInAdmin.AutoSize = true;
+			lblCampoAEditarClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCampoAEditarClienteInAdmin.ForeColor = Color.White;
+			lblCampoAEditarClienteInAdmin.Location = new Point(392, 255);
+			lblCampoAEditarClienteInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblCampoAEditarClienteInAdmin.Name = "lblCampoAEditarClienteInAdmin";
+			lblCampoAEditarClienteInAdmin.Size = new Size(154, 19);
+			lblCampoAEditarClienteInAdmin.TabIndex = 85;
+			lblCampoAEditarClienteInAdmin.Text = "CAMPO A EDITAR:";
 			// 
 			// label46
 			// 
@@ -3589,7 +3599,6 @@
 			BuscarUsuario.Controls.Add(button9);
 			BuscarUsuario.Controls.Add(dataGridView3);
 			BuscarUsuario.Controls.Add(button11);
-			BuscarUsuario.Controls.Add(button12);
 			BuscarUsuario.Controls.Add(textBox29);
 			BuscarUsuario.Controls.Add(label47);
 			BuscarUsuario.Controls.Add(label48);
@@ -3668,18 +3677,6 @@
 			button11.Text = "NUEVO USUARIO ➕";
 			button11.UseVisualStyleBackColor = true;
 			button11.Click += button11_Click;
-			// 
-			// button12
-			// 
-			button12.FlatStyle = FlatStyle.System;
-			button12.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button12.Location = new Point(1127, 216);
-			button12.Margin = new Padding(2);
-			button12.Name = "button12";
-			button12.Size = new Size(146, 35);
-			button12.TabIndex = 33;
-			button12.Text = "BUSCAR 🔍";
-			button12.UseVisualStyleBackColor = true;
 			// 
 			// textBox29
 			// 
@@ -4201,15 +4198,6 @@
 			button14.UseVisualStyleBackColor = false;
 			button14.Click += button14_Click;
 			// 
-			// txtCelularClienteInAdmin
-			// 
-			txtCelularClienteInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			txtCelularClienteInAdmin.Location = new Point(786, 332);
-			txtCelularClienteInAdmin.Margin = new Padding(2);
-			txtCelularClienteInAdmin.Name = "txtCelularClienteInAdmin";
-			txtCelularClienteInAdmin.Size = new Size(143, 27);
-			txtCelularClienteInAdmin.TabIndex = 85;
-			// 
 			// Administracion
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -4218,8 +4206,8 @@
 			ClientSize = new Size(1484, 961);
 			Controls.Add(lblNombreUsuario);
 			Controls.Add(btnAjustesInAdmin);
-			Controls.Add(pnlMenuInAdmin);
 			Controls.Add(tabCtrlInAdmin);
+			Controls.Add(pnlMenuInAdmin);
 			ForeColor = Color.Black;
 			Margin = new Padding(2);
 			MaximizeBox = false;
@@ -4255,8 +4243,8 @@
 			((System.ComponentModel.ISupportInitialize)GridClientesInClientes).EndInit();
 			NuevoCliente.ResumeLayout(false);
 			NuevoCliente.PerformLayout();
-			EditarCliente.ResumeLayout(false);
-			EditarCliente.PerformLayout();
+			EditarClienteInAdmin.ResumeLayout(false);
+			EditarClienteInAdmin.PerformLayout();
 			tabPgPartidos.ResumeLayout(false);
 			tabPgPartidos.PerformLayout();
 			tabPgFacturas.ResumeLayout(false);
@@ -4468,10 +4456,15 @@
         private TabPage tabPageUsuarios;
         private TabControl tabClientesInAdmin;
         private TabPage BuscarCliente;
-        private Button btnHistorialCliente;
+		private Button btnHistorialClienteInAdmin;
+
+		public Button btnEditarClienteInAdmin { get; private set; }
+
+		private Button btnHistorialCliente;
         private Button btnEditarCliente;
         private DataGridView GridClientesInClientes;
-        private Button btnNuevoClienteInCliente;
+		private Button btnNuevoClienteInAdmin;
+		private Button btnNuevoClienteInCliente;
         private Button btnBuscarCliente;
         private TextBox txtBuscarCliente;
         private Label lblBuscarClienteInCliente;
@@ -4509,38 +4502,23 @@
         private Label label27;
         private Label label28;
         private Label label29;
-        private TabPage EditarCliente;
-        private Button button7;
-        private TextBox textBox15;
-        private TextBox textBox16;
-        private TextBox textBox17;
-        private TextBox textBox18;
-        private TextBox textBox19;
-        private TextBox textBox20;
-        private TextBox textBox21;
-        private TextBox textBox22;
-        private TextBox textBox23;
-        private TextBox textBox24;
-        private TextBox textBox25;
-        private TextBox textBox26;
-        private TextBox textBox27;
-        private TextBox textBox28;
-        private Label label30;
-        private Label label31;
-        private Label label32;
-        private Label label33;
-        private Label label34;
-        private Label label35;
-        private Label label36;
+        private TabPage EditarClienteInAdmin;
+        private TextBox txtCiudadEditarClienteInAdmin;
+        private TextBox txtColoniaEditarClienteInAdmin;
+        private TextBox txtCPEditarClienteInAdmin;
+        private TextBox txtNoInteriorEditarClienteInAdmin;
+        private TextBox txtNoExteriorEditarClienteInAdmin;
+        private TextBox txtCalleEditarClienteInAdmin;
+        private TextBox txtNuevoDatoEditarClienteInAdmin;
+        private Label lblCPEditarClienteInAdmin;
+        private Label lblCiudadEditarClienteInAdmin;
+        private Label lblColoniaEditarClienteInAdmin;
+        private Label lblNoInteriorEditarClienteInAdmin;
+        private Label lblNoExteriorEditarClienteInAdmin;
+        private Label lblCalleEditarClienteInAdmin;
         private Label label37;
-        private Label label38;
-        private Label label39;
-        private Label label40;
-        private Label label41;
-        private Label label42;
-        private Label label43;
-        private Label label44;
-        private Label label45;
+        private Label lblFechaNacimientoEditarClienteInAdmin;
+        private Label lblCampoAEditarClienteInAdmin;
         private Label label46;
         private TabControl tabCtrlUsauriosInAdmin;
         private TabPage BuscarUsuario;
@@ -4599,6 +4577,24 @@
         private DataGridViewTextBoxColumn CORREOINUSUARIO;
         private DataGridViewTextBoxColumn ESTADOINUSUARIO;
 		private DateTimePicker dateFechaNacimientoClienteinAdmin;
+		private Button btnAgregarClienteInAdmin;
 		private TextBox txtCelularClienteInAdmin;
+		private TextBox txtCPClienteInAdmin;
+		private TextBox txtNoInteriorClienteInAdmin;
+		private TextBox txtNoExteriorCleinteInAdmin;
+		private TextBox txtCalleClienteInAdmin;
+		private TextBox txtPaisClienteInAdmin;
+		private Label label70;
+		private TextBox txtEstadoClienteInAdmin;
+		private Label lblEstadoClienteInAdmin;
+		private Label lblNombreCompletoEditarClienteInAdmin;
+		private ComboBox cboBoxEditarClienteInAdmin;
+		private TextBox txtPaisEditarClienteInAdmin;
+		private Label lblPaisEditarClienteInAdmin;
+		private TextBox txtEstadoEditarClienteInAdmin;
+		private Label lblEstadoEditarClienteInAdmin;
+		private Label lblNuevoDatoEditarClienteInAdmin;
+		private Button btnGuardarCambiosEditarClienteInAdmin;
+		private Button btnEditarClienteAdmin;
 	}
 }

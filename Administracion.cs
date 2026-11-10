@@ -1,12 +1,17 @@
 ﻿
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using PIA.Datos;
 using PIA.Diseños; 
+using PIA.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing; 
 using System.Text; 
+using System.Text.RegularExpressions;
 using System.Windows.Forms; 
 
 namespace PIA{                                                                                          // Indico que este código pertenece al proyecto PIA.
@@ -32,26 +37,27 @@ namespace PIA{                                                                  
 			this.FormBorderStyle = FormBorderStyle.None;                                                // Quito los bordes predeterminados de la ventana.
 			this.StartPosition = FormStartPosition.CenterScreen;                                        // Hago que la ventana aparezca en el centro de la pantalla.
 
-			GridClientesInClientes.Columns.Add("IdCliente", "ID");
-			GridClientesInClientes.Columns.Add("NombreCompleto", "Nombre");
+			//==========================================
+			// CONFIGURACIÓN DEL GRID DE CLIENTES
+			//==========================================
+			GridClientesInClientes.Columns.Add("IdCliente", "IdCliente");
+			GridClientesInClientes.Columns.Add("Nombre", "Nombre");
+			GridClientesInClientes.Columns.Add("ApPaterno", "Apellido Paterno");
+			GridClientesInClientes.Columns.Add("ApMaterno", "Apellido Materno");
 			GridClientesInClientes.Columns.Add("FechaNacimiento", "Fecha de nacimiento");
+			GridClientesInClientes.Columns.Add("Edad", "Edad");
 			GridClientesInClientes.Columns.Add("Domicilio", "Domicilio");
 			GridClientesInClientes.Columns.Add("RFC", "RFC");
 			GridClientesInClientes.Columns.Add("CorreoElectronico", "Correo");
 			GridClientesInClientes.Columns.Add("TelefonoCasa", "Teléfono casa");
-			GridClientesInClientes.Columns.Add("Celular", "Celular");
+			GridClientesInClientes.Columns.Add("TelefonoCelular", "Teléfono celular");
 			GridClientesInClientes.Columns.Add("Activo", "Activo");
-
 			GridClientesInClientes.ReadOnly = true;
 			GridClientesInClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 			GridClientesInClientes.MultiSelect = false;
 			GridClientesInClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			GridClientesInClientes.Columns["IdCliente"].Visible = false;
-
-
 			CargarGridClientes();
-
-
+			GridClientesInClientes.SelectionChanged += GridClientesInClientes_SelectionChanged;
 		}
 
 		private void Administracion_Load(object sender, EventArgs e)
@@ -204,58 +210,61 @@ namespace PIA{                                                                  
 			MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);     // Muestro un mensaje indicando que el usuario se editó correctamente.
 			tabCtrlUsauriosInAdmin.SelectedIndex = 0;                                                              // Cambio a la primera pestaña de la sección de usuarios.
 		}
-
-		private void button5_Click(object sender, EventArgs e)
+		//==========================================
+		// BOTON GUARDAR CLIENTE
+		//==========================================
+		private async void btnAgregarClienteInAdmin_Click(object sender, EventArgs e)
 		{
 			if (string.IsNullOrWhiteSpace(txtNombreClienteInAdmin.Text) ||
 				string.IsNullOrWhiteSpace(txtApPaternoClienteInAdmin.Text) ||
-				string.IsNullOrWhiteSpace(txtApMaternoClienteInAdmin.Text) ||
 				string.IsNullOrWhiteSpace(dateFechaNacimientoClienteinAdmin.Text) ||
 				string.IsNullOrWhiteSpace(txtRFCClienteInAdmin.Text) ||
 				string.IsNullOrWhiteSpace(txtCorreoClienteInAdmin.Text) ||
-				string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text) ||
-				string.IsNullOrWhiteSpace(txtTelefonoCasaInAdmin.Text))
+				string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text))
 			{
 				MessageBox.Show("Complete los campos obligatorios.");
 				return;
 			}
+			else
+			{
+				try
+				{
+					var cliente = new Cliente
+					{
+						Nombres = txtNombreClienteInAdmin.Text,
+						ApPaterno = txtApPaternoClienteInAdmin.Text,
+						ApMaterno = txtApMaternoClienteInAdmin.Text,
+						FechaNacimiento = dateFechaNacimientoClienteinAdmin.Value,
+						RFC = txtRFCClienteInAdmin.Text,
+						CorreoElectronico = txtCorreoClienteInAdmin.Text,
+						TelefonoCasa = txtTelefonoCasaInAdmin.Text,
+						TelefonoCelular = txtCelularClienteInAdmin.Text,
+						Domicilio = $@"{txtCalleClienteInAdmin.Text} {txtNoExteriorCleinteInAdmin.Text} {txtNoInteriorClienteInAdmin.Text}, {txtCPClienteInAdmin.Text}, {txtColoniaClienteInAdmin.Text}, {txtCiudadClienteInAdmin.Text}, {txtEstadoClienteInAdmin.Text}, {txtPaisClienteInAdmin.Text}",
+						CreadoPor = Sesion.IdUsuario,
+						Activo = true
+					};
 
-			Cliente nuevoCliente = new Cliente
-			{
-				Nombres = txtNombreClienteInAdmin.Text.Trim(),
-				ApPaterno = txtApPaternoClienteInAdmin.Text.Trim(),
-				ApMaterno = string.IsNullOrWhiteSpace(txtApMaternoClienteInAdmin.Text) ? null : txtApMaternoClienteInAdmin.Text.Trim(),
-				FechaNacimiento = dateFechaNacimientoClienteinAdmin.Value.Date,
-				RFC = txtRFCClienteInAdmin.Text.Trim().ToUpper(),
-				CorreoElectronico = txtCorreoClienteInAdmin.Text.Trim(),
-				TelefonoCasa = string.IsNullOrWhiteSpace(txtTelefonoCasaInAdmin.Text) ? null : txtTelefonoCasaInAdmin.Text.Trim(),
-				TelefonoCelular = string.IsNullOrWhiteSpace(txtCelularClienteInAdmin.Text) ? null : txtCelularClienteInAdmin.Text.Trim(),
-				Activo = true,
-				FechaHoraRegistro = DateTime.Now,
-				CreadoPor = Sesion.IdUsuario
-			};
-			try
-			{
-				using var db = new AppDbContext();
-				db.Cliente.Add(nuevoCliente);
-				db.SaveChanges();
+					var repositorio = new RepoCliente();
+					await repositorio.AgregarAsync(cliente);
 
-				MessageBox.Show("Cliente registrado correctamente.");
-				LimpiarCamposNuevoCliente();
-				CargarGridClientes();   // refresca el grid de la vista
+					MessageBox.Show("Cliente agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);     // Muestro un mensaje indicando que el cliente se agregó correctamente.
+					tabClientesInAdmin.SelectedIndex = 0;                                                       // Cambio a la primera pestaña de la sección de clientes.
+					CargarGridClientes();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "No se pudo agregar el cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				finally
+				{
+					LimpiarCamposNuevoCliente();
+				}
 			}
-			catch (Exception ex)
-			{
-				MessageBox.Show("No se pudo guardar el cliente.\n" + ex.InnerException?.Message ?? ex.Message);
-			}
-		
-		MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.None);     // Muestro un mensaje indicando que el usuario se agregó correctamente.
-			tabClientesInAdmin.SelectedIndex = 0;
 		}
 
-		private void button7_Click(object sender, EventArgs e)
+		private void btnGuardarClienteInAdmin_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.None);     // Muestro un mensaje indicando que el usuario se editó correctamente.
+			MessageBox.Show("Cliente editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.None);
 			tabClientesInAdmin.SelectedIndex = 0;
 		}
 
@@ -269,30 +278,38 @@ namespace PIA{                                                                  
 			CargarGridClientes();
 		}
 
+		//==========================================
+		// METODO CARGAR GRID CLIENTES
+		//==========================================
 		private void CargarGridClientes()
 		{
 			string texto = txtBuscarCliente.Text;
 			using var db = new AppDbContext();
-			var clientes = db.vw_ConsultaCliente
-				.Where(c => c.Nombre.Contains(texto) || c.CorreoElectronico.Contains(texto) || c.RFC.Contains(texto));
+			var clientes = db.vw_Clientes
+				.Where(c => c.ApPaterno.Contains(texto) || c.CorreoElectronico.Contains(texto) || c.RFC.Contains(texto));
 
 			GridClientesInClientes.Rows.Clear();
 
-			foreach (vw_ConsultaCliente c in clientes)
+			foreach (vw_Clientes c in clientes)
 			{
 				GridClientesInClientes.Rows.Add(
 				c.IdCliente,
-				c.Nombre,
+				c.Nombres,
+				c.ApPaterno,
+				c.ApMaterno,
 				c.FechaNacimiento.ToShortDateString(),
+				c.Edad,
 				c.Domicilio,
 				c.RFC,
 				c.CorreoElectronico,
 				c.TelefonoCasa,
-				c.Celular,
+				c.TelefonoCelular,
 				c.Activo);
 			}
 		}
-
+		//==========================================
+		// METODO LIMPIAR CAMPOS NUEVO CLIENTE
+		//==========================================
 		private void LimpiarCamposNuevoCliente()
 		{
 			txtNombreClienteInAdmin.Clear();
@@ -303,14 +320,187 @@ namespace PIA{                                                                  
 			txtTelefonoCasaInAdmin.Clear();
 			txtCelularClienteInAdmin.Clear();
 			dateFechaNacimientoClienteinAdmin.Value = DateTime.Today;
+			txtCalleClienteInAdmin.Clear();
+			txtNoExteriorCleinteInAdmin.Clear();
+			txtNoInteriorClienteInAdmin.Clear();
+			txtCPClienteInAdmin.Clear();
+			txtColoniaClienteInAdmin.Clear();
+			txtCiudadClienteInAdmin.Clear();
+			txtEstadoClienteInAdmin.Clear();
+			txtPaisClienteInAdmin.Clear();
 			txtNombreClienteInAdmin.Focus();
 		}
+		//==========================================
+		// CONFIGURACION DEL COMBOBOX DE EDITAR CLIENTE
+		//==========================================
+		private void cboBoxEditarClienteInAdmin_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (cboBoxEditarClienteInAdmin.SelectedIndex  != 3)
+			{
+				lblNuevoDatoEditarClienteInAdmin.Visible = true;
+				txtNuevoDatoEditarClienteInAdmin.Visible = true;
+				lblCalleEditarClienteInAdmin.Visible = false;
+				txtCalleEditarClienteInAdmin.Visible = false;
+				lblNoExteriorEditarClienteInAdmin.Visible = false;
+				txtNoExteriorEditarClienteInAdmin.Visible = false;
+				lblNoInteriorEditarClienteInAdmin.Visible = false;
+				txtNoInteriorEditarClienteInAdmin.Visible = false;
+				lblCPEditarClienteInAdmin.Visible = false;
+				txtCPEditarClienteInAdmin.Visible = false;
+				lblColoniaEditarClienteInAdmin.Visible = false;
+				txtColoniaEditarClienteInAdmin.Visible = false;
+				lblCiudadEditarClienteInAdmin.Visible = false;
+				txtCiudadEditarClienteInAdmin.Visible = false;
+				lblEstadoEditarClienteInAdmin.Visible = false;
+				txtEstadoEditarClienteInAdmin.Visible = false;
+				lblPaisEditarClienteInAdmin.Visible = false;
+				txtPaisEditarClienteInAdmin.Visible = false;
+			}
+			else
+			{
+				lblNuevoDatoEditarClienteInAdmin.Visible = false;
+				txtNuevoDatoEditarClienteInAdmin.Visible = false;
+				lblCalleEditarClienteInAdmin.Visible = true;
+				txtCalleEditarClienteInAdmin.Visible = true;
+				lblNoExteriorEditarClienteInAdmin.Visible = true;
+				txtNoExteriorEditarClienteInAdmin.Visible = true;
+				lblNoInteriorEditarClienteInAdmin.Visible = true;
+				txtNoInteriorEditarClienteInAdmin.Visible = true;
+				lblCPEditarClienteInAdmin.Visible = true;
+				txtCPEditarClienteInAdmin.Visible = true;
+				lblColoniaEditarClienteInAdmin.Visible = true;
+				txtColoniaEditarClienteInAdmin.Visible = true;
+				lblCiudadEditarClienteInAdmin.Visible = true;
+				txtCiudadEditarClienteInAdmin.Visible = true;
+				lblEstadoEditarClienteInAdmin.Visible = true;
+				txtEstadoEditarClienteInAdmin.Visible = true;
+				lblPaisEditarClienteInAdmin.Visible = true;
+				txtPaisEditarClienteInAdmin.Visible = true;
+			}
+		}
+		//==========================================
+		// BOTON GUARDAR CAMBIOS EDITAR CLIENTE
+		//==========================================
+		private async void button7_Click(object sender, EventArgs e)
+		{
+			var fila = GridClientesInClientes.CurrentRow;
 
+			if (fila is null || fila.IsNewRow ||
+				fila.Cells["IdCliente"].Value is null)
+			{
+				MessageBox.Show("Selecciona un cliente del grid.");
+				return;
+			}
+			int idCliente = Convert.ToInt32(fila.Cells["IdCliente"].Value);
 
+			if (cboBoxEditarClienteInAdmin.SelectedItem is null)
+			{
+				MessageBox.Show("Selecciona qué dato quieres cambiar.");
+				return;
+			}
 
+			string campoSeleccionado = cboBoxEditarClienteInAdmin.SelectedItem.ToString()!;
+			string nuevoDato;
 
+			if (cboBoxEditarClienteInAdmin.SelectedIndex == 3)
+			{
+				if (string.IsNullOrWhiteSpace(txtCalleEditarClienteInAdmin.Text) ||
+					string.IsNullOrWhiteSpace(txtNoExteriorEditarClienteInAdmin.Text) ||
+					string.IsNullOrWhiteSpace(txtCPEditarClienteInAdmin.Text) ||
+					string.IsNullOrWhiteSpace(txtColoniaEditarClienteInAdmin.Text) ||
+					string.IsNullOrWhiteSpace(txtCiudadEditarClienteInAdmin.Text) ||
+					string.IsNullOrWhiteSpace(txtEstadoEditarClienteInAdmin.Text) ||
+					string.IsNullOrWhiteSpace(txtPaisEditarClienteInAdmin.Text))
+				{
+					MessageBox.Show("Completa los campos obligatorios del domicilio.");
+					return;
+				}
 
+				string numeroInterior = string.IsNullOrWhiteSpace(
+					txtNoInteriorEditarClienteInAdmin.Text)
+						? ""
+						: $" Int. {txtNoInteriorEditarClienteInAdmin.Text.Trim()}";
 
+				nuevoDato =
+					$"{txtCalleEditarClienteInAdmin.Text.Trim()} " +
+					$"No. {txtNoExteriorEditarClienteInAdmin.Text.Trim()}" +
+					$"{numeroInterior}, " +
+					$"C.P. {txtCPEditarClienteInAdmin.Text.Trim()}, " +
+					$"{txtColoniaClienteInAdmin.Text.Trim()}, " +
+					$"{txtCiudadEditarClienteInAdmin.Text.Trim()}, " +
+					$"{txtEstadoEditarClienteInAdmin.Text.Trim()}, " +
+					$"{txtPaisEditarClienteInAdmin.Text.Trim()}";
+			}
+			else
+			{
+				nuevoDato = txtNuevoDatoEditarClienteInAdmin.Text.Trim();
+
+				if (string.IsNullOrWhiteSpace(nuevoDato))
+				{
+					MessageBox.Show("Escribe el nuevo valor.");
+					return;
+				}
+			}
+
+			try
+			{
+				var repo = new RepoCliente();
+
+				await repo.ActualizarClienteAsync(idCliente, campoSeleccionado, nuevoDato);
+
+				MessageBox.Show(
+					"Cambios guardados correctamente.",
+					"Éxito",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Information);
+
+				CargarGridClientes();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "No se pudieron guardar los cambios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			tabClientesInAdmin.SelectedIndex = 0;
+			cboBoxEditarClienteInAdmin.SelectedIndex = -1;
+			txtNuevoDatoEditarClienteInAdmin.Clear();
+			txtCalleEditarClienteInAdmin.Clear();
+			txtNoExteriorEditarClienteInAdmin.Clear();
+			txtNoInteriorEditarClienteInAdmin.Clear();
+			txtCPEditarClienteInAdmin.Clear();
+			txtColoniaEditarClienteInAdmin.Clear();
+			txtCiudadEditarClienteInAdmin.Clear();
+			txtEstadoEditarClienteInAdmin.Clear();	
+		}
+
+		//==========================================
+		// BOTON EDITAR CLIENTE
+		//==========================================
+		private void btnEditarClienteAdmin_Click(object sender, EventArgs e)
+		{
+			tabClientesInAdmin.SelectedIndex = 2;
+		}
+		//==========================================
+		// EVENTO SELECCION DE FILA EN GRID CLIENTES
+		//==========================================
+		private void GridClientesInClientes_SelectionChanged(object sender, EventArgs e)
+		{
+			var fila = GridClientesInClientes.CurrentRow;
+
+			if (fila is null || fila.IsNewRow)
+				return;
+
+			int idCliente = Convert.ToInt32(fila.Cells["IdCliente"].Value);
+
+			lblNombreCompletoEditarClienteInAdmin.Text =
+				$"{fila.Cells["Nombre"].Value} " +
+				$"{fila.Cells["ApPaterno"].Value} " +
+				$"{fila.Cells["ApMaterno"].Value}".Trim();
+				
+
+			lblFechaNacimientoEditarClienteInAdmin.Text = fila.Cells["FechaNacimiento"].Value?.ToString() ?? "";
+		}
 	}
-	
+
+
 }

@@ -212,7 +212,7 @@ namespace PIA.Datos{                                                            
 		public string CreadoPorRol { get; set; } = string.Empty;
 	}
 
-	// Vistas para mostrar informacion de Estadios
+	//Vistas para mostrar informacion de Estadios
 	public class vw_Estadios
 	{
 		public int IdEstadio { get; set; }

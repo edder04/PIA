@@ -137,7 +137,7 @@
 			tabClientesInVentas = new TabControl();
 			BuscarCliente = new TabPage();
 			btnHistorialCliente = new Button();
-			btnEditarCliente = new Button();
+			btnEditarClienteInOper = new Button();
 			GridClientesInClientes = new DataGridView();
 			dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
 			dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
@@ -289,14 +289,15 @@
 			tabCtrlVentas.Controls.Add(tabPgClientes);
 			tabCtrlVentas.Controls.Add(tabPgPartidos);
 			tabCtrlVentas.Controls.Add(tabPgReportes);
-			tabCtrlVentas.ItemSize = new Size(0, 1);
+			tabCtrlVentas.ItemSize = new Size(96, 20);
 			tabCtrlVentas.Location = new Point(50, 100);
 			tabCtrlVentas.Margin = new Padding(0);
 			tabCtrlVentas.Name = "tabCtrlVentas";
 			tabCtrlVentas.SelectedIndex = 0;
 			tabCtrlVentas.Size = new Size(1400, 850);
 			tabCtrlVentas.SizeMode = TabSizeMode.Fixed;
-			tabCtrlVentas.TabIndex = 0;
+			tabCtrlVentas.TabIndex = 4;
+			tabCtrlVentas.Visible = false;
 			// 
 			// tabPgInicio
 			// 
@@ -312,11 +313,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 5);
+			tabPgInicio.Location = new Point(4, 24);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 841);
+			tabPgInicio.Size = new Size(1392, 822);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -450,11 +451,11 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 5);
+			tabPgVentas.Location = new Point(4, 24);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 841);
+			tabPgVentas.Size = new Size(1392, 822);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
@@ -1597,10 +1598,10 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInVentas);
-			tabPgClientes.Location = new Point(4, 5);
+			tabPgClientes.Location = new Point(4, 24);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 841);
+			tabPgClientes.Size = new Size(1392, 822);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
@@ -1619,7 +1620,7 @@
 			// 
 			BuscarCliente.BackColor = Color.Black;
 			BuscarCliente.Controls.Add(btnHistorialCliente);
-			BuscarCliente.Controls.Add(btnEditarCliente);
+			BuscarCliente.Controls.Add(btnEditarClienteInOper);
 			BuscarCliente.Controls.Add(GridClientesInClientes);
 			BuscarCliente.Controls.Add(btnNuevoClienteInCliente);
 			BuscarCliente.Controls.Add(btnBuscarCliente);
@@ -1645,18 +1646,18 @@
 			btnHistorialCliente.Text = "HISTORIAL 📋";
 			btnHistorialCliente.UseVisualStyleBackColor = true;
 			// 
-			// btnEditarCliente
+			// btnEditarClienteInOper
 			// 
-			btnEditarCliente.FlatStyle = FlatStyle.System;
-			btnEditarCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnEditarCliente.Location = new Point(106, 614);
-			btnEditarCliente.Margin = new Padding(2);
-			btnEditarCliente.Name = "btnEditarCliente";
-			btnEditarCliente.Size = new Size(175, 35);
-			btnEditarCliente.TabIndex = 36;
-			btnEditarCliente.Text = "EDITAR 🖋️";
-			btnEditarCliente.UseVisualStyleBackColor = true;
-			btnEditarCliente.Click += btnEditarCliente_Click;
+			btnEditarClienteInOper.FlatStyle = FlatStyle.System;
+			btnEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnEditarClienteInOper.Location = new Point(106, 614);
+			btnEditarClienteInOper.Margin = new Padding(2);
+			btnEditarClienteInOper.Name = "btnEditarClienteInOper";
+			btnEditarClienteInOper.Size = new Size(175, 35);
+			btnEditarClienteInOper.TabIndex = 36;
+			btnEditarClienteInOper.Text = "EDITAR 🖋️";
+			btnEditarClienteInOper.UseVisualStyleBackColor = true;
+			btnEditarClienteInOper.Click += btnEditarCliente_Click;
 			// 
 			// GridClientesInClientes
 			// 
@@ -3261,7 +3262,7 @@
         private TabPage BuscarCliente;
         private TabPage NuevoCliente;
         private Button btnHistorialCliente;
-        private Button btnEditarCliente;
+        private Button btnEditarClienteInOper;
         private DataGridView GridClientesInClientes;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
