@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace PIA
 {
 	public partial class UcCardPartido : UserControl
@@ -18,10 +19,12 @@ namespace PIA
 		public UcCardPartido()
 		{
 			InitializeComponent();
+			btnVenta.Click += btnVenta_Click;
 		}
 
 		public void CargarPartido(vw_Partidos partido)
 		{
+			_partido = partido;
 			_idPartido = partido.IdPartido;
 
 			lblEquipoLocalInCard.Text = partido.EquipoLocal;
@@ -42,6 +45,7 @@ namespace PIA
 			if (_partido is not null){
 				PartidoElegido?.Invoke(_partido);
 			}
+
 		}
 	}
 }

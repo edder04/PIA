@@ -121,6 +121,9 @@ namespace PIA{                                                                  
 					txtBuscarEquipoVentaPaso2.Text =
 						$"{partidoElegido.EquipoLocal} vs. {partidoElegido.EquipoVisitante}";
 
+					tabCtrlInAdmin.SelectedIndex = 1; // Pestaña principal de Ventas
+					tabCtrlVenta.SelectedIndex = 0;  // Primer paso del flujo de venta
+
 				};
 
 				pnlPartidos.Controls.Add(tarjeta);
