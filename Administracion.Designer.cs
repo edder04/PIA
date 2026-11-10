@@ -220,16 +220,6 @@
 			lblFechaNacimientoEditarClienteInAdmin = new Label();
 			lblCampoAEditarClienteInAdmin = new Label();
 			label46 = new Label();
-			tabPgPartidos = new TabPage();
-			flowPanelPartidos = new FlowLayoutPanel();
-			btnProximosInPartidos = new Button();
-			btnEstaSemanaInPartidos = new Button();
-			btnHoyInPartidos = new Button();
-			btnTodosInPartidos = new Button();
-			comboBox2 = new ComboBox();
-			comboBox1 = new ComboBox();
-			label18 = new Label();
-			label17 = new Label();
 			tabPgFacturas = new TabPage();
 			lblInfoIVAInFactura = new Label();
 			lblInfoSubtotalInFactura = new Label();
@@ -344,6 +334,54 @@
 			label67 = new Label();
 			label68 = new Label();
 			button14 = new Button();
+			tabPgPartidos = new TabPage();
+			tabCtrlPartidoEstadio = new TabControl();
+			tabPage2 = new TabPage();
+			txtHoraPartidoInAdmin = new TextBox();
+			dteFechaPartidoInAdmin = new DateTimePicker();
+			txtEstadoPartidoInAdmin = new TextBox();
+			btnFinalizarPartidoInAdmin = new Button();
+			btnAgregarPartidoInAdmin = new Button();
+			txtEquipoVisitanteInAdmin = new TextBox();
+			txtEquipoLocalPartidoInAdmin = new TextBox();
+			label35 = new Label();
+			label34 = new Label();
+			label33 = new Label();
+			label32 = new Label();
+			label31 = new Label();
+			label30 = new Label();
+			lblPartidoInAdmin = new Label();
+			cboEstadioInAdmin = new ComboBox();
+			tabPage6 = new TabPage();
+			btnFinalizarAgregarPartidoInAdmin = new Button();
+			lblZonaInAdmin = new Label();
+			lblEstadioInAdmin = new Label();
+			txtAsientosZonaInAdmin = new TextBox();
+			txtPrecioZonaInAdmin = new TextBox();
+			txtNombreZonaInAdmin = new TextBox();
+			txtCapacidadEstadioInAdmin = new TextBox();
+			txtCiudadEstadioInAdmin = new TextBox();
+			txtNombreEstadioInAdmin = new TextBox();
+			btnAgregarZonaInAdmin = new Button();
+			lblAsientosZonaInAdmin = new Label();
+			lblPrecioZonaInAdmin = new Label();
+			btnAgregarEstadioInAdmin = new Button();
+			lblNombreZonaInAdmin = new Label();
+			lblCapacidadEstadioInAdmin = new Label();
+			lblCiudadEstadioInAdmin = new Label();
+			lblNombreEstadioInAdmin = new Label();
+			panel1 = new Panel();
+			btnAgregarEstadio = new Button();
+			btnAgregarPartido = new Button();
+			btnProximosInPartidos = new Button();
+			btnEstaSemanaInPartidos = new Button();
+			btnHoyInPartidos = new Button();
+			btnTodosInPartidos = new Button();
+			comboBox2 = new ComboBox();
+			comboBox1 = new ComboBox();
+			label18 = new Label();
+			label17 = new Label();
+			flowPanelPartidos = new FlowLayoutPanel();
 			pnlMenuInAdmin.SuspendLayout();
 			tabCtrlInAdmin.SuspendLayout();
 			tabPgInicio.SuspendLayout();
@@ -363,7 +401,6 @@
 			((System.ComponentModel.ISupportInitialize)GridClientesInClientes).BeginInit();
 			NuevoCliente.SuspendLayout();
 			EditarClienteInAdmin.SuspendLayout();
-			tabPgPartidos.SuspendLayout();
 			tabPgFacturas.SuspendLayout();
 			tabPgReportes.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
@@ -373,6 +410,11 @@
 			((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
 			NuevoUsuario.SuspendLayout();
 			tabEditarUsuario.SuspendLayout();
+			tabPgPartidos.SuspendLayout();
+			tabCtrlPartidoEstadio.SuspendLayout();
+			tabPage2.SuspendLayout();
+			tabPage6.SuspendLayout();
+			panel1.SuspendLayout();
 			SuspendLayout();
 			// 
 			// pnlMenuInAdmin
@@ -548,10 +590,10 @@
 			tabCtrlInAdmin.Controls.Add(tabPgInicio);
 			tabCtrlInAdmin.Controls.Add(tabPgVentas);
 			tabCtrlInAdmin.Controls.Add(tabPgClientes);
-			tabCtrlInAdmin.Controls.Add(tabPgPartidos);
 			tabCtrlInAdmin.Controls.Add(tabPgFacturas);
 			tabCtrlInAdmin.Controls.Add(tabPgReportes);
 			tabCtrlInAdmin.Controls.Add(tabPageUsuarios);
+			tabCtrlInAdmin.Controls.Add(tabPgPartidos);
 			tabCtrlInAdmin.Location = new Point(50, 100);
 			tabCtrlInAdmin.Margin = new Padding(2);
 			tabCtrlInAdmin.Name = "tabCtrlInAdmin";
@@ -2745,139 +2787,6 @@
 			label46.TabIndex = 84;
 			label46.Text = "EDITAR CLIENTE";
 			// 
-			// tabPgPartidos
-			// 
-			tabPgPartidos.BackColor = Color.Black;
-			tabPgPartidos.Controls.Add(flowPanelPartidos);
-			tabPgPartidos.Controls.Add(btnProximosInPartidos);
-			tabPgPartidos.Controls.Add(btnEstaSemanaInPartidos);
-			tabPgPartidos.Controls.Add(btnHoyInPartidos);
-			tabPgPartidos.Controls.Add(btnTodosInPartidos);
-			tabPgPartidos.Controls.Add(comboBox2);
-			tabPgPartidos.Controls.Add(comboBox1);
-			tabPgPartidos.Controls.Add(label18);
-			tabPgPartidos.Controls.Add(label17);
-			tabPgPartidos.Location = new Point(4, 24);
-			tabPgPartidos.Margin = new Padding(2);
-			tabPgPartidos.Name = "tabPgPartidos";
-			tabPgPartidos.Size = new Size(1392, 822);
-			tabPgPartidos.TabIndex = 3;
-			tabPgPartidos.Text = "Partidos";
-			// 
-			// flowPanelPartidos
-			// 
-			flowPanelPartidos.AutoScroll = true;
-			flowPanelPartidos.Location = new Point(2, 126);
-			flowPanelPartidos.Margin = new Padding(2);
-			flowPanelPartidos.Name = "flowPanelPartidos";
-			flowPanelPartidos.Padding = new Padding(6, 5, 6, 5);
-			flowPanelPartidos.Size = new Size(714, 690);
-			flowPanelPartidos.TabIndex = 18;
-			// 
-			// btnProximosInPartidos
-			// 
-			btnProximosInPartidos.FlatStyle = FlatStyle.System;
-			btnProximosInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
-			btnProximosInPartidos.Location = new Point(289, 86);
-			btnProximosInPartidos.Margin = new Padding(2);
-			btnProximosInPartidos.Name = "btnProximosInPartidos";
-			btnProximosInPartidos.Size = new Size(69, 25);
-			btnProximosInPartidos.TabIndex = 17;
-			btnProximosInPartidos.Text = "Proximos";
-			btnProximosInPartidos.UseVisualStyleBackColor = true;
-			// 
-			// btnEstaSemanaInPartidos
-			// 
-			btnEstaSemanaInPartidos.FlatStyle = FlatStyle.System;
-			btnEstaSemanaInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
-			btnEstaSemanaInPartidos.Location = new Point(177, 86);
-			btnEstaSemanaInPartidos.Margin = new Padding(2);
-			btnEstaSemanaInPartidos.Name = "btnEstaSemanaInPartidos";
-			btnEstaSemanaInPartidos.Size = new Size(92, 25);
-			btnEstaSemanaInPartidos.TabIndex = 16;
-			btnEstaSemanaInPartidos.Text = "Esta Semana";
-			btnEstaSemanaInPartidos.UseVisualStyleBackColor = true;
-			// 
-			// btnHoyInPartidos
-			// 
-			btnHoyInPartidos.FlatStyle = FlatStyle.System;
-			btnHoyInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
-			btnHoyInPartidos.Location = new Point(97, 86);
-			btnHoyInPartidos.Margin = new Padding(2);
-			btnHoyInPartidos.Name = "btnHoyInPartidos";
-			btnHoyInPartidos.Size = new Size(59, 25);
-			btnHoyInPartidos.TabIndex = 15;
-			btnHoyInPartidos.Text = "Hoy";
-			btnHoyInPartidos.UseVisualStyleBackColor = true;
-			// 
-			// btnTodosInPartidos
-			// 
-			btnTodosInPartidos.FlatStyle = FlatStyle.System;
-			btnTodosInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
-			btnTodosInPartidos.Location = new Point(20, 86);
-			btnTodosInPartidos.Margin = new Padding(2);
-			btnTodosInPartidos.Name = "btnTodosInPartidos";
-			btnTodosInPartidos.Size = new Size(59, 25);
-			btnTodosInPartidos.TabIndex = 14;
-			btnTodosInPartidos.Text = "Todos";
-			btnTodosInPartidos.UseVisualStyleBackColor = true;
-			// 
-			// comboBox2
-			// 
-			comboBox2.AllowDrop = true;
-			comboBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			comboBox2.BackColor = SystemColors.ActiveBorder;
-			comboBox2.FlatStyle = FlatStyle.Popup;
-			comboBox2.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			comboBox2.FormattingEnabled = true;
-			comboBox2.ItemHeight = 18;
-			comboBox2.Location = new Point(289, 58);
-			comboBox2.Margin = new Padding(2);
-			comboBox2.Name = "comboBox2";
-			comboBox2.Size = new Size(410, 26);
-			comboBox2.TabIndex = 13;
-			comboBox2.Text = "Todos los Estadios";
-			// 
-			// comboBox1
-			// 
-			comboBox1.AllowDrop = true;
-			comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			comboBox1.BackColor = SystemColors.ActiveBorder;
-			comboBox1.FlatStyle = FlatStyle.Popup;
-			comboBox1.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			comboBox1.FormattingEnabled = true;
-			comboBox1.ItemHeight = 18;
-			comboBox1.Location = new Point(15, 58);
-			comboBox1.Margin = new Padding(2);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(255, 26);
-			comboBox1.TabIndex = 12;
-			comboBox1.Text = "🗓️ Todas las Fechas";
-			// 
-			// label18
-			// 
-			label18.AutoSize = true;
-			label18.Font = new Font("Avenir LT Pro 65 Medium", 9.857142F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label18.ForeColor = Color.White;
-			label18.Location = new Point(15, 34);
-			label18.Margin = new Padding(2, 0, 2, 0);
-			label18.Name = "label18";
-			label18.Size = new Size(423, 17);
-			label18.TabIndex = 11;
-			label18.Text = "Consulta los proximos encuentros y disponibilidad de boletos";
-			// 
-			// label17
-			// 
-			label17.AutoSize = true;
-			label17.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label17.ForeColor = Color.White;
-			label17.Location = new Point(15, 14);
-			label17.Margin = new Padding(2, 0, 2, 0);
-			label17.Name = "label17";
-			label17.Size = new Size(105, 23);
-			label17.TabIndex = 10;
-			label17.Text = "PARTIDOS";
-			// 
 			// tabPgFacturas
 			// 
 			tabPgFacturas.BackColor = Color.Black;
@@ -4198,6 +4107,558 @@
 			button14.UseVisualStyleBackColor = false;
 			button14.Click += button14_Click;
 			// 
+			// tabPgPartidos
+			// 
+			tabPgPartidos.BackColor = Color.Black;
+			tabPgPartidos.Controls.Add(tabCtrlPartidoEstadio);
+			tabPgPartidos.Controls.Add(panel1);
+			tabPgPartidos.Controls.Add(btnProximosInPartidos);
+			tabPgPartidos.Controls.Add(btnEstaSemanaInPartidos);
+			tabPgPartidos.Controls.Add(btnHoyInPartidos);
+			tabPgPartidos.Controls.Add(btnTodosInPartidos);
+			tabPgPartidos.Controls.Add(comboBox2);
+			tabPgPartidos.Controls.Add(comboBox1);
+			tabPgPartidos.Controls.Add(label18);
+			tabPgPartidos.Controls.Add(label17);
+			tabPgPartidos.Controls.Add(flowPanelPartidos);
+			tabPgPartidos.Location = new Point(4, 24);
+			tabPgPartidos.Margin = new Padding(2);
+			tabPgPartidos.Name = "tabPgPartidos";
+			tabPgPartidos.Size = new Size(1392, 822);
+			tabPgPartidos.TabIndex = 3;
+			tabPgPartidos.Text = "Partidos";
+			// 
+			// tabCtrlPartidoEstadio
+			// 
+			tabCtrlPartidoEstadio.Controls.Add(tabPage2);
+			tabCtrlPartidoEstadio.Controls.Add(tabPage6);
+			tabCtrlPartidoEstadio.Location = new Point(750, 126);
+			tabCtrlPartidoEstadio.Name = "tabCtrlPartidoEstadio";
+			tabCtrlPartidoEstadio.SelectedIndex = 0;
+			tabCtrlPartidoEstadio.Size = new Size(600, 690);
+			tabCtrlPartidoEstadio.TabIndex = 20;
+			tabCtrlPartidoEstadio.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
+			// 
+			// tabPage2
+			// 
+			tabPage2.BackColor = Color.Black;
+			tabPage2.Controls.Add(txtHoraPartidoInAdmin);
+			tabPage2.Controls.Add(dteFechaPartidoInAdmin);
+			tabPage2.Controls.Add(txtEstadoPartidoInAdmin);
+			tabPage2.Controls.Add(btnFinalizarPartidoInAdmin);
+			tabPage2.Controls.Add(btnAgregarPartidoInAdmin);
+			tabPage2.Controls.Add(txtEquipoVisitanteInAdmin);
+			tabPage2.Controls.Add(txtEquipoLocalPartidoInAdmin);
+			tabPage2.Controls.Add(label35);
+			tabPage2.Controls.Add(label34);
+			tabPage2.Controls.Add(label33);
+			tabPage2.Controls.Add(label32);
+			tabPage2.Controls.Add(label31);
+			tabPage2.Controls.Add(label30);
+			tabPage2.Controls.Add(lblPartidoInAdmin);
+			tabPage2.Controls.Add(cboEstadioInAdmin);
+			tabPage2.Location = new Point(4, 24);
+			tabPage2.Name = "tabPage2";
+			tabPage2.Padding = new Padding(3);
+			tabPage2.Size = new Size(592, 662);
+			tabPage2.TabIndex = 0;
+			tabPage2.Text = "TabAgregarPartido";
+			// 
+			// txtHoraPartidoInAdmin
+			// 
+			txtHoraPartidoInAdmin.Location = new Point(240, 229);
+			txtHoraPartidoInAdmin.Name = "txtHoraPartidoInAdmin";
+			txtHoraPartidoInAdmin.Size = new Size(88, 23);
+			txtHoraPartidoInAdmin.TabIndex = 28;
+			// 
+			// dteFechaPartidoInAdmin
+			// 
+			dteFechaPartidoInAdmin.Location = new Point(285, 187);
+			dteFechaPartidoInAdmin.Name = "dteFechaPartidoInAdmin";
+			dteFechaPartidoInAdmin.Size = new Size(232, 23);
+			dteFechaPartidoInAdmin.TabIndex = 27;
+			// 
+			// txtEstadoPartidoInAdmin
+			// 
+			txtEstadoPartidoInAdmin.Location = new Point(87, 409);
+			txtEstadoPartidoInAdmin.Name = "txtEstadoPartidoInAdmin";
+			txtEstadoPartidoInAdmin.Size = new Size(430, 23);
+			txtEstadoPartidoInAdmin.TabIndex = 26;
+			// 
+			// btnFinalizarPartidoInAdmin
+			// 
+			btnFinalizarPartidoInAdmin.Cursor = Cursors.Hand;
+			btnFinalizarPartidoInAdmin.FlatStyle = FlatStyle.Popup;
+			btnFinalizarPartidoInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnFinalizarPartidoInAdmin.ForeColor = Color.White;
+			btnFinalizarPartidoInAdmin.Location = new Point(203, 587);
+			btnFinalizarPartidoInAdmin.Name = "btnFinalizarPartidoInAdmin";
+			btnFinalizarPartidoInAdmin.Size = new Size(200, 25);
+			btnFinalizarPartidoInAdmin.TabIndex = 25;
+			btnFinalizarPartidoInAdmin.Text = "FINALIZAR";
+			btnFinalizarPartidoInAdmin.UseVisualStyleBackColor = true;
+			// 
+			// btnAgregarPartidoInAdmin
+			// 
+			btnAgregarPartidoInAdmin.Cursor = Cursors.Hand;
+			btnAgregarPartidoInAdmin.FlatStyle = FlatStyle.Popup;
+			btnAgregarPartidoInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarPartidoInAdmin.ForeColor = Color.White;
+			btnAgregarPartidoInAdmin.Location = new Point(203, 486);
+			btnAgregarPartidoInAdmin.Name = "btnAgregarPartidoInAdmin";
+			btnAgregarPartidoInAdmin.Size = new Size(200, 25);
+			btnAgregarPartidoInAdmin.TabIndex = 24;
+			btnAgregarPartidoInAdmin.Text = "AGREGAR PARTIDO";
+			btnAgregarPartidoInAdmin.UseVisualStyleBackColor = true;
+			// 
+			// txtEquipoVisitanteInAdmin
+			// 
+			txtEquipoVisitanteInAdmin.Location = new Point(87, 349);
+			txtEquipoVisitanteInAdmin.Name = "txtEquipoVisitanteInAdmin";
+			txtEquipoVisitanteInAdmin.Size = new Size(430, 23);
+			txtEquipoVisitanteInAdmin.TabIndex = 23;
+			txtEquipoVisitanteInAdmin.TextChanged += textBox2_TextChanged;
+			// 
+			// txtEquipoLocalPartidoInAdmin
+			// 
+			txtEquipoLocalPartidoInAdmin.Location = new Point(86, 291);
+			txtEquipoLocalPartidoInAdmin.Name = "txtEquipoLocalPartidoInAdmin";
+			txtEquipoLocalPartidoInAdmin.Size = new Size(430, 23);
+			txtEquipoLocalPartidoInAdmin.TabIndex = 22;
+			// 
+			// label35
+			// 
+			label35.AutoSize = true;
+			label35.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label35.ForeColor = Color.White;
+			label35.Location = new Point(86, 387);
+			label35.Name = "label35";
+			label35.Size = new Size(78, 19);
+			label35.TabIndex = 21;
+			label35.Text = "ESTADO:";
+			// 
+			// label34
+			// 
+			label34.AutoSize = true;
+			label34.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label34.ForeColor = Color.White;
+			label34.Location = new Point(86, 327);
+			label34.Name = "label34";
+			label34.Size = new Size(165, 19);
+			label34.TabIndex = 20;
+			label34.Text = "EQUIPO VISITANTE:";
+			// 
+			// label33
+			// 
+			label33.AutoSize = true;
+			label33.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label33.ForeColor = Color.White;
+			label33.Location = new Point(87, 269);
+			label33.Name = "label33";
+			label33.Size = new Size(137, 19);
+			label33.TabIndex = 19;
+			label33.Text = "EQUIPO LOCAL:";
+			// 
+			// label32
+			// 
+			label32.AutoSize = true;
+			label32.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label32.ForeColor = Color.White;
+			label32.Location = new Point(86, 230);
+			label32.Name = "label32";
+			label32.Size = new Size(147, 19);
+			label32.TabIndex = 18;
+			label32.Text = "INGRESAR HORA:";
+			// 
+			// label31
+			// 
+			label31.AutoSize = true;
+			label31.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label31.ForeColor = Color.White;
+			label31.Location = new Point(86, 191);
+			label31.Name = "label31";
+			label31.Size = new Size(186, 19);
+			label31.TabIndex = 17;
+			label31.Text = "SELECCIONAR FECHA:";
+			// 
+			// label30
+			// 
+			label30.AutoSize = true;
+			label30.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label30.ForeColor = Color.White;
+			label30.Location = new Point(87, 156);
+			label30.Name = "label30";
+			label30.Size = new Size(201, 19);
+			label30.TabIndex = 16;
+			label30.Text = "SELECCIONAR ESTADIO:";
+			// 
+			// lblPartidoInAdmin
+			// 
+			lblPartidoInAdmin.AutoSize = true;
+			lblPartidoInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblPartidoInAdmin.ForeColor = Color.White;
+			lblPartidoInAdmin.Location = new Point(263, 67);
+			lblPartidoInAdmin.Name = "lblPartidoInAdmin";
+			lblPartidoInAdmin.Size = new Size(79, 19);
+			lblPartidoInAdmin.TabIndex = 15;
+			lblPartidoInAdmin.Text = "PARTIDO";
+			// 
+			// cboEstadioInAdmin
+			// 
+			cboEstadioInAdmin.FormattingEnabled = true;
+			cboEstadioInAdmin.Location = new Point(285, 152);
+			cboEstadioInAdmin.Name = "cboEstadioInAdmin";
+			cboEstadioInAdmin.Size = new Size(232, 23);
+			cboEstadioInAdmin.TabIndex = 0;
+			// 
+			// tabPage6
+			// 
+			tabPage6.BackColor = Color.Black;
+			tabPage6.Controls.Add(btnFinalizarAgregarPartidoInAdmin);
+			tabPage6.Controls.Add(lblZonaInAdmin);
+			tabPage6.Controls.Add(lblEstadioInAdmin);
+			tabPage6.Controls.Add(txtAsientosZonaInAdmin);
+			tabPage6.Controls.Add(txtPrecioZonaInAdmin);
+			tabPage6.Controls.Add(txtNombreZonaInAdmin);
+			tabPage6.Controls.Add(txtCapacidadEstadioInAdmin);
+			tabPage6.Controls.Add(txtCiudadEstadioInAdmin);
+			tabPage6.Controls.Add(txtNombreEstadioInAdmin);
+			tabPage6.Controls.Add(btnAgregarZonaInAdmin);
+			tabPage6.Controls.Add(lblAsientosZonaInAdmin);
+			tabPage6.Controls.Add(lblPrecioZonaInAdmin);
+			tabPage6.Controls.Add(btnAgregarEstadioInAdmin);
+			tabPage6.Controls.Add(lblNombreZonaInAdmin);
+			tabPage6.Controls.Add(lblCapacidadEstadioInAdmin);
+			tabPage6.Controls.Add(lblCiudadEstadioInAdmin);
+			tabPage6.Controls.Add(lblNombreEstadioInAdmin);
+			tabPage6.Location = new Point(4, 24);
+			tabPage6.Name = "tabPage6";
+			tabPage6.Padding = new Padding(3);
+			tabPage6.Size = new Size(592, 662);
+			tabPage6.TabIndex = 1;
+			tabPage6.Text = "tabAgregarEstadio";
+			// 
+			// btnFinalizarAgregarPartidoInAdmin
+			// 
+			btnFinalizarAgregarPartidoInAdmin.Cursor = Cursors.Hand;
+			btnFinalizarAgregarPartidoInAdmin.FlatStyle = FlatStyle.Popup;
+			btnFinalizarAgregarPartidoInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnFinalizarAgregarPartidoInAdmin.ForeColor = Color.White;
+			btnFinalizarAgregarPartidoInAdmin.Location = new Point(217, 599);
+			btnFinalizarAgregarPartidoInAdmin.Name = "btnFinalizarAgregarPartidoInAdmin";
+			btnFinalizarAgregarPartidoInAdmin.Size = new Size(200, 25);
+			btnFinalizarAgregarPartidoInAdmin.TabIndex = 16;
+			btnFinalizarAgregarPartidoInAdmin.Text = "FINALIZAR";
+			btnFinalizarAgregarPartidoInAdmin.UseVisualStyleBackColor = true;
+			btnFinalizarAgregarPartidoInAdmin.Click += btnFinalizarAgregarPartidoInAdmin_Click;
+			// 
+			// lblZonaInAdmin
+			// 
+			lblZonaInAdmin.AutoSize = true;
+			lblZonaInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblZonaInAdmin.ForeColor = Color.White;
+			lblZonaInAdmin.Location = new Point(259, 364);
+			lblZonaInAdmin.Name = "lblZonaInAdmin";
+			lblZonaInAdmin.Size = new Size(57, 19);
+			lblZonaInAdmin.TabIndex = 15;
+			lblZonaInAdmin.Text = "ZONA";
+			// 
+			// lblEstadioInAdmin
+			// 
+			lblEstadioInAdmin.AutoSize = true;
+			lblEstadioInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblEstadioInAdmin.ForeColor = Color.White;
+			lblEstadioInAdmin.Location = new Point(256, 101);
+			lblEstadioInAdmin.Name = "lblEstadioInAdmin";
+			lblEstadioInAdmin.Size = new Size(78, 19);
+			lblEstadioInAdmin.TabIndex = 14;
+			lblEstadioInAdmin.Text = "ESTADIO";
+			// 
+			// txtAsientosZonaInAdmin
+			// 
+			txtAsientosZonaInAdmin.Location = new Point(204, 472);
+			txtAsientosZonaInAdmin.Name = "txtAsientosZonaInAdmin";
+			txtAsientosZonaInAdmin.Size = new Size(316, 23);
+			txtAsientosZonaInAdmin.TabIndex = 13;
+			// 
+			// txtPrecioZonaInAdmin
+			// 
+			txtPrecioZonaInAdmin.Location = new Point(204, 436);
+			txtPrecioZonaInAdmin.Name = "txtPrecioZonaInAdmin";
+			txtPrecioZonaInAdmin.Size = new Size(316, 23);
+			txtPrecioZonaInAdmin.TabIndex = 12;
+			// 
+			// txtNombreZonaInAdmin
+			// 
+			txtNombreZonaInAdmin.Location = new Point(248, 400);
+			txtNombreZonaInAdmin.Name = "txtNombreZonaInAdmin";
+			txtNombreZonaInAdmin.Size = new Size(263, 23);
+			txtNombreZonaInAdmin.TabIndex = 11;
+			// 
+			// txtCapacidadEstadioInAdmin
+			// 
+			txtCapacidadEstadioInAdmin.Location = new Point(273, 241);
+			txtCapacidadEstadioInAdmin.Name = "txtCapacidadEstadioInAdmin";
+			txtCapacidadEstadioInAdmin.Size = new Size(235, 23);
+			txtCapacidadEstadioInAdmin.TabIndex = 10;
+			// 
+			// txtCiudadEstadioInAdmin
+			// 
+			txtCiudadEstadioInAdmin.Location = new Point(192, 207);
+			txtCiudadEstadioInAdmin.Name = "txtCiudadEstadioInAdmin";
+			txtCiudadEstadioInAdmin.Size = new Size(316, 23);
+			txtCiudadEstadioInAdmin.TabIndex = 9;
+			// 
+			// txtNombreEstadioInAdmin
+			// 
+			txtNombreEstadioInAdmin.Location = new Point(192, 175);
+			txtNombreEstadioInAdmin.Name = "txtNombreEstadioInAdmin";
+			txtNombreEstadioInAdmin.Size = new Size(316, 23);
+			txtNombreEstadioInAdmin.TabIndex = 8;
+			// 
+			// btnAgregarZonaInAdmin
+			// 
+			btnAgregarZonaInAdmin.Cursor = Cursors.Hand;
+			btnAgregarZonaInAdmin.FlatStyle = FlatStyle.Popup;
+			btnAgregarZonaInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarZonaInAdmin.ForeColor = Color.White;
+			btnAgregarZonaInAdmin.Location = new Point(217, 531);
+			btnAgregarZonaInAdmin.Name = "btnAgregarZonaInAdmin";
+			btnAgregarZonaInAdmin.Size = new Size(200, 25);
+			btnAgregarZonaInAdmin.TabIndex = 7;
+			btnAgregarZonaInAdmin.Text = "AGREGAR ZONA";
+			btnAgregarZonaInAdmin.UseVisualStyleBackColor = true;
+			btnAgregarZonaInAdmin.Click += btnAgregarZonaInAdmin_Click;
+			// 
+			// lblAsientosZonaInAdmin
+			// 
+			lblAsientosZonaInAdmin.AutoSize = true;
+			lblAsientosZonaInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblAsientosZonaInAdmin.ForeColor = Color.White;
+			lblAsientosZonaInAdmin.Location = new Point(104, 476);
+			lblAsientosZonaInAdmin.Name = "lblAsientosZonaInAdmin";
+			lblAsientosZonaInAdmin.Size = new Size(94, 19);
+			lblAsientosZonaInAdmin.TabIndex = 6;
+			lblAsientosZonaInAdmin.Text = "ASIENTOS:";
+			// 
+			// lblPrecioZonaInAdmin
+			// 
+			lblPrecioZonaInAdmin.AutoSize = true;
+			lblPrecioZonaInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblPrecioZonaInAdmin.ForeColor = Color.White;
+			lblPrecioZonaInAdmin.Location = new Point(109, 437);
+			lblPrecioZonaInAdmin.Name = "lblPrecioZonaInAdmin";
+			lblPrecioZonaInAdmin.Size = new Size(73, 19);
+			lblPrecioZonaInAdmin.TabIndex = 5;
+			lblPrecioZonaInAdmin.Text = "PRECIO:";
+			// 
+			// btnAgregarEstadioInAdmin
+			// 
+			btnAgregarEstadioInAdmin.Cursor = Cursors.Hand;
+			btnAgregarEstadioInAdmin.FlatStyle = FlatStyle.Popup;
+			btnAgregarEstadioInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarEstadioInAdmin.ForeColor = Color.White;
+			btnAgregarEstadioInAdmin.Location = new Point(204, 298);
+			btnAgregarEstadioInAdmin.Name = "btnAgregarEstadioInAdmin";
+			btnAgregarEstadioInAdmin.Size = new Size(200, 25);
+			btnAgregarEstadioInAdmin.TabIndex = 4;
+			btnAgregarEstadioInAdmin.Text = "AGREGAR ESTADIO";
+			btnAgregarEstadioInAdmin.UseVisualStyleBackColor = true;
+			btnAgregarEstadioInAdmin.Click += btnAgregarEstadioInAdmin_Click;
+			// 
+			// lblNombreZonaInAdmin
+			// 
+			lblNombreZonaInAdmin.AutoSize = true;
+			lblNombreZonaInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreZonaInAdmin.ForeColor = Color.White;
+			lblNombreZonaInAdmin.Location = new Point(104, 401);
+			lblNombreZonaInAdmin.Name = "lblNombreZonaInAdmin";
+			lblNombreZonaInAdmin.Size = new Size(138, 19);
+			lblNombreZonaInAdmin.TabIndex = 3;
+			lblNombreZonaInAdmin.Text = "NOMBRE ZONA:";
+			// 
+			// lblCapacidadEstadioInAdmin
+			// 
+			lblCapacidadEstadioInAdmin.AutoSize = true;
+			lblCapacidadEstadioInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCapacidadEstadioInAdmin.ForeColor = Color.White;
+			lblCapacidadEstadioInAdmin.Location = new Point(101, 242);
+			lblCapacidadEstadioInAdmin.Name = "lblCapacidadEstadioInAdmin";
+			lblCapacidadEstadioInAdmin.Size = new Size(166, 19);
+			lblCapacidadEstadioInAdmin.TabIndex = 2;
+			lblCapacidadEstadioInAdmin.Text = "CAPACIDAD TOTAL:";
+			// 
+			// lblCiudadEstadioInAdmin
+			// 
+			lblCiudadEstadioInAdmin.AutoSize = true;
+			lblCiudadEstadioInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCiudadEstadioInAdmin.ForeColor = Color.White;
+			lblCiudadEstadioInAdmin.Location = new Point(101, 211);
+			lblCiudadEstadioInAdmin.Name = "lblCiudadEstadioInAdmin";
+			lblCiudadEstadioInAdmin.Size = new Size(78, 19);
+			lblCiudadEstadioInAdmin.TabIndex = 1;
+			lblCiudadEstadioInAdmin.Text = "CIUDAD:";
+			// 
+			// lblNombreEstadioInAdmin
+			// 
+			lblNombreEstadioInAdmin.AutoSize = true;
+			lblNombreEstadioInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreEstadioInAdmin.ForeColor = Color.White;
+			lblNombreEstadioInAdmin.Location = new Point(101, 176);
+			lblNombreEstadioInAdmin.Name = "lblNombreEstadioInAdmin";
+			lblNombreEstadioInAdmin.Size = new Size(85, 19);
+			lblNombreEstadioInAdmin.TabIndex = 0;
+			lblNombreEstadioInAdmin.Text = "NOMBRE:";
+			// 
+			// panel1
+			// 
+			panel1.Controls.Add(btnAgregarEstadio);
+			panel1.Controls.Add(btnAgregarPartido);
+			panel1.Location = new Point(811, 58);
+			panel1.Name = "panel1";
+			panel1.Size = new Size(500, 50);
+			panel1.TabIndex = 19;
+			// 
+			// btnAgregarEstadio
+			// 
+			btnAgregarEstadio.Cursor = Cursors.Hand;
+			btnAgregarEstadio.FlatStyle = FlatStyle.Popup;
+			btnAgregarEstadio.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarEstadio.ForeColor = Color.White;
+			btnAgregarEstadio.Location = new Point(260, 12);
+			btnAgregarEstadio.Name = "btnAgregarEstadio";
+			btnAgregarEstadio.Size = new Size(200, 25);
+			btnAgregarEstadio.TabIndex = 1;
+			btnAgregarEstadio.Text = "AGREGAR ESTADIO";
+			btnAgregarEstadio.UseVisualStyleBackColor = true;
+			// 
+			// btnAgregarPartido
+			// 
+			btnAgregarPartido.Cursor = Cursors.Hand;
+			btnAgregarPartido.FlatStyle = FlatStyle.Popup;
+			btnAgregarPartido.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarPartido.ForeColor = Color.White;
+			btnAgregarPartido.Location = new Point(30, 12);
+			btnAgregarPartido.Name = "btnAgregarPartido";
+			btnAgregarPartido.Size = new Size(200, 25);
+			btnAgregarPartido.TabIndex = 0;
+			btnAgregarPartido.Text = "AGREGAR PARTIDO";
+			btnAgregarPartido.UseVisualStyleBackColor = true;
+			// 
+			// btnProximosInPartidos
+			// 
+			btnProximosInPartidos.FlatStyle = FlatStyle.System;
+			btnProximosInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			btnProximosInPartidos.Location = new Point(289, 86);
+			btnProximosInPartidos.Margin = new Padding(2);
+			btnProximosInPartidos.Name = "btnProximosInPartidos";
+			btnProximosInPartidos.Size = new Size(69, 25);
+			btnProximosInPartidos.TabIndex = 17;
+			btnProximosInPartidos.Text = "Proximos";
+			btnProximosInPartidos.UseVisualStyleBackColor = true;
+			// 
+			// btnEstaSemanaInPartidos
+			// 
+			btnEstaSemanaInPartidos.FlatStyle = FlatStyle.System;
+			btnEstaSemanaInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			btnEstaSemanaInPartidos.Location = new Point(177, 86);
+			btnEstaSemanaInPartidos.Margin = new Padding(2);
+			btnEstaSemanaInPartidos.Name = "btnEstaSemanaInPartidos";
+			btnEstaSemanaInPartidos.Size = new Size(92, 25);
+			btnEstaSemanaInPartidos.TabIndex = 16;
+			btnEstaSemanaInPartidos.Text = "Esta Semana";
+			btnEstaSemanaInPartidos.UseVisualStyleBackColor = true;
+			// 
+			// btnHoyInPartidos
+			// 
+			btnHoyInPartidos.FlatStyle = FlatStyle.System;
+			btnHoyInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			btnHoyInPartidos.Location = new Point(97, 86);
+			btnHoyInPartidos.Margin = new Padding(2);
+			btnHoyInPartidos.Name = "btnHoyInPartidos";
+			btnHoyInPartidos.Size = new Size(59, 25);
+			btnHoyInPartidos.TabIndex = 15;
+			btnHoyInPartidos.Text = "Hoy";
+			btnHoyInPartidos.UseVisualStyleBackColor = true;
+			// 
+			// btnTodosInPartidos
+			// 
+			btnTodosInPartidos.FlatStyle = FlatStyle.System;
+			btnTodosInPartidos.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			btnTodosInPartidos.Location = new Point(20, 86);
+			btnTodosInPartidos.Margin = new Padding(2);
+			btnTodosInPartidos.Name = "btnTodosInPartidos";
+			btnTodosInPartidos.Size = new Size(59, 25);
+			btnTodosInPartidos.TabIndex = 14;
+			btnTodosInPartidos.Text = "Todos";
+			btnTodosInPartidos.UseVisualStyleBackColor = true;
+			// 
+			// comboBox2
+			// 
+			comboBox2.AllowDrop = true;
+			comboBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			comboBox2.BackColor = SystemColors.ActiveBorder;
+			comboBox2.FlatStyle = FlatStyle.Popup;
+			comboBox2.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			comboBox2.FormattingEnabled = true;
+			comboBox2.ItemHeight = 18;
+			comboBox2.Location = new Point(289, 58);
+			comboBox2.Margin = new Padding(2);
+			comboBox2.Name = "comboBox2";
+			comboBox2.Size = new Size(410, 26);
+			comboBox2.TabIndex = 13;
+			comboBox2.Text = "Todos los Estadios";
+			// 
+			// comboBox1
+			// 
+			comboBox1.AllowDrop = true;
+			comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			comboBox1.BackColor = SystemColors.ActiveBorder;
+			comboBox1.FlatStyle = FlatStyle.Popup;
+			comboBox1.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			comboBox1.FormattingEnabled = true;
+			comboBox1.ItemHeight = 18;
+			comboBox1.Location = new Point(15, 58);
+			comboBox1.Margin = new Padding(2);
+			comboBox1.Name = "comboBox1";
+			comboBox1.Size = new Size(255, 26);
+			comboBox1.TabIndex = 12;
+			comboBox1.Text = "🗓️ Todas las Fechas";
+			// 
+			// label18
+			// 
+			label18.AutoSize = true;
+			label18.Font = new Font("Avenir LT Pro 65 Medium", 9.857142F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label18.ForeColor = Color.White;
+			label18.Location = new Point(15, 34);
+			label18.Margin = new Padding(2, 0, 2, 0);
+			label18.Name = "label18";
+			label18.Size = new Size(423, 17);
+			label18.TabIndex = 11;
+			label18.Text = "Consulta los proximos encuentros y disponibilidad de boletos";
+			// 
+			// label17
+			// 
+			label17.AutoSize = true;
+			label17.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label17.ForeColor = Color.White;
+			label17.Location = new Point(15, 14);
+			label17.Margin = new Padding(2, 0, 2, 0);
+			label17.Name = "label17";
+			label17.Size = new Size(105, 23);
+			label17.TabIndex = 10;
+			label17.Text = "PARTIDOS";
+			// 
+			// flowPanelPartidos
+			// 
+			flowPanelPartidos.AutoScroll = true;
+			flowPanelPartidos.Location = new Point(2, 126);
+			flowPanelPartidos.Margin = new Padding(2);
+			flowPanelPartidos.Name = "flowPanelPartidos";
+			flowPanelPartidos.Padding = new Padding(6, 5, 6, 5);
+			flowPanelPartidos.Size = new Size(1348, 690);
+			flowPanelPartidos.TabIndex = 18;
+			// 
 			// Administracion
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -4245,8 +4706,6 @@
 			NuevoCliente.PerformLayout();
 			EditarClienteInAdmin.ResumeLayout(false);
 			EditarClienteInAdmin.PerformLayout();
-			tabPgPartidos.ResumeLayout(false);
-			tabPgPartidos.PerformLayout();
 			tabPgFacturas.ResumeLayout(false);
 			tabPgFacturas.PerformLayout();
 			tabPgReportes.ResumeLayout(false);
@@ -4261,6 +4720,14 @@
 			NuevoUsuario.PerformLayout();
 			tabEditarUsuario.ResumeLayout(false);
 			tabEditarUsuario.PerformLayout();
+			tabPgPartidos.ResumeLayout(false);
+			tabPgPartidos.PerformLayout();
+			tabCtrlPartidoEstadio.ResumeLayout(false);
+			tabPage2.ResumeLayout(false);
+			tabPage2.PerformLayout();
+			tabPage6.ResumeLayout(false);
+			tabPage6.PerformLayout();
+			panel1.ResumeLayout(false);
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -4470,7 +4937,7 @@
         private Label lblBuscarClienteInCliente;
         private Label lblClientesInCliente;
         private TabPage NuevoCliente;
-        private Button button5;
+        private Button btnAgregarEstadio;
         private TextBox txtCiudadClienteInAdmin;
         private TextBox txtColoniaClienteInAdmin;
         private TextBox textBox11;
@@ -4478,7 +4945,7 @@
         private TextBox textBox9;
         private TextBox textBox8;
         private TextBox textBox7;
-        private TextBox textBox6;
+        private TextBox txtAsientosZonaInAdmin;
         private TextBox txtTelefonoCasaInAdmin;
         private TextBox txtCorreoClienteInAdmin;
         private TextBox txtRFCClienteInAdmin;
@@ -4596,5 +5063,41 @@
 		private Label lblNuevoDatoEditarClienteInAdmin;
 		private Button btnGuardarCambiosEditarClienteInAdmin;
 		private Button btnEditarClienteAdmin;
+		private Panel panel1;
+		private Button btnAgregarPartido;
+		private TabControl tabCtrlPartidoEstadio;
+		private TabPage tabPage2;
+		private TabPage tabPage6;
+		private Label lblNombreEstadioInAdmin;
+		private Label lblNombreZonaInAdmin;
+		private Label lblCapacidadEstadioInAdmin;
+		private Label lblCiudadEstadioInAdmin;
+		private TextBox txtCiudadEstadioInAdmin;
+		private TextBox txtNombreEstadioInAdmin;
+		private Button btnAgregarZonaInAdmin;
+		private Label lblAsientosZonaInAdmin;
+		private Label lblPrecioZonaInAdmin;
+		private Button btnAgregarEstadioInAdmin;
+		private TextBox txtCapacidadEstadioInAdmin;
+		private Label lblZonaInAdmin;
+		private Label lblEstadioInAdmin;
+		private TextBox txtPrecioZonaInAdmin;
+		private TextBox txtNombreZonaInAdmin;
+		private Button btnFinalizarAgregarPartidoInAdmin;
+		private ComboBox cboEstadioInAdmin;
+		private Label label35;
+		private Label label34;
+		private Label label33;
+		private Label label32;
+		private Label label31;
+		private Label label30;
+		private Label lblPartidoInAdmin;
+		private TextBox txtEstadoPartidoInAdmin;
+		private Button btnFinalizarPartidoInAdmin;
+		private Button btnAgregarPartidoInAdmin;
+		private TextBox txtEquipoVisitanteInAdmin;
+		private TextBox txtEquipoLocalPartidoInAdmin;
+		private TextBox txtHoraPartidoInAdmin;
+		private DateTimePicker dteFechaPartidoInAdmin;
 	}
 }

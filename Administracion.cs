@@ -17,12 +17,15 @@ using System.Windows.Forms;
 namespace PIA{                                                                                          // Indico que este código pertenece al proyecto PIA.
 	public partial class Administracion : Form
 	{                                                         // Creo la ventana de administración que hereda las funciones de Form.
+		private int? _idEstadioEnCaptura = null;
+		private int _zonasAgregadas = 0;
+
 		public Administracion()
 		{                                                                        // Este es el constructor que se ejecuta cuando abro la ventana.
 
 			InitializeComponent();                                                                      // Cargo todos los controles y elementos de la ventana.
 			pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú de administración al iniciar.
-			GlassEffect.Apply(this);                                                                    // Aplico el efecto visual de vidrio a la ventana.
+			GlassEffect.Apply(this);                                                                  // Aplico el efecto visual de vidrio a la ventana.
 
 			RedondearBoton.Aplicar(btnAjustesInAdmin, 20);                                              // Redondeo las esquinas del botón de ajustes.
 			RedondearBoton.Aplicar(btnHoyInPartidos, 20);                                               // Redondeo las esquinas del botón de partidos de hoy.
@@ -58,13 +61,31 @@ namespace PIA{                                                                  
 			GridClientesInClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			CargarGridClientes();
 			GridClientesInClientes.SelectionChanged += GridClientesInClientes_SelectionChanged;
+
 		}
 
-		private void Administracion_Load(object sender, EventArgs e)
+		private async void Administracion_Load(object sender, EventArgs e)
 		{                                   // Este método se ejecuta cuando se carga la ventana de administración.
 			pictureBox1.Image = Image
 				.FromFile(@"C:\Users\edcru\Downloads\UANL\Agosto-Diciembre 2026\checkMark.gif");        // Cargo el GIF desde la ruta donde tengo guardado el archivo.
 			pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;                                     // Ajusto la imagen para que ocupe el espacio del PictureBox.
+
+			try
+			{
+				var repo = new RepoEstadio();
+
+				cboEstadioInAdmin.DataSource = await repo.ObtenerTodosAsync();
+				cboEstadioInAdmin.DisplayMember = "Nombre";
+				cboEstadioInAdmin.ValueMember = "IdEstadio";
+				cboEstadioInAdmin.SelectedIndex = -1;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"No se pudieron cargar los estadios.\n{ex.Message}");
+			}
+
+
+
 		}
 
 		private void btnInicio_Click(object sender, EventArgs e)
@@ -335,7 +356,7 @@ namespace PIA{                                                                  
 		//==========================================
 		private void cboBoxEditarClienteInAdmin_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (cboBoxEditarClienteInAdmin.SelectedIndex  != 3)
+			if (cboBoxEditarClienteInAdmin.SelectedIndex != 3)
 			{
 				lblNuevoDatoEditarClienteInAdmin.Visible = true;
 				txtNuevoDatoEditarClienteInAdmin.Visible = true;
@@ -470,7 +491,7 @@ namespace PIA{                                                                  
 			txtCPEditarClienteInAdmin.Clear();
 			txtColoniaEditarClienteInAdmin.Clear();
 			txtCiudadEditarClienteInAdmin.Clear();
-			txtEstadoEditarClienteInAdmin.Clear();	
+			txtEstadoEditarClienteInAdmin.Clear();
 		}
 
 		//==========================================
@@ -496,9 +517,128 @@ namespace PIA{                                                                  
 				$"{fila.Cells["Nombre"].Value} " +
 				$"{fila.Cells["ApPaterno"].Value} " +
 				$"{fila.Cells["ApMaterno"].Value}".Trim();
-				
+
 
 			lblFechaNacimientoEditarClienteInAdmin.Text = fila.Cells["FechaNacimiento"].Value?.ToString() ?? "";
+		}
+
+		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void textBox2_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		//======================
+		// BOTON AGREGAR ESTADIO
+		//======================
+		private async void btnAgregarEstadioInAdmin_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				var estadio = new Estadio
+				{
+					Nombre = txtNombreEstadioInAdmin.Text.Trim(),
+					Ciudad = txtCiudadEstadioInAdmin.Text.Trim(),
+					CapacidadTotal = int.Parse(txtCapacidadEstadioInAdmin.Text),
+					CreadoPor = Sesion.IdUsuario
+				};
+
+				_idEstadioEnCaptura = await new RepoEstadio().AgregarEstadioAsync(estadio);
+				_zonasAgregadas = 0;
+
+				txtNombreEstadioInAdmin.ReadOnly = true;
+				txtCiudadEstadioInAdmin.ReadOnly = true;
+				txtCapacidadEstadioInAdmin.ReadOnly = true;
+				btnAgregarEstadioInAdmin.Enabled = false;
+				btnAgregarZonaInAdmin.Enabled = true;
+
+				MessageBox.Show(
+					$"Estadio guardado. ID: {_idEstadioEnCaptura}. Ahora agrega sus zonas.");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"No se pudo agregar el estadio.\n{ex.Message}");
+			}
+		}
+		//===================
+		// BOTON AGREGAR ZONA
+		//===================
+		private async void btnAgregarZonaInAdmin_Click(object sender, EventArgs e)
+		{
+			if (_idEstadioEnCaptura is null)
+			{
+				MessageBox.Show("Primero agrega un estadio.");
+				return;
+			}
+
+			MessageBox.Show(
+			$"Precio recibido: '{txtPrecioZonaInAdmin.Text}'\n" +
+			$"Asientos recibidos: '{txtAsientosZonaInAdmin.Text}'");
+
+			if (!decimal.TryParse(txtPrecioZonaInAdmin.Text, out decimal precio) ||
+				!int.TryParse(txtAsientosZonaInAdmin.Text, out int cupo))
+			{
+				MessageBox.Show("Revisa el precio y la cantidad de asientos.");
+				return;
+			}
+
+			try
+			{
+				var zona = new Zona
+				{
+					IdEstadio = _idEstadioEnCaptura.Value,
+					NombreZona = txtNombreZonaInAdmin.Text.Trim(),
+					PrecioBase = precio,
+					CupoZona = cupo,
+					CreadoPor = Sesion.IdUsuario
+				};
+
+				await new RepoZona().AgregarZonaAsync(zona);
+				_zonasAgregadas++;
+
+				txtNombreZonaInAdmin.Clear();
+				txtPrecioZonaInAdmin.Clear();
+				txtAsientosZonaInAdmin.Clear();
+
+				MessageBox.Show("Zona agregada al estadio.");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"No se pudo agregar la zona.\n{ex.Message}");
+			}
+		}
+
+		//================================
+		// BOTON FINALIZAR AGREGAR PARTIDO
+		//================================
+		private void btnFinalizarAgregarPartidoInAdmin_Click(object sender, EventArgs e)
+		{
+			if (_idEstadioEnCaptura is null)
+			{
+				MessageBox.Show("Primero agrega un estadio.");
+				return;
+			}
+
+			if (_zonasAgregadas == 0)
+			{
+				MessageBox.Show("Agrega al menos una zona antes de finalizar.");
+				return;
+			}
+
+			txtNombreEstadioInAdmin.ReadOnly = false;
+			txtCiudadEstadioInAdmin.ReadOnly = false;
+			txtCapacidadEstadioInAdmin.ReadOnly = false;
+			btnAgregarEstadioInAdmin.Enabled = true;
+			btnAgregarZonaInAdmin.Enabled = false;
+
+			_idEstadioEnCaptura = null;
+			_zonasAgregadas = 0;
+
+			MessageBox.Show("Registro del estadio y sus zonas finalizado.");
 		}
 	}
 

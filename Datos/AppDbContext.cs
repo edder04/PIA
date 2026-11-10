@@ -135,7 +135,10 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<Estadio>(entity =>
 			{
-				entity.ToTable("Estadios", t => t.HasCheckConstraint("CK_Estadios_CapacidadTotal", "[CapacidadTotal] > 0"));
+				entity.ToTable("Estadios", t => {
+				t.HasCheckConstraint("CK_Estadios_CapacidadTotal", "[CapacidadTotal] > 0");
+				t.HasTrigger("trg_ValidarReduccionCapacidadEstadio");
+					});
 				entity.HasKey(e => e.IdEstadio);
 				entity.Property(e => e.IdEstadio).ValueGeneratedOnAdd();
 				entity.Property(e => e.Nombre).HasColumnType("nvarchar(100)").HasMaxLength(100).IsRequired();
@@ -154,6 +157,7 @@ namespace PIA.Datos{                                                            
 				{
 					t.HasCheckConstraint("CK_Zonas_PrecioBase", "[PrecioBase] >= 0");
 					t.HasCheckConstraint("CK_Zonas_CupoZona", "[CupoZona] > 0");
+					t.HasTrigger("trg_ValidarCapacidadZonas");
 				});
 				entity.HasKey(e => e.IdZona);
 				entity.Property(e => e.IdZona).ValueGeneratedOnAdd();
@@ -190,6 +194,7 @@ namespace PIA.Datos{                                                            
 				{
 					t.HasCheckConstraint("CHK_MetodoPago", "[MetodoPago] IN ('Crédito', 'Débito', 'Efectivo')");
 					t.HasCheckConstraint("CHK_EstadoVenta", "[EstadoVenta] IN ('Activa', 'Cancelada')");
+					t.HasTrigger("trg_BloquearReactivacionVenta");
 				});
 				entity.HasKey(e => e.IdVenta);
 				entity.Property(e => e.IdVenta).ValueGeneratedOnAdd();
@@ -213,7 +218,14 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<DetalleVenta>(entity =>
 			{
-				entity.ToTable("DetalleVenta");
+				entity.ToTable("DetalleVenta", t =>
+				{
+					t.HasTrigger("trg_ValidarDetalleVentaZonaPartido");
+					t.HasTrigger("trg_ValidarCantidadDetalleVenta");
+					t.HasTrigger("trg_ValidarPartidoActivoEnVenta");
+					t.HasTrigger("trg_CalcularTotalesDetalleVenta");
+					t.HasTrigger("trg_ActualizarTotalesVenta");
+				});
 				entity.HasKey(e => e.IdDetalleVenta);
 				entity.Property(e => e.IdDetalleVenta).ValueGeneratedOnAdd();
 				entity.Property(e => e.IdVenta).IsRequired();
@@ -231,7 +243,13 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<Boleto>(entity =>
 			{
-				entity.ToTable("Boletos", t => t.HasCheckConstraint("CHK_EstadoBoleto", "[EstadoBoleto] IN ('Vendido', 'Cancelado')"));
+				entity.ToTable("Boletos", t =>
+				{
+					t.HasCheckConstraint("CHK_EstadoBoleto", "[EstadoBoleto] IN ('Vendido', 'Cancelado')");
+					t.HasTrigger("trg_ValidarBoletoUnicoPorPartido");
+					t.HasTrigger("trg_ValidarCapacidadBoletos");
+					t.HasTrigger("trg_ValidarBoletoDetalle");
+				});
 				entity.HasKey(e => e.IdBoleto);
 				entity.Property(e => e.IdBoleto).ValueGeneratedOnAdd();
 				entity.Property(e => e.IdVenta).IsRequired();
@@ -249,7 +267,7 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<Factura>(entity =>
 			{
-				entity.ToTable("Facturas");
+				entity.ToTable("Facturas", t => t.HasTrigger("trg_ValidarFacturaVentaActiva"));
 				entity.HasKey(e => e.IdFactura);
 				entity.Property(e => e.IdFactura).ValueGeneratedOnAdd();
 				entity.Property(e => e.IdVenta).IsRequired();
@@ -273,7 +291,7 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<Cancelacion>(entity =>
 			{
-				entity.ToTable("Cancelaciones");
+				entity.ToTable("Cancelaciones", t => t.HasTrigger("trg_ProcesarCancelacion"));
 				entity.HasKey(e => e.IdCancelacion);
 				entity.Property(e => e.IdCancelacion).ValueGeneratedOnAdd();
 				entity.Property(e => e.IdVenta).IsRequired();
