@@ -130,4 +130,56 @@ namespace PIA.Repositorios
 
 	}
 
+	public class RepoBoleto
+	{
+		// Agrega los boletos al contexto compartido.
+		// RepoVenta hará el SaveChanges dentro de la transacción.
+		public void AgregarBoletos(
+			AppDbContext db,
+			IEnumerable<Boleto> boletos)
+		{
+			db.Boleto.AddRange(boletos);
+		}
+	}
+
+	public class RepoVenta
+	{
+		private readonly RepoBoleto _repoBoleto = new();
+
+		public async Task<int> RegistrarVentaAsync(
+			Venta venta,
+			DetalleVenta detalle,
+			List<Boleto> boletos)
+		{
+			await using var db = new AppDbContext();
+			await using var transaccion = await db.Database.BeginTransactionAsync();
+
+			try
+			{
+				db.Venta.Add(venta);
+				await db.SaveChangesAsync();
+
+				detalle.IdVenta = venta.IdVenta;
+				db.DetalleVenta.Add(detalle);
+				await db.SaveChangesAsync();
+
+				foreach (var boleto in boletos)
+				{
+					boleto.IdVenta = venta.IdVenta;
+				}
+
+				db.Boleto.AddRange(boletos);
+				await db.SaveChangesAsync();
+
+				await transaccion.CommitAsync();
+				return venta.IdVenta;
+			}
+			catch
+			{
+				await transaccion.RollbackAsync();
+				throw;
+			}
+		}
+	}
+
 }

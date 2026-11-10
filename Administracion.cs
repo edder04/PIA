@@ -13,7 +13,8 @@ using System.Data;
 using System.Drawing; 
 using System.Text; 
 using System.Text.RegularExpressions;
-using System.Windows.Forms; 
+using System.Windows.Forms;
+using System.Globalization;
 
 namespace PIA{                                                                                          // Indico que este código pertenece al proyecto PIA.
 	public partial class Administracion : Form
@@ -21,12 +22,21 @@ namespace PIA{                                                                  
 		private int? _idEstadioEnCaptura = null;
 		private int _zonasAgregadas = 0;
 		private vw_Partidos? _partidoParaVenta;
+		private vw_Clientes? _clienteParaVenta;
+		private vw_DisponibilidadZonas? _zonaParaVenta;
+		private readonly HashSet<string> _asientosOcupados = new();
+		private readonly HashSet<string> _asientosSeleccionados = new();
+		private const int AsientosPorFila = 15;
+		private const decimal TasaIva = 0.16m;
 
 		public Administracion()
 		{                                                                        // Este es el constructor que se ejecuta cuando abro la ventana.
 
 			InitializeComponent();                                                                      // Cargo todos los controles y elementos de la ventana.
+			cboZonaVentaPaso3.SelectedIndexChanged += cboZonaVentaPaso3_SelectedIndexChanged;
 			pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú de administración al iniciar.
+
+			ConfigurarGridReporteVentas();
 			GlassEffect.Apply(this);                                                                  // Aplico el efecto visual de vidrio a la ventana.
 
 			RedondearBoton.Aplicar(btnAjustesInAdmin, 20);                                              // Redondeo las esquinas del botón de ajustes.
@@ -91,6 +101,15 @@ namespace PIA{                                                                  
 			gridPartidosVentaInAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 			gridPartidosVentaInAdmin.MultiSelect = false;
 			gridPartidosVentaInAdmin.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			if (!gridPartidosVentaInAdmin.Columns.Contains("IdPartido"))
+			{
+				gridPartidosVentaInAdmin.Columns.Insert(0, new DataGridViewTextBoxColumn
+				{
+					Name = "IdPartido",
+					HeaderText = "IdPartido",
+					Visible = false
+				});
+			}
 			CargarGridPartidos();
 		}
 		//=======================
@@ -137,6 +156,7 @@ namespace PIA{                                                                  
 			pictureBox1.Image = Image
 				.FromFile(@"C:\Users\edcru\Downloads\UANL\Agosto-Diciembre 2026\checkMark.gif");        // Cargo el GIF desde la ruta donde tengo guardado el archivo.
 			pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;                                     // Ajusto la imagen para que ocupe el espacio del PictureBox.
+			await CargarFiltrosReporteAsync();
 
 			await CargarPartidos();
 			tabCtrlPartidoEstadio.Visible = false;
@@ -267,41 +287,361 @@ namespace PIA{                                                                  
 			tabClientesInAdmin.SelectedIndex = 1;
 		}
 
-		private void btnContinuarVentaPaso1_Click(object sender, EventArgs e)
+		//==============================
+		// BOTON CONTINUAR VENTA PASO 1
+		//==============================
+		private async void btnContinuarVentaPaso1_Click(object sender, EventArgs e)
 		{
+			var fila = gridClientesVentasInAdmin.CurrentRow;
+
+			if (fila is null || fila.IsNewRow ||
+				fila.Cells["IdCliente"].Value is null)
+			{
+				MessageBox.Show("Selecciona un cliente.");
+				return;
+			}
+
+			int idCliente = Convert.ToInt32(fila.Cells["IdCliente"].Value);
+
+			using var db = new AppDbContext();
+
+			_clienteParaVenta = await db.vw_Clientes
+				.AsNoTracking()
+				.SingleOrDefaultAsync(c => c.IdCliente == idCliente);
+
+			if (_clienteParaVenta is null)
+			{
+				MessageBox.Show("No se encontró el cliente.");
+				return;
+			}
+
 			tabCtrlVenta.SelectedIndex = 1;
 		}
 
+		//==============================
+		// BOTON ATRAS VENTA PASO 2
+		//==============================
 		private void btnAtrasVentaPaso2_Click(object sender, EventArgs e)
 		{
 			tabCtrlVenta.SelectedIndex = 0;
 		}
 
-		private void btnContinuarVentaPaso2_Click(object sender, EventArgs e)
+		//==============================
+		// BOTON CONTINUAR VENTA PASO 2
+		//==============================
+		private async void btnContinuarVentaPaso2_Click(object sender, EventArgs e)
 		{
+			var fila = gridPartidosVentaInAdmin.CurrentRow;
+
+			if (fila is null || fila.IsNewRow ||
+				fila.Cells["IdPartido"].Value is null)
+			{
+				MessageBox.Show("Selecciona un partido.");
+				return;
+			}
+
+			int idPartido = Convert.ToInt32(fila.Cells["IdPartido"].Value);
+
+			using var db = new AppDbContext();
+
+			_partidoParaVenta = await db.vw_Partidos
+				.AsNoTracking()
+				.SingleOrDefaultAsync(p => p.IdPartido == idPartido);
+
+			if (_partidoParaVenta is null)
+			{
+				MessageBox.Show("No se encontró el partido.");
+				return;
+			}
+
+			lblInfoPartidoVentaPaso3.Text =
+				$"{_partidoParaVenta.EquipoLocal} vs. {_partidoParaVenta.EquipoVisitante}";
+			lblInfoEstadioVentaPaso3.Text = _partidoParaVenta.Estadio;
+			lblFechaVentaPaso3.Text = _partidoParaVenta.FechaHora.ToString("dd/MM/yyyy HH:mm");
+
+			var zonas = await db.vw_DisponibilidadZonas
+				.AsNoTracking()
+				.Where(z => z.IdPartido == idPartido)
+				.ToListAsync();
+
+			cboZonaVentaPaso3.DataSource = zonas;
+			cboZonaVentaPaso3.DisplayMember = "NombreZona";
+			cboZonaVentaPaso3.ValueMember = "IdZona";
+			cboZonaVentaPaso3.SelectedIndex = -1;
+
 			tabCtrlVenta.SelectedIndex = 2;
 		}
 
+		//==============================
+		// BOTON ATRAS VENTA PASO 3
+		//==============================
 		private void btnAtrasVentaPaso3_Click(object sender, EventArgs e)
 		{
 			tabCtrlVenta.SelectedIndex = 1;
 		}
 
+		//==============================
+		// BOTON CONTINUAR VENTA PASO 3
+		//==============================
 		private void btnContinuarVentaPaso3_Click(object sender, EventArgs e)
 		{
+			if (_asientosSeleccionados.Count == 0)
+			{
+				MessageBox.Show("Selecciona al menos un asiento.");
+				return;
+			}
+
+			PrepararPaso4();
 			tabCtrlVenta.SelectedIndex = 3;
 		}
 
+		//==============================
+		// BOTON ATRAS VENTA PASO 4
+		//==============================
 		private void btnAtrasVentaPaso4_Click(object sender, EventArgs e)
 		{
 			tabCtrlVenta.SelectedIndex = 2;
 		}
 
-		private void btnConfirmarVentaPaso4_Click(object sender, EventArgs e)
+		//==============================
+		// BOTON CONTINUAR VENTA PASO 4
+		//==============================
+		private async void btnConfirmarVentaPaso4_Click(object sender, EventArgs e)
 		{
-			tabCtrlVenta.SelectedIndex = 4;
+			if (_clienteParaVenta is null ||
+				_partidoParaVenta is null ||
+				_zonaParaVenta is null ||
+				_asientosSeleccionados.Count == 0)
+			{
+				MessageBox.Show("Faltan datos de cliente, partido, zona o asientos.");
+				return;
+			}
+
+			string metodoPago;
+
+			if (radioBtnEfectivoVentaPaso4.Checked)
+			{
+				metodoPago = "Efectivo";
+			}
+			else if (radioBtnCreditoVentaPaso4.Checked)
+			{
+				if (string.IsNullOrWhiteSpace(txtTitularVentaPaso4.Text))
+				{
+					MessageBox.Show("Escribe el nombre del titular de la tarjeta.");
+					txtTitularVentaPaso4.Focus();
+					return;
+				}
+
+				string numero = Regex.Replace(
+					txtNumeroTarjetaVentaPaso4.Text,
+					@"[\s-]",
+					"");
+
+				string vencimiento = txtVencimientoTarjetaVentaPaso4.Text.Trim();
+				string cvv = txtCVVVentaPaso4.Text.Trim();
+
+				if (!Regex.IsMatch(numero, @"^\d+$"))
+				{
+					MessageBox.Show("El número de tarjeta solo debe contener dígitos.");
+					txtNumeroTarjetaVentaPaso4.Focus();
+					return;
+				}
+
+				string? marcaTarjeta = DetectarMarcaTarjeta(numero);
+
+				if (marcaTarjeta is null || !PasaLuhn(numero))
+				{
+					MessageBox.Show("El número de tarjeta no es válido.");
+					txtNumeroTarjetaVentaPaso4.Focus();
+					return;
+				}
+
+				if (!DateTime.TryParseExact(
+						vencimiento,
+						new[] { "MM/yy", "MM/yyyy" },
+						CultureInfo.InvariantCulture,
+						DateTimeStyles.None,
+						out DateTime fechaVencimiento))
+				{
+					MessageBox.Show("Escribe el vencimiento como MM/AA, por ejemplo 08/28.");
+					txtVencimientoTarjetaVentaPaso4.Focus();
+					return;
+				}
+
+				DateTime finDelMes = new DateTime(
+						fechaVencimiento.Year,
+						fechaVencimiento.Month,
+						1)
+					.AddMonths(1)
+					.AddTicks(-1);
+
+				if (finDelMes < DateTime.Today)
+				{
+					MessageBox.Show("La tarjeta está vencida.");
+					txtVencimientoTarjetaVentaPaso4.Focus();
+					return;
+				}
+
+				int longitudCvv = marcaTarjeta == "American Express" ? 4 : 3;
+
+				if (!Regex.IsMatch(cvv, $@"^\d{{{longitudCvv}}}$"))
+				{
+					MessageBox.Show(
+						$"El CVV de {marcaTarjeta} debe tener {longitudCvv} dígitos.");
+					txtCVVVentaPaso4.Focus();
+					return;
+				}
+
+				// Guarda solo el método. Esta comprobación de formato no autoriza un cobro.
+				metodoPago = "Crédito";
+			}
+			else
+			{
+				MessageBox.Show("Selecciona efectivo o tarjeta.");
+				return;
+			}
+
+			decimal precioUnitario = _zonaParaVenta.PrecioBase;
+			int cantidad = _asientosSeleccionados.Count;
+			decimal subtotal = precioUnitario * cantidad;
+			decimal iva = subtotal * TasaIva;
+			decimal total = subtotal + iva;
+
+			var venta = new Venta
+			{
+				IdCliente = _clienteParaVenta.IdCliente,
+				IdUsuario = Sesion.IdUsuario,
+				FechaHoraVenta = DateTime.Now,
+				Subtotal = subtotal,
+				IVA = iva,
+				Total = total,
+				MetodoPago = metodoPago,
+				EstadoVenta = "Activa"
+			};
+
+			var detalle = new DetalleVenta
+			{
+				IdPartido = _partidoParaVenta.IdPartido,
+				IdZona = _zonaParaVenta.IdZona,
+				Cantidad = cantidad,
+				PrecioUnitario = precioUnitario,
+				Subtotal = subtotal,
+				IVA = iva,
+				Total = total
+			};
+
+			var boletos = new List<Boleto>();
+
+			foreach (string clave in _asientosSeleccionados)
+			{
+				string[] partes = clave.Split('-');
+
+				if (partes.Length != 2)
+				{
+					MessageBox.Show($"El asiento '{clave}' tiene un formato inesperado.");
+					return;
+				}
+
+				boletos.Add(new Boleto
+				{
+					IdPartido = _partidoParaVenta.IdPartido,
+					IdZona = _zonaParaVenta.IdZona,
+					Fila = partes[0],
+					Asiento = partes[1],
+					PrecioUnitario = precioUnitario,
+					EstadoBoleto = "Vendido"
+				});
+			}
+
+			btnConfirmarVentaPaso4.Enabled = false;
+
+			try
+			{
+				int idVenta = await new RepoVenta()
+					.RegistrarVentaAsync(venta, detalle, boletos);
+
+				MessageBox.Show($"Venta registrada correctamente. Folio: {idVenta}");
+
+				// Solo avanza si se guardó la venta correctamente.
+				tabCtrlVenta.SelectedIndex = 4;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(
+					ex.InnerException?.Message ?? ex.Message,
+					"No se pudo registrar la venta",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+			}
+			finally
+			{
+				btnConfirmarVentaPaso4.Enabled = true;
+
+				// No se conservan datos sensibles en el formulario.
+				txtTitularVentaPaso4.Clear();
+				txtNumeroTarjetaVentaPaso4.Clear();
+				txtVencimientoTarjetaVentaPaso4.Clear();
+				txtCVVVentaPaso4.Clear();
+			}
+		}
+		//=================================
+		// METODO DETECTAR MARCA DE TARJETA
+		//=================================
+		private static string? DetectarMarcaTarjeta(string numero)
+		{
+			if (numero.StartsWith("4") &&
+				numero.Length is 13 or 16 or 19)
+			{
+				return "Visa";
+			}
+
+			if (numero.Length == 16)
+			{
+				int primerosDos = int.Parse(numero[..2]);
+				int primerosCuatro = int.Parse(numero[..4]);
+
+				if (primerosDos is >= 51 and <= 55 ||
+					primerosCuatro is >= 2221 and <= 2720)
+				{
+					return "Mastercard";
+				}
+			}
+
+			if (numero.Length == 15 &&
+				(numero.StartsWith("34") || numero.StartsWith("37")))
+			{
+				return "American Express";
+			}
+
+			return null;
 		}
 
+		private static bool PasaLuhn(string numero)
+		{
+			int suma = 0;
+			bool duplicar = false;
+
+			for (int i = numero.Length - 1; i >= 0; i--)
+			{
+				int digito = numero[i] - '0';
+
+				if (duplicar)
+				{
+					digito *= 2;
+					if (digito > 9)
+						digito -= 9;
+				}
+
+				suma += digito;
+				duplicar = !duplicar;
+			}
+
+			return suma % 10 == 0;
+		}
+
+		//========================================
+		// BOTON NUEVA VENTA DESDE VENTA REALIZADA
+		//========================================
 		private void btnNuevaVentaVentaRealizada_Click(object sender, EventArgs e)
 		{
 			tabCtrlVenta.SelectedIndex = 0;
@@ -677,10 +1017,6 @@ namespace PIA{                                                                  
 				return;
 			}
 
-			MessageBox.Show(
-			$"Precio recibido: '{txtPrecioZonaInAdmin.Text}'\n" +
-			$"Asientos recibidos: '{txtAsientosZonaInAdmin.Text}'");
-
 			if (!decimal.TryParse(txtPrecioZonaInAdmin.Text, out decimal precio) ||
 				!int.TryParse(txtAsientosZonaInAdmin.Text, out int cupo))
 			{
@@ -850,25 +1186,452 @@ namespace PIA{                                                                  
 		//=========================================
 		// METODO CARGAR GRID DE PARTIDOS EN VENTAS
 		//=========================================
-				private void CargarGridPartidos()
+		private void CargarGridPartidos()
 		{
-			string texto = txtBuscarEquipoVentaPaso2.Text;
+			string texto = txtBuscarEquipoVentaPaso2.Text.Trim();
+
 			using var db = new AppDbContext();
-			var partidos = db.vw_Partidos
-				.Where(p => p.EquipoLocal.Contains(texto) || p.EquipoVisitante.Contains(texto));
+
+			var consulta = db.vw_Partidos.AsNoTracking();
+
+			if (!string.IsNullOrWhiteSpace(texto))
+			{
+				consulta = consulta.Where(p =>
+					p.EquipoLocal.Contains(texto) ||
+					p.EquipoVisitante.Contains(texto) ||
+					p.Estadio.Contains(texto) ||
+					(p.EquipoLocal + " vs. " + p.EquipoVisitante).Contains(texto));
+			}
+
+			var partidos = consulta.ToList();
+
 			gridPartidosVentaInAdmin.Rows.Clear();
-			foreach (vw_Partidos p in partidos)
+
+			foreach (var p in partidos)
 			{
 				gridPartidosVentaInAdmin.Rows.Add(
-				p.FechaHora.ToString("g"),
-				p.EquipoLocal,
-				p.EquipoVisitante,
-				p.Estadio,
-				p.Estado,
-				p.Ciudad,
-				p.BoletosDisponibles
-				);
+					p.IdPartido,
+					p.FechaHora.ToString("g"),
+					p.EquipoLocal,
+					p.EquipoVisitante,
+					p.Estadio,
+					p.Estado,
+					p.Ciudad,
+					p.BoletosDisponibles);
 			}
+		}
+		//=========================================
+		// EVENTO SELECCION DE ZONA EN VENTA PASO 3
+		//=========================================
+		private async void cboZonaVentaPaso3_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (cboZonaVentaPaso3.SelectedItem is not vw_DisponibilidadZonas zona)
+				return;
+
+			_zonaParaVenta = zona;
+
+			lblInfoPrecioVentaPaso3.Text = zona.PrecioBase.ToString("C");
+			lblInfoDisponiblesVentaPaso3.Text = zona.BoletosDisponibles.ToString();
+			await CargarGridAsientosAsync();
+
+		}
+
+		//===================================================
+		// METODO CONFIGURAR GRID DE ASIENTOS EN VENTA PASO 3
+		//===================================================
+		private void ConfigurarGridAsientos()
+		{
+			dgvAsientosVentaPaso3.Columns.Clear();
+			dgvAsientosVentaPaso3.Rows.Clear();
+
+			dgvAsientosVentaPaso3.AllowUserToAddRows = false;
+			dgvAsientosVentaPaso3.ReadOnly = true;
+			dgvAsientosVentaPaso3.MultiSelect = false;
+			dgvAsientosVentaPaso3.SelectionMode = DataGridViewSelectionMode.CellSelect;
+			dgvAsientosVentaPaso3.RowHeadersVisible = true;
+			dgvAsientosVentaPaso3.AutoSizeColumnsMode =
+				DataGridViewAutoSizeColumnsMode.Fill;
+
+			for (int asiento = 1; asiento <= AsientosPorFila; asiento++)
+			{
+				dgvAsientosVentaPaso3.Columns.Add(
+					$"Asiento{asiento:00}",
+					asiento.ToString("00"));
+			}
+
+			dgvAsientosVentaPaso3.CellClick += dgvAsientosVentaPaso3_CellClick;
+		}
+
+		//===============================================
+		// METODO CARGAR GRID DE ASIENTOS EN VENTA PASO 3
+		//===============================================
+		private async Task CargarGridAsientosAsync()
+		{
+			if (_partidoParaVenta is null || _zonaParaVenta is null)
+				return;
+
+			_asientosSeleccionados.Clear();
+			_asientosOcupados.Clear();
+
+			ConfigurarGridAsientos();
+
+			using var db = new AppDbContext();
+
+			var ocupados = await db.vw_AsientosOcupados
+				.AsNoTracking()
+				.Where(a => a.IdPartido == _partidoParaVenta.IdPartido &&
+							a.IdZona == _zonaParaVenta.IdZona)
+				.Select(a => new { a.Fila, a.Asiento })
+				.ToListAsync();
+
+			foreach (var asiento in ocupados)
+				_asientosOcupados.Add($"{asiento.Fila}-{asiento.Asiento}");
+
+			int cantidadFilas =
+				(_zonaParaVenta.CupoZona + AsientosPorFila - 1) / AsientosPorFila;
+
+			for (int filaIndex = 0; filaIndex < cantidadFilas; filaIndex++)
+			{
+				int indiceFila = dgvAsientosVentaPaso3.Rows.Add();
+				var filaGrid = dgvAsientosVentaPaso3.Rows[indiceFila];
+
+				filaGrid.HeaderCell.Value = "F" + (filaIndex + 1).ToString("D3");
+
+				for (int columna = 0; columna < AsientosPorFila; columna++)
+				{
+					int indiceAsiento = filaIndex * AsientosPorFila + columna;
+					var celda = filaGrid.Cells[columna];
+
+					if (indiceAsiento >= _zonaParaVenta.CupoZona)
+					{
+						celda.Value = "";
+						continue;
+					}
+
+					string fila = (filaIndex + 1).ToString("D3");
+					string numero = (columna + 1).ToString("D2");
+					string clave = $"{fila}-{numero}";
+
+					celda.Value = numero;
+					celda.Tag = clave;
+
+					bool ocupado = _asientosOcupados.Contains(clave);
+					celda.Style.BackColor = ocupado
+						? System.Drawing.Color.IndianRed
+						: System.Drawing.Color.LightGray;
+
+					celda.ToolTipText = ocupado ? "Ocupado" : "Disponible";
+				}
+			}
+
+			lblBoletosSeleccionadosVentaPaso3.Text = "0";
+		}
+
+		//===============================================
+		// EVENTO CLICK EN CELDA DEL GRID DE ASIENTOS
+		//===============================================
+		private void dgvAsientosVentaPaso3_CellClick(
+	object? sender,
+	DataGridViewCellEventArgs e)
+		{
+			// Ignora encabezados y clics fuera de las celdas
+			if (e.RowIndex < 0 || e.ColumnIndex < 0)
+				return;
+
+			var celda = dgvAsientosVentaPaso3
+				.Rows[e.RowIndex]
+				.Cells[e.ColumnIndex];
+
+			// Las celdas fuera del cupo no tienen Tag
+			if (celda.Tag is not string clave)
+				return;
+
+			// Los asientos ocupados no se pueden seleccionar
+			if (_asientosOcupados.Contains(clave))
+				return;
+
+			if (_asientosSeleccionados.Contains(clave))
+			{
+				// Quitar selección
+				_asientosSeleccionados.Remove(clave);
+				celda.Style.BackColor = System.Drawing.Color.LightGray;
+			}
+			else
+			{
+				// Aplicar el límite de 4
+				if (_asientosSeleccionados.Count >= 4)
+				{
+					MessageBox.Show("Solo puedes seleccionar hasta 4 asientos.");
+					return;
+				}
+
+				_asientosSeleccionados.Add(clave);
+				celda.Style.BackColor = System.Drawing.Color.LightGreen;
+			}
+
+			ActualizarTotalesVenta();
+		}
+
+		private void ActualizarTotalesVenta()
+		{
+			decimal precioUnitario = _zonaParaVenta?.PrecioBase ?? 0m;
+			int cantidad = _asientosSeleccionados.Count;
+
+			decimal subtotal = precioUnitario * cantidad;
+			decimal iva = subtotal * TasaIva;
+			decimal total = subtotal + iva;
+
+			lblInfoSubtotalVentaPaso3.Text = $"SUBTOTAL: {subtotal:C2}";
+			lvlInfoIVAVentaPaso3.Text = $"IVA: {iva:C2}";
+			lblInfoTotalVentaPaso3.Text = $"TOTAL: {total:C2}";
+			lblBoletosSeleccionadosVentaPaso3.Text =
+				$"SELECCIONADOS: {cantidad} / 4";
+		}
+
+		private void PrepararPaso4()
+		{
+			if (_clienteParaVenta is null ||
+				_partidoParaVenta is null ||
+				_zonaParaVenta is null ||
+				_asientosSeleccionados.Count == 0)
+			{
+				MessageBox.Show("Selecciona cliente, partido, zona y al menos un asiento.");
+				return;
+			}
+
+			lblNombreVentaPaso4.Text =
+				$"{_clienteParaVenta.Nombres} {_clienteParaVenta.ApPaterno} {_clienteParaVenta.ApMaterno}";
+
+			lblInfoPartidoVentaPaso4.Text =
+				$"{_partidoParaVenta.EquipoLocal} vs. {_partidoParaVenta.EquipoVisitante}";
+
+			lblInfoZonaVentaPaso4.Text = _zonaParaVenta.NombreZona;
+			lblInfoBoletosVentaPaso4.Text = _asientosSeleccionados.Count.ToString();
+
+			lblInfoAsientosVentaPaso4.Text = string.Join(
+				", ",
+				_asientosSeleccionados.OrderBy(a => a));
+
+			lblInfoTotalVentaPaso4.Text =
+				$"TOTAL A COBRAR: {(_zonaParaVenta.PrecioBase * _asientosSeleccionados.Count * 1.16m):C2}";
+		}
+
+		private void radioBtnEfectivoVentaPaso4_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+		//=========================================
+		// CLASE PARA FILTRO DE PARTIDOS EN REPORTE
+		//=========================================
+		private sealed class FiltroPartidoReporte
+		{
+			public int? IdPartido { get; set; }
+			public string Descripcion { get; set; } = "";
+		}
+
+		//=========================================
+		// METODO CARGAR FILTROS DE REPORTE
+		//=========================================
+		private async Task CargarFiltrosReporteAsync()
+		{
+			using var db = new AppDbContext();
+
+			var estadios = await db.vw_BoletosVendidos
+				.AsNoTracking()
+				.Select(b => b.Estadio)
+				.Distinct()
+				.OrderBy(e => e)
+				.ToListAsync();
+
+			estadios.Insert(0, "Todos");
+
+			cboEstadioReporte.DataSource = estadios;
+			cboEstadioReporte.SelectedIndex = 0;
+
+			var partidosDb = await db.vw_BoletosVendidos
+				.AsNoTracking()
+				.Select(b => new
+				{
+					b.IdPartido,
+					b.EquipoLocal,
+					b.EquipoVisitante
+				})
+				.Distinct()
+				.ToListAsync();
+
+			var partidos = partidosDb
+				.Select(p => new FiltroPartidoReporte
+				{
+					IdPartido = p.IdPartido,
+					Descripcion = $"{p.EquipoLocal} vs. {p.EquipoVisitante}"
+				})
+				.OrderBy(p => p.Descripcion)
+				.ToList();
+
+			partidos.Insert(0, new FiltroPartidoReporte
+			{
+				IdPartido = null,
+				Descripcion = "Todos"
+			});
+
+			cboPartidoReporte.DataSource = partidos;
+			cboPartidoReporte.DisplayMember = nameof(FiltroPartidoReporte.Descripcion);
+			cboPartidoReporte.ValueMember = nameof(FiltroPartidoReporte.IdPartido);
+			cboPartidoReporte.SelectedIndex = 0;
+		}
+
+
+		private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		//=========================================
+		// BOTON FILTRAR REPORTE
+		//=========================================
+		private async void btnFiltrarReporte_Click_1(object sender, EventArgs e)
+		{
+			DateTime desde = dtpDesdeReporte.Value.Date;
+			DateTime hasta = dtpHastaReporte.Value.Date;
+
+			if (desde > hasta)
+			{
+				MessageBox.Show("La fecha Desde no puede ser posterior a Hasta.");
+				return;
+			}
+
+			try
+			{
+				using var db = new AppDbContext();
+
+				var consulta = db.vw_BoletosVendidos
+					.AsNoTracking()
+					.Where(b =>
+						b.FechaHoraVenta >= desde &&
+						b.FechaHoraVenta < hasta.AddDays(1) &&
+						b.EstadoVenta == "Activa" &&
+						b.EstadoBoleto == "Vendido");
+
+				if (cboEstadioReporte.SelectedItem is string estadio &&
+					estadio != "Todos")
+				{
+					consulta = consulta.Where(b => b.Estadio == estadio);
+				}
+
+				if (cboPartidoReporte.SelectedValue is int idPartido)
+				{
+					consulta = consulta.Where(b => b.IdPartido == idPartido);
+				}
+
+				var boletos = await consulta.ToListAsync();
+
+				var filas = boletos
+					.GroupBy(b => new
+					{
+						b.FolioVenta,
+						b.Estadio,
+						b.IdPartido,
+						b.EquipoLocal,
+						b.EquipoVisitante,
+						b.IdZona,
+						b.NombreZona
+					})
+					.Select(g =>
+					{
+						decimal subtotal = g.Sum(b => b.PrecioUnitario);
+
+						return new
+						{
+							Folio = g.Key.FolioVenta,
+							g.Key.Estadio,
+							Partido = $"{g.Key.EquipoLocal} vs. {g.Key.EquipoVisitante}",
+							Zona = g.Key.NombreZona,
+							Cantidad = g.Count(),
+							Subtotal = subtotal,
+							Total = subtotal * (1m + TasaIva)
+						};
+					})
+					.OrderBy(f => f.Folio)
+					.ToList();
+
+				dgvReporteVentas.Rows.Clear();
+
+				foreach (var fila in filas)
+				{
+					dgvReporteVentas.Rows.Add(
+						fila.Folio.ToString(),
+						fila.Estadio,
+						fila.Partido,
+						fila.Zona,
+						fila.Cantidad,
+						fila.Subtotal,
+						fila.Total);
+				}
+
+				int cantidadBoletos = filas.Sum(f => f.Cantidad);
+				decimal ingresos = filas.Sum(f => f.Total);
+
+				lblBoletosVendidosReporte.Text =
+					$"BOLETOS VENDIDOS: {cantidadBoletos}";
+
+				lblIngresosReporte.Text =
+					$"INGRESOS: {ingresos:C2}";
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(
+					ex.InnerException?.Message ?? ex.Message,
+					"No se pudo cargar el reporte",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error);
+			}
+		}
+		//============================================
+		// METODO CONFIGURAR GRID DE REPORTE DE VENTAS
+		//============================================
+		private void ConfigurarGridReporteVentas()
+		{
+			dgvReporteVentas.Columns.Clear();
+			dgvReporteVentas.AutoGenerateColumns = false;
+			dgvReporteVentas.AllowUserToAddRows = false;
+			dgvReporteVentas.ReadOnly = true;
+			dgvReporteVentas.RowHeadersVisible = false;
+			dgvReporteVentas.AutoSizeColumnsMode =
+				DataGridViewAutoSizeColumnsMode.Fill;
+
+			dgvReporteVentas.Columns.Add("Folio", "FOLIO");
+			dgvReporteVentas.Columns.Add("Estadio", "ESTADIO");
+			dgvReporteVentas.Columns.Add("Partido", "PARTIDO");
+			dgvReporteVentas.Columns.Add("Zona", "ZONA");
+			dgvReporteVentas.Columns.Add("Cantidad", "CANTIDAD");
+			dgvReporteVentas.Columns.Add("Subtotal", "SUBTOTAL");
+			dgvReporteVentas.Columns.Add("Total", "TOTAL");
+
+			dgvReporteVentas.Columns["Subtotal"]!
+				.DefaultCellStyle.Format = "C2";
+
+			dgvReporteVentas.Columns["Total"]!
+				.DefaultCellStyle.Format = "C2";
+		}
+
+		//==============================
+		// BOTON LIMPIAR FILTROS REPORTE
+		//==============================
+		private void button4_Click(object sender, EventArgs e)
+		{
+			dtpDesdeReporte.Value = DateTime.Today;
+			dtpHastaReporte.Value = DateTime.Today;
+
+			if (cboEstadioReporte.Items.Count > 0)
+				cboEstadioReporte.SelectedIndex = 0; // "Todos"
+
+			if (cboPartidoReporte.Items.Count > 0)
+				cboPartidoReporte.SelectedIndex = 0; // "Todos"
+
+			dgvReporteVentas.Rows.Clear();
+
+			lblBoletosVendidosReporte.Text = "BOLETOS VENDIDOS: 0";
+			lblIngresosReporte.Text = "INGRESOS: $0.00";
 		}
 	}
 
