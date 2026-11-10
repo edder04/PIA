@@ -121,7 +121,13 @@ namespace PIA.Repositorios
 	// Repositorio de Partidos
 	//========================
 	public class RepoPartido{
-		
+		public async Task AgregarPartidoAsync(Partido partido)
+		{
+			using var db = new AppDbContext();
+			db.Partido.Add(partido);
+			await db.SaveChangesAsync();
+		}
+
 	}
 
 }
