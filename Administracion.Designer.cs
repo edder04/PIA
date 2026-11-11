@@ -42,6 +42,7 @@
 			DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
 			DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
 			pnlMenuInAdmin = new Panel();
+			btnCancelacion = new Button();
 			btnUsuarios = new Button();
 			btnInicio = new Button();
 			btnSalir = new Button();
@@ -359,26 +360,22 @@
 			label64 = new Label();
 			label65 = new Label();
 			tabEditarUsuario = new TabPage();
-			textBox31 = new TextBox();
-			label50 = new Label();
-			textBox32 = new TextBox();
-			textBox33 = new TextBox();
-			textBox34 = new TextBox();
-			textBox35 = new TextBox();
-			textBox44 = new TextBox();
-			textBox45 = new TextBox();
-			textBox46 = new TextBox();
-			textBox47 = new TextBox();
-			label51 = new Label();
-			label52 = new Label();
-			label53 = new Label();
-			label54 = new Label();
+			label6 = new Label();
+			comboBox3 = new ComboBox();
+			textBox1 = new TextBox();
+			label7 = new Label();
 			label55 = new Label();
-			label56 = new Label();
-			label66 = new Label();
 			label67 = new Label();
 			label68 = new Label();
 			button14 = new Button();
+			tabPage7 = new TabPage();
+			button1 = new Button();
+			txtMotivoCancelarInAdmin = new TextBox();
+			lblMotivoCancelarInAdmin = new Label();
+			dgvCancelaciones = new DataGridView();
+			label38 = new Label();
+			txtBuscarCancelarInAdmin = new TextBox();
+			lblBuscarCancelarInAdmin = new Label();
 			pnlMenuInAdmin.SuspendLayout();
 			tabCtrlInAdmin.SuspendLayout();
 			tabPgInicio.SuspendLayout();
@@ -413,11 +410,14 @@
 			((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
 			NuevoUsuario.SuspendLayout();
 			tabEditarUsuario.SuspendLayout();
+			tabPage7.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)dgvCancelaciones).BeginInit();
 			SuspendLayout();
 			// 
 			// pnlMenuInAdmin
 			// 
 			pnlMenuInAdmin.BackColor = Color.FromArgb(90, 90, 90);
+			pnlMenuInAdmin.Controls.Add(btnCancelacion);
 			pnlMenuInAdmin.Controls.Add(btnUsuarios);
 			pnlMenuInAdmin.Controls.Add(btnInicio);
 			pnlMenuInAdmin.Controls.Add(btnSalir);
@@ -429,8 +429,22 @@
 			pnlMenuInAdmin.Location = new Point(1100, 100);
 			pnlMenuInAdmin.Margin = new Padding(2);
 			pnlMenuInAdmin.Name = "pnlMenuInAdmin";
-			pnlMenuInAdmin.Size = new Size(350, 422);
+			pnlMenuInAdmin.Size = new Size(350, 490);
 			pnlMenuInAdmin.TabIndex = 3;
+			// 
+			// btnCancelacion
+			// 
+			btnCancelacion.BackColor = Color.White;
+			btnCancelacion.Cursor = Cursors.Hand;
+			btnCancelacion.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnCancelacion.ForeColor = Color.Black;
+			btnCancelacion.Location = new Point(29, 375);
+			btnCancelacion.Margin = new Padding(2);
+			btnCancelacion.Name = "btnCancelacion";
+			btnCancelacion.Size = new Size(292, 35);
+			btnCancelacion.TabIndex = 11;
+			btnCancelacion.Text = "CANCELACIONES";
+			btnCancelacion.UseVisualStyleBackColor = false;
 			// 
 			// btnUsuarios
 			// 
@@ -459,7 +473,7 @@
 			btnInicio.Location = new Point(29, 25);
 			btnInicio.Margin = new Padding(2);
 			btnInicio.Name = "btnInicio";
-			btnInicio.Size = new Size(292, 39);
+			btnInicio.Size = new Size(292, 37);
 			btnInicio.TabIndex = 9;
 			btnInicio.Text = "INICIO";
 			btnInicio.UseVisualStyleBackColor = false;
@@ -471,7 +485,7 @@
 			btnSalir.Cursor = Cursors.Hand;
 			btnSalir.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnSalir.ForeColor = Color.Black;
-			btnSalir.Location = new Point(29, 375);
+			btnSalir.Location = new Point(29, 425);
 			btnSalir.Margin = new Padding(2);
 			btnSalir.Name = "btnSalir";
 			btnSalir.Size = new Size(292, 35);
@@ -560,7 +574,7 @@
 			lblNombreUsuario.AutoSize = true;
 			lblNombreUsuario.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			lblNombreUsuario.ForeColor = Color.White;
-			lblNombreUsuario.Location = new Point(1270, 57);
+			lblNombreUsuario.Location = new Point(1240, 59);
 			lblNombreUsuario.Margin = new Padding(2, 0, 2, 0);
 			lblNombreUsuario.Name = "lblNombreUsuario";
 			lblNombreUsuario.RightToLeft = RightToLeft.Yes;
@@ -585,6 +599,7 @@
 			// 
 			// tabCtrlInAdmin
 			// 
+			tabCtrlInAdmin.Appearance = TabAppearance.FlatButtons;
 			tabCtrlInAdmin.Controls.Add(tabPgInicio);
 			tabCtrlInAdmin.Controls.Add(tabPgVentas);
 			tabCtrlInAdmin.Controls.Add(tabPgClientes);
@@ -592,6 +607,8 @@
 			tabCtrlInAdmin.Controls.Add(tabPgFacturas);
 			tabCtrlInAdmin.Controls.Add(tabPgReportes);
 			tabCtrlInAdmin.Controls.Add(tabPageUsuarios);
+			tabCtrlInAdmin.Controls.Add(tabPage7);
+			tabCtrlInAdmin.ItemSize = new Size(0, 1);
 			tabCtrlInAdmin.Location = new Point(50, 100);
 			tabCtrlInAdmin.Margin = new Padding(2);
 			tabCtrlInAdmin.Name = "tabCtrlInAdmin";
@@ -611,11 +628,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 24);
+			tabPgInicio.Location = new Point(4, 5);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 822);
+			tabPgInicio.Size = new Size(1392, 841);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -707,11 +724,11 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 24);
+			tabPgVentas.Location = new Point(4, 27);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 822);
+			tabPgVentas.Size = new Size(1392, 819);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
@@ -1722,10 +1739,10 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInAdmin);
-			tabPgClientes.Location = new Point(4, 24);
+			tabPgClientes.Location = new Point(4, 27);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 822);
+			tabPgClientes.Size = new Size(1392, 819);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
@@ -2610,10 +2627,10 @@
 			tabPgPartidos.Controls.Add(label18);
 			tabPgPartidos.Controls.Add(label17);
 			tabPgPartidos.Controls.Add(pnlPartidos);
-			tabPgPartidos.Location = new Point(4, 24);
+			tabPgPartidos.Location = new Point(4, 27);
 			tabPgPartidos.Margin = new Padding(2);
 			tabPgPartidos.Name = "tabPgPartidos";
-			tabPgPartidos.Size = new Size(1392, 822);
+			tabPgPartidos.Size = new Size(1392, 819);
 			tabPgPartidos.TabIndex = 3;
 			tabPgPartidos.Text = "Partidos";
 			// 
@@ -3221,10 +3238,10 @@
 			tabPgFacturas.Controls.Add(txtCodigoVentaInFactura);
 			tabPgFacturas.Controls.Add(lblCodigoVentaInFactura);
 			tabPgFacturas.Controls.Add(lblFacturarVenta);
-			tabPgFacturas.Location = new Point(4, 24);
+			tabPgFacturas.Location = new Point(4, 27);
 			tabPgFacturas.Margin = new Padding(2);
 			tabPgFacturas.Name = "tabPgFacturas";
-			tabPgFacturas.Size = new Size(1392, 822);
+			tabPgFacturas.Size = new Size(1392, 819);
 			tabPgFacturas.TabIndex = 4;
 			tabPgFacturas.Text = " Factura";
 			// 
@@ -3650,10 +3667,10 @@
 			tabPgReportes.Controls.Add(label2);
 			tabPgReportes.Controls.Add(label1);
 			tabPgReportes.Controls.Add(dgvReporteVentas);
-			tabPgReportes.Location = new Point(4, 24);
+			tabPgReportes.Location = new Point(4, 27);
 			tabPgReportes.Margin = new Padding(2);
 			tabPgReportes.Name = "tabPgReportes";
-			tabPgReportes.Size = new Size(1392, 822);
+			tabPgReportes.Size = new Size(1392, 819);
 			tabPgReportes.TabIndex = 5;
 			tabPgReportes.Text = "Reportes";
 			// 
@@ -3870,7 +3887,7 @@
 			dataGridViewCellStyle13.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
 			dataGridViewCellStyle13.ForeColor = Color.White;
 			dgvReporteVentas.RowsDefaultCellStyle = dataGridViewCellStyle13;
-			dgvReporteVentas.Size = new Size(1300, 300);
+			dgvReporteVentas.Size = new Size(1300, 297);
 			dgvReporteVentas.TabIndex = 32;
 			// 
 			// FOLIO
@@ -3934,11 +3951,11 @@
 			// 
 			tabPageUsuarios.BackColor = Color.Black;
 			tabPageUsuarios.Controls.Add(tabCtrlUsauriosInAdmin);
-			tabPageUsuarios.Location = new Point(4, 24);
+			tabPageUsuarios.Location = new Point(4, 27);
 			tabPageUsuarios.Margin = new Padding(2);
 			tabPageUsuarios.Name = "tabPageUsuarios";
 			tabPageUsuarios.Padding = new Padding(2);
-			tabPageUsuarios.Size = new Size(1392, 822);
+			tabPageUsuarios.Size = new Size(1392, 819);
 			tabPageUsuarios.TabIndex = 6;
 			tabPageUsuarios.Text = "Usuarios";
 			// 
@@ -4318,23 +4335,11 @@
 			// tabEditarUsuario
 			// 
 			tabEditarUsuario.BackColor = Color.Black;
-			tabEditarUsuario.Controls.Add(textBox31);
-			tabEditarUsuario.Controls.Add(label50);
-			tabEditarUsuario.Controls.Add(textBox32);
-			tabEditarUsuario.Controls.Add(textBox33);
-			tabEditarUsuario.Controls.Add(textBox34);
-			tabEditarUsuario.Controls.Add(textBox35);
-			tabEditarUsuario.Controls.Add(textBox44);
-			tabEditarUsuario.Controls.Add(textBox45);
-			tabEditarUsuario.Controls.Add(textBox46);
-			tabEditarUsuario.Controls.Add(textBox47);
-			tabEditarUsuario.Controls.Add(label51);
-			tabEditarUsuario.Controls.Add(label52);
-			tabEditarUsuario.Controls.Add(label53);
-			tabEditarUsuario.Controls.Add(label54);
+			tabEditarUsuario.Controls.Add(label6);
+			tabEditarUsuario.Controls.Add(comboBox3);
+			tabEditarUsuario.Controls.Add(textBox1);
+			tabEditarUsuario.Controls.Add(label7);
 			tabEditarUsuario.Controls.Add(label55);
-			tabEditarUsuario.Controls.Add(label56);
-			tabEditarUsuario.Controls.Add(label66);
 			tabEditarUsuario.Controls.Add(label67);
 			tabEditarUsuario.Controls.Add(label68);
 			tabEditarUsuario.Controls.Add(button14);
@@ -4344,182 +4349,61 @@
 			tabEditarUsuario.TabIndex = 2;
 			tabEditarUsuario.Text = "EditarUsuario";
 			// 
-			// textBox31
+			// label6
 			// 
-			textBox31.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox31.Location = new Point(621, 471);
-			textBox31.Margin = new Padding(2);
-			textBox31.Name = "textBox31";
-			textBox31.Size = new Size(196, 27);
-			textBox31.TabIndex = 134;
+			label6.AutoSize = true;
+			label6.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label6.ForeColor = Color.White;
+			label6.Location = new Point(399, 346);
+			label6.Margin = new Padding(2, 0, 2, 0);
+			label6.Name = "label6";
+			label6.Size = new Size(123, 19);
+			label6.TabIndex = 126;
+			label6.Text = "NUEVO DATO:";
 			// 
-			// label50
+			// comboBox3
 			// 
-			label50.AutoSize = true;
-			label50.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label50.ForeColor = Color.White;
-			label50.Location = new Point(627, 456);
-			label50.Margin = new Padding(2, 0, 2, 0);
-			label50.Name = "label50";
-			label50.Size = new Size(126, 19);
-			label50.TabIndex = 133;
-			label50.Text = "CONTRASEÑA:";
+			comboBox3.AutoCompleteCustomSource.AddRange(new string[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			comboBox3.FormattingEnabled = true;
+			comboBox3.Items.AddRange(new object[] { "CORREO ELECTRONICO", "ROL", "NOMBRE DE USUARIO", "CONTRASEÑA", "ACTIVO" });
+			comboBox3.Location = new Point(587, 315);
+			comboBox3.Name = "comboBox3";
+			comboBox3.Size = new Size(205, 23);
+			comboBox3.TabIndex = 125;
 			// 
-			// textBox32
+			// textBox1
 			// 
-			textBox32.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox32.Location = new Point(392, 419);
-			textBox32.Margin = new Padding(2);
-			textBox32.Name = "textBox32";
-			textBox32.Size = new Size(174, 27);
-			textBox32.TabIndex = 132;
+			textBox1.AutoCompleteCustomSource.AddRange(new string[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			textBox1.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			textBox1.Location = new Point(526, 343);
+			textBox1.Margin = new Padding(2);
+			textBox1.Name = "textBox1";
+			textBox1.Size = new Size(423, 27);
+			textBox1.TabIndex = 124;
 			// 
-			// textBox33
+			// label7
 			// 
-			textBox33.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox33.Location = new Point(392, 471);
-			textBox33.Margin = new Padding(2);
-			textBox33.Name = "textBox33";
-			textBox33.Size = new Size(196, 27);
-			textBox33.TabIndex = 131;
-			// 
-			// textBox34
-			// 
-			textBox34.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox34.Location = new Point(612, 419);
-			textBox34.Margin = new Padding(2);
-			textBox34.Name = "textBox34";
-			textBox34.Size = new Size(143, 27);
-			textBox34.TabIndex = 130;
-			// 
-			// textBox35
-			// 
-			textBox35.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox35.Location = new Point(563, 369);
-			textBox35.Margin = new Padding(2);
-			textBox35.Name = "textBox35";
-			textBox35.Size = new Size(423, 27);
-			textBox35.TabIndex = 129;
-			// 
-			// textBox44
-			// 
-			textBox44.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox44.Location = new Point(393, 369);
-			textBox44.Margin = new Padding(2);
-			textBox44.Name = "textBox44";
-			textBox44.Size = new Size(143, 27);
-			textBox44.TabIndex = 128;
-			// 
-			// textBox45
-			// 
-			textBox45.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox45.Location = new Point(706, 319);
-			textBox45.Margin = new Padding(2);
-			textBox45.Name = "textBox45";
-			textBox45.Size = new Size(280, 27);
-			textBox45.TabIndex = 127;
-			// 
-			// textBox46
-			// 
-			textBox46.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox46.Location = new Point(393, 319);
-			textBox46.Margin = new Padding(2);
-			textBox46.Name = "textBox46";
-			textBox46.Size = new Size(280, 27);
-			textBox46.TabIndex = 126;
-			// 
-			// textBox47
-			// 
-			textBox47.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox47.Location = new Point(393, 269);
-			textBox47.Margin = new Padding(2);
-			textBox47.Name = "textBox47";
-			textBox47.Size = new Size(390, 27);
-			textBox47.TabIndex = 125;
-			// 
-			// label51
-			// 
-			label51.AutoSize = true;
-			label51.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label51.ForeColor = Color.White;
-			label51.Location = new Point(398, 456);
-			label51.Margin = new Padding(2, 0, 2, 0);
-			label51.Name = "label51";
-			label51.Size = new Size(190, 19);
-			label51.TabIndex = 124;
-			label51.Text = "NOMBRE DE USUARIO:";
-			// 
-			// label52
-			// 
-			label52.AutoSize = true;
-			label52.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label52.ForeColor = Color.White;
-			label52.Location = new Point(618, 404);
-			label52.Margin = new Padding(2, 0, 2, 0);
-			label52.Name = "label52";
-			label52.Size = new Size(46, 19);
-			label52.TabIndex = 123;
-			label52.Text = "ROL:";
-			// 
-			// label53
-			// 
-			label53.AutoSize = true;
-			label53.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label53.ForeColor = Color.White;
-			label53.Location = new Point(399, 404);
-			label53.Margin = new Padding(2, 0, 2, 0);
-			label53.Name = "label53";
-			label53.Size = new Size(179, 19);
-			label53.TabIndex = 122;
-			label53.Text = "FECHA NACIMIENTO:";
-			// 
-			// label54
-			// 
-			label54.AutoSize = true;
-			label54.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label54.ForeColor = Color.White;
-			label54.Location = new Point(569, 354);
-			label54.Margin = new Padding(2, 0, 2, 0);
-			label54.Name = "label54";
-			label54.Size = new Size(81, 19);
-			label54.TabIndex = 121;
-			label54.Text = "CORREO:";
+			label7.AutoSize = true;
+			label7.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label7.ForeColor = Color.White;
+			label7.Location = new Point(399, 316);
+			label7.Margin = new Padding(2, 0, 2, 0);
+			label7.Name = "label7";
+			label7.Size = new Size(154, 19);
+			label7.TabIndex = 123;
+			label7.Text = "CAMPO A EDITAR:";
 			// 
 			// label55
 			// 
 			label55.AutoSize = true;
 			label55.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
 			label55.ForeColor = Color.White;
-			label55.Location = new Point(399, 354);
+			label55.Location = new Point(399, 282);
 			label55.Margin = new Padding(2, 0, 2, 0);
 			label55.Name = "label55";
 			label55.Size = new Size(85, 19);
 			label55.TabIndex = 120;
 			label55.Text = "NOMINA:";
-			// 
-			// label56
-			// 
-			label56.AutoSize = true;
-			label56.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label56.ForeColor = Color.White;
-			label56.Location = new Point(712, 304);
-			label56.Margin = new Padding(2, 0, 2, 0);
-			label56.Name = "label56";
-			label56.Size = new Size(180, 19);
-			label56.TabIndex = 119;
-			label56.Text = "APELLIDO MATERNO:";
-			// 
-			// label66
-			// 
-			label66.AutoSize = true;
-			label66.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label66.ForeColor = Color.White;
-			label66.Location = new Point(398, 304);
-			label66.Margin = new Padding(2, 0, 2, 0);
-			label66.Name = "label66";
-			label66.Size = new Size(174, 19);
-			label66.TabIndex = 118;
-			label66.Text = "APELLIDO PATERNO:";
 			// 
 			// label67
 			// 
@@ -4529,9 +4413,9 @@
 			label67.Location = new Point(399, 254);
 			label67.Margin = new Padding(2, 0, 2, 0);
 			label67.Name = "label67";
-			label67.Size = new Size(104, 19);
+			label67.Size = new Size(85, 19);
 			label67.TabIndex = 117;
-			label67.Text = "NOMBRE(S):";
+			label67.Text = "NOMBRE:";
 			// 
 			// label68
 			// 
@@ -4549,7 +4433,7 @@
 			// 
 			button14.BackColor = Color.White;
 			button14.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button14.Location = new Point(621, 626);
+			button14.Location = new Point(605, 462);
 			button14.Margin = new Padding(2);
 			button14.Name = "button14";
 			button14.Size = new Size(187, 35);
@@ -4557,6 +4441,102 @@
 			button14.Text = "GUARDAR CAMBIOS";
 			button14.UseVisualStyleBackColor = false;
 			button14.Click += button14_Click;
+			// 
+			// tabPage7
+			// 
+			tabPage7.BackColor = Color.Black;
+			tabPage7.Controls.Add(button1);
+			tabPage7.Controls.Add(txtMotivoCancelarInAdmin);
+			tabPage7.Controls.Add(lblMotivoCancelarInAdmin);
+			tabPage7.Controls.Add(dgvCancelaciones);
+			tabPage7.Controls.Add(label38);
+			tabPage7.Controls.Add(txtBuscarCancelarInAdmin);
+			tabPage7.Controls.Add(lblBuscarCancelarInAdmin);
+			tabPage7.Location = new Point(4, 27);
+			tabPage7.Name = "tabPage7";
+			tabPage7.Padding = new Padding(3);
+			tabPage7.Size = new Size(1392, 819);
+			tabPage7.TabIndex = 7;
+			tabPage7.Text = "Cancelacion";
+			// 
+			// button1
+			// 
+			button1.FlatStyle = FlatStyle.System;
+			button1.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			button1.Location = new Point(600, 714);
+			button1.Margin = new Padding(2);
+			button1.Name = "button1";
+			button1.Size = new Size(175, 35);
+			button1.TabIndex = 39;
+			button1.Text = "AUTORIZAR";
+			button1.UseVisualStyleBackColor = true;
+			// 
+			// txtMotivoCancelarInAdmin
+			// 
+			txtMotivoCancelarInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtMotivoCancelarInAdmin.Location = new Point(259, 622);
+			txtMotivoCancelarInAdmin.Margin = new Padding(2);
+			txtMotivoCancelarInAdmin.Name = "txtMotivoCancelarInAdmin";
+			txtMotivoCancelarInAdmin.Size = new Size(875, 30);
+			txtMotivoCancelarInAdmin.TabIndex = 38;
+			// 
+			// lblMotivoCancelarInAdmin
+			// 
+			lblMotivoCancelarInAdmin.AutoSize = true;
+			lblMotivoCancelarInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblMotivoCancelarInAdmin.ForeColor = Color.White;
+			lblMotivoCancelarInAdmin.Location = new Point(260, 590);
+			lblMotivoCancelarInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblMotivoCancelarInAdmin.Name = "lblMotivoCancelarInAdmin";
+			lblMotivoCancelarInAdmin.Size = new Size(111, 27);
+			lblMotivoCancelarInAdmin.TabIndex = 37;
+			lblMotivoCancelarInAdmin.Text = "MOTIVO:";
+			// 
+			// dgvCancelaciones
+			// 
+			dgvCancelaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvCancelaciones.BackgroundColor = Color.Black;
+			dgvCancelaciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvCancelaciones.Location = new Point(113, 267);
+			dgvCancelaciones.Margin = new Padding(2);
+			dgvCancelaciones.Name = "dgvCancelaciones";
+			dgvCancelaciones.RowHeadersWidth = 72;
+			dgvCancelaciones.Size = new Size(1167, 288);
+			dgvCancelaciones.TabIndex = 36;
+			// 
+			// label38
+			// 
+			label38.AutoSize = true;
+			label38.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label38.ForeColor = Color.White;
+			label38.Location = new Point(599, 109);
+			label38.Margin = new Padding(2, 0, 2, 0);
+			label38.Name = "label38";
+			label38.Size = new Size(176, 27);
+			label38.TabIndex = 23;
+			label38.Text = "CANCELACION";
+			// 
+			// txtBuscarCancelarInAdmin
+			// 
+			txtBuscarCancelarInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtBuscarCancelarInAdmin.Location = new Point(259, 218);
+			txtBuscarCancelarInAdmin.Margin = new Padding(2);
+			txtBuscarCancelarInAdmin.Name = "txtBuscarCancelarInAdmin";
+			txtBuscarCancelarInAdmin.Size = new Size(875, 30);
+			txtBuscarCancelarInAdmin.TabIndex = 22;
+			// 
+			// lblBuscarCancelarInAdmin
+			// 
+			lblBuscarCancelarInAdmin.AutoSize = true;
+			lblBuscarCancelarInAdmin.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblBuscarCancelarInAdmin.ForeColor = Color.White;
+			lblBuscarCancelarInAdmin.Location = new Point(260, 186);
+			lblBuscarCancelarInAdmin.Margin = new Padding(2, 0, 2, 0);
+			lblBuscarCancelarInAdmin.Name = "lblBuscarCancelarInAdmin";
+			lblBuscarCancelarInAdmin.Size = new Size(387, 27);
+			lblBuscarCancelarInAdmin.TabIndex = 21;
+			lblBuscarCancelarInAdmin.Text = "BUSCAR POR FOLIO/RFC/NOMBRE";
+			lblBuscarCancelarInAdmin.Click += label36_Click;
 			// 
 			// Administracion
 			// 
@@ -4628,6 +4608,9 @@
 			NuevoUsuario.PerformLayout();
 			tabEditarUsuario.ResumeLayout(false);
 			tabEditarUsuario.PerformLayout();
+			tabPage7.ResumeLayout(false);
+			tabPage7.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)dgvCancelaciones).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -4897,23 +4880,7 @@
         private Label label63;
         private Label label64;
         private Label label65;
-        private TextBox textBox31;
-        private Label label50;
-        private TextBox textBox32;
-        private TextBox textBox33;
-        private TextBox textBox34;
-        private TextBox textBox35;
-        private TextBox textBox44;
-        private TextBox textBox45;
-        private TextBox textBox46;
-        private TextBox textBox47;
-        private Label label51;
-        private Label label52;
-        private Label label53;
-        private Label label54;
         private Label label55;
-        private Label label56;
-        private Label label66;
         private Label label67;
         private Label label68;
         private DataGridViewTextBoxColumn IDUSUARIO;
@@ -4991,5 +4958,18 @@
 		private ComboBox cboEstadioReporte;
 		private Label lblBoletosVendidosReporte;
 		private Label lblIngresosReporte;
+		private Label label6;
+		private ComboBox comboBox3;
+		private TextBox textBox1;
+		private Label label7;
+		private Button btnCancelacion;
+		private TabPage tabPage7;
+		private Label label38;
+		private TextBox txtBuscarCancelarInAdmin;
+		private Label lblBuscarCancelarInAdmin;
+		private TextBox txtMotivoCancelarInAdmin;
+		private Label lblMotivoCancelarInAdmin;
+		private DataGridView dgvCancelaciones;
+		private Button button1;
 	}
 }

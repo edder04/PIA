@@ -15,6 +15,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Globalization;
+using Color = System.Drawing.Color;
 
 namespace PIA{                                                                                          // Indico que este código pertenece al proyecto PIA.
 	public partial class Administracion : Form
@@ -28,11 +29,17 @@ namespace PIA{                                                                  
 		private readonly HashSet<string> _asientosSeleccionados = new();
 		private const int AsientosPorFila = 15;
 		private const decimal TasaIva = 0.16m;
+		private bool _cargandoVentasCancelables;
+		private bool _recargarVentasCancelables;
 
 		public Administracion()
 		{                                                                        // Este es el constructor que se ejecuta cuando abro la ventana.
 
 			InitializeComponent();                                                                      // Cargo todos los controles y elementos de la ventana.
+			ConfigurarGridCancelaciones();
+			btnCancelacion.Click += btnCancelacion_Click;
+			txtBuscarCancelarInAdmin.TextChanged += txtBuscarCancelarInAdmin_TextChanged;
+			button1.Click += button1_Click;
 			cboZonaVentaPaso3.SelectedIndexChanged += cboZonaVentaPaso3_SelectedIndexChanged;
 			pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú de administración al iniciar.
 
@@ -157,6 +164,7 @@ namespace PIA{                                                                  
 				.FromFile(@"C:\Users\edcru\Downloads\UANL\Agosto-Diciembre 2026\checkMark.gif");        // Cargo el GIF desde la ruta donde tengo guardado el archivo.
 			pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;                                     // Ajusto la imagen para que ocupe el espacio del PictureBox.
 			await CargarFiltrosReporteAsync();
+			await CargarVentasCancelablesAsync();
 
 			await CargarPartidos();
 			tabCtrlPartidoEstadio.Visible = false;
@@ -252,6 +260,182 @@ namespace PIA{                                                                  
 			tabCtrlInAdmin.SelectedIndex = 6;
 			pnlMenuInAdmin.Visible = false;
 			tabCtrlUsauriosInAdmin.SelectedIndex = 0;
+		}
+
+		//=======================
+		// CONFIGURA EL GRID DE VENTAS PARA CANCELACION
+		//=======================
+		private void ConfigurarGridCancelaciones()
+		{
+			dgvCancelaciones.Columns.Clear();
+			dgvCancelaciones.Columns.Add("FOLIO", "FOLIO");
+			dgvCancelaciones.Columns.Add("FECHA", "FECHA DE VENTA");
+			dgvCancelaciones.Columns.Add("CLIENTE", "CLIENTE");
+			dgvCancelaciones.Columns.Add("RFC", "RFC");
+			dgvCancelaciones.Columns.Add("BOLETOS", "BOLETOS");
+			dgvCancelaciones.Columns.Add("TOTAL", "TOTAL");
+			dgvCancelaciones.Columns.Add("ESTADO", "ESTADO");
+			dgvCancelaciones.Columns.Add("MOTIVO", "MOTIVO DE CANCELACION");
+			dgvCancelaciones.ReadOnly = true;
+			dgvCancelaciones.AllowUserToAddRows = false;
+			dgvCancelaciones.AllowUserToDeleteRows = false;
+			dgvCancelaciones.MultiSelect = false;
+			dgvCancelaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			dgvCancelaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvCancelaciones.BackgroundColor = Color.FromArgb(60, 60, 60);
+			dgvCancelaciones.EnableHeadersVisualStyles = false;
+			dgvCancelaciones.DefaultCellStyle.BackColor = Color.FromArgb(60, 60, 60);
+			dgvCancelaciones.DefaultCellStyle.ForeColor = Color.White;
+			dgvCancelaciones.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 90, 160);
+			dgvCancelaciones.DefaultCellStyle.SelectionForeColor = Color.White;
+			dgvCancelaciones.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(60, 60, 60);
+			dgvCancelaciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+			dgvCancelaciones.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(60, 60, 60);
+			dgvCancelaciones.AlternatingRowsDefaultCellStyle.ForeColor = Color.White;
+		}
+
+		//=======================
+		// ABRE LA PESTANA DE CANCELACIONES
+		//=======================
+		private async void btnCancelacion_Click(object? sender, EventArgs e)
+		{
+			tabCtrlInAdmin.SelectedIndex = 7;
+			pnlMenuInAdmin.Visible = false;
+			await CargarVentasCancelablesAsync();
+		}
+
+		//=======================
+		// FILTRA LAS VENTAS POR FOLIO, RFC, CLIENTE O ESTADO
+		//=======================
+		private async void txtBuscarCancelarInAdmin_TextChanged(object? sender, EventArgs e)
+		{
+			await CargarVentasCancelablesAsync();
+		}
+
+		//=======================
+		// CARGA VENTAS Y CANCELACIONES EN EL GRID
+		//=======================
+		private async Task CargarVentasCancelablesAsync()
+		{
+			if (_cargandoVentasCancelables)
+			{
+				_recargarVentasCancelables = true;
+				return;
+			}
+
+			_cargandoVentasCancelables = true;
+			try
+			{
+				string busqueda = txtBuscarCancelarInAdmin.Text.Trim();
+				using var db = new AppDbContext();
+				var ventas = await db.vw_Ventas.AsNoTracking()
+					.OrderByDescending(v => v.FechaHoraVenta)
+					.ToListAsync();
+				var cancelaciones = await db.vw_Cancelaciones.AsNoTracking()
+					.ToListAsync();
+				var motivoPorVenta = cancelaciones
+					.GroupBy(c => c.IdVenta)
+					.ToDictionary(g => g.Key, g => g.OrderByDescending(c => c.FechaHoraCancelacion).First().Motivo);
+
+				var filtradas = ventas.Where(v =>
+					string.IsNullOrWhiteSpace(busqueda) ||
+					v.Folio.ToString().Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+					v.Cliente.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+					v.RFC.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+					v.EstadoVenta.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+					(motivoPorVenta.TryGetValue(v.IdVenta, out string? motivo) &&
+					 motivo.Contains(busqueda, StringComparison.OrdinalIgnoreCase)))
+					.ToList();
+
+				dgvCancelaciones.Rows.Clear();
+				foreach (var venta in filtradas)
+				{
+					motivoPorVenta.TryGetValue(venta.IdVenta, out string? motivo);
+					int fila = dgvCancelaciones.Rows.Add(
+						venta.Folio,
+						venta.FechaHoraVenta.ToString("dd/MM/yyyy HH:mm"),
+						venta.Cliente,
+						venta.RFC,
+						$"{venta.TotalBoletos - venta.BoletosCancelados} / {venta.TotalBoletos}",
+						venta.Total.ToString("C2"),
+						venta.EstadoVenta,
+						motivo ?? string.Empty);
+					dgvCancelaciones.Rows[fila].Tag = venta;
+				}
+				dgvCancelaciones.ClearSelection();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.InnerException?.Message ?? ex.Message,
+					"No se pudieron cargar las ventas", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				_cargandoVentasCancelables = false;
+				if (_recargarVentasCancelables)
+				{
+					_recargarVentasCancelables = false;
+					await CargarVentasCancelablesAsync();
+				}
+			}
+		}
+
+		//=======================
+		// REGISTRA LA CANCELACION DE LA VENTA SELECCIONADA
+		//=======================
+		private async void button1_Click(object? sender, EventArgs e)
+		{
+			if (dgvCancelaciones.SelectedRows.Count == 0 ||
+				dgvCancelaciones.SelectedRows[0].Tag is not vw_Ventas venta)
+			{
+				MessageBox.Show("Selecciona una venta del grid.");
+				return;
+			}
+
+			if (!string.Equals(venta.EstadoVenta, "Activa", StringComparison.OrdinalIgnoreCase))
+			{
+				MessageBox.Show("Solo se pueden cancelar ventas que estén activas.");
+				return;
+			}
+
+			string motivo = txtMotivoCancelarInAdmin.Text.Trim();
+			if (string.IsNullOrWhiteSpace(motivo))
+			{
+				MessageBox.Show("Escribe el motivo de la cancelación.");
+				txtMotivoCancelarInAdmin.Focus();
+				return;
+			}
+
+			var confirmar = MessageBox.Show(
+				$"¿Autorizas cancelar la venta {venta.Folio}? El trigger actualizará la venta y sus boletos.",
+				"Confirmar cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+			if (confirmar != DialogResult.Yes)
+				return;
+
+			button1.Enabled = false;
+			try
+			{
+				await new RepoCancelacion().RegistrarAsync(new Cancelacion
+				{
+					IdVenta = venta.IdVenta,
+					IdUsuario = Sesion.IdUsuario,
+					Motivo = motivo
+				});
+
+				MessageBox.Show("La cancelación fue registrada correctamente.", "Cancelación autorizada",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
+				txtMotivoCancelarInAdmin.Clear();
+				await CargarVentasCancelablesAsync();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.InnerException?.Message ?? ex.Message,
+					"No se pudo cancelar la venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				button1.Enabled = true;
+			}
 		}
 
 		private void btnSalir_Click(object sender, EventArgs e)
@@ -1632,6 +1816,11 @@ namespace PIA{                                                                  
 
 			lblBoletosVendidosReporte.Text = "BOLETOS VENDIDOS: 0";
 			lblIngresosReporte.Text = "INGRESOS: $0.00";
+		}
+
+		private void label36_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 

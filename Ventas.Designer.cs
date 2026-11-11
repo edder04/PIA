@@ -30,12 +30,10 @@
 		{
 			tabCtrlVentas = new TabControl();
 			tabPgInicio = new TabPage();
-			dataGridView1 = new DataGridView();
-			flowLayoutPanel1 = new FlowLayoutPanel();
+			flpProximosPartidosInOper = new FlowLayoutPanel();
 			lblInfoIngresosInicio = new Label();
 			lblInfoBoletosVendidosInicio = new Label();
 			lblInfoVentasDelDiaInicio = new Label();
-			lblActividadRecienteInicio = new Label();
 			lblProximosPartidosInicio = new Label();
 			lblIngresosInicio = new Label();
 			lblBoletosVendidosInicio = new Label();
@@ -44,7 +42,6 @@
 			tabPgVentas = new TabPage();
 			tabCtrlVenta = new TabControl();
 			tabPage1 = new TabPage();
-			button3 = new Button();
 			button2 = new Button();
 			btnContinuarVentaPaso1 = new Button();
 			gridClientesVentasPaso1 = new DataGridView();
@@ -59,7 +56,6 @@
 			btnAtrasVentaPaso2 = new Button();
 			btnContinuarVentaPaso2 = new Button();
 			flowPanVentasPaso2 = new FlowLayoutPanel();
-			button10 = new Button();
 			txtEstadioVentaPaso2 = new TextBox();
 			lblEstadioVentaPaso2 = new Label();
 			txtFechaVentaPaso2 = new TextBox();
@@ -67,18 +63,16 @@
 			txtEquipoVentaPaso2 = new TextBox();
 			lblEquipoVentaPaso2 = new Label();
 			tabPage3 = new TabPage();
+			dgvAsientosInOper = new DataGridView();
 			btnAtrasVentaPaso3 = new Button();
 			btnContinuarVentaPaso3 = new Button();
 			lblInfoTotalVentaPaso3 = new Label();
 			lvlInfoIVAVentaPaso3 = new Label();
 			lblInfoSubtotalVentaPaso3 = new Label();
-			lbl4VentaPaso3 = new Label();
-			lblBoletosSeleccionadosVentaPaso3 = new Label();
 			lblTotalVentaPaso3 = new Label();
 			lblIVAVentaPaso3 = new Label();
 			lblSubtotalVentaPaso3 = new Label();
 			lblSeleccionadosVentaPaso3 = new Label();
-			flowPanVentasPaso3 = new FlowLayoutPanel();
 			lblAsientosVentaPaso3 = new Label();
 			lblInfoDisponiblesVentaPaso3 = new Label();
 			lblDisponiblesVentaPaso3 = new Label();
@@ -92,11 +86,7 @@
 			lblInfoPartidoVentaPaso3 = new Label();
 			lblPartidoVentaPaso3 = new Label();
 			tabPage4 = new TabPage();
-			lblInfoCuentaTransferenciaVentaPaso4 = new Label();
-			lblCuentaTransferenciaVentaPaso4 = new Label();
 			txtTitularVentaPaso4 = new TextBox();
-			cboTipoTarjetaVentaPaso4 = new ComboBox();
-			lblTipoTarjetaVentaPaso4 = new Label();
 			txtCVVVentaPaso4 = new TextBox();
 			txtVencimientoTarjetaVentaPaso4 = new TextBox();
 			txtNumeroTarjetaVentaPaso4 = new TextBox();
@@ -105,7 +95,6 @@
 			lblNumeroTarjetaVentaPaso4 = new Label();
 			lblTitularVentaPaso4 = new Label();
 			lblInfoTotalVentaPaso4 = new Label();
-			radioBtnTransferenciaVentaPaso4 = new RadioButton();
 			radioBtnTarjetaVentaPaso4 = new RadioButton();
 			radioBtnEfectivoVentaPaso4 = new RadioButton();
 			lblInfoAsientosVentaPaso4 = new Label();
@@ -123,97 +112,87 @@
 			lblPartidoVentaPaso4 = new Label();
 			lblClienteVentaPaso4 = new Label();
 			tabPage5 = new TabPage();
-			lblInfoFechaYHoraVentaRealizada = new Label();
-			lblInfoTotalVentaRealizada = new Label();
-			lblInfoCodigoVentaRealizada = new Label();
-			lblFechaYHoraVentaRealizada = new Label();
 			pictureBox1 = new PictureBox();
 			btnNuevaVentaVentaRealizada = new Button();
-			lblTotalVentaRealizada = new Label();
-			lblCodigoVentaRealizada = new Label();
 			lblMensajeVentaRealizada = new Label();
 			lblVentaRealizada = new Label();
 			tabPgClientes = new TabPage();
 			tabClientesInVentas = new TabControl();
 			BuscarCliente = new TabPage();
-			btnHistorialCliente = new Button();
+			btnHistorialClienteInOper = new Button();
 			btnEditarClienteInOper = new Button();
-			GridClientesInClientes = new DataGridView();
+			GridClientesInOper = new DataGridView();
 			dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
 			dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
 			dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
 			CORREO = new DataGridViewTextBoxColumn();
 			ESTADO = new DataGridViewTextBoxColumn();
-			btnNuevoClienteInCliente = new Button();
-			btnBuscarCliente = new Button();
-			txtBuscarCliente = new TextBox();
-			lblBuscarClienteInCliente = new Label();
+			btnNuevoClienteInOper = new Button();
+			txtBuscarClienteInOper = new TextBox();
+			lblBuscarClienteInOper = new Label();
 			lblClientesInCliente = new Label();
 			NuevoCliente = new TabPage();
-			button5 = new Button();
-			textBox13 = new TextBox();
-			textBox12 = new TextBox();
-			textBox11 = new TextBox();
-			textBox10 = new TextBox();
-			textBox9 = new TextBox();
-			textBox8 = new TextBox();
-			textBox7 = new TextBox();
-			textBox6 = new TextBox();
-			textBox5 = new TextBox();
-			textBox4 = new TextBox();
-			textBox3 = new TextBox();
-			textBox2 = new TextBox();
-			textBox1 = new TextBox();
-			textBox14 = new TextBox();
-			label16 = new Label();
-			label15 = new Label();
-			label14 = new Label();
-			label13 = new Label();
-			label8 = new Label();
-			label9 = new Label();
+			txtPaisNuevoClienteInOper = new TextBox();
+			lblPaisNuevoClienteInOper = new Label();
+			txtEstadoNuevoClienteInOper = new TextBox();
+			lblEstadoNuevoClienteInOper = new Label();
+			btnAgregarNuevoClienteInOper = new Button();
+			txtCiudadNuevoClienteInOper = new TextBox();
+			txtColoniaNuevoClienteInOper = new TextBox();
+			txtCPNuevoClienteInOper = new TextBox();
+			txtNoInteriorNuevoClienteInOper = new TextBox();
+			txtNoExteriorNuevoClienteInOper = new TextBox();
+			txtCalleNuevoClienteInOper = new TextBox();
+			txtFechaNacimientoNuevoClienteInOper = new TextBox();
+			txtTelefonoCelularNuevoClienteInOper = new TextBox();
+			txtTelefonoCasaNuevoClienteInOper = new TextBox();
+			txtCorreoNuevoClienteInOper = new TextBox();
+			txtRFCNuevoClienteInOper = new TextBox();
+			txtApMaternoNuevoClienteInOper = new TextBox();
+			txtApPaternoNuevoClienteInOper = new TextBox();
+			txtNombreNuevoClienteInOper = new TextBox();
+			lblCPNuevoClienteInOper = new Label();
+			lblCiudadNuevoClienteInOper = new Label();
+			lblColoniaNuevoClienteInOper = new Label();
+			lblNoInteriorNuevoClienteInOper = new Label();
+			lblNoExteriorNuevoClienteInOper = new Label();
+			lblCalleNuevoClienteInOper = new Label();
 			label19 = new Label();
 			label20 = new Label();
-			label21 = new Label();
-			label22 = new Label();
-			label23 = new Label();
-			label24 = new Label();
-			label25 = new Label();
-			label26 = new Label();
-			label27 = new Label();
-			label28 = new Label();
+			lblTelefonoCelularNuevoClienteInOper = new Label();
+			lblTelefonoCasaNuevoClienteInOper = new Label();
+			lblFechaNacimientoNuevoClienteInOper = new Label();
+			lblCorreoNuevoClienteInOper = new Label();
+			lblRFCNuevoClienteInOper = new Label();
+			lblApMaternoNuevoClienteInOper = new Label();
+			lblApPaternoNuevoClienteInOper = new Label();
+			lblNombreNuevoClienteInOper = new Label();
 			label29 = new Label();
 			EditarCliente = new TabPage();
-			button7 = new Button();
-			textBox15 = new TextBox();
-			textBox16 = new TextBox();
-			textBox17 = new TextBox();
-			textBox18 = new TextBox();
-			textBox19 = new TextBox();
-			textBox20 = new TextBox();
-			textBox21 = new TextBox();
-			textBox22 = new TextBox();
-			textBox23 = new TextBox();
-			textBox24 = new TextBox();
-			textBox25 = new TextBox();
-			textBox26 = new TextBox();
-			textBox27 = new TextBox();
-			textBox28 = new TextBox();
-			label30 = new Label();
-			label31 = new Label();
-			label32 = new Label();
-			label33 = new Label();
-			label34 = new Label();
-			label35 = new Label();
-			label36 = new Label();
+			btnGuardarCambiosEditarClienteInOper = new Button();
+			lblNuevoDatoEditarClienteInOper = new Label();
+			txtPaisEditarClienteInOper = new TextBox();
+			lblPaisEditarClienteInOper = new Label();
+			txtEstadoEditarClienteInOper = new TextBox();
+			lblEstadoEditarClienteInOper = new Label();
+			cboBoxEditarClienteInOper = new ComboBox();
+			lblNombreCompletoEditarClienteInOper = new Label();
+			txtCiudadEditarClienteInOper = new TextBox();
+			txtColoniaEditarClienteInOper = new TextBox();
+			txtCPEditarClienteInOper = new TextBox();
+			txtNoInteriorEditarClienteInOper = new TextBox();
+			txtNoExteriorEditarClienteInOper = new TextBox();
+			txtCalleEditarClienteInOper = new TextBox();
+			txtNuevoDatoEditarClienteInOper = new TextBox();
+			lblCPEditarClienteInOper = new Label();
+			lblCiudadEditarClienteInOper = new Label();
+			lblColoniaEditarClienteInOper = new Label();
+			lblNoInteriorEditarClienteInOper = new Label();
+			lblNoExteriorEditarClienteInOper = new Label();
+			lblCalleEditarClienteInOper = new Label();
 			label37 = new Label();
-			label38 = new Label();
-			label39 = new Label();
-			label40 = new Label();
-			label41 = new Label();
-			label42 = new Label();
-			label43 = new Label();
-			label44 = new Label();
-			label45 = new Label();
+			lblFechaNacimientoEditarClienteInOper = new Label();
+			lblCampoAEditarClienteInOper = new Label();
 			label46 = new Label();
 			tabPgPartidos = new TabPage();
 			flowPanelPartidos = new FlowLayoutPanel();
@@ -226,11 +205,17 @@
 			label18 = new Label();
 			label17 = new Label();
 			tabPgReportes = new TabPage();
-			button6 = new Button();
+			btnOcupacionDisponibilidadInOper = new Button();
+			btnReporteVentaInOper = new Button();
+			tabReporteVenta = new TabControl();
+			ReporteVenta = new TabPage();
+			cboPartidoReporteInOper = new ComboBox();
+			cboEstadioReporteInOper = new ComboBox();
+			btnExportarReporteVentaInOper = new Button();
 			dateTimePicker2 = new DateTimePicker();
-			label7 = new Label();
-			label6 = new Label();
-			dataGridView2 = new DataGridView();
+			lblIngresosReportesInOper = new Label();
+			lblBoletosVendidosReportesInOper = new Label();
+			gridReporteInOper = new DataGridView();
 			FOLIO = new DataGridViewTextBoxColumn();
 			FECHAVENTA = new DataGridViewTextBoxColumn();
 			ESTADIO = new DataGridViewTextBoxColumn();
@@ -240,13 +225,26 @@
 			SUBTOTAL = new DataGridViewTextBoxColumn();
 			TOTAL = new DataGridViewTextBoxColumn();
 			dateTimePicker1 = new DateTimePicker();
-			button4 = new Button();
-			button1 = new Button();
-			label5 = new Label();
-			label4 = new Label();
-			label3 = new Label();
-			label2 = new Label();
+			btnLimparGridReporteInOper = new Button();
+			btnFiltrarReporteInOper = new Button();
+			lblPartidoReporteInOper = new Label();
+			lblEstadioReporteInOper = new Label();
+			lblHastaReporteInOper = new Label();
+			lblDesdeReporteInOper = new Label();
 			label1 = new Label();
+			tabPage6 = new TabPage();
+			dgvAsientosODInOper = new DataGridView();
+			dgvDisponibilidadODInOper = new DataGridView();
+			dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
+			CAPACIDAD = new DataGridViewTextBoxColumn();
+			DISPONIBLES = new DataGridViewTextBoxColumn();
+			VENDIDOS = new DataGridViewTextBoxColumn();
+			OCUPACION = new DataGridViewTextBoxColumn();
+			label4 = new Label();
+			cboPartidoODInOper = new ComboBox();
+			cboEstadioODInOper = new ComboBox();
+			lblPartidoODInOper = new Label();
+			lblEstadioODInOper = new Label();
 			btnAjustes = new Button();
 			lblNombreUsuario = new Label();
 			btnVentasVentas = new Button();
@@ -259,37 +257,42 @@
 			btnSalir = new Button();
 			tabCtrlVentas.SuspendLayout();
 			tabPgInicio.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
 			tabPgVentas.SuspendLayout();
 			tabCtrlVenta.SuspendLayout();
 			tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)gridClientesVentasPaso1).BeginInit();
 			tabVentaPaso2.SuspendLayout();
 			tabPage3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)dgvAsientosInOper).BeginInit();
 			tabPage4.SuspendLayout();
 			tabPage5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
 			tabPgClientes.SuspendLayout();
 			tabClientesInVentas.SuspendLayout();
 			BuscarCliente.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)GridClientesInClientes).BeginInit();
+			((System.ComponentModel.ISupportInitialize)GridClientesInOper).BeginInit();
 			NuevoCliente.SuspendLayout();
 			EditarCliente.SuspendLayout();
 			tabPgPartidos.SuspendLayout();
 			tabPgReportes.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+			tabReporteVenta.SuspendLayout();
+			ReporteVenta.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)gridReporteInOper).BeginInit();
+			tabPage6.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)dgvAsientosODInOper).BeginInit();
+			((System.ComponentModel.ISupportInitialize)dgvDisponibilidadODInOper).BeginInit();
 			pnlMenu.SuspendLayout();
 			SuspendLayout();
 			// 
 			// tabCtrlVentas
 			// 
-			tabCtrlVentas.Appearance = TabAppearance.Buttons;
+			tabCtrlVentas.Appearance = TabAppearance.FlatButtons;
 			tabCtrlVentas.Controls.Add(tabPgInicio);
 			tabCtrlVentas.Controls.Add(tabPgVentas);
 			tabCtrlVentas.Controls.Add(tabPgClientes);
 			tabCtrlVentas.Controls.Add(tabPgPartidos);
 			tabCtrlVentas.Controls.Add(tabPgReportes);
-			tabCtrlVentas.ItemSize = new Size(96, 20);
+			tabCtrlVentas.ItemSize = new Size(0, 1);
 			tabCtrlVentas.Location = new Point(50, 100);
 			tabCtrlVentas.Margin = new Padding(0);
 			tabCtrlVentas.Name = "tabCtrlVentas";
@@ -302,42 +305,30 @@
 			// tabPgInicio
 			// 
 			tabPgInicio.BackColor = Color.Black;
-			tabPgInicio.Controls.Add(dataGridView1);
-			tabPgInicio.Controls.Add(flowLayoutPanel1);
+			tabPgInicio.Controls.Add(flpProximosPartidosInOper);
 			tabPgInicio.Controls.Add(lblInfoIngresosInicio);
 			tabPgInicio.Controls.Add(lblInfoBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblInfoVentasDelDiaInicio);
-			tabPgInicio.Controls.Add(lblActividadRecienteInicio);
 			tabPgInicio.Controls.Add(lblProximosPartidosInicio);
 			tabPgInicio.Controls.Add(lblIngresosInicio);
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 24);
+			tabPgInicio.Location = new Point(4, 34);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 822);
+			tabPgInicio.Size = new Size(1392, 812);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
-			// dataGridView1
+			// flpProximosPartidosInOper
 			// 
-			dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridView1.Location = new Point(58, 525);
-			dataGridView1.Margin = new Padding(2);
-			dataGridView1.Name = "dataGridView1";
-			dataGridView1.RowHeadersWidth = 72;
-			dataGridView1.Size = new Size(1283, 250);
-			dataGridView1.TabIndex = 20;
-			// 
-			// flowLayoutPanel1
-			// 
-			flowLayoutPanel1.Location = new Point(58, 200);
-			flowLayoutPanel1.Margin = new Padding(2);
-			flowLayoutPanel1.Name = "flowLayoutPanel1";
-			flowLayoutPanel1.Size = new Size(1283, 275);
-			flowLayoutPanel1.TabIndex = 19;
+			flpProximosPartidosInOper.Location = new Point(58, 200);
+			flpProximosPartidosInOper.Margin = new Padding(2);
+			flpProximosPartidosInOper.Name = "flpProximosPartidosInOper";
+			flpProximosPartidosInOper.Size = new Size(1283, 275);
+			flpProximosPartidosInOper.TabIndex = 19;
 			// 
 			// lblInfoIngresosInicio
 			// 
@@ -374,18 +365,6 @@
 			lblInfoVentasDelDiaInicio.Size = new Size(32, 23);
 			lblInfoVentasDelDiaInicio.TabIndex = 16;
 			lblInfoVentasDelDiaInicio.Text = "50";
-			// 
-			// lblActividadRecienteInicio
-			// 
-			lblActividadRecienteInicio.AutoSize = true;
-			lblActividadRecienteInicio.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblActividadRecienteInicio.ForeColor = Color.White;
-			lblActividadRecienteInicio.Location = new Point(58, 500);
-			lblActividadRecienteInicio.Margin = new Padding(2, 0, 2, 0);
-			lblActividadRecienteInicio.Name = "lblActividadRecienteInicio";
-			lblActividadRecienteInicio.Size = new Size(220, 23);
-			lblActividadRecienteInicio.TabIndex = 15;
-			lblActividadRecienteInicio.Text = "ACTIVIDAD RECIENTE:";
 			// 
 			// lblProximosPartidosInicio
 			// 
@@ -451,32 +430,34 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 24);
+			tabPgVentas.Location = new Point(4, 5);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 822);
+			tabPgVentas.Size = new Size(1392, 841);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
 			// tabCtrlVenta
 			// 
+			tabCtrlVenta.Appearance = TabAppearance.FlatButtons;
 			tabCtrlVenta.Controls.Add(tabPage1);
 			tabCtrlVenta.Controls.Add(tabVentaPaso2);
 			tabCtrlVenta.Controls.Add(tabPage3);
 			tabCtrlVenta.Controls.Add(tabPage4);
 			tabCtrlVenta.Controls.Add(tabPage5);
+			tabCtrlVenta.ItemSize = new Size(0, 1);
 			tabCtrlVenta.Location = new Point(58, 18);
 			tabCtrlVenta.Margin = new Padding(2);
 			tabCtrlVenta.Name = "tabCtrlVenta";
 			tabCtrlVenta.SelectedIndex = 0;
 			tabCtrlVenta.Size = new Size(1283, 800);
+			tabCtrlVenta.SizeMode = TabSizeMode.Fixed;
 			tabCtrlVenta.TabIndex = 0;
 			// 
 			// tabPage1
 			// 
 			tabPage1.BackColor = Color.Black;
-			tabPage1.Controls.Add(button3);
 			tabPage1.Controls.Add(button2);
 			tabPage1.Controls.Add(btnContinuarVentaPaso1);
 			tabPage1.Controls.Add(gridClientesVentasPaso1);
@@ -484,25 +465,13 @@
 			tabPage1.Controls.Add(label12);
 			tabPage1.Controls.Add(label11);
 			tabPage1.Controls.Add(label10);
-			tabPage1.Location = new Point(4, 24);
+			tabPage1.Location = new Point(4, 5);
 			tabPage1.Margin = new Padding(2);
 			tabPage1.Name = "tabPage1";
 			tabPage1.Padding = new Padding(2);
-			tabPage1.Size = new Size(1275, 772);
+			tabPage1.Size = new Size(1275, 791);
 			tabPage1.TabIndex = 0;
 			tabPage1.Text = "Venta1";
-			// 
-			// button3
-			// 
-			button3.FlatStyle = FlatStyle.System;
-			button3.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button3.Location = new Point(930, 226);
-			button3.Margin = new Padding(2);
-			button3.Name = "button3";
-			button3.Size = new Size(146, 35);
-			button3.TabIndex = 24;
-			button3.Text = "BUSCAR 🔍";
-			button3.UseVisualStyleBackColor = true;
 			// 
 			// button2
 			// 
@@ -613,18 +582,17 @@
 			tabVentaPaso2.Controls.Add(btnAtrasVentaPaso2);
 			tabVentaPaso2.Controls.Add(btnContinuarVentaPaso2);
 			tabVentaPaso2.Controls.Add(flowPanVentasPaso2);
-			tabVentaPaso2.Controls.Add(button10);
 			tabVentaPaso2.Controls.Add(txtEstadioVentaPaso2);
 			tabVentaPaso2.Controls.Add(lblEstadioVentaPaso2);
 			tabVentaPaso2.Controls.Add(txtFechaVentaPaso2);
 			tabVentaPaso2.Controls.Add(lblFechaVentaPaso2);
 			tabVentaPaso2.Controls.Add(txtEquipoVentaPaso2);
 			tabVentaPaso2.Controls.Add(lblEquipoVentaPaso2);
-			tabVentaPaso2.Location = new Point(4, 24);
+			tabVentaPaso2.Location = new Point(4, 5);
 			tabVentaPaso2.Margin = new Padding(2);
 			tabVentaPaso2.Name = "tabVentaPaso2";
 			tabVentaPaso2.Padding = new Padding(2);
-			tabVentaPaso2.Size = new Size(1275, 772);
+			tabVentaPaso2.Size = new Size(1275, 791);
 			tabVentaPaso2.TabIndex = 1;
 			tabVentaPaso2.Text = "Venta 2";
 			// 
@@ -661,18 +629,6 @@
 			flowPanVentasPaso2.Name = "flowPanVentasPaso2";
 			flowPanVentasPaso2.Size = new Size(1167, 425);
 			flowPanVentasPaso2.TabIndex = 27;
-			// 
-			// button10
-			// 
-			button10.FlatStyle = FlatStyle.System;
-			button10.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button10.Location = new Point(58, 182);
-			button10.Margin = new Padding(2);
-			button10.Name = "button10";
-			button10.Size = new Size(146, 35);
-			button10.TabIndex = 26;
-			button10.Text = "BUSCAR 🔍";
-			button10.UseVisualStyleBackColor = true;
 			// 
 			// txtEstadioVentaPaso2
 			// 
@@ -744,18 +700,16 @@
 			// tabPage3
 			// 
 			tabPage3.BackColor = Color.Black;
+			tabPage3.Controls.Add(dgvAsientosInOper);
 			tabPage3.Controls.Add(btnAtrasVentaPaso3);
 			tabPage3.Controls.Add(btnContinuarVentaPaso3);
 			tabPage3.Controls.Add(lblInfoTotalVentaPaso3);
 			tabPage3.Controls.Add(lvlInfoIVAVentaPaso3);
 			tabPage3.Controls.Add(lblInfoSubtotalVentaPaso3);
-			tabPage3.Controls.Add(lbl4VentaPaso3);
-			tabPage3.Controls.Add(lblBoletosSeleccionadosVentaPaso3);
 			tabPage3.Controls.Add(lblTotalVentaPaso3);
 			tabPage3.Controls.Add(lblIVAVentaPaso3);
 			tabPage3.Controls.Add(lblSubtotalVentaPaso3);
 			tabPage3.Controls.Add(lblSeleccionadosVentaPaso3);
-			tabPage3.Controls.Add(flowPanVentasPaso3);
 			tabPage3.Controls.Add(lblAsientosVentaPaso3);
 			tabPage3.Controls.Add(lblInfoDisponiblesVentaPaso3);
 			tabPage3.Controls.Add(lblDisponiblesVentaPaso3);
@@ -768,12 +722,20 @@
 			tabPage3.Controls.Add(lblFechaVentaPaso3);
 			tabPage3.Controls.Add(lblInfoPartidoVentaPaso3);
 			tabPage3.Controls.Add(lblPartidoVentaPaso3);
-			tabPage3.Location = new Point(4, 24);
+			tabPage3.Location = new Point(4, 5);
 			tabPage3.Margin = new Padding(2);
 			tabPage3.Name = "tabPage3";
-			tabPage3.Size = new Size(1275, 772);
+			tabPage3.Size = new Size(1275, 791);
 			tabPage3.TabIndex = 2;
 			tabPage3.Text = "Venta3";
+			// 
+			// dgvAsientosInOper
+			// 
+			dgvAsientosInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvAsientosInOper.Location = new Point(59, 178);
+			dgvAsientosInOper.Name = "dgvAsientosInOper";
+			dgvAsientosInOper.Size = new Size(1164, 425);
+			dgvAsientosInOper.TabIndex = 45;
 			// 
 			// btnAtrasVentaPaso3
 			// 
@@ -837,30 +799,6 @@
 			lblInfoSubtotalVentaPaso3.TabIndex = 40;
 			lblInfoSubtotalVentaPaso3.Text = "$000,000,000";
 			// 
-			// lbl4VentaPaso3
-			// 
-			lbl4VentaPaso3.AutoSize = true;
-			lbl4VentaPaso3.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lbl4VentaPaso3.ForeColor = Color.White;
-			lbl4VentaPaso3.Location = new Point(287, 625);
-			lbl4VentaPaso3.Margin = new Padding(2, 0, 2, 0);
-			lbl4VentaPaso3.Name = "lbl4VentaPaso3";
-			lbl4VentaPaso3.Size = new Size(41, 27);
-			lbl4VentaPaso3.TabIndex = 39;
-			lbl4VentaPaso3.Text = "/ 4";
-			// 
-			// lblBoletosSeleccionadosVentaPaso3
-			// 
-			lblBoletosSeleccionadosVentaPaso3.AutoSize = true;
-			lblBoletosSeleccionadosVentaPaso3.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblBoletosSeleccionadosVentaPaso3.ForeColor = Color.White;
-			lblBoletosSeleccionadosVentaPaso3.Location = new Point(265, 625);
-			lblBoletosSeleccionadosVentaPaso3.Margin = new Padding(2, 0, 2, 0);
-			lblBoletosSeleccionadosVentaPaso3.Name = "lblBoletosSeleccionadosVentaPaso3";
-			lblBoletosSeleccionadosVentaPaso3.Size = new Size(25, 27);
-			lblBoletosSeleccionadosVentaPaso3.TabIndex = 38;
-			lblBoletosSeleccionadosVentaPaso3.Text = "0";
-			// 
 			// lblTotalVentaPaso3
 			// 
 			lblTotalVentaPaso3.AutoSize = true;
@@ -908,14 +846,6 @@
 			lblSeleccionadosVentaPaso3.Size = new Size(209, 27);
 			lblSeleccionadosVentaPaso3.TabIndex = 34;
 			lblSeleccionadosVentaPaso3.Text = "SELECCIONADOS:";
-			// 
-			// flowPanVentasPaso3
-			// 
-			flowPanVentasPaso3.Location = new Point(58, 150);
-			flowPanVentasPaso3.Margin = new Padding(2);
-			flowPanVentasPaso3.Name = "flowPanVentasPaso3";
-			flowPanVentasPaso3.Size = new Size(1167, 450);
-			flowPanVentasPaso3.TabIndex = 33;
 			// 
 			// lblAsientosVentaPaso3
 			// 
@@ -1061,11 +991,7 @@
 			// tabPage4
 			// 
 			tabPage4.BackColor = Color.Black;
-			tabPage4.Controls.Add(lblInfoCuentaTransferenciaVentaPaso4);
-			tabPage4.Controls.Add(lblCuentaTransferenciaVentaPaso4);
 			tabPage4.Controls.Add(txtTitularVentaPaso4);
-			tabPage4.Controls.Add(cboTipoTarjetaVentaPaso4);
-			tabPage4.Controls.Add(lblTipoTarjetaVentaPaso4);
 			tabPage4.Controls.Add(txtCVVVentaPaso4);
 			tabPage4.Controls.Add(txtVencimientoTarjetaVentaPaso4);
 			tabPage4.Controls.Add(txtNumeroTarjetaVentaPaso4);
@@ -1074,7 +1000,6 @@
 			tabPage4.Controls.Add(lblNumeroTarjetaVentaPaso4);
 			tabPage4.Controls.Add(lblTitularVentaPaso4);
 			tabPage4.Controls.Add(lblInfoTotalVentaPaso4);
-			tabPage4.Controls.Add(radioBtnTransferenciaVentaPaso4);
 			tabPage4.Controls.Add(radioBtnTarjetaVentaPaso4);
 			tabPage4.Controls.Add(radioBtnEfectivoVentaPaso4);
 			tabPage4.Controls.Add(lblInfoAsientosVentaPaso4);
@@ -1091,36 +1016,12 @@
 			tabPage4.Controls.Add(lblZonaVentaPaso4);
 			tabPage4.Controls.Add(lblPartidoVentaPaso4);
 			tabPage4.Controls.Add(lblClienteVentaPaso4);
-			tabPage4.Location = new Point(4, 24);
+			tabPage4.Location = new Point(4, 5);
 			tabPage4.Margin = new Padding(2);
 			tabPage4.Name = "tabPage4";
-			tabPage4.Size = new Size(1275, 772);
+			tabPage4.Size = new Size(1275, 791);
 			tabPage4.TabIndex = 3;
 			tabPage4.Text = "Venta4";
-			// 
-			// lblInfoCuentaTransferenciaVentaPaso4
-			// 
-			lblInfoCuentaTransferenciaVentaPaso4.AutoSize = true;
-			lblInfoCuentaTransferenciaVentaPaso4.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblInfoCuentaTransferenciaVentaPaso4.ForeColor = Color.White;
-			lblInfoCuentaTransferenciaVentaPaso4.Location = new Point(387, 434);
-			lblInfoCuentaTransferenciaVentaPaso4.Margin = new Padding(2, 0, 2, 0);
-			lblInfoCuentaTransferenciaVentaPaso4.Name = "lblInfoCuentaTransferenciaVentaPaso4";
-			lblInfoCuentaTransferenciaVentaPaso4.Size = new Size(289, 27);
-			lblInfoCuentaTransferenciaVentaPaso4.TabIndex = 55;
-			lblInfoCuentaTransferenciaVentaPaso4.Text = "XXXX-XXXX-XXXX-XXXX";
-			// 
-			// lblCuentaTransferenciaVentaPaso4
-			// 
-			lblCuentaTransferenciaVentaPaso4.AutoSize = true;
-			lblCuentaTransferenciaVentaPaso4.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblCuentaTransferenciaVentaPaso4.ForeColor = Color.White;
-			lblCuentaTransferenciaVentaPaso4.Location = new Point(117, 434);
-			lblCuentaTransferenciaVentaPaso4.Margin = new Padding(2, 0, 2, 0);
-			lblCuentaTransferenciaVentaPaso4.Name = "lblCuentaTransferenciaVentaPaso4";
-			lblCuentaTransferenciaVentaPaso4.Size = new Size(275, 27);
-			lblCuentaTransferenciaVentaPaso4.TabIndex = 54;
-			lblCuentaTransferenciaVentaPaso4.Text = "CUENTA A TRANSFERIR:";
 			// 
 			// txtTitularVentaPaso4
 			// 
@@ -1130,29 +1031,6 @@
 			txtTitularVentaPaso4.Name = "txtTitularVentaPaso4";
 			txtTitularVentaPaso4.Size = new Size(507, 23);
 			txtTitularVentaPaso4.TabIndex = 53;
-			txtTitularVentaPaso4.Text = "NOMBRE";
-			// 
-			// cboTipoTarjetaVentaPaso4
-			// 
-			cboTipoTarjetaVentaPaso4.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
-			cboTipoTarjetaVentaPaso4.FormattingEnabled = true;
-			cboTipoTarjetaVentaPaso4.Location = new Point(325, 353);
-			cboTipoTarjetaVentaPaso4.Margin = new Padding(2);
-			cboTipoTarjetaVentaPaso4.Name = "cboTipoTarjetaVentaPaso4";
-			cboTipoTarjetaVentaPaso4.Size = new Size(188, 23);
-			cboTipoTarjetaVentaPaso4.TabIndex = 52;
-			// 
-			// lblTipoTarjetaVentaPaso4
-			// 
-			lblTipoTarjetaVentaPaso4.AutoSize = true;
-			lblTipoTarjetaVentaPaso4.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblTipoTarjetaVentaPaso4.ForeColor = Color.White;
-			lblTipoTarjetaVentaPaso4.Location = new Point(117, 350);
-			lblTipoTarjetaVentaPaso4.Margin = new Padding(2, 0, 2, 0);
-			lblTipoTarjetaVentaPaso4.Name = "lblTipoTarjetaVentaPaso4";
-			lblTipoTarjetaVentaPaso4.Size = new Size(209, 27);
-			lblTipoTarjetaVentaPaso4.TabIndex = 51;
-			lblTipoTarjetaVentaPaso4.Text = "TIPO DE TARJETA:";
 			// 
 			// txtCVVVentaPaso4
 			// 
@@ -1162,7 +1040,6 @@
 			txtCVVVentaPaso4.Name = "txtCVVVentaPaso4";
 			txtCVVVentaPaso4.Size = new Size(148, 30);
 			txtCVVVentaPaso4.TabIndex = 50;
-			txtCVVVentaPaso4.Text = "123";
 			// 
 			// txtVencimientoTarjetaVentaPaso4
 			// 
@@ -1172,7 +1049,6 @@
 			txtVencimientoTarjetaVentaPaso4.Name = "txtVencimientoTarjetaVentaPaso4";
 			txtVencimientoTarjetaVentaPaso4.Size = new Size(148, 30);
 			txtVencimientoTarjetaVentaPaso4.TabIndex = 49;
-			txtVencimientoTarjetaVentaPaso4.Text = "MM/AA";
 			// 
 			// txtNumeroTarjetaVentaPaso4
 			// 
@@ -1182,7 +1058,6 @@
 			txtNumeroTarjetaVentaPaso4.Name = "txtNumeroTarjetaVentaPaso4";
 			txtNumeroTarjetaVentaPaso4.Size = new Size(283, 23);
 			txtNumeroTarjetaVentaPaso4.TabIndex = 48;
-			txtNumeroTarjetaVentaPaso4.Text = "XXXX-XXXX-XXXX-XXXX";
 			// 
 			// lblCVVVentaPaso4
 			// 
@@ -1244,20 +1119,6 @@
 			lblInfoTotalVentaPaso4.TabIndex = 43;
 			lblInfoTotalVentaPaso4.Text = "$000,000,000";
 			// 
-			// radioBtnTransferenciaVentaPaso4
-			// 
-			radioBtnTransferenciaVentaPaso4.AutoSize = true;
-			radioBtnTransferenciaVentaPaso4.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			radioBtnTransferenciaVentaPaso4.ForeColor = Color.White;
-			radioBtnTransferenciaVentaPaso4.Location = new Point(700, 300);
-			radioBtnTransferenciaVentaPaso4.Margin = new Padding(2);
-			radioBtnTransferenciaVentaPaso4.Name = "radioBtnTransferenciaVentaPaso4";
-			radioBtnTransferenciaVentaPaso4.Size = new Size(215, 31);
-			radioBtnTransferenciaVentaPaso4.TabIndex = 40;
-			radioBtnTransferenciaVentaPaso4.TabStop = true;
-			radioBtnTransferenciaVentaPaso4.Text = "TRANSFERENCIA";
-			radioBtnTransferenciaVentaPaso4.UseVisualStyleBackColor = true;
-			// 
 			// radioBtnTarjetaVentaPaso4
 			// 
 			radioBtnTarjetaVentaPaso4.AutoSize = true;
@@ -1266,10 +1127,10 @@
 			radioBtnTarjetaVentaPaso4.Location = new Point(525, 300);
 			radioBtnTarjetaVentaPaso4.Margin = new Padding(2);
 			radioBtnTarjetaVentaPaso4.Name = "radioBtnTarjetaVentaPaso4";
-			radioBtnTarjetaVentaPaso4.Size = new Size(123, 31);
+			radioBtnTarjetaVentaPaso4.Size = new Size(128, 31);
 			radioBtnTarjetaVentaPaso4.TabIndex = 39;
 			radioBtnTarjetaVentaPaso4.TabStop = true;
-			radioBtnTarjetaVentaPaso4.Text = "TARJETA";
+			radioBtnTarjetaVentaPaso4.Text = "CREDITO";
 			radioBtnTarjetaVentaPaso4.UseVisualStyleBackColor = true;
 			// 
 			// radioBtnEfectivoVentaPaso4
@@ -1459,70 +1320,16 @@
 			// tabPage5
 			// 
 			tabPage5.BackColor = Color.Black;
-			tabPage5.Controls.Add(lblInfoFechaYHoraVentaRealizada);
-			tabPage5.Controls.Add(lblInfoTotalVentaRealizada);
-			tabPage5.Controls.Add(lblInfoCodigoVentaRealizada);
-			tabPage5.Controls.Add(lblFechaYHoraVentaRealizada);
 			tabPage5.Controls.Add(pictureBox1);
 			tabPage5.Controls.Add(btnNuevaVentaVentaRealizada);
-			tabPage5.Controls.Add(lblTotalVentaRealizada);
-			tabPage5.Controls.Add(lblCodigoVentaRealizada);
 			tabPage5.Controls.Add(lblMensajeVentaRealizada);
 			tabPage5.Controls.Add(lblVentaRealizada);
-			tabPage5.Location = new Point(4, 24);
+			tabPage5.Location = new Point(4, 5);
 			tabPage5.Margin = new Padding(2);
 			tabPage5.Name = "tabPage5";
-			tabPage5.Size = new Size(1275, 772);
+			tabPage5.Size = new Size(1275, 791);
 			tabPage5.TabIndex = 4;
 			tabPage5.Text = "VentaRealizada";
-			// 
-			// lblInfoFechaYHoraVentaRealizada
-			// 
-			lblInfoFechaYHoraVentaRealizada.AutoSize = true;
-			lblInfoFechaYHoraVentaRealizada.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblInfoFechaYHoraVentaRealizada.ForeColor = Color.White;
-			lblInfoFechaYHoraVentaRealizada.Location = new Point(346, 475);
-			lblInfoFechaYHoraVentaRealizada.Margin = new Padding(2, 0, 2, 0);
-			lblInfoFechaYHoraVentaRealizada.Name = "lblInfoFechaYHoraVentaRealizada";
-			lblInfoFechaYHoraVentaRealizada.Size = new Size(187, 27);
-			lblInfoFechaYHoraVentaRealizada.TabIndex = 45;
-			lblInfoFechaYHoraVentaRealizada.Text = "FECHA Y HORA:";
-			// 
-			// lblInfoTotalVentaRealizada
-			// 
-			lblInfoTotalVentaRealizada.AutoSize = true;
-			lblInfoTotalVentaRealizada.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblInfoTotalVentaRealizada.ForeColor = Color.White;
-			lblInfoTotalVentaRealizada.Location = new Point(722, 450);
-			lblInfoTotalVentaRealizada.Margin = new Padding(2, 0, 2, 0);
-			lblInfoTotalVentaRealizada.Name = "lblInfoTotalVentaRealizada";
-			lblInfoTotalVentaRealizada.Size = new Size(156, 27);
-			lblInfoTotalVentaRealizada.TabIndex = 44;
-			lblInfoTotalVentaRealizada.Text = "$000,000,000";
-			// 
-			// lblInfoCodigoVentaRealizada
-			// 
-			lblInfoCodigoVentaRealizada.AutoSize = true;
-			lblInfoCodigoVentaRealizada.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblInfoCodigoVentaRealizada.ForeColor = Color.White;
-			lblInfoCodigoVentaRealizada.Location = new Point(382, 450);
-			lblInfoCodigoVentaRealizada.Margin = new Padding(2, 0, 2, 0);
-			lblInfoCodigoVentaRealizada.Name = "lblInfoCodigoVentaRealizada";
-			lblInfoCodigoVentaRealizada.Size = new Size(77, 27);
-			lblInfoCodigoVentaRealizada.TabIndex = 29;
-			lblInfoCodigoVentaRealizada.Text = "00023";
-			// 
-			// lblFechaYHoraVentaRealizada
-			// 
-			lblFechaYHoraVentaRealizada.AutoSize = true;
-			lblFechaYHoraVentaRealizada.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblFechaYHoraVentaRealizada.ForeColor = Color.White;
-			lblFechaYHoraVentaRealizada.Location = new Point(155, 475);
-			lblFechaYHoraVentaRealizada.Margin = new Padding(2, 0, 2, 0);
-			lblFechaYHoraVentaRealizada.Name = "lblFechaYHoraVentaRealizada";
-			lblFechaYHoraVentaRealizada.Size = new Size(187, 27);
-			lblFechaYHoraVentaRealizada.TabIndex = 28;
-			lblFechaYHoraVentaRealizada.Text = "FECHA Y HORA:";
 			// 
 			// pictureBox1
 			// 
@@ -1545,30 +1352,6 @@
 			btnNuevaVentaVentaRealizada.Text = "NUEVA VENTA";
 			btnNuevaVentaVentaRealizada.UseVisualStyleBackColor = true;
 			btnNuevaVentaVentaRealizada.Click += btnNuevaVentaVentaRealizada_Click;
-			// 
-			// lblTotalVentaRealizada
-			// 
-			lblTotalVentaRealizada.AutoSize = true;
-			lblTotalVentaRealizada.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblTotalVentaRealizada.ForeColor = Color.White;
-			lblTotalVentaRealizada.Location = new Point(621, 450);
-			lblTotalVentaRealizada.Margin = new Padding(2, 0, 2, 0);
-			lblTotalVentaRealizada.Name = "lblTotalVentaRealizada";
-			lblTotalVentaRealizada.Size = new Size(89, 27);
-			lblTotalVentaRealizada.TabIndex = 24;
-			lblTotalVentaRealizada.Text = "TOTAL:";
-			// 
-			// lblCodigoVentaRealizada
-			// 
-			lblCodigoVentaRealizada.AutoSize = true;
-			lblCodigoVentaRealizada.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblCodigoVentaRealizada.ForeColor = Color.White;
-			lblCodigoVentaRealizada.Location = new Point(155, 450);
-			lblCodigoVentaRealizada.Margin = new Padding(2, 0, 2, 0);
-			lblCodigoVentaRealizada.Name = "lblCodigoVentaRealizada";
-			lblCodigoVentaRealizada.Size = new Size(230, 27);
-			lblCodigoVentaRealizada.TabIndex = 23;
-			lblCodigoVentaRealizada.Text = "CODIGO DE VENTA:";
 			// 
 			// lblMensajeVentaRealizada
 			// 
@@ -1598,53 +1381,55 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInVentas);
-			tabPgClientes.Location = new Point(4, 24);
+			tabPgClientes.Location = new Point(4, 34);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 822);
+			tabPgClientes.Size = new Size(1392, 812);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
 			// tabClientesInVentas
 			// 
+			tabClientesInVentas.Appearance = TabAppearance.FlatButtons;
 			tabClientesInVentas.Controls.Add(BuscarCliente);
 			tabClientesInVentas.Controls.Add(NuevoCliente);
 			tabClientesInVentas.Controls.Add(EditarCliente);
+			tabClientesInVentas.ItemSize = new Size(0, 1);
 			tabClientesInVentas.Location = new Point(3, 19);
 			tabClientesInVentas.Name = "tabClientesInVentas";
 			tabClientesInVentas.SelectedIndex = 0;
 			tabClientesInVentas.Size = new Size(1386, 800);
+			tabClientesInVentas.SizeMode = TabSizeMode.Fixed;
 			tabClientesInVentas.TabIndex = 0;
 			// 
 			// BuscarCliente
 			// 
 			BuscarCliente.BackColor = Color.Black;
-			BuscarCliente.Controls.Add(btnHistorialCliente);
+			BuscarCliente.Controls.Add(btnHistorialClienteInOper);
 			BuscarCliente.Controls.Add(btnEditarClienteInOper);
-			BuscarCliente.Controls.Add(GridClientesInClientes);
-			BuscarCliente.Controls.Add(btnNuevoClienteInCliente);
-			BuscarCliente.Controls.Add(btnBuscarCliente);
-			BuscarCliente.Controls.Add(txtBuscarCliente);
-			BuscarCliente.Controls.Add(lblBuscarClienteInCliente);
+			BuscarCliente.Controls.Add(GridClientesInOper);
+			BuscarCliente.Controls.Add(btnNuevoClienteInOper);
+			BuscarCliente.Controls.Add(txtBuscarClienteInOper);
+			BuscarCliente.Controls.Add(lblBuscarClienteInOper);
 			BuscarCliente.Controls.Add(lblClientesInCliente);
-			BuscarCliente.Location = new Point(4, 24);
+			BuscarCliente.Location = new Point(4, 5);
 			BuscarCliente.Name = "BuscarCliente";
 			BuscarCliente.Padding = new Padding(3);
-			BuscarCliente.Size = new Size(1378, 772);
+			BuscarCliente.Size = new Size(1378, 791);
 			BuscarCliente.TabIndex = 0;
 			BuscarCliente.Text = "BuscarCliente";
 			// 
-			// btnHistorialCliente
+			// btnHistorialClienteInOper
 			// 
-			btnHistorialCliente.FlatStyle = FlatStyle.System;
-			btnHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnHistorialCliente.Location = new Point(310, 614);
-			btnHistorialCliente.Margin = new Padding(2);
-			btnHistorialCliente.Name = "btnHistorialCliente";
-			btnHistorialCliente.Size = new Size(175, 35);
-			btnHistorialCliente.TabIndex = 37;
-			btnHistorialCliente.Text = "HISTORIAL 📋";
-			btnHistorialCliente.UseVisualStyleBackColor = true;
+			btnHistorialClienteInOper.FlatStyle = FlatStyle.System;
+			btnHistorialClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnHistorialClienteInOper.Location = new Point(310, 614);
+			btnHistorialClienteInOper.Margin = new Padding(2);
+			btnHistorialClienteInOper.Name = "btnHistorialClienteInOper";
+			btnHistorialClienteInOper.Size = new Size(175, 35);
+			btnHistorialClienteInOper.TabIndex = 37;
+			btnHistorialClienteInOper.Text = "HISTORIAL 📋";
+			btnHistorialClienteInOper.UseVisualStyleBackColor = true;
 			// 
 			// btnEditarClienteInOper
 			// 
@@ -1659,18 +1444,18 @@
 			btnEditarClienteInOper.UseVisualStyleBackColor = true;
 			btnEditarClienteInOper.Click += btnEditarCliente_Click;
 			// 
-			// GridClientesInClientes
+			// GridClientesInOper
 			// 
-			GridClientesInClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			GridClientesInClientes.BackgroundColor = Color.Black;
-			GridClientesInClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			GridClientesInClientes.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, CORREO, ESTADO });
-			GridClientesInClientes.Location = new Point(106, 306);
-			GridClientesInClientes.Margin = new Padding(2);
-			GridClientesInClientes.Name = "GridClientesInClientes";
-			GridClientesInClientes.RowHeadersWidth = 72;
-			GridClientesInClientes.Size = new Size(1167, 288);
-			GridClientesInClientes.TabIndex = 35;
+			GridClientesInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			GridClientesInOper.BackgroundColor = Color.Black;
+			GridClientesInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			GridClientesInOper.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, CORREO, ESTADO });
+			GridClientesInOper.Location = new Point(106, 306);
+			GridClientesInOper.Margin = new Padding(2);
+			GridClientesInOper.Name = "GridClientesInOper";
+			GridClientesInOper.RowHeadersWidth = 72;
+			GridClientesInOper.Size = new Size(1167, 288);
+			GridClientesInOper.TabIndex = 35;
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -1702,51 +1487,39 @@
 			ESTADO.MinimumWidth = 9;
 			ESTADO.Name = "ESTADO";
 			// 
-			// btnNuevoClienteInCliente
+			// btnNuevoClienteInOper
 			// 
-			btnNuevoClienteInCliente.FlatStyle = FlatStyle.System;
-			btnNuevoClienteInCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnNuevoClienteInCliente.Location = new Point(106, 239);
-			btnNuevoClienteInCliente.Margin = new Padding(2);
-			btnNuevoClienteInCliente.Name = "btnNuevoClienteInCliente";
-			btnNuevoClienteInCliente.Size = new Size(233, 35);
-			btnNuevoClienteInCliente.TabIndex = 34;
-			btnNuevoClienteInCliente.Text = "NUEVO CLIENTE ➕";
-			btnNuevoClienteInCliente.UseVisualStyleBackColor = true;
-			btnNuevoClienteInCliente.Click += btnNuevoClienteInCliente_Click;
+			btnNuevoClienteInOper.FlatStyle = FlatStyle.System;
+			btnNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnNuevoClienteInOper.Location = new Point(106, 239);
+			btnNuevoClienteInOper.Margin = new Padding(2);
+			btnNuevoClienteInOper.Name = "btnNuevoClienteInOper";
+			btnNuevoClienteInOper.Size = new Size(233, 35);
+			btnNuevoClienteInOper.TabIndex = 34;
+			btnNuevoClienteInOper.Text = "NUEVO CLIENTE ➕";
+			btnNuevoClienteInOper.UseVisualStyleBackColor = true;
+			btnNuevoClienteInOper.Click += btnNuevoClienteInCliente_Click;
 			// 
-			// btnBuscarCliente
+			// txtBuscarClienteInOper
 			// 
-			btnBuscarCliente.FlatStyle = FlatStyle.System;
-			btnBuscarCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnBuscarCliente.Location = new Point(1127, 207);
-			btnBuscarCliente.Margin = new Padding(2);
-			btnBuscarCliente.Name = "btnBuscarCliente";
-			btnBuscarCliente.Size = new Size(146, 35);
-			btnBuscarCliente.TabIndex = 33;
-			btnBuscarCliente.Text = "BUSCAR 🔍";
-			btnBuscarCliente.UseVisualStyleBackColor = true;
+			txtBuscarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtBuscarClienteInOper.Location = new Point(556, 212);
+			txtBuscarClienteInOper.Margin = new Padding(2);
+			txtBuscarClienteInOper.Name = "txtBuscarClienteInOper";
+			txtBuscarClienteInOper.Size = new Size(555, 33);
+			txtBuscarClienteInOper.TabIndex = 32;
 			// 
-			// txtBuscarCliente
+			// lblBuscarClienteInOper
 			// 
-			txtBuscarCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			txtBuscarCliente.Location = new Point(556, 212);
-			txtBuscarCliente.Margin = new Padding(2);
-			txtBuscarCliente.Name = "txtBuscarCliente";
-			txtBuscarCliente.Size = new Size(555, 33);
-			txtBuscarCliente.TabIndex = 32;
-			// 
-			// lblBuscarClienteInCliente
-			// 
-			lblBuscarClienteInCliente.AutoSize = true;
-			lblBuscarClienteInCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			lblBuscarClienteInCliente.ForeColor = Color.White;
-			lblBuscarClienteInCliente.Location = new Point(106, 214);
-			lblBuscarClienteInCliente.Margin = new Padding(2, 0, 2, 0);
-			lblBuscarClienteInCliente.Name = "lblBuscarClienteInCliente";
-			lblBuscarClienteInCliente.Size = new Size(458, 27);
-			lblBuscarClienteInCliente.TabIndex = 31;
-			lblBuscarClienteInCliente.Text = "BUSCAR POR APELLIDO, CORREO O RFC:";
+			lblBuscarClienteInOper.AutoSize = true;
+			lblBuscarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblBuscarClienteInOper.ForeColor = Color.White;
+			lblBuscarClienteInOper.Location = new Point(106, 214);
+			lblBuscarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblBuscarClienteInOper.Name = "lblBuscarClienteInOper";
+			lblBuscarClienteInOper.Size = new Size(458, 27);
+			lblBuscarClienteInOper.TabIndex = 31;
+			lblBuscarClienteInOper.Text = "BUSCAR POR APELLIDO, CORREO O RFC:";
 			// 
 			// lblClientesInCliente
 			// 
@@ -1763,262 +1536,308 @@
 			// NuevoCliente
 			// 
 			NuevoCliente.BackColor = Color.Black;
-			NuevoCliente.Controls.Add(button5);
-			NuevoCliente.Controls.Add(textBox13);
-			NuevoCliente.Controls.Add(textBox12);
-			NuevoCliente.Controls.Add(textBox11);
-			NuevoCliente.Controls.Add(textBox10);
-			NuevoCliente.Controls.Add(textBox9);
-			NuevoCliente.Controls.Add(textBox8);
-			NuevoCliente.Controls.Add(textBox7);
-			NuevoCliente.Controls.Add(textBox6);
-			NuevoCliente.Controls.Add(textBox5);
-			NuevoCliente.Controls.Add(textBox4);
-			NuevoCliente.Controls.Add(textBox3);
-			NuevoCliente.Controls.Add(textBox2);
-			NuevoCliente.Controls.Add(textBox1);
-			NuevoCliente.Controls.Add(textBox14);
-			NuevoCliente.Controls.Add(label16);
-			NuevoCliente.Controls.Add(label15);
-			NuevoCliente.Controls.Add(label14);
-			NuevoCliente.Controls.Add(label13);
-			NuevoCliente.Controls.Add(label8);
-			NuevoCliente.Controls.Add(label9);
+			NuevoCliente.Controls.Add(txtPaisNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblPaisNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtEstadoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblEstadoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(btnAgregarNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtCiudadNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtColoniaNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtCPNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtNoInteriorNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtNoExteriorNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtCalleNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtFechaNacimientoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtTelefonoCelularNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtTelefonoCasaNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtCorreoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtRFCNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtApMaternoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtApPaternoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(txtNombreNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblCPNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblCiudadNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblColoniaNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblNoInteriorNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblNoExteriorNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblCalleNuevoClienteInOper);
 			NuevoCliente.Controls.Add(label19);
 			NuevoCliente.Controls.Add(label20);
-			NuevoCliente.Controls.Add(label21);
-			NuevoCliente.Controls.Add(label22);
-			NuevoCliente.Controls.Add(label23);
-			NuevoCliente.Controls.Add(label24);
-			NuevoCliente.Controls.Add(label25);
-			NuevoCliente.Controls.Add(label26);
-			NuevoCliente.Controls.Add(label27);
-			NuevoCliente.Controls.Add(label28);
+			NuevoCliente.Controls.Add(lblTelefonoCelularNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblTelefonoCasaNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblFechaNacimientoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblCorreoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblRFCNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblApMaternoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblApPaternoNuevoClienteInOper);
+			NuevoCliente.Controls.Add(lblNombreNuevoClienteInOper);
 			NuevoCliente.Controls.Add(label29);
-			NuevoCliente.Location = new Point(4, 24);
+			NuevoCliente.Location = new Point(4, 5);
 			NuevoCliente.Name = "NuevoCliente";
 			NuevoCliente.Padding = new Padding(3);
-			NuevoCliente.Size = new Size(1378, 772);
+			NuevoCliente.Size = new Size(1378, 791);
 			NuevoCliente.TabIndex = 1;
 			NuevoCliente.Text = "NuevoCliente";
 			// 
-			// button5
+			// txtPaisNuevoClienteInOper
 			// 
-			button5.BackColor = Color.White;
-			button5.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button5.ForeColor = Color.Black;
-			button5.Location = new Point(621, 689);
-			button5.Margin = new Padding(2);
-			button5.Name = "button5";
-			button5.Size = new Size(131, 35);
-			button5.TabIndex = 83;
-			button5.Text = "AGREGAR ➕";
-			button5.UseVisualStyleBackColor = false;
+			txtPaisNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtPaisNuevoClienteInOper.Location = new Point(688, 628);
+			txtPaisNuevoClienteInOper.Margin = new Padding(2);
+			txtPaisNuevoClienteInOper.Name = "txtPaisNuevoClienteInOper";
+			txtPaisNuevoClienteInOper.Size = new Size(298, 27);
+			txtPaisNuevoClienteInOper.TabIndex = 151;
 			// 
-			// textBox13
+			// lblPaisNuevoClienteInOper
 			// 
-			textBox13.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox13.Location = new Point(688, 603);
-			textBox13.Margin = new Padding(2);
-			textBox13.Name = "textBox13";
-			textBox13.Size = new Size(298, 27);
-			textBox13.TabIndex = 82;
+			lblPaisNuevoClienteInOper.AutoSize = true;
+			lblPaisNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblPaisNuevoClienteInOper.ForeColor = Color.White;
+			lblPaisNuevoClienteInOper.Location = new Point(691, 610);
+			lblPaisNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblPaisNuevoClienteInOper.Name = "lblPaisNuevoClienteInOper";
+			lblPaisNuevoClienteInOper.Size = new Size(49, 19);
+			lblPaisNuevoClienteInOper.TabIndex = 150;
+			lblPaisNuevoClienteInOper.Text = "PAIS:";
 			// 
-			// textBox12
+			// txtEstadoNuevoClienteInOper
 			// 
-			textBox12.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox12.Location = new Point(393, 603);
-			textBox12.Margin = new Padding(2);
-			textBox12.Name = "textBox12";
-			textBox12.Size = new Size(264, 27);
-			textBox12.TabIndex = 81;
+			txtEstadoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtEstadoNuevoClienteInOper.Location = new Point(393, 628);
+			txtEstadoNuevoClienteInOper.Margin = new Padding(2);
+			txtEstadoNuevoClienteInOper.Name = "txtEstadoNuevoClienteInOper";
+			txtEstadoNuevoClienteInOper.Size = new Size(266, 27);
+			txtEstadoNuevoClienteInOper.TabIndex = 149;
 			// 
-			// textBox11
+			// lblEstadoNuevoClienteInOper
 			// 
-			textBox11.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox11.Location = new Point(766, 552);
-			textBox11.Margin = new Padding(2);
-			textBox11.Name = "textBox11";
-			textBox11.Size = new Size(143, 27);
-			textBox11.TabIndex = 80;
+			lblEstadoNuevoClienteInOper.AutoSize = true;
+			lblEstadoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblEstadoNuevoClienteInOper.ForeColor = Color.White;
+			lblEstadoNuevoClienteInOper.Location = new Point(396, 610);
+			lblEstadoNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblEstadoNuevoClienteInOper.Name = "lblEstadoNuevoClienteInOper";
+			lblEstadoNuevoClienteInOper.Size = new Size(78, 19);
+			lblEstadoNuevoClienteInOper.TabIndex = 148;
+			lblEstadoNuevoClienteInOper.Text = "ESTADO:";
 			// 
-			// textBox10
+			// btnAgregarNuevoClienteInOper
 			// 
-			textBox10.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox10.Location = new Point(564, 553);
-			textBox10.Margin = new Padding(2);
-			textBox10.Name = "textBox10";
-			textBox10.Size = new Size(143, 27);
-			textBox10.TabIndex = 79;
+			btnAgregarNuevoClienteInOper.BackColor = Color.White;
+			btnAgregarNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnAgregarNuevoClienteInOper.ForeColor = Color.Black;
+			btnAgregarNuevoClienteInOper.Location = new Point(621, 689);
+			btnAgregarNuevoClienteInOper.Margin = new Padding(2);
+			btnAgregarNuevoClienteInOper.Name = "btnAgregarNuevoClienteInOper";
+			btnAgregarNuevoClienteInOper.Size = new Size(131, 35);
+			btnAgregarNuevoClienteInOper.TabIndex = 83;
+			btnAgregarNuevoClienteInOper.Text = "AGREGAR ➕";
+			btnAgregarNuevoClienteInOper.UseVisualStyleBackColor = false;
 			// 
-			// textBox9
+			// txtCiudadNuevoClienteInOper
 			// 
-			textBox9.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox9.Location = new Point(393, 553);
-			textBox9.Margin = new Padding(2);
-			textBox9.Name = "textBox9";
-			textBox9.Size = new Size(143, 27);
-			textBox9.TabIndex = 78;
+			txtCiudadNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCiudadNuevoClienteInOper.Location = new Point(688, 582);
+			txtCiudadNuevoClienteInOper.Margin = new Padding(2);
+			txtCiudadNuevoClienteInOper.Name = "txtCiudadNuevoClienteInOper";
+			txtCiudadNuevoClienteInOper.Size = new Size(298, 27);
+			txtCiudadNuevoClienteInOper.TabIndex = 82;
 			// 
-			// textBox8
+			// txtColoniaNuevoClienteInOper
 			// 
-			textBox8.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox8.Location = new Point(393, 492);
-			textBox8.Margin = new Padding(2);
-			textBox8.Name = "textBox8";
-			textBox8.Size = new Size(297, 27);
-			textBox8.TabIndex = 77;
+			txtColoniaNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtColoniaNuevoClienteInOper.Location = new Point(393, 582);
+			txtColoniaNuevoClienteInOper.Margin = new Padding(2);
+			txtColoniaNuevoClienteInOper.Name = "txtColoniaNuevoClienteInOper";
+			txtColoniaNuevoClienteInOper.Size = new Size(264, 27);
+			txtColoniaNuevoClienteInOper.TabIndex = 81;
 			// 
-			// textBox7
+			// txtCPNuevoClienteInOper
 			// 
-			textBox7.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox7.Location = new Point(392, 332);
-			textBox7.Margin = new Padding(2);
-			textBox7.Name = "textBox7";
-			textBox7.Size = new Size(174, 27);
-			textBox7.TabIndex = 76;
+			txtCPNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCPNuevoClienteInOper.Location = new Point(766, 531);
+			txtCPNuevoClienteInOper.Margin = new Padding(2);
+			txtCPNuevoClienteInOper.Name = "txtCPNuevoClienteInOper";
+			txtCPNuevoClienteInOper.Size = new Size(143, 27);
+			txtCPNuevoClienteInOper.TabIndex = 80;
 			// 
-			// textBox6
+			// txtNoInteriorNuevoClienteInOper
 			// 
-			textBox6.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox6.Location = new Point(783, 332);
-			textBox6.Margin = new Padding(2);
-			textBox6.Name = "textBox6";
-			textBox6.Size = new Size(143, 27);
-			textBox6.TabIndex = 75;
+			txtNoInteriorNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoInteriorNuevoClienteInOper.Location = new Point(564, 532);
+			txtNoInteriorNuevoClienteInOper.Margin = new Padding(2);
+			txtNoInteriorNuevoClienteInOper.Name = "txtNoInteriorNuevoClienteInOper";
+			txtNoInteriorNuevoClienteInOper.Size = new Size(143, 27);
+			txtNoInteriorNuevoClienteInOper.TabIndex = 79;
 			// 
-			// textBox5
+			// txtNoExteriorNuevoClienteInOper
 			// 
-			textBox5.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox5.Location = new Point(612, 332);
-			textBox5.Margin = new Padding(2);
-			textBox5.Name = "textBox5";
-			textBox5.Size = new Size(143, 27);
-			textBox5.TabIndex = 74;
+			txtNoExteriorNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoExteriorNuevoClienteInOper.Location = new Point(393, 532);
+			txtNoExteriorNuevoClienteInOper.Margin = new Padding(2);
+			txtNoExteriorNuevoClienteInOper.Name = "txtNoExteriorNuevoClienteInOper";
+			txtNoExteriorNuevoClienteInOper.Size = new Size(143, 27);
+			txtNoExteriorNuevoClienteInOper.TabIndex = 78;
 			// 
-			// textBox4
+			// txtCalleNuevoClienteInOper
 			// 
-			textBox4.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox4.Location = new Point(563, 282);
-			textBox4.Margin = new Padding(2);
-			textBox4.Name = "textBox4";
-			textBox4.Size = new Size(423, 27);
-			textBox4.TabIndex = 73;
+			txtCalleNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCalleNuevoClienteInOper.Location = new Point(393, 471);
+			txtCalleNuevoClienteInOper.Margin = new Padding(2);
+			txtCalleNuevoClienteInOper.Name = "txtCalleNuevoClienteInOper";
+			txtCalleNuevoClienteInOper.Size = new Size(297, 27);
+			txtCalleNuevoClienteInOper.TabIndex = 77;
 			// 
-			// textBox3
+			// txtFechaNacimientoNuevoClienteInOper
 			// 
-			textBox3.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox3.Location = new Point(393, 282);
-			textBox3.Margin = new Padding(2);
-			textBox3.Name = "textBox3";
-			textBox3.Size = new Size(143, 27);
-			textBox3.TabIndex = 72;
+			txtFechaNacimientoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtFechaNacimientoNuevoClienteInOper.Location = new Point(392, 311);
+			txtFechaNacimientoNuevoClienteInOper.Margin = new Padding(2);
+			txtFechaNacimientoNuevoClienteInOper.Name = "txtFechaNacimientoNuevoClienteInOper";
+			txtFechaNacimientoNuevoClienteInOper.Size = new Size(174, 27);
+			txtFechaNacimientoNuevoClienteInOper.TabIndex = 76;
 			// 
-			// textBox2
+			// txtTelefonoCelularNuevoClienteInOper
 			// 
-			textBox2.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox2.Location = new Point(706, 232);
-			textBox2.Margin = new Padding(2);
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(280, 27);
-			textBox2.TabIndex = 71;
+			txtTelefonoCelularNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtTelefonoCelularNuevoClienteInOper.Location = new Point(783, 311);
+			txtTelefonoCelularNuevoClienteInOper.Margin = new Padding(2);
+			txtTelefonoCelularNuevoClienteInOper.Name = "txtTelefonoCelularNuevoClienteInOper";
+			txtTelefonoCelularNuevoClienteInOper.Size = new Size(143, 27);
+			txtTelefonoCelularNuevoClienteInOper.TabIndex = 75;
 			// 
-			// textBox1
+			// txtTelefonoCasaNuevoClienteInOper
 			// 
-			textBox1.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox1.Location = new Point(393, 232);
-			textBox1.Margin = new Padding(2);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(280, 27);
-			textBox1.TabIndex = 70;
+			txtTelefonoCasaNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtTelefonoCasaNuevoClienteInOper.Location = new Point(612, 311);
+			txtTelefonoCasaNuevoClienteInOper.Margin = new Padding(2);
+			txtTelefonoCasaNuevoClienteInOper.Name = "txtTelefonoCasaNuevoClienteInOper";
+			txtTelefonoCasaNuevoClienteInOper.Size = new Size(143, 27);
+			txtTelefonoCasaNuevoClienteInOper.TabIndex = 74;
 			// 
-			// textBox14
+			// txtCorreoNuevoClienteInOper
 			// 
-			textBox14.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox14.Location = new Point(393, 182);
-			textBox14.Margin = new Padding(2);
-			textBox14.Name = "textBox14";
-			textBox14.Size = new Size(390, 27);
-			textBox14.TabIndex = 69;
+			txtCorreoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCorreoNuevoClienteInOper.Location = new Point(563, 261);
+			txtCorreoNuevoClienteInOper.Margin = new Padding(2);
+			txtCorreoNuevoClienteInOper.Name = "txtCorreoNuevoClienteInOper";
+			txtCorreoNuevoClienteInOper.Size = new Size(423, 27);
+			txtCorreoNuevoClienteInOper.TabIndex = 73;
 			// 
-			// label16
+			// txtRFCNuevoClienteInOper
 			// 
-			label16.AutoSize = true;
-			label16.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label16.ForeColor = Color.White;
-			label16.Location = new Point(766, 531);
-			label16.Margin = new Padding(2, 0, 2, 0);
-			label16.Name = "label16";
-			label16.Size = new Size(42, 19);
-			label16.TabIndex = 68;
-			label16.Text = "C.P.:";
+			txtRFCNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtRFCNuevoClienteInOper.Location = new Point(393, 261);
+			txtRFCNuevoClienteInOper.Margin = new Padding(2);
+			txtRFCNuevoClienteInOper.Name = "txtRFCNuevoClienteInOper";
+			txtRFCNuevoClienteInOper.Size = new Size(143, 27);
+			txtRFCNuevoClienteInOper.TabIndex = 72;
 			// 
-			// label15
+			// txtApMaternoNuevoClienteInOper
 			// 
-			label15.AutoSize = true;
-			label15.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label15.ForeColor = Color.White;
-			label15.Location = new Point(688, 582);
-			label15.Margin = new Padding(2, 0, 2, 0);
-			label15.Name = "label15";
-			label15.Size = new Size(78, 19);
-			label15.TabIndex = 67;
-			label15.Text = "CIUDAD:";
+			txtApMaternoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtApMaternoNuevoClienteInOper.Location = new Point(706, 211);
+			txtApMaternoNuevoClienteInOper.Margin = new Padding(2);
+			txtApMaternoNuevoClienteInOper.Name = "txtApMaternoNuevoClienteInOper";
+			txtApMaternoNuevoClienteInOper.Size = new Size(280, 27);
+			txtApMaternoNuevoClienteInOper.TabIndex = 71;
 			// 
-			// label14
+			// txtApPaternoNuevoClienteInOper
 			// 
-			label14.AutoSize = true;
-			label14.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label14.ForeColor = Color.White;
-			label14.Location = new Point(393, 582);
-			label14.Margin = new Padding(2, 0, 2, 0);
-			label14.Name = "label14";
-			label14.Size = new Size(90, 19);
-			label14.TabIndex = 66;
-			label14.Text = "COLONIA:";
+			txtApPaternoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtApPaternoNuevoClienteInOper.Location = new Point(393, 211);
+			txtApPaternoNuevoClienteInOper.Margin = new Padding(2);
+			txtApPaternoNuevoClienteInOper.Name = "txtApPaternoNuevoClienteInOper";
+			txtApPaternoNuevoClienteInOper.Size = new Size(280, 27);
+			txtApPaternoNuevoClienteInOper.TabIndex = 70;
 			// 
-			// label13
+			// txtNombreNuevoClienteInOper
 			// 
-			label13.AutoSize = true;
-			label13.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label13.ForeColor = Color.White;
-			label13.Location = new Point(564, 531);
-			label13.Margin = new Padding(2, 0, 2, 0);
-			label13.Name = "label13";
-			label13.Size = new Size(126, 19);
-			label13.TabIndex = 65;
-			label13.Text = "NO° INTERIOR:";
+			txtNombreNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNombreNuevoClienteInOper.Location = new Point(393, 161);
+			txtNombreNuevoClienteInOper.Margin = new Padding(2);
+			txtNombreNuevoClienteInOper.Name = "txtNombreNuevoClienteInOper";
+			txtNombreNuevoClienteInOper.Size = new Size(390, 27);
+			txtNombreNuevoClienteInOper.TabIndex = 69;
 			// 
-			// label8
+			// lblCPNuevoClienteInOper
 			// 
-			label8.AutoSize = true;
-			label8.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label8.ForeColor = Color.White;
-			label8.Location = new Point(393, 531);
-			label8.Margin = new Padding(2, 0, 2, 0);
-			label8.Name = "label8";
-			label8.Size = new Size(130, 19);
-			label8.TabIndex = 64;
-			label8.Text = "NO° EXTERIOR:";
+			lblCPNuevoClienteInOper.AutoSize = true;
+			lblCPNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCPNuevoClienteInOper.ForeColor = Color.White;
+			lblCPNuevoClienteInOper.Location = new Point(766, 510);
+			lblCPNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCPNuevoClienteInOper.Name = "lblCPNuevoClienteInOper";
+			lblCPNuevoClienteInOper.Size = new Size(42, 19);
+			lblCPNuevoClienteInOper.TabIndex = 68;
+			lblCPNuevoClienteInOper.Text = "C.P.:";
 			// 
-			// label9
+			// lblCiudadNuevoClienteInOper
 			// 
-			label9.AutoSize = true;
-			label9.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label9.ForeColor = Color.White;
-			label9.Location = new Point(393, 471);
-			label9.Margin = new Padding(2, 0, 2, 0);
-			label9.Name = "label9";
-			label9.Size = new Size(65, 19);
-			label9.TabIndex = 63;
-			label9.Text = "CALLE:";
+			lblCiudadNuevoClienteInOper.AutoSize = true;
+			lblCiudadNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCiudadNuevoClienteInOper.ForeColor = Color.White;
+			lblCiudadNuevoClienteInOper.Location = new Point(688, 561);
+			lblCiudadNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCiudadNuevoClienteInOper.Name = "lblCiudadNuevoClienteInOper";
+			lblCiudadNuevoClienteInOper.Size = new Size(78, 19);
+			lblCiudadNuevoClienteInOper.TabIndex = 67;
+			lblCiudadNuevoClienteInOper.Text = "CIUDAD:";
+			// 
+			// lblColoniaNuevoClienteInOper
+			// 
+			lblColoniaNuevoClienteInOper.AutoSize = true;
+			lblColoniaNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblColoniaNuevoClienteInOper.ForeColor = Color.White;
+			lblColoniaNuevoClienteInOper.Location = new Point(393, 561);
+			lblColoniaNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblColoniaNuevoClienteInOper.Name = "lblColoniaNuevoClienteInOper";
+			lblColoniaNuevoClienteInOper.Size = new Size(90, 19);
+			lblColoniaNuevoClienteInOper.TabIndex = 66;
+			lblColoniaNuevoClienteInOper.Text = "COLONIA:";
+			// 
+			// lblNoInteriorNuevoClienteInOper
+			// 
+			lblNoInteriorNuevoClienteInOper.AutoSize = true;
+			lblNoInteriorNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblNoInteriorNuevoClienteInOper.ForeColor = Color.White;
+			lblNoInteriorNuevoClienteInOper.Location = new Point(564, 510);
+			lblNoInteriorNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNoInteriorNuevoClienteInOper.Name = "lblNoInteriorNuevoClienteInOper";
+			lblNoInteriorNuevoClienteInOper.Size = new Size(126, 19);
+			lblNoInteriorNuevoClienteInOper.TabIndex = 65;
+			lblNoInteriorNuevoClienteInOper.Text = "NO° INTERIOR:";
+			// 
+			// lblNoExteriorNuevoClienteInOper
+			// 
+			lblNoExteriorNuevoClienteInOper.AutoSize = true;
+			lblNoExteriorNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblNoExteriorNuevoClienteInOper.ForeColor = Color.White;
+			lblNoExteriorNuevoClienteInOper.Location = new Point(393, 510);
+			lblNoExteriorNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNoExteriorNuevoClienteInOper.Name = "lblNoExteriorNuevoClienteInOper";
+			lblNoExteriorNuevoClienteInOper.Size = new Size(130, 19);
+			lblNoExteriorNuevoClienteInOper.TabIndex = 64;
+			lblNoExteriorNuevoClienteInOper.Text = "NO° EXTERIOR:";
+			// 
+			// lblCalleNuevoClienteInOper
+			// 
+			lblCalleNuevoClienteInOper.AutoSize = true;
+			lblCalleNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCalleNuevoClienteInOper.ForeColor = Color.White;
+			lblCalleNuevoClienteInOper.Location = new Point(393, 450);
+			lblCalleNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCalleNuevoClienteInOper.Name = "lblCalleNuevoClienteInOper";
+			lblCalleNuevoClienteInOper.Size = new Size(65, 19);
+			lblCalleNuevoClienteInOper.TabIndex = 63;
+			lblCalleNuevoClienteInOper.Text = "CALLE:";
 			// 
 			// label19
 			// 
 			label19.AutoSize = true;
 			label19.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label19.ForeColor = Color.White;
-			label19.Location = new Point(621, 425);
+			label19.Location = new Point(621, 404);
 			label19.Margin = new Padding(2, 0, 2, 0);
 			label19.Name = "label19";
 			label19.Size = new Size(134, 27);
@@ -2030,108 +1849,108 @@
 			label20.AutoSize = true;
 			label20.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label20.ForeColor = Color.White;
-			label20.Location = new Point(648, 133);
+			label20.Location = new Point(648, 112);
 			label20.Margin = new Padding(2, 0, 2, 0);
 			label20.Name = "label20";
 			label20.Size = new Size(87, 27);
 			label20.TabIndex = 61;
 			label20.Text = "DATOS";
 			// 
-			// label21
+			// lblTelefonoCelularNuevoClienteInOper
 			// 
-			label21.AutoSize = true;
-			label21.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label21.ForeColor = Color.White;
-			label21.Location = new Point(783, 311);
-			label21.Margin = new Padding(2, 0, 2, 0);
-			label21.Name = "label21";
-			label21.Size = new Size(87, 19);
-			label21.TabIndex = 60;
-			label21.Text = "CELULAR:";
+			lblTelefonoCelularNuevoClienteInOper.AutoSize = true;
+			lblTelefonoCelularNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblTelefonoCelularNuevoClienteInOper.ForeColor = Color.White;
+			lblTelefonoCelularNuevoClienteInOper.Location = new Point(783, 290);
+			lblTelefonoCelularNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblTelefonoCelularNuevoClienteInOper.Name = "lblTelefonoCelularNuevoClienteInOper";
+			lblTelefonoCelularNuevoClienteInOper.Size = new Size(87, 19);
+			lblTelefonoCelularNuevoClienteInOper.TabIndex = 60;
+			lblTelefonoCelularNuevoClienteInOper.Text = "CELULAR:";
 			// 
-			// label22
+			// lblTelefonoCasaNuevoClienteInOper
 			// 
-			label22.AutoSize = true;
-			label22.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label22.ForeColor = Color.White;
-			label22.Location = new Point(612, 311);
-			label22.Margin = new Padding(2, 0, 2, 0);
-			label22.Name = "label22";
-			label22.Size = new Size(149, 19);
-			label22.TabIndex = 59;
-			label22.Text = "TELEFONO CASA:";
+			lblTelefonoCasaNuevoClienteInOper.AutoSize = true;
+			lblTelefonoCasaNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblTelefonoCasaNuevoClienteInOper.ForeColor = Color.White;
+			lblTelefonoCasaNuevoClienteInOper.Location = new Point(612, 290);
+			lblTelefonoCasaNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblTelefonoCasaNuevoClienteInOper.Name = "lblTelefonoCasaNuevoClienteInOper";
+			lblTelefonoCasaNuevoClienteInOper.Size = new Size(149, 19);
+			lblTelefonoCasaNuevoClienteInOper.TabIndex = 59;
+			lblTelefonoCasaNuevoClienteInOper.Text = "TELEFONO CASA:";
 			// 
-			// label23
+			// lblFechaNacimientoNuevoClienteInOper
 			// 
-			label23.AutoSize = true;
-			label23.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label23.ForeColor = Color.White;
-			label23.Location = new Point(393, 311);
-			label23.Margin = new Padding(2, 0, 2, 0);
-			label23.Name = "label23";
-			label23.Size = new Size(179, 19);
-			label23.TabIndex = 58;
-			label23.Text = "FECHA NACIMIENTO:";
+			lblFechaNacimientoNuevoClienteInOper.AutoSize = true;
+			lblFechaNacimientoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblFechaNacimientoNuevoClienteInOper.ForeColor = Color.White;
+			lblFechaNacimientoNuevoClienteInOper.Location = new Point(393, 290);
+			lblFechaNacimientoNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblFechaNacimientoNuevoClienteInOper.Name = "lblFechaNacimientoNuevoClienteInOper";
+			lblFechaNacimientoNuevoClienteInOper.Size = new Size(179, 19);
+			lblFechaNacimientoNuevoClienteInOper.TabIndex = 58;
+			lblFechaNacimientoNuevoClienteInOper.Text = "FECHA NACIMIENTO:";
 			// 
-			// label24
+			// lblCorreoNuevoClienteInOper
 			// 
-			label24.AutoSize = true;
-			label24.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label24.ForeColor = Color.White;
-			label24.Location = new Point(563, 261);
-			label24.Margin = new Padding(2, 0, 2, 0);
-			label24.Name = "label24";
-			label24.Size = new Size(81, 19);
-			label24.TabIndex = 57;
-			label24.Text = "CORREO:";
+			lblCorreoNuevoClienteInOper.AutoSize = true;
+			lblCorreoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCorreoNuevoClienteInOper.ForeColor = Color.White;
+			lblCorreoNuevoClienteInOper.Location = new Point(563, 240);
+			lblCorreoNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCorreoNuevoClienteInOper.Name = "lblCorreoNuevoClienteInOper";
+			lblCorreoNuevoClienteInOper.Size = new Size(81, 19);
+			lblCorreoNuevoClienteInOper.TabIndex = 57;
+			lblCorreoNuevoClienteInOper.Text = "CORREO:";
 			// 
-			// label25
+			// lblRFCNuevoClienteInOper
 			// 
-			label25.AutoSize = true;
-			label25.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label25.ForeColor = Color.White;
-			label25.Location = new Point(393, 261);
-			label25.Margin = new Padding(2, 0, 2, 0);
-			label25.Name = "label25";
-			label25.Size = new Size(44, 19);
-			label25.TabIndex = 56;
-			label25.Text = "RFC:";
+			lblRFCNuevoClienteInOper.AutoSize = true;
+			lblRFCNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblRFCNuevoClienteInOper.ForeColor = Color.White;
+			lblRFCNuevoClienteInOper.Location = new Point(393, 240);
+			lblRFCNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblRFCNuevoClienteInOper.Name = "lblRFCNuevoClienteInOper";
+			lblRFCNuevoClienteInOper.Size = new Size(44, 19);
+			lblRFCNuevoClienteInOper.TabIndex = 56;
+			lblRFCNuevoClienteInOper.Text = "RFC:";
 			// 
-			// label26
+			// lblApMaternoNuevoClienteInOper
 			// 
-			label26.AutoSize = true;
-			label26.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label26.ForeColor = Color.White;
-			label26.Location = new Point(706, 211);
-			label26.Margin = new Padding(2, 0, 2, 0);
-			label26.Name = "label26";
-			label26.Size = new Size(180, 19);
-			label26.TabIndex = 55;
-			label26.Text = "APELLIDO MATERNO:";
+			lblApMaternoNuevoClienteInOper.AutoSize = true;
+			lblApMaternoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblApMaternoNuevoClienteInOper.ForeColor = Color.White;
+			lblApMaternoNuevoClienteInOper.Location = new Point(706, 190);
+			lblApMaternoNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblApMaternoNuevoClienteInOper.Name = "lblApMaternoNuevoClienteInOper";
+			lblApMaternoNuevoClienteInOper.Size = new Size(180, 19);
+			lblApMaternoNuevoClienteInOper.TabIndex = 55;
+			lblApMaternoNuevoClienteInOper.Text = "APELLIDO MATERNO:";
 			// 
-			// label27
+			// lblApPaternoNuevoClienteInOper
 			// 
-			label27.AutoSize = true;
-			label27.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label27.ForeColor = Color.White;
-			label27.Location = new Point(392, 211);
-			label27.Margin = new Padding(2, 0, 2, 0);
-			label27.Name = "label27";
-			label27.Size = new Size(174, 19);
-			label27.TabIndex = 54;
-			label27.Text = "APELLIDO PATERNO:";
+			lblApPaternoNuevoClienteInOper.AutoSize = true;
+			lblApPaternoNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblApPaternoNuevoClienteInOper.ForeColor = Color.White;
+			lblApPaternoNuevoClienteInOper.Location = new Point(392, 190);
+			lblApPaternoNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblApPaternoNuevoClienteInOper.Name = "lblApPaternoNuevoClienteInOper";
+			lblApPaternoNuevoClienteInOper.Size = new Size(174, 19);
+			lblApPaternoNuevoClienteInOper.TabIndex = 54;
+			lblApPaternoNuevoClienteInOper.Text = "APELLIDO PATERNO:";
 			// 
-			// label28
+			// lblNombreNuevoClienteInOper
 			// 
-			label28.AutoSize = true;
-			label28.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label28.ForeColor = Color.White;
-			label28.Location = new Point(393, 161);
-			label28.Margin = new Padding(2, 0, 2, 0);
-			label28.Name = "label28";
-			label28.Size = new Size(104, 19);
-			label28.TabIndex = 53;
-			label28.Text = "NOMBRE(S):";
+			lblNombreNuevoClienteInOper.AutoSize = true;
+			lblNombreNuevoClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreNuevoClienteInOper.ForeColor = Color.White;
+			lblNombreNuevoClienteInOper.Location = new Point(393, 140);
+			lblNombreNuevoClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNombreNuevoClienteInOper.Name = "lblNombreNuevoClienteInOper";
+			lblNombreNuevoClienteInOper.Size = new Size(104, 19);
+			lblNombreNuevoClienteInOper.TabIndex = 53;
+			lblNombreNuevoClienteInOper.Text = "NOMBRE(S):";
 			// 
 			// label29
 			// 
@@ -2148,385 +1967,310 @@
 			// EditarCliente
 			// 
 			EditarCliente.BackColor = Color.Black;
-			EditarCliente.Controls.Add(button7);
-			EditarCliente.Controls.Add(textBox15);
-			EditarCliente.Controls.Add(textBox16);
-			EditarCliente.Controls.Add(textBox17);
-			EditarCliente.Controls.Add(textBox18);
-			EditarCliente.Controls.Add(textBox19);
-			EditarCliente.Controls.Add(textBox20);
-			EditarCliente.Controls.Add(textBox21);
-			EditarCliente.Controls.Add(textBox22);
-			EditarCliente.Controls.Add(textBox23);
-			EditarCliente.Controls.Add(textBox24);
-			EditarCliente.Controls.Add(textBox25);
-			EditarCliente.Controls.Add(textBox26);
-			EditarCliente.Controls.Add(textBox27);
-			EditarCliente.Controls.Add(textBox28);
-			EditarCliente.Controls.Add(label30);
-			EditarCliente.Controls.Add(label31);
-			EditarCliente.Controls.Add(label32);
-			EditarCliente.Controls.Add(label33);
-			EditarCliente.Controls.Add(label34);
-			EditarCliente.Controls.Add(label35);
-			EditarCliente.Controls.Add(label36);
+			EditarCliente.Controls.Add(btnGuardarCambiosEditarClienteInOper);
+			EditarCliente.Controls.Add(lblNuevoDatoEditarClienteInOper);
+			EditarCliente.Controls.Add(txtPaisEditarClienteInOper);
+			EditarCliente.Controls.Add(lblPaisEditarClienteInOper);
+			EditarCliente.Controls.Add(txtEstadoEditarClienteInOper);
+			EditarCliente.Controls.Add(lblEstadoEditarClienteInOper);
+			EditarCliente.Controls.Add(cboBoxEditarClienteInOper);
+			EditarCliente.Controls.Add(lblNombreCompletoEditarClienteInOper);
+			EditarCliente.Controls.Add(txtCiudadEditarClienteInOper);
+			EditarCliente.Controls.Add(txtColoniaEditarClienteInOper);
+			EditarCliente.Controls.Add(txtCPEditarClienteInOper);
+			EditarCliente.Controls.Add(txtNoInteriorEditarClienteInOper);
+			EditarCliente.Controls.Add(txtNoExteriorEditarClienteInOper);
+			EditarCliente.Controls.Add(txtCalleEditarClienteInOper);
+			EditarCliente.Controls.Add(txtNuevoDatoEditarClienteInOper);
+			EditarCliente.Controls.Add(lblCPEditarClienteInOper);
+			EditarCliente.Controls.Add(lblCiudadEditarClienteInOper);
+			EditarCliente.Controls.Add(lblColoniaEditarClienteInOper);
+			EditarCliente.Controls.Add(lblNoInteriorEditarClienteInOper);
+			EditarCliente.Controls.Add(lblNoExteriorEditarClienteInOper);
+			EditarCliente.Controls.Add(lblCalleEditarClienteInOper);
 			EditarCliente.Controls.Add(label37);
-			EditarCliente.Controls.Add(label38);
-			EditarCliente.Controls.Add(label39);
-			EditarCliente.Controls.Add(label40);
-			EditarCliente.Controls.Add(label41);
-			EditarCliente.Controls.Add(label42);
-			EditarCliente.Controls.Add(label43);
-			EditarCliente.Controls.Add(label44);
-			EditarCliente.Controls.Add(label45);
+			EditarCliente.Controls.Add(lblFechaNacimientoEditarClienteInOper);
+			EditarCliente.Controls.Add(lblCampoAEditarClienteInOper);
 			EditarCliente.Controls.Add(label46);
-			EditarCliente.Location = new Point(4, 24);
+			EditarCliente.Location = new Point(4, 5);
 			EditarCliente.Name = "EditarCliente";
-			EditarCliente.Size = new Size(1378, 772);
+			EditarCliente.Size = new Size(1378, 791);
 			EditarCliente.TabIndex = 2;
 			EditarCliente.Text = "EditarCliente";
 			// 
-			// button7
+			// btnGuardarCambiosEditarClienteInOper
 			// 
-			button7.BackColor = Color.White;
-			button7.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button7.ForeColor = Color.Black;
-			button7.Location = new Point(621, 689);
-			button7.Margin = new Padding(2);
-			button7.Name = "button7";
-			button7.Size = new Size(187, 35);
-			button7.TabIndex = 115;
-			button7.Text = "GUARDAR CAMBIOS";
-			button7.UseVisualStyleBackColor = false;
+			btnGuardarCambiosEditarClienteInOper.BackColor = Color.Black;
+			btnGuardarCambiosEditarClienteInOper.Cursor = Cursors.Hand;
+			btnGuardarCambiosEditarClienteInOper.FlatStyle = FlatStyle.Flat;
+			btnGuardarCambiosEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnGuardarCambiosEditarClienteInOper.ForeColor = Color.White;
+			btnGuardarCambiosEditarClienteInOper.Location = new Point(556, 643);
+			btnGuardarCambiosEditarClienteInOper.Margin = new Padding(2);
+			btnGuardarCambiosEditarClienteInOper.Name = "btnGuardarCambiosEditarClienteInOper";
+			btnGuardarCambiosEditarClienteInOper.Size = new Size(223, 35);
+			btnGuardarCambiosEditarClienteInOper.TabIndex = 149;
+			btnGuardarCambiosEditarClienteInOper.Text = "GUARDAR CAMBIOS ✔️";
+			btnGuardarCambiosEditarClienteInOper.UseVisualStyleBackColor = false;
 			// 
-			// textBox15
+			// lblNuevoDatoEditarClienteInOper
 			// 
-			textBox15.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox15.Location = new Point(688, 603);
-			textBox15.Margin = new Padding(2);
-			textBox15.Name = "textBox15";
-			textBox15.Size = new Size(298, 27);
-			textBox15.TabIndex = 114;
+			lblNuevoDatoEditarClienteInOper.AutoSize = true;
+			lblNuevoDatoEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNuevoDatoEditarClienteInOper.ForeColor = Color.White;
+			lblNuevoDatoEditarClienteInOper.Location = new Point(392, 331);
+			lblNuevoDatoEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNuevoDatoEditarClienteInOper.Name = "lblNuevoDatoEditarClienteInOper";
+			lblNuevoDatoEditarClienteInOper.Size = new Size(123, 19);
+			lblNuevoDatoEditarClienteInOper.TabIndex = 148;
+			lblNuevoDatoEditarClienteInOper.Text = "NUEVO DATO:";
 			// 
-			// textBox16
+			// txtPaisEditarClienteInOper
 			// 
-			textBox16.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox16.Location = new Point(393, 603);
-			textBox16.Margin = new Padding(2);
-			textBox16.Name = "textBox16";
-			textBox16.Size = new Size(264, 27);
-			textBox16.TabIndex = 113;
+			txtPaisEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtPaisEditarClienteInOper.Location = new Point(688, 558);
+			txtPaisEditarClienteInOper.Margin = new Padding(2);
+			txtPaisEditarClienteInOper.Name = "txtPaisEditarClienteInOper";
+			txtPaisEditarClienteInOper.Size = new Size(298, 27);
+			txtPaisEditarClienteInOper.TabIndex = 147;
 			// 
-			// textBox17
+			// lblPaisEditarClienteInOper
 			// 
-			textBox17.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox17.Location = new Point(766, 552);
-			textBox17.Margin = new Padding(2);
-			textBox17.Name = "textBox17";
-			textBox17.Size = new Size(143, 27);
-			textBox17.TabIndex = 112;
+			lblPaisEditarClienteInOper.AutoSize = true;
+			lblPaisEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblPaisEditarClienteInOper.ForeColor = Color.White;
+			lblPaisEditarClienteInOper.Location = new Point(691, 540);
+			lblPaisEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblPaisEditarClienteInOper.Name = "lblPaisEditarClienteInOper";
+			lblPaisEditarClienteInOper.Size = new Size(49, 19);
+			lblPaisEditarClienteInOper.TabIndex = 146;
+			lblPaisEditarClienteInOper.Text = "PAIS:";
 			// 
-			// textBox18
+			// txtEstadoEditarClienteInOper
 			// 
-			textBox18.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox18.Location = new Point(564, 553);
-			textBox18.Margin = new Padding(2);
-			textBox18.Name = "textBox18";
-			textBox18.Size = new Size(143, 27);
-			textBox18.TabIndex = 111;
+			txtEstadoEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtEstadoEditarClienteInOper.Location = new Point(393, 558);
+			txtEstadoEditarClienteInOper.Margin = new Padding(2);
+			txtEstadoEditarClienteInOper.Name = "txtEstadoEditarClienteInOper";
+			txtEstadoEditarClienteInOper.Size = new Size(266, 27);
+			txtEstadoEditarClienteInOper.TabIndex = 145;
 			// 
-			// textBox19
+			// lblEstadoEditarClienteInOper
 			// 
-			textBox19.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox19.Location = new Point(393, 553);
-			textBox19.Margin = new Padding(2);
-			textBox19.Name = "textBox19";
-			textBox19.Size = new Size(143, 27);
-			textBox19.TabIndex = 110;
+			lblEstadoEditarClienteInOper.AutoSize = true;
+			lblEstadoEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblEstadoEditarClienteInOper.ForeColor = Color.White;
+			lblEstadoEditarClienteInOper.Location = new Point(396, 540);
+			lblEstadoEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblEstadoEditarClienteInOper.Name = "lblEstadoEditarClienteInOper";
+			lblEstadoEditarClienteInOper.Size = new Size(78, 19);
+			lblEstadoEditarClienteInOper.TabIndex = 144;
+			lblEstadoEditarClienteInOper.Text = "ESTADO:";
 			// 
-			// textBox20
+			// cboBoxEditarClienteInOper
 			// 
-			textBox20.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox20.Location = new Point(393, 492);
-			textBox20.Margin = new Padding(2);
-			textBox20.Name = "textBox20";
-			textBox20.Size = new Size(297, 27);
-			textBox20.TabIndex = 109;
+			cboBoxEditarClienteInOper.AutoCompleteCustomSource.AddRange(new string[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			cboBoxEditarClienteInOper.FormattingEnabled = true;
+			cboBoxEditarClienteInOper.Items.AddRange(new object[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			cboBoxEditarClienteInOper.Location = new Point(580, 300);
+			cboBoxEditarClienteInOper.Name = "cboBoxEditarClienteInOper";
+			cboBoxEditarClienteInOper.Size = new Size(205, 23);
+			cboBoxEditarClienteInOper.TabIndex = 143;
 			// 
-			// textBox21
+			// lblNombreCompletoEditarClienteInOper
 			// 
-			textBox21.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox21.Location = new Point(392, 332);
-			textBox21.Margin = new Padding(2);
-			textBox21.Name = "textBox21";
-			textBox21.Size = new Size(174, 27);
-			textBox21.TabIndex = 108;
+			lblNombreCompletoEditarClienteInOper.AutoSize = true;
+			lblNombreCompletoEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreCompletoEditarClienteInOper.ForeColor = Color.White;
+			lblNombreCompletoEditarClienteInOper.Location = new Point(393, 251);
+			lblNombreCompletoEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNombreCompletoEditarClienteInOper.Name = "lblNombreCompletoEditarClienteInOper";
+			lblNombreCompletoEditarClienteInOper.Size = new Size(85, 19);
+			lblNombreCompletoEditarClienteInOper.TabIndex = 142;
+			lblNombreCompletoEditarClienteInOper.Text = "NOMBRE:";
 			// 
-			// textBox22
+			// txtCiudadEditarClienteInOper
 			// 
-			textBox22.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox22.Location = new Point(783, 332);
-			textBox22.Margin = new Padding(2);
-			textBox22.Name = "textBox22";
-			textBox22.Size = new Size(143, 27);
-			textBox22.TabIndex = 107;
+			txtCiudadEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCiudadEditarClienteInOper.Location = new Point(688, 509);
+			txtCiudadEditarClienteInOper.Margin = new Padding(2);
+			txtCiudadEditarClienteInOper.Name = "txtCiudadEditarClienteInOper";
+			txtCiudadEditarClienteInOper.Size = new Size(298, 27);
+			txtCiudadEditarClienteInOper.TabIndex = 141;
 			// 
-			// textBox23
+			// txtColoniaEditarClienteInOper
 			// 
-			textBox23.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox23.Location = new Point(612, 332);
-			textBox23.Margin = new Padding(2);
-			textBox23.Name = "textBox23";
-			textBox23.Size = new Size(143, 27);
-			textBox23.TabIndex = 106;
+			txtColoniaEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtColoniaEditarClienteInOper.Location = new Point(393, 509);
+			txtColoniaEditarClienteInOper.Margin = new Padding(2);
+			txtColoniaEditarClienteInOper.Name = "txtColoniaEditarClienteInOper";
+			txtColoniaEditarClienteInOper.Size = new Size(264, 27);
+			txtColoniaEditarClienteInOper.TabIndex = 140;
 			// 
-			// textBox24
+			// txtCPEditarClienteInOper
 			// 
-			textBox24.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox24.Location = new Point(563, 282);
-			textBox24.Margin = new Padding(2);
-			textBox24.Name = "textBox24";
-			textBox24.Size = new Size(423, 27);
-			textBox24.TabIndex = 105;
+			txtCPEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCPEditarClienteInOper.Location = new Point(766, 458);
+			txtCPEditarClienteInOper.Margin = new Padding(2);
+			txtCPEditarClienteInOper.Name = "txtCPEditarClienteInOper";
+			txtCPEditarClienteInOper.Size = new Size(143, 27);
+			txtCPEditarClienteInOper.TabIndex = 139;
 			// 
-			// textBox25
+			// txtNoInteriorEditarClienteInOper
 			// 
-			textBox25.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox25.Location = new Point(393, 282);
-			textBox25.Margin = new Padding(2);
-			textBox25.Name = "textBox25";
-			textBox25.Size = new Size(143, 27);
-			textBox25.TabIndex = 104;
+			txtNoInteriorEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoInteriorEditarClienteInOper.Location = new Point(564, 459);
+			txtNoInteriorEditarClienteInOper.Margin = new Padding(2);
+			txtNoInteriorEditarClienteInOper.Name = "txtNoInteriorEditarClienteInOper";
+			txtNoInteriorEditarClienteInOper.Size = new Size(143, 27);
+			txtNoInteriorEditarClienteInOper.TabIndex = 138;
 			// 
-			// textBox26
+			// txtNoExteriorEditarClienteInOper
 			// 
-			textBox26.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox26.Location = new Point(706, 232);
-			textBox26.Margin = new Padding(2);
-			textBox26.Name = "textBox26";
-			textBox26.Size = new Size(280, 27);
-			textBox26.TabIndex = 103;
+			txtNoExteriorEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNoExteriorEditarClienteInOper.Location = new Point(393, 459);
+			txtNoExteriorEditarClienteInOper.Margin = new Padding(2);
+			txtNoExteriorEditarClienteInOper.Name = "txtNoExteriorEditarClienteInOper";
+			txtNoExteriorEditarClienteInOper.Size = new Size(143, 27);
+			txtNoExteriorEditarClienteInOper.TabIndex = 137;
 			// 
-			// textBox27
+			// txtCalleEditarClienteInOper
 			// 
-			textBox27.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox27.Location = new Point(393, 232);
-			textBox27.Margin = new Padding(2);
-			textBox27.Name = "textBox27";
-			textBox27.Size = new Size(280, 27);
-			textBox27.TabIndex = 102;
+			txtCalleEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtCalleEditarClienteInOper.Location = new Point(393, 398);
+			txtCalleEditarClienteInOper.Margin = new Padding(2);
+			txtCalleEditarClienteInOper.Name = "txtCalleEditarClienteInOper";
+			txtCalleEditarClienteInOper.Size = new Size(297, 27);
+			txtCalleEditarClienteInOper.TabIndex = 136;
 			// 
-			// textBox28
+			// txtNuevoDatoEditarClienteInOper
 			// 
-			textBox28.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			textBox28.Location = new Point(393, 182);
-			textBox28.Margin = new Padding(2);
-			textBox28.Name = "textBox28";
-			textBox28.Size = new Size(390, 27);
-			textBox28.TabIndex = 101;
+			txtNuevoDatoEditarClienteInOper.AutoCompleteCustomSource.AddRange(new string[] { "CORREO ELECTRONICO", "TELEFONO DE CASA", "TELEFONO CELULAR", "DOMICILIO" });
+			txtNuevoDatoEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			txtNuevoDatoEditarClienteInOper.Location = new Point(519, 328);
+			txtNuevoDatoEditarClienteInOper.Margin = new Padding(2);
+			txtNuevoDatoEditarClienteInOper.Name = "txtNuevoDatoEditarClienteInOper";
+			txtNuevoDatoEditarClienteInOper.Size = new Size(423, 27);
+			txtNuevoDatoEditarClienteInOper.TabIndex = 135;
 			// 
-			// label30
+			// lblCPEditarClienteInOper
 			// 
-			label30.AutoSize = true;
-			label30.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label30.ForeColor = Color.White;
-			label30.Location = new Point(766, 531);
-			label30.Margin = new Padding(2, 0, 2, 0);
-			label30.Name = "label30";
-			label30.Size = new Size(42, 19);
-			label30.TabIndex = 100;
-			label30.Text = "C.P.:";
+			lblCPEditarClienteInOper.AutoSize = true;
+			lblCPEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCPEditarClienteInOper.ForeColor = Color.White;
+			lblCPEditarClienteInOper.Location = new Point(766, 437);
+			lblCPEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCPEditarClienteInOper.Name = "lblCPEditarClienteInOper";
+			lblCPEditarClienteInOper.Size = new Size(42, 19);
+			lblCPEditarClienteInOper.TabIndex = 134;
+			lblCPEditarClienteInOper.Text = "C.P.:";
 			// 
-			// label31
+			// lblCiudadEditarClienteInOper
 			// 
-			label31.AutoSize = true;
-			label31.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label31.ForeColor = Color.White;
-			label31.Location = new Point(688, 582);
-			label31.Margin = new Padding(2, 0, 2, 0);
-			label31.Name = "label31";
-			label31.Size = new Size(78, 19);
-			label31.TabIndex = 99;
-			label31.Text = "CIUDAD:";
+			lblCiudadEditarClienteInOper.AutoSize = true;
+			lblCiudadEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCiudadEditarClienteInOper.ForeColor = Color.White;
+			lblCiudadEditarClienteInOper.Location = new Point(688, 488);
+			lblCiudadEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCiudadEditarClienteInOper.Name = "lblCiudadEditarClienteInOper";
+			lblCiudadEditarClienteInOper.Size = new Size(78, 19);
+			lblCiudadEditarClienteInOper.TabIndex = 133;
+			lblCiudadEditarClienteInOper.Text = "CIUDAD:";
 			// 
-			// label32
+			// lblColoniaEditarClienteInOper
 			// 
-			label32.AutoSize = true;
-			label32.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label32.ForeColor = Color.White;
-			label32.Location = new Point(393, 582);
-			label32.Margin = new Padding(2, 0, 2, 0);
-			label32.Name = "label32";
-			label32.Size = new Size(90, 19);
-			label32.TabIndex = 98;
-			label32.Text = "COLONIA:";
+			lblColoniaEditarClienteInOper.AutoSize = true;
+			lblColoniaEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblColoniaEditarClienteInOper.ForeColor = Color.White;
+			lblColoniaEditarClienteInOper.Location = new Point(393, 488);
+			lblColoniaEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblColoniaEditarClienteInOper.Name = "lblColoniaEditarClienteInOper";
+			lblColoniaEditarClienteInOper.Size = new Size(90, 19);
+			lblColoniaEditarClienteInOper.TabIndex = 132;
+			lblColoniaEditarClienteInOper.Text = "COLONIA:";
 			// 
-			// label33
+			// lblNoInteriorEditarClienteInOper
 			// 
-			label33.AutoSize = true;
-			label33.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label33.ForeColor = Color.White;
-			label33.Location = new Point(564, 531);
-			label33.Margin = new Padding(2, 0, 2, 0);
-			label33.Name = "label33";
-			label33.Size = new Size(126, 19);
-			label33.TabIndex = 97;
-			label33.Text = "NO° INTERIOR:";
+			lblNoInteriorEditarClienteInOper.AutoSize = true;
+			lblNoInteriorEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblNoInteriorEditarClienteInOper.ForeColor = Color.White;
+			lblNoInteriorEditarClienteInOper.Location = new Point(564, 437);
+			lblNoInteriorEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNoInteriorEditarClienteInOper.Name = "lblNoInteriorEditarClienteInOper";
+			lblNoInteriorEditarClienteInOper.Size = new Size(126, 19);
+			lblNoInteriorEditarClienteInOper.TabIndex = 131;
+			lblNoInteriorEditarClienteInOper.Text = "NO° INTERIOR:";
 			// 
-			// label34
+			// lblNoExteriorEditarClienteInOper
 			// 
-			label34.AutoSize = true;
-			label34.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label34.ForeColor = Color.White;
-			label34.Location = new Point(393, 531);
-			label34.Margin = new Padding(2, 0, 2, 0);
-			label34.Name = "label34";
-			label34.Size = new Size(130, 19);
-			label34.TabIndex = 96;
-			label34.Text = "NO° EXTERIOR:";
+			lblNoExteriorEditarClienteInOper.AutoSize = true;
+			lblNoExteriorEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblNoExteriorEditarClienteInOper.ForeColor = Color.White;
+			lblNoExteriorEditarClienteInOper.Location = new Point(393, 437);
+			lblNoExteriorEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblNoExteriorEditarClienteInOper.Name = "lblNoExteriorEditarClienteInOper";
+			lblNoExteriorEditarClienteInOper.Size = new Size(130, 19);
+			lblNoExteriorEditarClienteInOper.TabIndex = 130;
+			lblNoExteriorEditarClienteInOper.Text = "NO° EXTERIOR:";
 			// 
-			// label35
+			// lblCalleEditarClienteInOper
 			// 
-			label35.AutoSize = true;
-			label35.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label35.ForeColor = Color.White;
-			label35.Location = new Point(393, 471);
-			label35.Margin = new Padding(2, 0, 2, 0);
-			label35.Name = "label35";
-			label35.Size = new Size(65, 19);
-			label35.TabIndex = 95;
-			label35.Text = "CALLE:";
-			// 
-			// label36
-			// 
-			label36.AutoSize = true;
-			label36.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label36.ForeColor = Color.White;
-			label36.Location = new Point(621, 425);
-			label36.Margin = new Padding(2, 0, 2, 0);
-			label36.Name = "label36";
-			label36.Size = new Size(134, 27);
-			label36.TabIndex = 94;
-			label36.Text = "DOMICILIO";
+			lblCalleEditarClienteInOper.AutoSize = true;
+			lblCalleEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblCalleEditarClienteInOper.ForeColor = Color.White;
+			lblCalleEditarClienteInOper.Location = new Point(393, 377);
+			lblCalleEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCalleEditarClienteInOper.Name = "lblCalleEditarClienteInOper";
+			lblCalleEditarClienteInOper.Size = new Size(65, 19);
+			lblCalleEditarClienteInOper.TabIndex = 129;
+			lblCalleEditarClienteInOper.Text = "CALLE:";
 			// 
 			// label37
 			// 
 			label37.AutoSize = true;
 			label37.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label37.ForeColor = Color.White;
-			label37.Location = new Point(648, 133);
+			label37.Location = new Point(648, 179);
 			label37.Margin = new Padding(2, 0, 2, 0);
 			label37.Name = "label37";
 			label37.Size = new Size(87, 27);
-			label37.TabIndex = 93;
+			label37.TabIndex = 128;
 			label37.Text = "DATOS";
 			// 
-			// label38
+			// lblFechaNacimientoEditarClienteInOper
 			// 
-			label38.AutoSize = true;
-			label38.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label38.ForeColor = Color.White;
-			label38.Location = new Point(783, 311);
-			label38.Margin = new Padding(2, 0, 2, 0);
-			label38.Name = "label38";
-			label38.Size = new Size(87, 19);
-			label38.TabIndex = 92;
-			label38.Text = "CELULAR:";
+			lblFechaNacimientoEditarClienteInOper.AutoSize = true;
+			lblFechaNacimientoEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
+			lblFechaNacimientoEditarClienteInOper.ForeColor = Color.White;
+			lblFechaNacimientoEditarClienteInOper.Location = new Point(393, 278);
+			lblFechaNacimientoEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblFechaNacimientoEditarClienteInOper.Name = "lblFechaNacimientoEditarClienteInOper";
+			lblFechaNacimientoEditarClienteInOper.Size = new Size(179, 19);
+			lblFechaNacimientoEditarClienteInOper.TabIndex = 127;
+			lblFechaNacimientoEditarClienteInOper.Text = "FECHA NACIMIENTO:";
 			// 
-			// label39
+			// lblCampoAEditarClienteInOper
 			// 
-			label39.AutoSize = true;
-			label39.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label39.ForeColor = Color.White;
-			label39.Location = new Point(612, 311);
-			label39.Margin = new Padding(2, 0, 2, 0);
-			label39.Name = "label39";
-			label39.Size = new Size(149, 19);
-			label39.TabIndex = 91;
-			label39.Text = "TELEFONO CASA:";
-			// 
-			// label40
-			// 
-			label40.AutoSize = true;
-			label40.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label40.ForeColor = Color.White;
-			label40.Location = new Point(393, 311);
-			label40.Margin = new Padding(2, 0, 2, 0);
-			label40.Name = "label40";
-			label40.Size = new Size(179, 19);
-			label40.TabIndex = 90;
-			label40.Text = "FECHA NACIMIENTO:";
-			// 
-			// label41
-			// 
-			label41.AutoSize = true;
-			label41.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label41.ForeColor = Color.White;
-			label41.Location = new Point(563, 261);
-			label41.Margin = new Padding(2, 0, 2, 0);
-			label41.Name = "label41";
-			label41.Size = new Size(81, 19);
-			label41.TabIndex = 89;
-			label41.Text = "CORREO:";
-			// 
-			// label42
-			// 
-			label42.AutoSize = true;
-			label42.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label42.ForeColor = Color.White;
-			label42.Location = new Point(393, 261);
-			label42.Margin = new Padding(2, 0, 2, 0);
-			label42.Name = "label42";
-			label42.Size = new Size(44, 19);
-			label42.TabIndex = 88;
-			label42.Text = "RFC:";
-			// 
-			// label43
-			// 
-			label43.AutoSize = true;
-			label43.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label43.ForeColor = Color.White;
-			label43.Location = new Point(706, 211);
-			label43.Margin = new Padding(2, 0, 2, 0);
-			label43.Name = "label43";
-			label43.Size = new Size(180, 19);
-			label43.TabIndex = 87;
-			label43.Text = "APELLIDO MATERNO:";
-			// 
-			// label44
-			// 
-			label44.AutoSize = true;
-			label44.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold);
-			label44.ForeColor = Color.White;
-			label44.Location = new Point(392, 211);
-			label44.Margin = new Padding(2, 0, 2, 0);
-			label44.Name = "label44";
-			label44.Size = new Size(174, 19);
-			label44.TabIndex = 86;
-			label44.Text = "APELLIDO PATERNO:";
-			// 
-			// label45
-			// 
-			label45.AutoSize = true;
-			label45.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label45.ForeColor = Color.White;
-			label45.Location = new Point(393, 161);
-			label45.Margin = new Padding(2, 0, 2, 0);
-			label45.Name = "label45";
-			label45.Size = new Size(104, 19);
-			label45.TabIndex = 85;
-			label45.Text = "NOMBRE(S):";
+			lblCampoAEditarClienteInOper.AutoSize = true;
+			lblCampoAEditarClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblCampoAEditarClienteInOper.ForeColor = Color.White;
+			lblCampoAEditarClienteInOper.Location = new Point(392, 301);
+			lblCampoAEditarClienteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblCampoAEditarClienteInOper.Name = "lblCampoAEditarClienteInOper";
+			lblCampoAEditarClienteInOper.Size = new Size(154, 19);
+			lblCampoAEditarClienteInOper.TabIndex = 126;
+			lblCampoAEditarClienteInOper.Text = "CAMPO A EDITAR:";
 			// 
 			// label46
 			// 
 			label46.AutoSize = true;
 			label46.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label46.ForeColor = Color.White;
-			label46.Location = new Point(588, 49);
+			label46.Location = new Point(588, 95);
 			label46.Margin = new Padding(2, 0, 2, 0);
 			label46.Name = "label46";
 			label46.Size = new Size(191, 27);
-			label46.TabIndex = 84;
+			label46.TabIndex = 125;
 			label46.Text = "EDITAR CLIENTE";
 			// 
 			// tabPgPartidos
@@ -2541,10 +2285,10 @@
 			tabPgPartidos.Controls.Add(comboBox1);
 			tabPgPartidos.Controls.Add(label18);
 			tabPgPartidos.Controls.Add(label17);
-			tabPgPartidos.Location = new Point(4, 5);
+			tabPgPartidos.Location = new Point(4, 34);
 			tabPgPartidos.Margin = new Padding(2);
 			tabPgPartidos.Name = "tabPgPartidos";
-			tabPgPartidos.Size = new Size(1392, 841);
+			tabPgPartidos.Size = new Size(1392, 812);
 			tabPgPartidos.TabIndex = 3;
 			tabPgPartidos.Text = "Partidos";
 			// 
@@ -2665,89 +2409,164 @@
 			// tabPgReportes
 			// 
 			tabPgReportes.BackColor = Color.Black;
-			tabPgReportes.Controls.Add(button6);
-			tabPgReportes.Controls.Add(dateTimePicker2);
-			tabPgReportes.Controls.Add(label7);
-			tabPgReportes.Controls.Add(label6);
-			tabPgReportes.Controls.Add(dataGridView2);
-			tabPgReportes.Controls.Add(dateTimePicker1);
-			tabPgReportes.Controls.Add(button4);
-			tabPgReportes.Controls.Add(button1);
-			tabPgReportes.Controls.Add(label5);
-			tabPgReportes.Controls.Add(label4);
-			tabPgReportes.Controls.Add(label3);
-			tabPgReportes.Controls.Add(label2);
-			tabPgReportes.Controls.Add(label1);
-			tabPgReportes.Location = new Point(4, 5);
+			tabPgReportes.Controls.Add(btnOcupacionDisponibilidadInOper);
+			tabPgReportes.Controls.Add(btnReporteVentaInOper);
+			tabPgReportes.Controls.Add(tabReporteVenta);
+			tabPgReportes.Location = new Point(4, 34);
 			tabPgReportes.Margin = new Padding(2);
 			tabPgReportes.Name = "tabPgReportes";
-			tabPgReportes.Size = new Size(1392, 841);
+			tabPgReportes.Size = new Size(1392, 812);
 			tabPgReportes.TabIndex = 5;
 			tabPgReportes.Text = "Reportes";
+			tabPgReportes.Click += tabPgReportes_Click;
 			// 
-			// button6
+			// btnOcupacionDisponibilidadInOper
 			// 
-			button6.FlatStyle = FlatStyle.System;
-			button6.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button6.Location = new Point(1138, 700);
-			button6.Margin = new Padding(2);
-			button6.Name = "button6";
-			button6.Size = new Size(146, 35);
-			button6.TabIndex = 36;
-			button6.Text = "EXPORTAR";
-			button6.UseVisualStyleBackColor = true;
+			btnOcupacionDisponibilidadInOper.FlatStyle = FlatStyle.System;
+			btnOcupacionDisponibilidadInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnOcupacionDisponibilidadInOper.Location = new Point(297, 19);
+			btnOcupacionDisponibilidadInOper.Margin = new Padding(2);
+			btnOcupacionDisponibilidadInOper.Name = "btnOcupacionDisponibilidadInOper";
+			btnOcupacionDisponibilidadInOper.Size = new Size(347, 35);
+			btnOcupacionDisponibilidadInOper.TabIndex = 54;
+			btnOcupacionDisponibilidadInOper.Text = "OCUPACION Y DISPONIBILIDAD";
+			btnOcupacionDisponibilidadInOper.UseVisualStyleBackColor = true;
+			// 
+			// btnReporteVentaInOper
+			// 
+			btnReporteVentaInOper.FlatStyle = FlatStyle.System;
+			btnReporteVentaInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnReporteVentaInOper.Location = new Point(42, 19);
+			btnReporteVentaInOper.Margin = new Padding(2);
+			btnReporteVentaInOper.Name = "btnReporteVentaInOper";
+			btnReporteVentaInOper.Size = new Size(229, 35);
+			btnReporteVentaInOper.TabIndex = 53;
+			btnReporteVentaInOper.Text = "REPORTE DE VENTA";
+			btnReporteVentaInOper.UseVisualStyleBackColor = true;
+			// 
+			// tabReporteVenta
+			// 
+			tabReporteVenta.Appearance = TabAppearance.FlatButtons;
+			tabReporteVenta.Controls.Add(ReporteVenta);
+			tabReporteVenta.Controls.Add(tabPage6);
+			tabReporteVenta.ItemSize = new Size(0, 1);
+			tabReporteVenta.Location = new Point(26, 68);
+			tabReporteVenta.Name = "tabReporteVenta";
+			tabReporteVenta.SelectedIndex = 0;
+			tabReporteVenta.Size = new Size(1363, 751);
+			tabReporteVenta.SizeMode = TabSizeMode.Fixed;
+			tabReporteVenta.TabIndex = 0;
+			// 
+			// ReporteVenta
+			// 
+			ReporteVenta.BackColor = Color.Black;
+			ReporteVenta.Controls.Add(cboPartidoReporteInOper);
+			ReporteVenta.Controls.Add(cboEstadioReporteInOper);
+			ReporteVenta.Controls.Add(btnExportarReporteVentaInOper);
+			ReporteVenta.Controls.Add(dateTimePicker2);
+			ReporteVenta.Controls.Add(lblIngresosReportesInOper);
+			ReporteVenta.Controls.Add(lblBoletosVendidosReportesInOper);
+			ReporteVenta.Controls.Add(gridReporteInOper);
+			ReporteVenta.Controls.Add(dateTimePicker1);
+			ReporteVenta.Controls.Add(btnLimparGridReporteInOper);
+			ReporteVenta.Controls.Add(btnFiltrarReporteInOper);
+			ReporteVenta.Controls.Add(lblPartidoReporteInOper);
+			ReporteVenta.Controls.Add(lblEstadioReporteInOper);
+			ReporteVenta.Controls.Add(lblHastaReporteInOper);
+			ReporteVenta.Controls.Add(lblDesdeReporteInOper);
+			ReporteVenta.Controls.Add(label1);
+			ReporteVenta.Location = new Point(4, 5);
+			ReporteVenta.Name = "ReporteVenta";
+			ReporteVenta.Padding = new Padding(3);
+			ReporteVenta.Size = new Size(1355, 742);
+			ReporteVenta.TabIndex = 0;
+			ReporteVenta.Text = "tabPage2";
+			// 
+			// cboPartidoReporteInOper
+			// 
+			cboPartidoReporteInOper.BackColor = Color.White;
+			cboPartidoReporteInOper.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			cboPartidoReporteInOper.ForeColor = Color.Black;
+			cboPartidoReporteInOper.FormattingEnabled = true;
+			cboPartidoReporteInOper.Location = new Point(560, 163);
+			cboPartidoReporteInOper.Name = "cboPartidoReporteInOper";
+			cboPartidoReporteInOper.Size = new Size(297, 23);
+			cboPartidoReporteInOper.TabIndex = 54;
+			// 
+			// cboEstadioReporteInOper
+			// 
+			cboEstadioReporteInOper.BackColor = Color.White;
+			cboEstadioReporteInOper.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			cboEstadioReporteInOper.ForeColor = Color.Black;
+			cboEstadioReporteInOper.FormattingEnabled = true;
+			cboEstadioReporteInOper.Location = new Point(205, 163);
+			cboEstadioReporteInOper.Name = "cboEstadioReporteInOper";
+			cboEstadioReporteInOper.Size = new Size(225, 23);
+			cboEstadioReporteInOper.TabIndex = 53;
+			// 
+			// btnExportarReporteVentaInOper
+			// 
+			btnExportarReporteVentaInOper.FlatStyle = FlatStyle.System;
+			btnExportarReporteVentaInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnExportarReporteVentaInOper.Location = new Point(1115, 680);
+			btnExportarReporteVentaInOper.Margin = new Padding(2);
+			btnExportarReporteVentaInOper.Name = "btnExportarReporteVentaInOper";
+			btnExportarReporteVentaInOper.Size = new Size(146, 35);
+			btnExportarReporteVentaInOper.TabIndex = 52;
+			btnExportarReporteVentaInOper.Text = "EXPORTAR";
+			btnExportarReporteVentaInOper.UseVisualStyleBackColor = true;
 			// 
 			// dateTimePicker2
 			// 
 			dateTimePicker2.CalendarFont = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
 			dateTimePicker2.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			dateTimePicker2.Location = new Point(554, 150);
+			dateTimePicker2.Location = new Point(531, 130);
 			dateTimePicker2.Margin = new Padding(2);
 			dateTimePicker2.Name = "dateTimePicker2";
-			dateTimePicker2.Size = new Size(176, 30);
-			dateTimePicker2.TabIndex = 35;
+			dateTimePicker2.Size = new Size(326, 30);
+			dateTimePicker2.TabIndex = 51;
 			// 
-			// label7
+			// lblIngresosReportesInOper
 			// 
-			label7.AutoSize = true;
-			label7.BackColor = Color.Transparent;
-			label7.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label7.ForeColor = Color.White;
-			label7.Location = new Point(583, 700);
-			label7.Margin = new Padding(2, 0, 2, 0);
-			label7.Name = "label7";
-			label7.Size = new Size(133, 27);
-			label7.TabIndex = 34;
-			label7.Text = "INGRESOS:";
+			lblIngresosReportesInOper.AutoSize = true;
+			lblIngresosReportesInOper.BackColor = Color.Transparent;
+			lblIngresosReportesInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblIngresosReportesInOper.ForeColor = Color.White;
+			lblIngresosReportesInOper.Location = new Point(560, 680);
+			lblIngresosReportesInOper.Margin = new Padding(2, 0, 2, 0);
+			lblIngresosReportesInOper.Name = "lblIngresosReportesInOper";
+			lblIngresosReportesInOper.Size = new Size(133, 27);
+			lblIngresosReportesInOper.TabIndex = 50;
+			lblIngresosReportesInOper.Text = "INGRESOS:";
 			// 
-			// label6
+			// lblBoletosVendidosReportesInOper
 			// 
-			label6.AutoSize = true;
-			label6.BackColor = Color.Transparent;
-			label6.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label6.ForeColor = Color.White;
-			label6.Location = new Point(117, 700);
-			label6.Margin = new Padding(2, 0, 2, 0);
-			label6.Name = "label6";
-			label6.Size = new Size(247, 27);
-			label6.TabIndex = 33;
-			label6.Text = "BOLETOS VENDIDOS:";
+			lblBoletosVendidosReportesInOper.AutoSize = true;
+			lblBoletosVendidosReportesInOper.BackColor = Color.Transparent;
+			lblBoletosVendidosReportesInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblBoletosVendidosReportesInOper.ForeColor = Color.White;
+			lblBoletosVendidosReportesInOper.Location = new Point(94, 680);
+			lblBoletosVendidosReportesInOper.Margin = new Padding(2, 0, 2, 0);
+			lblBoletosVendidosReportesInOper.Name = "lblBoletosVendidosReportesInOper";
+			lblBoletosVendidosReportesInOper.Size = new Size(247, 27);
+			lblBoletosVendidosReportesInOper.TabIndex = 49;
+			lblBoletosVendidosReportesInOper.Text = "BOLETOS VENDIDOS:";
 			// 
-			// dataGridView2
+			// gridReporteInOper
 			// 
-			dataGridView2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-			dataGridView2.BackgroundColor = Color.Black;
-			dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridView2.Columns.AddRange(new DataGridViewColumn[] { FOLIO, FECHAVENTA, ESTADIO, PARTIDO, ZONA, CANTIDAD, SUBTOTAL, TOTAL });
-			dataGridView2.GridColor = Color.Black;
-			dataGridView2.Location = new Point(117, 300);
-			dataGridView2.Margin = new Padding(2);
-			dataGridView2.Name = "dataGridView2";
-			dataGridView2.RowHeadersWidth = 72;
-			dataGridView2.Size = new Size(1167, 307);
-			dataGridView2.TabIndex = 32;
+			gridReporteInOper.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			gridReporteInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			gridReporteInOper.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			gridReporteInOper.BackgroundColor = Color.Black;
+			gridReporteInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			gridReporteInOper.Columns.AddRange(new DataGridViewColumn[] { FOLIO, FECHAVENTA, ESTADIO, PARTIDO, ZONA, CANTIDAD, SUBTOTAL, TOTAL });
+			gridReporteInOper.GridColor = Color.Black;
+			gridReporteInOper.Location = new Point(94, 280);
+			gridReporteInOper.Margin = new Padding(2);
+			gridReporteInOper.Name = "gridReporteInOper";
+			gridReporteInOper.RowHeadersWidth = 72;
+			gridReporteInOper.Size = new Size(1167, 278);
+			gridReporteInOper.TabIndex = 48;
 			// 
 			// FOLIO
 			// 
@@ -2810,87 +2629,87 @@
 			// 
 			dateTimePicker1.CalendarFont = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
 			dateTimePicker1.Font = new Font("Avenir LT Pro 65 Medium", 14.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			dateTimePicker1.Location = new Point(208, 150);
+			dateTimePicker1.Location = new Point(185, 130);
 			dateTimePicker1.Margin = new Padding(2);
 			dateTimePicker1.Name = "dateTimePicker1";
-			dateTimePicker1.Size = new Size(188, 30);
-			dateTimePicker1.TabIndex = 30;
+			dateTimePicker1.Size = new Size(245, 30);
+			dateTimePicker1.TabIndex = 47;
 			// 
-			// button4
+			// btnLimparGridReporteInOper
 			// 
-			button4.FlatStyle = FlatStyle.System;
-			button4.Font = new Font("Avenir LT Pro 65 Medium", 9.857142F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button4.Location = new Point(210, 225);
-			button4.Margin = new Padding(2);
-			button4.Name = "button4";
-			button4.Size = new Size(88, 25);
-			button4.TabIndex = 28;
-			button4.Text = "LIMPIAR";
-			button4.UseVisualStyleBackColor = true;
+			btnLimparGridReporteInOper.FlatStyle = FlatStyle.System;
+			btnLimparGridReporteInOper.Font = new Font("Avenir LT Pro 65 Medium", 9.857142F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnLimparGridReporteInOper.Location = new Point(187, 205);
+			btnLimparGridReporteInOper.Margin = new Padding(2);
+			btnLimparGridReporteInOper.Name = "btnLimparGridReporteInOper";
+			btnLimparGridReporteInOper.Size = new Size(88, 25);
+			btnLimparGridReporteInOper.TabIndex = 46;
+			btnLimparGridReporteInOper.Text = "LIMPIAR";
+			btnLimparGridReporteInOper.UseVisualStyleBackColor = true;
 			// 
-			// button1
+			// btnFiltrarReporteInOper
 			// 
-			button1.FlatStyle = FlatStyle.System;
-			button1.Font = new Font("Avenir LT Pro 65 Medium", 9.857142F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			button1.Location = new Point(117, 225);
-			button1.Margin = new Padding(2);
-			button1.Name = "button1";
-			button1.Size = new Size(88, 25);
-			button1.TabIndex = 27;
-			button1.Text = "FILTRAR";
-			button1.UseVisualStyleBackColor = true;
+			btnFiltrarReporteInOper.FlatStyle = FlatStyle.System;
+			btnFiltrarReporteInOper.Font = new Font("Avenir LT Pro 65 Medium", 9.857142F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnFiltrarReporteInOper.Location = new Point(94, 205);
+			btnFiltrarReporteInOper.Margin = new Padding(2);
+			btnFiltrarReporteInOper.Name = "btnFiltrarReporteInOper";
+			btnFiltrarReporteInOper.Size = new Size(88, 25);
+			btnFiltrarReporteInOper.TabIndex = 45;
+			btnFiltrarReporteInOper.Text = "FILTRAR";
+			btnFiltrarReporteInOper.UseVisualStyleBackColor = true;
 			// 
-			// label5
+			// lblPartidoReporteInOper
 			// 
-			label5.AutoSize = true;
-			label5.BackColor = Color.Transparent;
-			label5.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label5.ForeColor = Color.White;
-			label5.Location = new Point(467, 179);
-			label5.Margin = new Padding(2, 0, 2, 0);
-			label5.Name = "label5";
-			label5.Size = new Size(116, 27);
-			label5.TabIndex = 25;
-			label5.Text = "PARTIDO:";
+			lblPartidoReporteInOper.AutoSize = true;
+			lblPartidoReporteInOper.BackColor = Color.Transparent;
+			lblPartidoReporteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblPartidoReporteInOper.ForeColor = Color.White;
+			lblPartidoReporteInOper.Location = new Point(444, 159);
+			lblPartidoReporteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblPartidoReporteInOper.Name = "lblPartidoReporteInOper";
+			lblPartidoReporteInOper.Size = new Size(116, 27);
+			lblPartidoReporteInOper.TabIndex = 44;
+			lblPartidoReporteInOper.Text = "PARTIDO:";
 			// 
-			// label4
+			// lblEstadioReporteInOper
 			// 
-			label4.AutoSize = true;
-			label4.BackColor = Color.Transparent;
-			label4.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label4.ForeColor = Color.White;
-			label4.Location = new Point(117, 179);
-			label4.Margin = new Padding(2, 0, 2, 0);
-			label4.Name = "label4";
-			label4.Size = new Size(115, 27);
-			label4.TabIndex = 24;
-			label4.Text = "ESTADIO:";
+			lblEstadioReporteInOper.AutoSize = true;
+			lblEstadioReporteInOper.BackColor = Color.Transparent;
+			lblEstadioReporteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblEstadioReporteInOper.ForeColor = Color.White;
+			lblEstadioReporteInOper.Location = new Point(94, 159);
+			lblEstadioReporteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblEstadioReporteInOper.Name = "lblEstadioReporteInOper";
+			lblEstadioReporteInOper.Size = new Size(115, 27);
+			lblEstadioReporteInOper.TabIndex = 43;
+			lblEstadioReporteInOper.Text = "ESTADIO:";
 			// 
-			// label3
+			// lblHastaReporteInOper
 			// 
-			label3.AutoSize = true;
-			label3.BackColor = Color.Transparent;
-			label3.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label3.ForeColor = Color.White;
-			label3.Location = new Point(467, 150);
-			label3.Margin = new Padding(2, 0, 2, 0);
-			label3.Name = "label3";
-			label3.Size = new Size(92, 27);
-			label3.TabIndex = 23;
-			label3.Text = "HASTA:";
+			lblHastaReporteInOper.AutoSize = true;
+			lblHastaReporteInOper.BackColor = Color.Transparent;
+			lblHastaReporteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblHastaReporteInOper.ForeColor = Color.White;
+			lblHastaReporteInOper.Location = new Point(444, 130);
+			lblHastaReporteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblHastaReporteInOper.Name = "lblHastaReporteInOper";
+			lblHastaReporteInOper.Size = new Size(92, 27);
+			lblHastaReporteInOper.TabIndex = 42;
+			lblHastaReporteInOper.Text = "HASTA:";
 			// 
-			// label2
+			// lblDesdeReporteInOper
 			// 
-			label2.AutoSize = true;
-			label2.BackColor = Color.Transparent;
-			label2.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			label2.ForeColor = Color.White;
-			label2.Location = new Point(117, 150);
-			label2.Margin = new Padding(2, 0, 2, 0);
-			label2.Name = "label2";
-			label2.Size = new Size(94, 27);
-			label2.TabIndex = 22;
-			label2.Text = "DESDE:";
+			lblDesdeReporteInOper.AutoSize = true;
+			lblDesdeReporteInOper.BackColor = Color.Transparent;
+			lblDesdeReporteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblDesdeReporteInOper.ForeColor = Color.White;
+			lblDesdeReporteInOper.Location = new Point(94, 130);
+			lblDesdeReporteInOper.Margin = new Padding(2, 0, 2, 0);
+			lblDesdeReporteInOper.Name = "lblDesdeReporteInOper";
+			lblDesdeReporteInOper.Size = new Size(94, 27);
+			lblDesdeReporteInOper.TabIndex = 41;
+			lblDesdeReporteInOper.Text = "DESDE:";
 			// 
 			// label1
 			// 
@@ -2898,12 +2717,148 @@
 			label1.BackColor = Color.Transparent;
 			label1.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			label1.ForeColor = Color.White;
-			label1.Location = new Point(585, 75);
+			label1.Location = new Point(562, 55);
 			label1.Margin = new Padding(2, 0, 2, 0);
 			label1.Name = "label1";
 			label1.Size = new Size(232, 27);
-			label1.TabIndex = 21;
+			label1.TabIndex = 40;
 			label1.Text = "REPORTE DE VENTA";
+			// 
+			// tabPage6
+			// 
+			tabPage6.BackColor = Color.Black;
+			tabPage6.Controls.Add(dgvAsientosODInOper);
+			tabPage6.Controls.Add(dgvDisponibilidadODInOper);
+			tabPage6.Controls.Add(label4);
+			tabPage6.Controls.Add(cboPartidoODInOper);
+			tabPage6.Controls.Add(cboEstadioODInOper);
+			tabPage6.Controls.Add(lblPartidoODInOper);
+			tabPage6.Controls.Add(lblEstadioODInOper);
+			tabPage6.Location = new Point(4, 5);
+			tabPage6.Name = "tabPage6";
+			tabPage6.Padding = new Padding(3);
+			tabPage6.Size = new Size(1355, 742);
+			tabPage6.TabIndex = 1;
+			tabPage6.Text = "tabPage6";
+			// 
+			// dgvAsientosODInOper
+			// 
+			dgvAsientosODInOper.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			dgvAsientosODInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvAsientosODInOper.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			dgvAsientosODInOper.BackgroundColor = Color.Black;
+			dgvAsientosODInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvAsientosODInOper.GridColor = Color.Black;
+			dgvAsientosODInOper.Location = new Point(94, 415);
+			dgvAsientosODInOper.Margin = new Padding(2);
+			dgvAsientosODInOper.Name = "dgvAsientosODInOper";
+			dgvAsientosODInOper.RowHeadersWidth = 72;
+			dgvAsientosODInOper.Size = new Size(1167, 278);
+			dgvAsientosODInOper.TabIndex = 65;
+			// 
+			// dgvDisponibilidadODInOper
+			// 
+			dgvDisponibilidadODInOper.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			dgvDisponibilidadODInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvDisponibilidadODInOper.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			dgvDisponibilidadODInOper.BackgroundColor = Color.Black;
+			dgvDisponibilidadODInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvDisponibilidadODInOper.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn8, CAPACIDAD, DISPONIBLES, VENDIDOS, OCUPACION });
+			dgvDisponibilidadODInOper.GridColor = Color.Black;
+			dgvDisponibilidadODInOper.Location = new Point(94, 120);
+			dgvDisponibilidadODInOper.Margin = new Padding(2);
+			dgvDisponibilidadODInOper.Name = "dgvDisponibilidadODInOper";
+			dgvDisponibilidadODInOper.RowHeadersWidth = 72;
+			dgvDisponibilidadODInOper.Size = new Size(1167, 278);
+			dgvDisponibilidadODInOper.TabIndex = 60;
+			// 
+			// dataGridViewTextBoxColumn8
+			// 
+			dataGridViewTextBoxColumn8.HeaderText = "ZONA";
+			dataGridViewTextBoxColumn8.MinimumWidth = 9;
+			dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+			dataGridViewTextBoxColumn8.ReadOnly = true;
+			// 
+			// CAPACIDAD
+			// 
+			CAPACIDAD.HeaderText = "CAPACIDAD";
+			CAPACIDAD.Name = "CAPACIDAD";
+			// 
+			// DISPONIBLES
+			// 
+			DISPONIBLES.HeaderText = "DISPONIBLES";
+			DISPONIBLES.Name = "DISPONIBLES";
+			// 
+			// VENDIDOS
+			// 
+			VENDIDOS.HeaderText = "VENDIDOS";
+			VENDIDOS.Name = "VENDIDOS";
+			// 
+			// OCUPACION
+			// 
+			OCUPACION.HeaderText = "OCUPACION";
+			OCUPACION.Name = "OCUPACION";
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.BackColor = Color.Transparent;
+			label4.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label4.ForeColor = Color.White;
+			label4.Location = new Point(518, 23);
+			label4.Margin = new Padding(2, 0, 2, 0);
+			label4.Name = "label4";
+			label4.Size = new Size(359, 27);
+			label4.TabIndex = 59;
+			label4.Text = "OCUPACION Y DISPONIBILIDAD";
+			// 
+			// cboPartidoODInOper
+			// 
+			cboPartidoODInOper.BackColor = Color.White;
+			cboPartidoODInOper.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			cboPartidoODInOper.ForeColor = Color.Black;
+			cboPartidoODInOper.FormattingEnabled = true;
+			cboPartidoODInOper.Location = new Point(762, 70);
+			cboPartidoODInOper.Name = "cboPartidoODInOper";
+			cboPartidoODInOper.Size = new Size(297, 23);
+			cboPartidoODInOper.TabIndex = 58;
+			// 
+			// cboEstadioODInOper
+			// 
+			cboEstadioODInOper.BackColor = Color.White;
+			cboEstadioODInOper.Font = new Font("Avenir LT Pro 35 Light", 9.749999F);
+			cboEstadioODInOper.ForeColor = Color.Black;
+			cboEstadioODInOper.FormattingEnabled = true;
+			cboEstadioODInOper.Location = new Point(407, 70);
+			cboEstadioODInOper.Name = "cboEstadioODInOper";
+			cboEstadioODInOper.Size = new Size(225, 23);
+			cboEstadioODInOper.TabIndex = 57;
+			// 
+			// lblPartidoODInOper
+			// 
+			lblPartidoODInOper.AutoSize = true;
+			lblPartidoODInOper.BackColor = Color.Transparent;
+			lblPartidoODInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblPartidoODInOper.ForeColor = Color.White;
+			lblPartidoODInOper.Location = new Point(646, 66);
+			lblPartidoODInOper.Margin = new Padding(2, 0, 2, 0);
+			lblPartidoODInOper.Name = "lblPartidoODInOper";
+			lblPartidoODInOper.Size = new Size(116, 27);
+			lblPartidoODInOper.TabIndex = 56;
+			lblPartidoODInOper.Text = "PARTIDO:";
+			// 
+			// lblEstadioODInOper
+			// 
+			lblEstadioODInOper.AutoSize = true;
+			lblEstadioODInOper.BackColor = Color.Transparent;
+			lblEstadioODInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblEstadioODInOper.ForeColor = Color.White;
+			lblEstadioODInOper.Location = new Point(296, 66);
+			lblEstadioODInOper.Margin = new Padding(2, 0, 2, 0);
+			lblEstadioODInOper.Name = "lblEstadioODInOper";
+			lblEstadioODInOper.Size = new Size(115, 27);
+			lblEstadioODInOper.TabIndex = 55;
+			lblEstadioODInOper.Text = "ESTADIO:";
 			// 
 			// btnAjustes
 			// 
@@ -2924,13 +2879,14 @@
 			lblNombreUsuario.AutoSize = true;
 			lblNombreUsuario.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			lblNombreUsuario.ForeColor = Color.White;
-			lblNombreUsuario.Location = new Point(1270, 57);
+			lblNombreUsuario.Location = new Point(1234, 59);
 			lblNombreUsuario.Margin = new Padding(2, 0, 2, 0);
 			lblNombreUsuario.Name = "lblNombreUsuario";
 			lblNombreUsuario.RightToLeft = RightToLeft.Yes;
 			lblNombreUsuario.Size = new Size(112, 27);
 			lblNombreUsuario.TabIndex = 2;
 			lblNombreUsuario.Text = "USUARIO";
+			lblNombreUsuario.TextAlign = ContentAlignment.MiddleRight;
 			// 
 			// btnVentasVentas
 			// 
@@ -3074,7 +3030,6 @@
 			tabCtrlVentas.ResumeLayout(false);
 			tabPgInicio.ResumeLayout(false);
 			tabPgInicio.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
 			tabPgVentas.ResumeLayout(false);
 			tabCtrlVenta.ResumeLayout(false);
 			tabPage1.ResumeLayout(false);
@@ -3084,6 +3039,7 @@
 			tabVentaPaso2.PerformLayout();
 			tabPage3.ResumeLayout(false);
 			tabPage3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)dgvAsientosInOper).EndInit();
 			tabPage4.ResumeLayout(false);
 			tabPage4.PerformLayout();
 			tabPage5.ResumeLayout(false);
@@ -3093,7 +3049,7 @@
 			tabClientesInVentas.ResumeLayout(false);
 			BuscarCliente.ResumeLayout(false);
 			BuscarCliente.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)GridClientesInClientes).EndInit();
+			((System.ComponentModel.ISupportInitialize)GridClientesInOper).EndInit();
 			NuevoCliente.ResumeLayout(false);
 			NuevoCliente.PerformLayout();
 			EditarCliente.ResumeLayout(false);
@@ -3101,8 +3057,14 @@
 			tabPgPartidos.ResumeLayout(false);
 			tabPgPartidos.PerformLayout();
 			tabPgReportes.ResumeLayout(false);
-			tabPgReportes.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+			tabReporteVenta.ResumeLayout(false);
+			ReporteVenta.ResumeLayout(false);
+			ReporteVenta.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)gridReporteInOper).EndInit();
+			tabPage6.ResumeLayout(false);
+			tabPage6.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)dgvAsientosODInOper).EndInit();
+			((System.ComponentModel.ISupportInitialize)dgvDisponibilidadODInOper).EndInit();
 			pnlMenu.ResumeLayout(false);
 			ResumeLayout(false);
 			PerformLayout();
@@ -3125,7 +3087,6 @@
         private Button btnReportesVentas;
         private Label lblBienvenidaInicio;
         private Label lblVentasDelDiaInicio;
-        private Label lblActividadRecienteInicio;
         private Label lblProximosPartidosInicio;
         private Label lblIngresosInicio;
         private Label lblBoletosVendidosInicio;
@@ -3141,15 +3102,12 @@
         private Label label11;
         private Label label10;
         private TabPage tabVentaPaso2;
-        private Button button3;
         private Button button2;
         private TabPage tabPage3;
         private TabPage tabPage4;
         private TabPage tabPage5;
         private Label lblVentaRealizada;
         private Button btnNuevaVentaVentaRealizada;
-        private Label lblTotalVentaRealizada;
-        private Label lblCodigoVentaRealizada;
         private Label lblMensajeVentaRealizada;
         private PictureBox pictureBox1;
         private Label label18;
@@ -3167,7 +3125,6 @@
         private TextBox txtFechaVentaPaso2;
         private TextBox txtEstadioVentaPaso2;
         private Label lblEstadioVentaPaso2;
-        private Button button10;
         private FlowLayoutPanel flowPanVentasPaso2;
         private Label lblPartidoVentaPaso3;
         private Label lblInfoEstadioVentaPaso3;
@@ -3181,9 +3138,6 @@
         private Label lblPrecioVentaPaso3;
         private ComboBox cboZonaVentaPaso3;
         private Label lblAsientosVentaPaso3;
-        private FlowLayoutPanel flowPanVentasPaso3;
-        private Label lbl4VentaPaso3;
-        private Label lblBoletosSeleccionadosVentaPaso3;
         private Label lblTotalVentaPaso3;
         private Label lblIVAVentaPaso3;
         private Label lblSubtotalVentaPaso3;
@@ -3211,7 +3165,6 @@
         private Label lblInfoPartidoVentaPaso4;
         private Label lblNombreVentaPaso4;
         private Label lblTotalVentaPaso4;
-        private Label lblTipoTarjetaVentaPaso4;
         private TextBox txtCVVVentaPaso4;
         private TextBox txtVencimientoTarjetaVentaPaso4;
         private TextBox txtNumeroTarjetaVentaPaso4;
@@ -3220,124 +3173,131 @@
         private Label lblNumeroTarjetaVentaPaso4;
         private Label lblTitularVentaPaso4;
         private Label lblInfoTotalVentaPaso4;
-        private RadioButton radioBtnTransferenciaVentaPaso4;
-        private ComboBox cboTipoTarjetaVentaPaso4;
         private TextBox txtTitularVentaPaso4;
-        private Label lblInfoCuentaTransferenciaVentaPaso4;
-        private Label lblCuentaTransferenciaVentaPaso4;
-        private Label lblFechaYHoraVentaRealizada;
-        private Label lblInfoCodigoVentaRealizada;
-        private Label lblInfoFechaYHoraVentaRealizada;
-        private Label lblInfoTotalVentaRealizada;
         private Label lblInfoIngresosInicio;
         private Label lblInfoBoletosVendidosInicio;
         private Label lblInfoVentasDelDiaInicio;
-        private DataGridView dataGridView1;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flpProximosPartidosInOper;
         private Panel pnlMenu;
         private Button btnSalir;
         private Button btnInicio;
-        private Label label1;
-        private Button button4;
-        private Button button1;
-        private Label label5;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private DateTimePicker dateTimePicker1;
-        private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn FOLIO;
-        private DataGridViewTextBoxColumn FECHAVENTA;
-        private DataGridViewTextBoxColumn ESTADIO;
-        private DataGridViewTextBoxColumn PARTIDO;
-        private DataGridViewTextBoxColumn ZONA;
-        private DataGridViewTextBoxColumn CANTIDAD;
-        private DataGridViewTextBoxColumn SUBTOTAL;
-        private DataGridViewTextBoxColumn TOTAL;
-        private Label label6;
-        private DateTimePicker dateTimePicker2;
-        private Label label7;
-        private Button button6;
         private TabControl tabClientesInVentas;
         private TabPage BuscarCliente;
         private TabPage NuevoCliente;
-        private Button btnHistorialCliente;
+        private Button btnHistorialClienteInOper;
         private Button btnEditarClienteInOper;
-        private DataGridView GridClientesInClientes;
+        private DataGridView GridClientesInOper;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn CORREO;
         private DataGridViewTextBoxColumn ESTADO;
-        private Button btnNuevoClienteInCliente;
-        private Button btnBuscarCliente;
-        private TextBox txtBuscarCliente;
-        private Label lblBuscarClienteInCliente;
+        private Button btnNuevoClienteInOper;
+        private TextBox txtBuscarClienteInOper;
+        private Label lblBuscarClienteInOper;
         private Label lblClientesInCliente;
-        private Button button5;
-        private TextBox textBox13;
-        private TextBox textBox12;
-        private TextBox textBox11;
-        private TextBox textBox10;
-        private TextBox textBox9;
-        private TextBox textBox8;
-        private TextBox textBox7;
-        private TextBox textBox6;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private TextBox textBox14;
-        private Label label16;
-        private Label label15;
-        private Label label14;
-        private Label label13;
-        private Label label8;
-        private Label label9;
+        private Button btnAgregarNuevoClienteInOper;
+        private TextBox txtCiudadNuevoClienteInOper;
+        private TextBox txtColoniaNuevoClienteInOper;
+        private TextBox txtCPNuevoClienteInOper;
+        private TextBox txtNoInteriorNuevoClienteInOper;
+        private TextBox txtNoExteriorNuevoClienteInOper;
+        private TextBox txtCalleNuevoClienteInOper;
+        private TextBox txtFechaNacimientoNuevoClienteInOper;
+        private TextBox txtTelefonoCelularNuevoClienteInOper;
+        private TextBox txtTelefonoCasaNuevoClienteInOper;
+        private TextBox txtCorreoNuevoClienteInOper;
+        private TextBox txtRFCNuevoClienteInOper;
+        private TextBox txtApMaternoNuevoClienteInOper;
+        private TextBox txtApPaternoNuevoClienteInOper;
+        private TextBox txtNombreNuevoClienteInOper;
+        private Label lblCPNuevoClienteInOper;
+        private Label lblCiudadNuevoClienteInOper;
+        private Label lblColoniaNuevoClienteInOper;
+        private Label lblNoInteriorNuevoClienteInOper;
+        private Label lblNoExteriorNuevoClienteInOper;
+        private Label lblCalleNuevoClienteInOper;
         private Label label19;
         private Label label20;
-        private Label label21;
-        private Label label22;
-        private Label label23;
-        private Label label24;
-        private Label label25;
-        private Label label26;
-        private Label label27;
-        private Label label28;
+        private Label lblTelefonoCelularNuevoClienteInOper;
+        private Label lblTelefonoCasaNuevoClienteInOper;
+        private Label lblFechaNacimientoNuevoClienteInOper;
+        private Label lblCorreoNuevoClienteInOper;
+        private Label lblRFCNuevoClienteInOper;
+        private Label lblApMaternoNuevoClienteInOper;
+        private Label lblApPaternoNuevoClienteInOper;
+        private Label lblNombreNuevoClienteInOper;
         private Label label29;
         private TabPage EditarCliente;
-        private Button button7;
-        private TextBox textBox15;
-        private TextBox textBox16;
-        private TextBox textBox17;
-        private TextBox textBox18;
-        private TextBox textBox19;
-        private TextBox textBox20;
-        private TextBox textBox21;
-        private TextBox textBox22;
-        private TextBox textBox23;
-        private TextBox textBox24;
-        private TextBox textBox25;
-        private TextBox textBox26;
-        private TextBox textBox27;
-        private TextBox textBox28;
-        private Label label30;
-        private Label label31;
-        private Label label32;
-        private Label label33;
-        private Label label34;
-        private Label label35;
-        private Label label36;
-        private Label label37;
-        private Label label38;
-        private Label label39;
-        private Label label40;
-        private Label label41;
-        private Label label42;
-        private Label label43;
-        private Label label44;
-        private Label label45;
-        private Label label46;
-    }
+		private Button btnGuardarCambiosEditarClienteInOper;
+		private Label lblNuevoDatoEditarClienteInOper;
+		private TextBox txtPaisEditarClienteInOper;
+		private Label lblPaisEditarClienteInOper;
+		private TextBox txtEstadoEditarClienteInOper;
+		private Label lblEstadoEditarClienteInOper;
+		private ComboBox cboBoxEditarClienteInOper;
+		private Label lblNombreCompletoEditarClienteInOper;
+		private TextBox txtCiudadEditarClienteInOper;
+		private TextBox txtColoniaEditarClienteInOper;
+		private TextBox txtCPEditarClienteInOper;
+		private TextBox txtNoInteriorEditarClienteInOper;
+		private TextBox txtNoExteriorEditarClienteInOper;
+		private TextBox txtCalleEditarClienteInOper;
+		private TextBox txtNuevoDatoEditarClienteInOper;
+		private Label lblCPEditarClienteInOper;
+		private Label lblCiudadEditarClienteInOper;
+		private Label lblColoniaEditarClienteInOper;
+		private Label lblNoInteriorEditarClienteInOper;
+		private Label lblNoExteriorEditarClienteInOper;
+		private Label lblCalleEditarClienteInOper;
+		private Label label37;
+		private Label lblFechaNacimientoEditarClienteInOper;
+		private Label lblCampoAEditarClienteInOper;
+		private Label label46;
+		private TextBox txtPaisNuevoClienteInOper;
+		private Label lblPaisNuevoClienteInOper;
+		private TextBox txtEstadoNuevoClienteInOper;
+		private Label lblEstadoNuevoClienteInOper;
+		private DataGridView dgvAsientosInOper;
+		private Button btnReporteVentaInOper;
+		private TabControl tabReporteVenta;
+		private TabPage ReporteVenta;
+		private ComboBox cboPartidoReporteInOper;
+		private ComboBox cboEstadioReporteInOper;
+		private Button btnExportarReporteVentaInOper;
+		private DateTimePicker dateTimePicker2;
+		private Label lblIngresosReportesInOper;
+		private Label lblBoletosVendidosReportesInOper;
+		private DataGridView gridReporteInOper;
+		private DataGridViewTextBoxColumn FOLIO;
+		private DataGridViewTextBoxColumn FECHAVENTA;
+		private DataGridViewTextBoxColumn ESTADIO;
+		private DataGridViewTextBoxColumn PARTIDO;
+		private DataGridViewTextBoxColumn ZONA;
+		private DataGridViewTextBoxColumn CANTIDAD;
+		private DataGridViewTextBoxColumn SUBTOTAL;
+		private DataGridViewTextBoxColumn TOTAL;
+		private DateTimePicker dateTimePicker1;
+		private Button btnLimparGridReporteInOper;
+		private Button btnFiltrarReporteInOper;
+		private Label lblPartidoReporteInOper;
+		private Label lblEstadioReporteInOper;
+		private Label lblHastaReporteInOper;
+		private Label lblDesdeReporteInOper;
+		private Label label1;
+		private TabPage tabPage6;
+		private Button btnOcupacionDisponibilidadInOper;
+		private Label label4;
+		private ComboBox cboPartidoODInOper;
+		private ComboBox cboEstadioODInOper;
+		private Label lblPartidoODInOper;
+		private Label lblEstadioODInOper;
+		private DataGridView dgvDisponibilidadODInOper;
+		private DataGridView dgvAsientosODInOper;
+		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+		private DataGridViewTextBoxColumn CAPACIDAD;
+		private DataGridViewTextBoxColumn DISPONIBLES;
+		private DataGridViewTextBoxColumn VENDIDOS;
+		private DataGridViewTextBoxColumn OCUPACION;
+	}
 }

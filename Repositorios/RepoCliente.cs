@@ -182,4 +182,26 @@ namespace PIA.Repositorios
 		}
 	}
 
+	//=======================
+	// REPOSITORIO PARA CANCELAR UNA VENTA
+	//=======================
+	public class RepoCancelacion
+	{
+		//=======================
+		// REGISTRA LA CANCELACION Y DEJA QUE EL TRIGGER PROCESE LA VENTA
+		//=======================
+		public async Task RegistrarAsync(Cancelacion cancelacion)
+		{
+			await using var db = new AppDbContext();
+			bool yaCancelada = await db.Cancelacion
+				.AnyAsync(c => c.IdVenta == cancelacion.IdVenta);
+
+			if (yaCancelada)
+				throw new InvalidOperationException("Esta venta ya tiene una cancelación registrada.");
+
+			db.Cancelacion.Add(cancelacion);
+			await db.SaveChangesAsync();
+		}
+	}
+
 }
