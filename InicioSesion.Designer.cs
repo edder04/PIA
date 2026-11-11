@@ -86,6 +86,7 @@ namespace PIA
             txtContraseña.Name = "txtContraseña";
             txtContraseña.Size = new Size(300, 27);
             txtContraseña.TabIndex = 6;
+            txtContraseña.UseSystemPasswordChar = true;
             txtContraseña.TextAlign = HorizontalAlignment.Center;
             txtContraseña.KeyDown += txtContraseña_KeyDown;
             // 

@@ -161,6 +161,15 @@ namespace PIA{                                                                  
 		//==================================
 		private async void Administracion_Load(object sender, EventArgs e)
 		{                                   // Este método se ejecuta cuando se carga la ventana de administración.
+			//=======================
+			// MUESTRA EL USUARIO ACTIVO EN EL ENCABEZADO Y EN BIENVENIDA
+			//=======================
+			string nombreUsuario = string.IsNullOrWhiteSpace(Sesion.NombreUsuario)
+				? "USUARIO"
+				: Sesion.NombreUsuario.Trim().ToUpper(new CultureInfo("es-MX"));
+			lblNombreUsuario.Text = nombreUsuario;
+			lblBienvenidaInicio.Text = $"BUENOS DÍAS, {nombreUsuario}";
+
 			pictureBox1.Image = Image
 				.FromFile(@"C:\Users\edcru\Downloads\UANL\Agosto-Diciembre 2026\checkMark.gif");        // Cargo el GIF desde la ruta donde tengo guardado el archivo.
 			pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;                                     // Ajusto la imagen para que ocupe el espacio del PictureBox.
