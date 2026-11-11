@@ -57,6 +57,7 @@ namespace PIA
 			cboEstadioReporteInOper.SelectedIndexChanged += cboEstadioReporteInOper_SelectedIndexChanged;
 			btnFiltrarReporteInOper.Click += btnFiltrarReporteInOper_Click;
 			btnLimparGridReporteInOper.Click += btnLimparGridReporteInOper_Click;
+			btnExportarReporteVentaInOper.Click += btnExportarReporteVentaInOper_Click;
 			cboEstadioODInOper.SelectedIndexChanged += cboEstadioODInOper_SelectedIndexChanged;
 			cboPartidoODInOper.SelectedIndexChanged += cboPartidoODInOper_SelectedIndexChanged;
 			dgvDisponibilidadODInOper.CellClick += dgvDisponibilidadODInOper_CellClick;
@@ -1585,8 +1586,10 @@ namespace PIA
 			tabClientesInVentas.SelectedIndex = 1;
 		}
 
-		// Método: button6_Click.
-		private void button6_Click(object sender, EventArgs e)
+		//=======================
+		// EXPORTA EL REPORTE FILTRADO A PDF
+		//=======================
+		private void btnExportarReporteVentaInOper_Click(object? sender, EventArgs e)
 		{
 			ExportarReporteVentasPdf();
 		}

@@ -44,6 +44,7 @@ namespace PIA{                                                                  
 			pnlMenuInAdmin.Visible = false;                                                             // Oculto el menú de administración al iniciar.
 
 			ConfigurarGridReporteVentas();
+			button6.Click += button6_Click;
 			GlassEffect.Apply(this);                                                                  // Aplico el efecto visual de vidrio a la ventana.
 
 			RedondearBoton.Aplicar(btnAjustesInAdmin, 20);                                              // Redondeo las esquinas del botón de ajustes.
@@ -1816,6 +1817,67 @@ namespace PIA{                                                                  
 
 			lblBoletosVendidosReporte.Text = "BOLETOS VENDIDOS: 0";
 			lblIngresosReporte.Text = "INGRESOS: $0.00";
+		}
+
+		//=======================
+		// EXPORTA EL REPORTE FILTRADO DE ADMINISTRACION A PDF
+		//=======================
+		private void button6_Click(object? sender, EventArgs e)
+		{
+			if (dgvReporteVentas.Rows.Count == 0)
+			{
+				MessageBox.Show("No hay datos en el reporte para exportar.", "Reporte vacío",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
+			using var dialogo = new SaveFileDialog
+			{
+				Title = "Exportar reporte de ventas",
+				Filter = "Archivo PDF (*.pdf)|*.pdf",
+				FileName = $"ReporteVentas_Admin_{DateTime.Now:yyyyMMdd_HHmm}.pdf",
+				AddExtension = true,
+				DefaultExt = "pdf",
+				OverwritePrompt = true
+			};
+
+			if (dialogo.ShowDialog(this) != DialogResult.OK)
+				return;
+
+			var lineas = new List<string>
+			{
+				$"Periodo: {dtpDesdeReporte.Value:dd/MM/yyyy} al {dtpHastaReporte.Value:dd/MM/yyyy}",
+				$"Estadio: {cboEstadioReporte.SelectedItem ?? "Todos"}",
+				$"Partido: {(cboPartidoReporte.SelectedItem as FiltroPartidoReporte)?.Descripcion ?? "Todos"}",
+				lblBoletosVendidosReporte.Text,
+				lblIngresosReporte.Text,
+				string.Empty,
+				"DETALLE DEL REPORTE DE VENTAS"
+			};
+
+			foreach (DataGridViewRow fila in dgvReporteVentas.Rows)
+			{
+				if (fila.IsNewRow)
+					continue;
+
+				string Valor(int indice) => Convert.ToString(fila.Cells[indice].Value) ?? string.Empty;
+				lineas.Add($"Folio: {Valor(0)} | Estadio: {Valor(1)}");
+				lineas.Add($"Partido: {Valor(2)} | Zona: {Valor(3)}");
+				lineas.Add($"Boletos: {Valor(4)} | Subtotal: {Valor(5)} | Total: {Valor(6)}");
+				lineas.Add(string.Empty);
+			}
+
+			try
+			{
+				GeneradorPdfBasico.Guardar(dialogo.FileName, "REPORTE DE VENTAS - ADMINISTRACION", lineas);
+				MessageBox.Show("El reporte PDF se guardó correctamente.", "Reporte exportado",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"No se pudo guardar el reporte PDF.\n{ex.Message}",
+					"Error al exportar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		private void label36_Click(object sender, EventArgs e)
