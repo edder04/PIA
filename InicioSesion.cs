@@ -90,7 +90,8 @@ namespace PIA{                                                                  
 				Sesion.Rol = usuario.Rol;
 
 				this.Hide();                                                                            // Oculto la ventana de inicio de sesión cuando el acceso es correcto.
-                ventanaDestino.Show();                                                                  // Abro la ventana que corresponde al rol del usuario.
+                ventanaDestino.Show(); 
+            }                                                                  // Abro la ventana que corresponde al rol del usuario.
         //=============================================================
         // Este método se ejecuta cuando hago clic en el botón Aceptar.
         //=============================================================

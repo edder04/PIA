@@ -1121,21 +1121,12 @@ namespace PIA
 			pnlMenu.Visible = false;
 		}
 
-		//=======================================================
-		// Abre la sección para buscar ventas y generar facturas.
-		//=======================================================
-		private void btnFacturasVentas_Click(object sender, EventArgs e)
-		{
-			tabCtrlVentas.SelectedIndex = 4;
-			pnlMenu.Visible = false;
-		}
-
 		//=============================
 		// Abre la sección de reportes.
 		//=============================
 		private void btnReportesVentas_Click(object sender, EventArgs e)
 		{
-			tabCtrlVentas.SelectedIndex = 5;
+			tabCtrlVentas.SelectedIndex = 4;
 
 			pnlMenu.Visible = false;
 		}

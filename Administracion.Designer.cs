@@ -639,7 +639,7 @@
 			tabCtrlInAdmin.Controls.Add(tabPgReportes);
 			tabCtrlInAdmin.Controls.Add(tabPageUsuarios);
 			tabCtrlInAdmin.Controls.Add(tabPage7);
-			tabCtrlInAdmin.ItemSize = new Size(50, 20);
+			tabCtrlInAdmin.ItemSize = new Size(0, 1);
 			tabCtrlInAdmin.Location = new Point(50, 100);
 			tabCtrlInAdmin.Margin = new Padding(2);
 			tabCtrlInAdmin.Name = "tabCtrlInAdmin";
@@ -659,11 +659,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 24);
+			tabPgInicio.Location = new Point(4, 5);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 822);
+			tabPgInicio.Size = new Size(1392, 841);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -1783,7 +1783,7 @@
 			tabClientesInAdmin.Controls.Add(NuevoCliente);
 			tabClientesInAdmin.Controls.Add(EditarClienteInAdmin);
 			tabClientesInAdmin.Controls.Add(tabHistorialCliente);
-			tabClientesInAdmin.ItemSize = new Size(50, 20);
+			tabClientesInAdmin.ItemSize = new Size(0, 1);
 			tabClientesInAdmin.Location = new Point(3, 11);
 			tabClientesInAdmin.Name = "tabClientesInAdmin";
 			tabClientesInAdmin.SelectedIndex = 0;
@@ -1801,10 +1801,10 @@
 			BuscarCliente.Controls.Add(txtBuscarCliente);
 			BuscarCliente.Controls.Add(lblBuscarClienteInCliente);
 			BuscarCliente.Controls.Add(lblClientesInCliente);
-			BuscarCliente.Location = new Point(4, 24);
+			BuscarCliente.Location = new Point(4, 5);
 			BuscarCliente.Name = "BuscarCliente";
 			BuscarCliente.Padding = new Padding(3);
-			BuscarCliente.Size = new Size(1378, 772);
+			BuscarCliente.Size = new Size(1378, 791);
 			BuscarCliente.TabIndex = 0;
 			BuscarCliente.Text = "BuscarCliente";
 			// 
@@ -3827,7 +3827,7 @@
 			tabReportes.Appearance = TabAppearance.FlatButtons;
 			tabReportes.Controls.Add(tabReporteVenta);
 			tabReportes.Controls.Add(tabOcupacion);
-			tabReportes.ItemSize = new Size(50, 20);
+			tabReportes.ItemSize = new Size(0, 1);
 			tabReportes.Location = new Point(15, 60);
 			tabReportes.Name = "tabReportes";
 			tabReportes.SelectedIndex = 0;
@@ -3853,10 +3853,10 @@
 			tabReporteVenta.Controls.Add(lblHastaReporteInOper);
 			tabReporteVenta.Controls.Add(lblDesdeReporteInOper);
 			tabReporteVenta.Controls.Add(label1);
-			tabReporteVenta.Location = new Point(4, 24);
+			tabReporteVenta.Location = new Point(4, 5);
 			tabReporteVenta.Name = "tabReporteVenta";
 			tabReporteVenta.Padding = new Padding(3);
-			tabReporteVenta.Size = new Size(1355, 723);
+			tabReporteVenta.Size = new Size(1355, 742);
 			tabReporteVenta.TabIndex = 0;
 			tabReporteVenta.Text = "ReporteVenta";
 			// 
@@ -3943,7 +3943,7 @@
 			gridReporteInOper.Margin = new Padding(2);
 			gridReporteInOper.Name = "gridReporteInOper";
 			gridReporteInOper.RowHeadersWidth = 72;
-			gridReporteInOper.Size = new Size(1200, 300);
+			gridReporteInOper.Size = new Size(1200, 319);
 			gridReporteInOper.TabIndex = 48;
 			// 
 			// FOLIO
@@ -4290,13 +4290,16 @@
 			// 
 			// tabCtrlUsauriosInAdmin
 			// 
+			tabCtrlUsauriosInAdmin.Appearance = TabAppearance.FlatButtons;
 			tabCtrlUsauriosInAdmin.Controls.Add(BuscarUsuario);
 			tabCtrlUsauriosInAdmin.Controls.Add(NuevoUsuario);
 			tabCtrlUsauriosInAdmin.Controls.Add(tabEditarUsuario);
+			tabCtrlUsauriosInAdmin.ItemSize = new Size(0, 1);
 			tabCtrlUsauriosInAdmin.Location = new Point(3, 11);
 			tabCtrlUsauriosInAdmin.Name = "tabCtrlUsauriosInAdmin";
 			tabCtrlUsauriosInAdmin.SelectedIndex = 0;
 			tabCtrlUsauriosInAdmin.Size = new Size(1386, 800);
+			tabCtrlUsauriosInAdmin.SizeMode = TabSizeMode.Fixed;
 			tabCtrlUsauriosInAdmin.TabIndex = 2;
 			// 
 			// BuscarUsuario
@@ -4308,10 +4311,10 @@
 			BuscarUsuario.Controls.Add(textBox29);
 			BuscarUsuario.Controls.Add(label47);
 			BuscarUsuario.Controls.Add(label48);
-			BuscarUsuario.Location = new Point(4, 24);
+			BuscarUsuario.Location = new Point(4, 5);
 			BuscarUsuario.Name = "BuscarUsuario";
 			BuscarUsuario.Padding = new Padding(3);
-			BuscarUsuario.Size = new Size(1378, 772);
+			BuscarUsuario.Size = new Size(1378, 791);
 			BuscarUsuario.TabIndex = 0;
 			BuscarUsuario.Text = "BuscarUsuario";
 			// 
@@ -4440,10 +4443,10 @@
 			NuevoUsuario.Controls.Add(label63);
 			NuevoUsuario.Controls.Add(label64);
 			NuevoUsuario.Controls.Add(label65);
-			NuevoUsuario.Location = new Point(4, 24);
+			NuevoUsuario.Location = new Point(4, 5);
 			NuevoUsuario.Name = "NuevoUsuario";
 			NuevoUsuario.Padding = new Padding(3);
-			NuevoUsuario.Size = new Size(1378, 772);
+			NuevoUsuario.Size = new Size(1378, 791);
 			NuevoUsuario.TabIndex = 1;
 			NuevoUsuario.Text = "NuevoUsuario";
 			// 
@@ -4672,9 +4675,9 @@
 			tabEditarUsuario.Controls.Add(label67);
 			tabEditarUsuario.Controls.Add(label68);
 			tabEditarUsuario.Controls.Add(button14);
-			tabEditarUsuario.Location = new Point(4, 24);
+			tabEditarUsuario.Location = new Point(4, 5);
 			tabEditarUsuario.Name = "tabEditarUsuario";
-			tabEditarUsuario.Size = new Size(1378, 772);
+			tabEditarUsuario.Size = new Size(1378, 791);
 			tabEditarUsuario.TabIndex = 2;
 			tabEditarUsuario.Text = "EditarUsuario";
 			// 

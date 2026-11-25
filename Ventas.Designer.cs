@@ -308,7 +308,7 @@
 			tabCtrlVentas.Controls.Add(tabPgClientes);
 			tabCtrlVentas.Controls.Add(tabPgPartidos);
 			tabCtrlVentas.Controls.Add(tabPgReportes);
-			tabCtrlVentas.ItemSize = new Size(50, 20);
+			tabCtrlVentas.ItemSize = new Size(0, 1);
 			tabCtrlVentas.Location = new Point(50, 100);
 			tabCtrlVentas.Margin = new Padding(0);
 			tabCtrlVentas.Name = "tabCtrlVentas";
@@ -330,11 +330,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 24);
+			tabPgInicio.Location = new Point(4, 5);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 822);
+			tabPgInicio.Size = new Size(1392, 841);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -1411,7 +1411,7 @@
 			tabClientesInVentas.Controls.Add(NuevoCliente);
 			tabClientesInVentas.Controls.Add(EditarCliente);
 			tabClientesInVentas.Controls.Add(tabHistorialCliente);
-			tabClientesInVentas.ItemSize = new Size(50, 20);
+			tabClientesInVentas.ItemSize = new Size(0, 1);
 			tabClientesInVentas.Location = new Point(3, 19);
 			tabClientesInVentas.Name = "tabClientesInVentas";
 			tabClientesInVentas.SelectedIndex = 0;
@@ -1429,10 +1429,10 @@
 			BuscarCliente.Controls.Add(txtBuscarClienteInOper);
 			BuscarCliente.Controls.Add(lblBuscarClienteInOper);
 			BuscarCliente.Controls.Add(lblClientesInCliente);
-			BuscarCliente.Location = new Point(4, 24);
+			BuscarCliente.Location = new Point(4, 5);
 			BuscarCliente.Name = "BuscarCliente";
 			BuscarCliente.Padding = new Padding(3);
-			BuscarCliente.Size = new Size(1378, 772);
+			BuscarCliente.Size = new Size(1378, 791);
 			BuscarCliente.TabIndex = 0;
 			BuscarCliente.Text = "BuscarCliente";
 			// 
@@ -1589,10 +1589,10 @@
 			NuevoCliente.Controls.Add(lblApPaternoNuevoClienteInOper);
 			NuevoCliente.Controls.Add(lblNombreNuevoClienteInOper);
 			NuevoCliente.Controls.Add(label29);
-			NuevoCliente.Location = new Point(4, 24);
+			NuevoCliente.Location = new Point(4, 5);
 			NuevoCliente.Name = "NuevoCliente";
 			NuevoCliente.Padding = new Padding(3);
-			NuevoCliente.Size = new Size(1378, 772);
+			NuevoCliente.Size = new Size(1378, 791);
 			NuevoCliente.TabIndex = 1;
 			NuevoCliente.Text = "NuevoCliente";
 			// 
@@ -2009,9 +2009,9 @@
 			EditarCliente.Controls.Add(lblFechaNacimientoEditarClienteInOper);
 			EditarCliente.Controls.Add(lblCampoAEditarClienteInOper);
 			EditarCliente.Controls.Add(label46);
-			EditarCliente.Location = new Point(4, 24);
+			EditarCliente.Location = new Point(4, 5);
 			EditarCliente.Name = "EditarCliente";
-			EditarCliente.Size = new Size(1378, 772);
+			EditarCliente.Size = new Size(1378, 791);
 			EditarCliente.TabIndex = 2;
 			EditarCliente.Text = "EditarCliente";
 			// 
@@ -2307,10 +2307,10 @@
 			tabHistorialCliente.Controls.Add(lblHistorialInHistorialCliente);
 			tabHistorialCliente.Controls.Add(lblRegresarInHistorialCliente);
 			tabHistorialCliente.Controls.Add(btnRegresarInHistorialCliente);
-			tabHistorialCliente.Location = new Point(4, 24);
+			tabHistorialCliente.Location = new Point(4, 5);
 			tabHistorialCliente.Name = "tabHistorialCliente";
 			tabHistorialCliente.Padding = new Padding(3);
-			tabHistorialCliente.Size = new Size(1378, 772);
+			tabHistorialCliente.Size = new Size(1378, 791);
 			tabHistorialCliente.TabIndex = 3;
 			tabHistorialCliente.Text = "HistorialCliente";
 			// 
@@ -2661,7 +2661,7 @@
 			tabReportes.Appearance = TabAppearance.FlatButtons;
 			tabReportes.Controls.Add(tabReporteVenta);
 			tabReportes.Controls.Add(tabOcupacion);
-			tabReportes.ItemSize = new Size(50, 20);
+			tabReportes.ItemSize = new Size(0, 1);
 			tabReportes.Location = new Point(26, 68);
 			tabReportes.Name = "tabReportes";
 			tabReportes.SelectedIndex = 0;
@@ -2687,10 +2687,10 @@
 			tabReporteVenta.Controls.Add(lblHastaReporteInOper);
 			tabReporteVenta.Controls.Add(lblDesdeReporteInOper);
 			tabReporteVenta.Controls.Add(label1);
-			tabReporteVenta.Location = new Point(4, 24);
+			tabReporteVenta.Location = new Point(4, 5);
 			tabReporteVenta.Name = "tabReporteVenta";
 			tabReporteVenta.Padding = new Padding(3);
-			tabReporteVenta.Size = new Size(1355, 723);
+			tabReporteVenta.Size = new Size(1355, 742);
 			tabReporteVenta.TabIndex = 0;
 			tabReporteVenta.Text = "ReporteVenta";
 			// 
@@ -2777,7 +2777,7 @@
 			gridReporteInOper.Margin = new Padding(2);
 			gridReporteInOper.Name = "gridReporteInOper";
 			gridReporteInOper.RowHeadersWidth = 72;
-			gridReporteInOper.Size = new Size(1200, 281);
+			gridReporteInOper.Size = new Size(1200, 300);
 			gridReporteInOper.TabIndex = 48;
 			// 
 			// FOLIO
@@ -2946,10 +2946,10 @@
 			tabOcupacion.Controls.Add(cboEstadioODInOper);
 			tabOcupacion.Controls.Add(lblPartidoODInOper);
 			tabOcupacion.Controls.Add(lblEstadioODInOper);
-			tabOcupacion.Location = new Point(4, 24);
+			tabOcupacion.Location = new Point(4, 5);
 			tabOcupacion.Name = "tabOcupacion";
 			tabOcupacion.Padding = new Padding(3);
-			tabOcupacion.Size = new Size(1355, 723);
+			tabOcupacion.Size = new Size(1355, 742);
 			tabOcupacion.TabIndex = 1;
 			tabOcupacion.Text = "Ocupacion";
 			// 
@@ -2965,7 +2965,7 @@
 			dgvAsientosInOcupacion.Margin = new Padding(2);
 			dgvAsientosInOcupacion.Name = "dgvAsientosInOcupacion";
 			dgvAsientosInOcupacion.RowHeadersWidth = 72;
-			dgvAsientosInOcupacion.Size = new Size(1167, 259);
+			dgvAsientosInOcupacion.Size = new Size(1167, 278);
 			dgvAsientosInOcupacion.TabIndex = 65;
 			// 
 			// dgvDisponibilidadInOcupacion
@@ -2981,7 +2981,7 @@
 			dgvDisponibilidadInOcupacion.Margin = new Padding(2);
 			dgvDisponibilidadInOcupacion.Name = "dgvDisponibilidadInOcupacion";
 			dgvDisponibilidadInOcupacion.RowHeadersWidth = 72;
-			dgvDisponibilidadInOcupacion.Size = new Size(1167, 259);
+			dgvDisponibilidadInOcupacion.Size = new Size(1167, 278);
 			dgvDisponibilidadInOcupacion.TabIndex = 60;
 			// 
 			// dataGridViewTextBoxColumn8
@@ -3212,10 +3212,10 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.Black;
 			ClientSize = new Size(1484, 961);
-			Controls.Add(tabCtrlVentas);
 			Controls.Add(lblNombreUsuario);
 			Controls.Add(btnAjustes);
 			Controls.Add(pnlMenu);
+			Controls.Add(tabCtrlVentas);
 			Margin = new Padding(2);
 			MaximizeBox = false;
 			MinimizeBox = false;
