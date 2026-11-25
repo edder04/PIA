@@ -22,6 +22,9 @@ namespace PIA
 			btnVenta.Click += btnVenta_Click;
 		}
 
+		//=======================================================
+		// Carga en la tarjeta los datos y la imagen del partido.
+		//=======================================================
 		public void CargarPartido(vw_Partidos partido)
 		{
 			_partido = partido;
@@ -35,11 +38,9 @@ namespace PIA
 				$"{partido.BoletosDisponibles} boletos disponibles";
 		}
 
-		private void UcCardPartido_Load(object sender, EventArgs e)
-		{
-
-		}
-
+		//===============================================================
+		// Abre el flujo de venta para el partido mostrado en la tarjeta.
+		//===============================================================
 		private void btnVenta_Click(object sender, EventArgs e)
 		{
 			if (_partido is not null){

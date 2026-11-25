@@ -115,10 +115,6 @@ namespace PIA.Datos{                                                            
 		public decimal Total { get; set; }
 		public string MetodoPago { get; set; } = string.Empty;
 		public string EstadoVenta { get; set; } = "Activa";
-		public string? TarjetaTitular { get; set; }
-		public string? TarjetaNumero { get; set; }
-		public string? TarjetaExpiracion { get; set; }
-		public string? TarjetaCVV { get; set; }
 	}
 
 	public class DetalleVenta

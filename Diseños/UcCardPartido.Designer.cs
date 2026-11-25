@@ -48,7 +48,6 @@
 			btnVenta.TabIndex = 24;
 			btnVenta.Text = "Hacer Venta";
 			btnVenta.UseVisualStyleBackColor = true;
-			btnVenta.Click += btnVenta_Click;
 			// 
 			// lblDisponibilidadInCard
 			// 
@@ -137,7 +136,6 @@
 			Margin = new Padding(6, 5, 6, 5);
 			Name = "UcCardPartido";
 			Size = new Size(331, 170);
-			Load += UcCardPartido_Load;
 			ResumeLayout(false);
 			PerformLayout();
 		}

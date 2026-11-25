@@ -67,7 +67,7 @@ namespace PIA
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(115, 25);
             lblUsuario.TabIndex = 3;
-            lblUsuario.Text = "USUARIO:";
+            lblUsuario.Text = "CORREO ELECTRÓNICO:";
             // 
             // txtUsuario
             // 

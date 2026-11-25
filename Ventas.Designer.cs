@@ -119,7 +119,7 @@
 			tabPgClientes = new TabPage();
 			tabClientesInVentas = new TabControl();
 			BuscarCliente = new TabPage();
-			btnHistorialClienteInOper = new Button();
+			btnHistorial = new Button();
 			btnEditarClienteInOper = new Button();
 			GridClientesInOper = new DataGridView();
 			dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -194,6 +194,21 @@
 			lblFechaNacimientoEditarClienteInOper = new Label();
 			lblCampoAEditarClienteInOper = new Label();
 			label46 = new Label();
+			tabHistorialCliente = new TabPage();
+			btnExportarInHistorialCliente = new Button();
+			dgvHistorialInHistorialCliente = new DataGridView();
+			lblHistorialComprasInHistorialCliente = new Label();
+			lblBoletosInHistorialCliente = new Label();
+			lblTotalInHistorialCliente = new Label();
+			lblComprasInHistorialCliente = new Label();
+			label13 = new Label();
+			lblClienteInHistorialCliente = new Label();
+			lblRFCInHistorialCliente = new Label();
+			lblNombreInfoInHistorialCliente = new Label();
+			lblNombreCompletoInHistorialCliente = new Label();
+			lblHistorialInHistorialCliente = new Label();
+			lblRegresarInHistorialCliente = new Label();
+			btnRegresarInHistorialCliente = new Button();
 			tabPgPartidos = new TabPage();
 			flowPanelPartidos = new FlowLayoutPanel();
 			btnProximosInPartidos = new Button();
@@ -207,8 +222,8 @@
 			tabPgReportes = new TabPage();
 			btnOcupacionDisponibilidadInOper = new Button();
 			btnReporteVentaInOper = new Button();
-			tabReporteVenta = new TabControl();
-			ReporteVenta = new TabPage();
+			tabReportes = new TabControl();
+			tabReporteVenta = new TabPage();
 			cboPartidoReporteInOper = new ComboBox();
 			cboEstadioReporteInOper = new ComboBox();
 			btnExportarReporteVentaInOper = new Button();
@@ -232,9 +247,9 @@
 			lblHastaReporteInOper = new Label();
 			lblDesdeReporteInOper = new Label();
 			label1 = new Label();
-			tabPage6 = new TabPage();
-			dgvAsientosODInOper = new DataGridView();
-			dgvDisponibilidadODInOper = new DataGridView();
+			tabOcupacion = new TabPage();
+			dgvAsientosInOcupacion = new DataGridView();
+			dgvDisponibilidadInOcupacion = new DataGridView();
 			dataGridViewTextBoxColumn8 = new DataGridViewTextBoxColumn();
 			CAPACIDAD = new DataGridViewTextBoxColumn();
 			DISPONIBLES = new DataGridViewTextBoxColumn();
@@ -250,7 +265,6 @@
 			btnVentasVentas = new Button();
 			btnClientesVentas = new Button();
 			btnPartidosVentas = new Button();
-			btnFacturasVentas = new Button();
 			btnReportesVentas = new Button();
 			pnlMenu = new Panel();
 			btnInicio = new Button();
@@ -273,14 +287,16 @@
 			((System.ComponentModel.ISupportInitialize)GridClientesInOper).BeginInit();
 			NuevoCliente.SuspendLayout();
 			EditarCliente.SuspendLayout();
+			tabHistorialCliente.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)dgvHistorialInHistorialCliente).BeginInit();
 			tabPgPartidos.SuspendLayout();
 			tabPgReportes.SuspendLayout();
+			tabReportes.SuspendLayout();
 			tabReporteVenta.SuspendLayout();
-			ReporteVenta.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)gridReporteInOper).BeginInit();
-			tabPage6.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)dgvAsientosODInOper).BeginInit();
-			((System.ComponentModel.ISupportInitialize)dgvDisponibilidadODInOper).BeginInit();
+			tabOcupacion.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)dgvAsientosInOcupacion).BeginInit();
+			((System.ComponentModel.ISupportInitialize)dgvDisponibilidadInOcupacion).BeginInit();
 			pnlMenu.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -292,7 +308,7 @@
 			tabCtrlVentas.Controls.Add(tabPgClientes);
 			tabCtrlVentas.Controls.Add(tabPgPartidos);
 			tabCtrlVentas.Controls.Add(tabPgReportes);
-			tabCtrlVentas.ItemSize = new Size(0, 1);
+			tabCtrlVentas.ItemSize = new Size(50, 20);
 			tabCtrlVentas.Location = new Point(50, 100);
 			tabCtrlVentas.Margin = new Padding(0);
 			tabCtrlVentas.Name = "tabCtrlVentas";
@@ -314,11 +330,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 34);
+			tabPgInicio.Location = new Point(4, 24);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 812);
+			tabPgInicio.Size = new Size(1392, 822);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -350,9 +366,9 @@
 			lblInfoBoletosVendidosInicio.Location = new Point(292, 100);
 			lblInfoBoletosVendidosInicio.Margin = new Padding(2, 0, 2, 0);
 			lblInfoBoletosVendidosInicio.Name = "lblInfoBoletosVendidosInicio";
-			lblInfoBoletosVendidosInicio.Size = new Size(43, 23);
+			lblInfoBoletosVendidosInicio.Size = new Size(21, 23);
 			lblInfoBoletosVendidosInicio.TabIndex = 17;
-			lblInfoBoletosVendidosInicio.Text = "152";
+			lblInfoBoletosVendidosInicio.Text = "0";
 			// 
 			// lblInfoVentasDelDiaInicio
 			// 
@@ -362,9 +378,9 @@
 			lblInfoVentasDelDiaInicio.Location = new Point(292, 75);
 			lblInfoVentasDelDiaInicio.Margin = new Padding(2, 0, 2, 0);
 			lblInfoVentasDelDiaInicio.Name = "lblInfoVentasDelDiaInicio";
-			lblInfoVentasDelDiaInicio.Size = new Size(32, 23);
+			lblInfoVentasDelDiaInicio.Size = new Size(21, 23);
 			lblInfoVentasDelDiaInicio.TabIndex = 16;
-			lblInfoVentasDelDiaInicio.Text = "50";
+			lblInfoVentasDelDiaInicio.Text = "0";
 			// 
 			// lblProximosPartidosInicio
 			// 
@@ -430,11 +446,11 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 5);
+			tabPgVentas.Location = new Point(4, 24);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 841);
+			tabPgVentas.Size = new Size(1392, 822);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
@@ -1381,10 +1397,10 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInVentas);
-			tabPgClientes.Location = new Point(4, 34);
+			tabPgClientes.Location = new Point(4, 24);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 812);
+			tabPgClientes.Size = new Size(1392, 822);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
@@ -1394,7 +1410,8 @@
 			tabClientesInVentas.Controls.Add(BuscarCliente);
 			tabClientesInVentas.Controls.Add(NuevoCliente);
 			tabClientesInVentas.Controls.Add(EditarCliente);
-			tabClientesInVentas.ItemSize = new Size(0, 1);
+			tabClientesInVentas.Controls.Add(tabHistorialCliente);
+			tabClientesInVentas.ItemSize = new Size(50, 20);
 			tabClientesInVentas.Location = new Point(3, 19);
 			tabClientesInVentas.Name = "tabClientesInVentas";
 			tabClientesInVentas.SelectedIndex = 0;
@@ -1405,31 +1422,31 @@
 			// BuscarCliente
 			// 
 			BuscarCliente.BackColor = Color.Black;
-			BuscarCliente.Controls.Add(btnHistorialClienteInOper);
+			BuscarCliente.Controls.Add(btnHistorial);
 			BuscarCliente.Controls.Add(btnEditarClienteInOper);
 			BuscarCliente.Controls.Add(GridClientesInOper);
 			BuscarCliente.Controls.Add(btnNuevoClienteInOper);
 			BuscarCliente.Controls.Add(txtBuscarClienteInOper);
 			BuscarCliente.Controls.Add(lblBuscarClienteInOper);
 			BuscarCliente.Controls.Add(lblClientesInCliente);
-			BuscarCliente.Location = new Point(4, 5);
+			BuscarCliente.Location = new Point(4, 24);
 			BuscarCliente.Name = "BuscarCliente";
 			BuscarCliente.Padding = new Padding(3);
-			BuscarCliente.Size = new Size(1378, 791);
+			BuscarCliente.Size = new Size(1378, 772);
 			BuscarCliente.TabIndex = 0;
 			BuscarCliente.Text = "BuscarCliente";
 			// 
-			// btnHistorialClienteInOper
+			// btnHistorial
 			// 
-			btnHistorialClienteInOper.FlatStyle = FlatStyle.System;
-			btnHistorialClienteInOper.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnHistorialClienteInOper.Location = new Point(310, 614);
-			btnHistorialClienteInOper.Margin = new Padding(2);
-			btnHistorialClienteInOper.Name = "btnHistorialClienteInOper";
-			btnHistorialClienteInOper.Size = new Size(175, 35);
-			btnHistorialClienteInOper.TabIndex = 37;
-			btnHistorialClienteInOper.Text = "HISTORIAL 📋";
-			btnHistorialClienteInOper.UseVisualStyleBackColor = true;
+			btnHistorial.FlatStyle = FlatStyle.System;
+			btnHistorial.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnHistorial.Location = new Point(310, 614);
+			btnHistorial.Margin = new Padding(2);
+			btnHistorial.Name = "btnHistorial";
+			btnHistorial.Size = new Size(175, 35);
+			btnHistorial.TabIndex = 37;
+			btnHistorial.Text = "HISTORIAL 📋";
+			btnHistorial.UseVisualStyleBackColor = true;
 			// 
 			// btnEditarClienteInOper
 			// 
@@ -1572,10 +1589,10 @@
 			NuevoCliente.Controls.Add(lblApPaternoNuevoClienteInOper);
 			NuevoCliente.Controls.Add(lblNombreNuevoClienteInOper);
 			NuevoCliente.Controls.Add(label29);
-			NuevoCliente.Location = new Point(4, 5);
+			NuevoCliente.Location = new Point(4, 24);
 			NuevoCliente.Name = "NuevoCliente";
 			NuevoCliente.Padding = new Padding(3);
-			NuevoCliente.Size = new Size(1378, 791);
+			NuevoCliente.Size = new Size(1378, 772);
 			NuevoCliente.TabIndex = 1;
 			NuevoCliente.Text = "NuevoCliente";
 			// 
@@ -1992,9 +2009,9 @@
 			EditarCliente.Controls.Add(lblFechaNacimientoEditarClienteInOper);
 			EditarCliente.Controls.Add(lblCampoAEditarClienteInOper);
 			EditarCliente.Controls.Add(label46);
-			EditarCliente.Location = new Point(4, 5);
+			EditarCliente.Location = new Point(4, 24);
 			EditarCliente.Name = "EditarCliente";
-			EditarCliente.Size = new Size(1378, 791);
+			EditarCliente.Size = new Size(1378, 772);
 			EditarCliente.TabIndex = 2;
 			EditarCliente.Text = "EditarCliente";
 			// 
@@ -2273,6 +2290,202 @@
 			label46.TabIndex = 125;
 			label46.Text = "EDITAR CLIENTE";
 			// 
+			// tabHistorialCliente
+			// 
+			tabHistorialCliente.BackColor = Color.Black;
+			tabHistorialCliente.Controls.Add(btnExportarInHistorialCliente);
+			tabHistorialCliente.Controls.Add(dgvHistorialInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblHistorialComprasInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblBoletosInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblTotalInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblComprasInHistorialCliente);
+			tabHistorialCliente.Controls.Add(label13);
+			tabHistorialCliente.Controls.Add(lblClienteInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblRFCInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblNombreInfoInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblNombreCompletoInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblHistorialInHistorialCliente);
+			tabHistorialCliente.Controls.Add(lblRegresarInHistorialCliente);
+			tabHistorialCliente.Controls.Add(btnRegresarInHistorialCliente);
+			tabHistorialCliente.Location = new Point(4, 24);
+			tabHistorialCliente.Name = "tabHistorialCliente";
+			tabHistorialCliente.Padding = new Padding(3);
+			tabHistorialCliente.Size = new Size(1378, 772);
+			tabHistorialCliente.TabIndex = 3;
+			tabHistorialCliente.Text = "HistorialCliente";
+			// 
+			// btnExportarInHistorialCliente
+			// 
+			btnExportarInHistorialCliente.Cursor = Cursors.Hand;
+			btnExportarInHistorialCliente.FlatStyle = FlatStyle.System;
+			btnExportarInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnExportarInHistorialCliente.Location = new Point(1163, 713);
+			btnExportarInHistorialCliente.Margin = new Padding(2);
+			btnExportarInHistorialCliente.Name = "btnExportarInHistorialCliente";
+			btnExportarInHistorialCliente.Size = new Size(172, 35);
+			btnExportarInHistorialCliente.TabIndex = 52;
+			btnExportarInHistorialCliente.Text = "EXPORTAR PDF";
+			btnExportarInHistorialCliente.UseVisualStyleBackColor = true;
+			// 
+			// dgvHistorialInHistorialCliente
+			// 
+			dgvHistorialInHistorialCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvHistorialInHistorialCliente.BackgroundColor = Color.Black;
+			dgvHistorialInHistorialCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvHistorialInHistorialCliente.Location = new Point(47, 404);
+			dgvHistorialInHistorialCliente.Margin = new Padding(2);
+			dgvHistorialInHistorialCliente.Name = "dgvHistorialInHistorialCliente";
+			dgvHistorialInHistorialCliente.RowHeadersWidth = 72;
+			dgvHistorialInHistorialCliente.Size = new Size(1288, 288);
+			dgvHistorialInHistorialCliente.TabIndex = 51;
+			// 
+			// lblHistorialComprasInHistorialCliente
+			// 
+			lblHistorialComprasInHistorialCliente.AutoSize = true;
+			lblHistorialComprasInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblHistorialComprasInHistorialCliente.ForeColor = Color.White;
+			lblHistorialComprasInHistorialCliente.Location = new Point(47, 375);
+			lblHistorialComprasInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblHistorialComprasInHistorialCliente.Name = "lblHistorialComprasInHistorialCliente";
+			lblHistorialComprasInHistorialCliente.Size = new Size(285, 27);
+			lblHistorialComprasInHistorialCliente.TabIndex = 50;
+			lblHistorialComprasInHistorialCliente.Text = "HISTORIAL DE COMPRAS";
+			// 
+			// lblBoletosInHistorialCliente
+			// 
+			lblBoletosInHistorialCliente.AutoSize = true;
+			lblBoletosInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblBoletosInHistorialCliente.ForeColor = Color.White;
+			lblBoletosInHistorialCliente.Location = new Point(951, 285);
+			lblBoletosInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblBoletosInHistorialCliente.Name = "lblBoletosInHistorialCliente";
+			lblBoletosInHistorialCliente.Size = new Size(114, 27);
+			lblBoletosInHistorialCliente.TabIndex = 49;
+			lblBoletosInHistorialCliente.Text = "BOLETOS";
+			// 
+			// lblTotalInHistorialCliente
+			// 
+			lblTotalInHistorialCliente.AutoSize = true;
+			lblTotalInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblTotalInHistorialCliente.ForeColor = Color.White;
+			lblTotalInHistorialCliente.Location = new Point(579, 285);
+			lblTotalInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblTotalInHistorialCliente.Name = "lblTotalInHistorialCliente";
+			lblTotalInHistorialCliente.Size = new Size(82, 27);
+			lblTotalInHistorialCliente.TabIndex = 48;
+			lblTotalInHistorialCliente.Text = "TOTAL";
+			// 
+			// lblComprasInHistorialCliente
+			// 
+			lblComprasInHistorialCliente.AutoSize = true;
+			lblComprasInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblComprasInHistorialCliente.ForeColor = Color.White;
+			lblComprasInHistorialCliente.Location = new Point(143, 285);
+			lblComprasInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblComprasInHistorialCliente.Name = "lblComprasInHistorialCliente";
+			lblComprasInHistorialCliente.Size = new Size(123, 27);
+			lblComprasInHistorialCliente.TabIndex = 47;
+			lblComprasInHistorialCliente.Text = "COMPRAS";
+			// 
+			// label13
+			// 
+			label13.AutoSize = true;
+			label13.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			label13.ForeColor = Color.White;
+			label13.Location = new Point(1062, 149);
+			label13.Margin = new Padding(2, 0, 2, 0);
+			label13.Name = "label13";
+			label13.Size = new Size(17, 27);
+			label13.TabIndex = 46;
+			label13.Text = "|";
+			// 
+			// lblClienteInHistorialCliente
+			// 
+			lblClienteInHistorialCliente.AutoSize = true;
+			lblClienteInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblClienteInHistorialCliente.ForeColor = Color.White;
+			lblClienteInHistorialCliente.Location = new Point(951, 149);
+			lblClienteInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblClienteInHistorialCliente.Name = "lblClienteInHistorialCliente";
+			lblClienteInHistorialCliente.RightToLeft = RightToLeft.Yes;
+			lblClienteInHistorialCliente.Size = new Size(105, 27);
+			lblClienteInHistorialCliente.TabIndex = 45;
+			lblClienteInHistorialCliente.Text = "CLIENTE";
+			lblClienteInHistorialCliente.TextAlign = ContentAlignment.MiddleRight;
+			// 
+			// lblRFCInHistorialCliente
+			// 
+			lblRFCInHistorialCliente.AutoSize = true;
+			lblRFCInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblRFCInHistorialCliente.ForeColor = Color.White;
+			lblRFCInHistorialCliente.Location = new Point(1083, 149);
+			lblRFCInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblRFCInHistorialCliente.Name = "lblRFCInHistorialCliente";
+			lblRFCInHistorialCliente.Size = new Size(54, 27);
+			lblRFCInHistorialCliente.TabIndex = 42;
+			lblRFCInHistorialCliente.Text = "RFC";
+			// 
+			// lblNombreInfoInHistorialCliente
+			// 
+			lblNombreInfoInHistorialCliente.AutoSize = true;
+			lblNombreInfoInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreInfoInHistorialCliente.ForeColor = Color.White;
+			lblNombreInfoInHistorialCliente.Location = new Point(47, 187);
+			lblNombreInfoInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblNombreInfoInHistorialCliente.Name = "lblNombreInfoInHistorialCliente";
+			lblNombreInfoInHistorialCliente.Size = new Size(111, 27);
+			lblNombreInfoInHistorialCliente.TabIndex = 41;
+			lblNombreInfoInHistorialCliente.Text = "NOMBRE";
+			// 
+			// lblNombreCompletoInHistorialCliente
+			// 
+			lblNombreCompletoInHistorialCliente.AutoSize = true;
+			lblNombreCompletoInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblNombreCompletoInHistorialCliente.ForeColor = Color.White;
+			lblNombreCompletoInHistorialCliente.Location = new Point(47, 149);
+			lblNombreCompletoInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblNombreCompletoInHistorialCliente.Name = "lblNombreCompletoInHistorialCliente";
+			lblNombreCompletoInHistorialCliente.Size = new Size(250, 27);
+			lblNombreCompletoInHistorialCliente.TabIndex = 40;
+			lblNombreCompletoInHistorialCliente.Text = "NOMBRE COMPLETO:";
+			// 
+			// lblHistorialInHistorialCliente
+			// 
+			lblHistorialInHistorialCliente.AutoSize = true;
+			lblHistorialInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblHistorialInHistorialCliente.ForeColor = Color.White;
+			lblHistorialInHistorialCliente.Location = new Point(567, 58);
+			lblHistorialInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblHistorialInHistorialCliente.Name = "lblHistorialInHistorialCliente";
+			lblHistorialInHistorialCliente.Size = new Size(279, 27);
+			lblHistorialInHistorialCliente.TabIndex = 39;
+			lblHistorialInHistorialCliente.Text = "HISTORIAL DEL CLIENTE";
+			// 
+			// lblRegresarInHistorialCliente
+			// 
+			lblRegresarInHistorialCliente.AutoSize = true;
+			lblRegresarInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			lblRegresarInHistorialCliente.ForeColor = Color.White;
+			lblRegresarInHistorialCliente.Location = new Point(59, 27);
+			lblRegresarInHistorialCliente.Margin = new Padding(2, 0, 2, 0);
+			lblRegresarInHistorialCliente.Name = "lblRegresarInHistorialCliente";
+			lblRegresarInHistorialCliente.Size = new Size(74, 16);
+			lblRegresarInHistorialCliente.TabIndex = 38;
+			lblRegresarInHistorialCliente.Text = "REGRESAR";
+			// 
+			// btnRegresarInHistorialCliente
+			// 
+			btnRegresarInHistorialCliente.Cursor = Cursors.Hand;
+			btnRegresarInHistorialCliente.FlatStyle = FlatStyle.System;
+			btnRegresarInHistorialCliente.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			btnRegresarInHistorialCliente.Location = new Point(18, 17);
+			btnRegresarInHistorialCliente.Margin = new Padding(2);
+			btnRegresarInHistorialCliente.Name = "btnRegresarInHistorialCliente";
+			btnRegresarInHistorialCliente.Size = new Size(37, 35);
+			btnRegresarInHistorialCliente.TabIndex = 37;
+			btnRegresarInHistorialCliente.Text = "<";
+			btnRegresarInHistorialCliente.UseVisualStyleBackColor = true;
+			// 
 			// tabPgPartidos
 			// 
 			tabPgPartidos.BackColor = Color.Black;
@@ -2285,10 +2498,10 @@
 			tabPgPartidos.Controls.Add(comboBox1);
 			tabPgPartidos.Controls.Add(label18);
 			tabPgPartidos.Controls.Add(label17);
-			tabPgPartidos.Location = new Point(4, 34);
+			tabPgPartidos.Location = new Point(4, 24);
 			tabPgPartidos.Margin = new Padding(2);
 			tabPgPartidos.Name = "tabPgPartidos";
-			tabPgPartidos.Size = new Size(1392, 812);
+			tabPgPartidos.Size = new Size(1392, 822);
 			tabPgPartidos.TabIndex = 3;
 			tabPgPartidos.Text = "Partidos";
 			// 
@@ -2411,14 +2624,13 @@
 			tabPgReportes.BackColor = Color.Black;
 			tabPgReportes.Controls.Add(btnOcupacionDisponibilidadInOper);
 			tabPgReportes.Controls.Add(btnReporteVentaInOper);
-			tabPgReportes.Controls.Add(tabReporteVenta);
-			tabPgReportes.Location = new Point(4, 34);
+			tabPgReportes.Controls.Add(tabReportes);
+			tabPgReportes.Location = new Point(4, 24);
 			tabPgReportes.Margin = new Padding(2);
 			tabPgReportes.Name = "tabPgReportes";
-			tabPgReportes.Size = new Size(1392, 812);
+			tabPgReportes.Size = new Size(1392, 822);
 			tabPgReportes.TabIndex = 5;
 			tabPgReportes.Text = "Reportes";
-			tabPgReportes.Click += tabPgReportes_Click;
 			// 
 			// btnOcupacionDisponibilidadInOper
 			// 
@@ -2444,43 +2656,43 @@
 			btnReporteVentaInOper.Text = "REPORTE DE VENTA";
 			btnReporteVentaInOper.UseVisualStyleBackColor = true;
 			// 
+			// tabReportes
+			// 
+			tabReportes.Appearance = TabAppearance.FlatButtons;
+			tabReportes.Controls.Add(tabReporteVenta);
+			tabReportes.Controls.Add(tabOcupacion);
+			tabReportes.ItemSize = new Size(50, 20);
+			tabReportes.Location = new Point(26, 68);
+			tabReportes.Name = "tabReportes";
+			tabReportes.SelectedIndex = 0;
+			tabReportes.Size = new Size(1363, 751);
+			tabReportes.SizeMode = TabSizeMode.Fixed;
+			tabReportes.TabIndex = 0;
+			// 
 			// tabReporteVenta
 			// 
-			tabReporteVenta.Appearance = TabAppearance.FlatButtons;
-			tabReporteVenta.Controls.Add(ReporteVenta);
-			tabReporteVenta.Controls.Add(tabPage6);
-			tabReporteVenta.ItemSize = new Size(0, 1);
-			tabReporteVenta.Location = new Point(26, 68);
+			tabReporteVenta.BackColor = Color.Black;
+			tabReporteVenta.Controls.Add(cboPartidoReporteInOper);
+			tabReporteVenta.Controls.Add(cboEstadioReporteInOper);
+			tabReporteVenta.Controls.Add(btnExportarReporteVentaInOper);
+			tabReporteVenta.Controls.Add(dateTimePicker2);
+			tabReporteVenta.Controls.Add(lblIngresosReportesInOper);
+			tabReporteVenta.Controls.Add(lblBoletosVendidosReportesInOper);
+			tabReporteVenta.Controls.Add(gridReporteInOper);
+			tabReporteVenta.Controls.Add(dateTimePicker1);
+			tabReporteVenta.Controls.Add(btnLimparGridReporteInOper);
+			tabReporteVenta.Controls.Add(btnFiltrarReporteInOper);
+			tabReporteVenta.Controls.Add(lblPartidoReporteInOper);
+			tabReporteVenta.Controls.Add(lblEstadioReporteInOper);
+			tabReporteVenta.Controls.Add(lblHastaReporteInOper);
+			tabReporteVenta.Controls.Add(lblDesdeReporteInOper);
+			tabReporteVenta.Controls.Add(label1);
+			tabReporteVenta.Location = new Point(4, 24);
 			tabReporteVenta.Name = "tabReporteVenta";
-			tabReporteVenta.SelectedIndex = 0;
-			tabReporteVenta.Size = new Size(1363, 751);
-			tabReporteVenta.SizeMode = TabSizeMode.Fixed;
+			tabReporteVenta.Padding = new Padding(3);
+			tabReporteVenta.Size = new Size(1355, 723);
 			tabReporteVenta.TabIndex = 0;
-			// 
-			// ReporteVenta
-			// 
-			ReporteVenta.BackColor = Color.Black;
-			ReporteVenta.Controls.Add(cboPartidoReporteInOper);
-			ReporteVenta.Controls.Add(cboEstadioReporteInOper);
-			ReporteVenta.Controls.Add(btnExportarReporteVentaInOper);
-			ReporteVenta.Controls.Add(dateTimePicker2);
-			ReporteVenta.Controls.Add(lblIngresosReportesInOper);
-			ReporteVenta.Controls.Add(lblBoletosVendidosReportesInOper);
-			ReporteVenta.Controls.Add(gridReporteInOper);
-			ReporteVenta.Controls.Add(dateTimePicker1);
-			ReporteVenta.Controls.Add(btnLimparGridReporteInOper);
-			ReporteVenta.Controls.Add(btnFiltrarReporteInOper);
-			ReporteVenta.Controls.Add(lblPartidoReporteInOper);
-			ReporteVenta.Controls.Add(lblEstadioReporteInOper);
-			ReporteVenta.Controls.Add(lblHastaReporteInOper);
-			ReporteVenta.Controls.Add(lblDesdeReporteInOper);
-			ReporteVenta.Controls.Add(label1);
-			ReporteVenta.Location = new Point(4, 5);
-			ReporteVenta.Name = "ReporteVenta";
-			ReporteVenta.Padding = new Padding(3);
-			ReporteVenta.Size = new Size(1355, 742);
-			ReporteVenta.TabIndex = 0;
-			ReporteVenta.Text = "tabPage2";
+			tabReporteVenta.Text = "ReporteVenta";
 			// 
 			// cboPartidoReporteInOper
 			// 
@@ -2561,11 +2773,11 @@
 			gridReporteInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			gridReporteInOper.Columns.AddRange(new DataGridViewColumn[] { FOLIO, FECHAVENTA, ESTADIO, PARTIDO, ZONA, CANTIDAD, SUBTOTAL, TOTAL });
 			gridReporteInOper.GridColor = Color.Black;
-			gridReporteInOper.Location = new Point(94, 280);
+			gridReporteInOper.Location = new Point(80, 290);
 			gridReporteInOper.Margin = new Padding(2);
 			gridReporteInOper.Name = "gridReporteInOper";
 			gridReporteInOper.RowHeadersWidth = 72;
-			gridReporteInOper.Size = new Size(1167, 278);
+			gridReporteInOper.Size = new Size(1200, 281);
 			gridReporteInOper.TabIndex = 48;
 			// 
 			// FOLIO
@@ -2724,53 +2936,53 @@
 			label1.TabIndex = 40;
 			label1.Text = "REPORTE DE VENTA";
 			// 
-			// tabPage6
+			// tabOcupacion
 			// 
-			tabPage6.BackColor = Color.Black;
-			tabPage6.Controls.Add(dgvAsientosODInOper);
-			tabPage6.Controls.Add(dgvDisponibilidadODInOper);
-			tabPage6.Controls.Add(label4);
-			tabPage6.Controls.Add(cboPartidoODInOper);
-			tabPage6.Controls.Add(cboEstadioODInOper);
-			tabPage6.Controls.Add(lblPartidoODInOper);
-			tabPage6.Controls.Add(lblEstadioODInOper);
-			tabPage6.Location = new Point(4, 5);
-			tabPage6.Name = "tabPage6";
-			tabPage6.Padding = new Padding(3);
-			tabPage6.Size = new Size(1355, 742);
-			tabPage6.TabIndex = 1;
-			tabPage6.Text = "tabPage6";
+			tabOcupacion.BackColor = Color.Black;
+			tabOcupacion.Controls.Add(dgvAsientosInOcupacion);
+			tabOcupacion.Controls.Add(dgvDisponibilidadInOcupacion);
+			tabOcupacion.Controls.Add(label4);
+			tabOcupacion.Controls.Add(cboPartidoODInOper);
+			tabOcupacion.Controls.Add(cboEstadioODInOper);
+			tabOcupacion.Controls.Add(lblPartidoODInOper);
+			tabOcupacion.Controls.Add(lblEstadioODInOper);
+			tabOcupacion.Location = new Point(4, 24);
+			tabOcupacion.Name = "tabOcupacion";
+			tabOcupacion.Padding = new Padding(3);
+			tabOcupacion.Size = new Size(1355, 723);
+			tabOcupacion.TabIndex = 1;
+			tabOcupacion.Text = "Ocupacion";
 			// 
-			// dgvAsientosODInOper
+			// dgvAsientosInOcupacion
 			// 
-			dgvAsientosODInOper.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			dgvAsientosODInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			dgvAsientosODInOper.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-			dgvAsientosODInOper.BackgroundColor = Color.Black;
-			dgvAsientosODInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvAsientosODInOper.GridColor = Color.Black;
-			dgvAsientosODInOper.Location = new Point(94, 415);
-			dgvAsientosODInOper.Margin = new Padding(2);
-			dgvAsientosODInOper.Name = "dgvAsientosODInOper";
-			dgvAsientosODInOper.RowHeadersWidth = 72;
-			dgvAsientosODInOper.Size = new Size(1167, 278);
-			dgvAsientosODInOper.TabIndex = 65;
+			dgvAsientosInOcupacion.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			dgvAsientosInOcupacion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvAsientosInOcupacion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			dgvAsientosInOcupacion.BackgroundColor = Color.Black;
+			dgvAsientosInOcupacion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvAsientosInOcupacion.GridColor = Color.Black;
+			dgvAsientosInOcupacion.Location = new Point(94, 415);
+			dgvAsientosInOcupacion.Margin = new Padding(2);
+			dgvAsientosInOcupacion.Name = "dgvAsientosInOcupacion";
+			dgvAsientosInOcupacion.RowHeadersWidth = 72;
+			dgvAsientosInOcupacion.Size = new Size(1167, 259);
+			dgvAsientosInOcupacion.TabIndex = 65;
 			// 
-			// dgvDisponibilidadODInOper
+			// dgvDisponibilidadInOcupacion
 			// 
-			dgvDisponibilidadODInOper.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			dgvDisponibilidadODInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-			dgvDisponibilidadODInOper.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-			dgvDisponibilidadODInOper.BackgroundColor = Color.Black;
-			dgvDisponibilidadODInOper.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dgvDisponibilidadODInOper.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn8, CAPACIDAD, DISPONIBLES, VENDIDOS, OCUPACION });
-			dgvDisponibilidadODInOper.GridColor = Color.Black;
-			dgvDisponibilidadODInOper.Location = new Point(94, 120);
-			dgvDisponibilidadODInOper.Margin = new Padding(2);
-			dgvDisponibilidadODInOper.Name = "dgvDisponibilidadODInOper";
-			dgvDisponibilidadODInOper.RowHeadersWidth = 72;
-			dgvDisponibilidadODInOper.Size = new Size(1167, 278);
-			dgvDisponibilidadODInOper.TabIndex = 60;
+			dgvDisponibilidadInOcupacion.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			dgvDisponibilidadInOcupacion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvDisponibilidadInOcupacion.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+			dgvDisponibilidadInOcupacion.BackgroundColor = Color.Black;
+			dgvDisponibilidadInOcupacion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dgvDisponibilidadInOcupacion.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn8, CAPACIDAD, DISPONIBLES, VENDIDOS, OCUPACION });
+			dgvDisponibilidadInOcupacion.GridColor = Color.Black;
+			dgvDisponibilidadInOcupacion.Location = new Point(94, 120);
+			dgvDisponibilidadInOcupacion.Margin = new Padding(2);
+			dgvDisponibilidadInOcupacion.Name = "dgvDisponibilidadInOcupacion";
+			dgvDisponibilidadInOcupacion.RowHeadersWidth = 72;
+			dgvDisponibilidadInOcupacion.Size = new Size(1167, 259);
+			dgvDisponibilidadInOcupacion.TabIndex = 60;
 			// 
 			// dataGridViewTextBoxColumn8
 			// 
@@ -2894,7 +3106,7 @@
 			btnVentasVentas.Cursor = Cursors.Hand;
 			btnVentasVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnVentasVentas.ForeColor = Color.Black;
-			btnVentasVentas.Location = new Point(29, 75);
+			btnVentasVentas.Location = new Point(31, 119);
 			btnVentasVentas.Margin = new Padding(2);
 			btnVentasVentas.Name = "btnVentasVentas";
 			btnVentasVentas.Size = new Size(292, 35);
@@ -2909,7 +3121,7 @@
 			btnClientesVentas.Cursor = Cursors.Hand;
 			btnClientesVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnClientesVentas.ForeColor = Color.Black;
-			btnClientesVentas.Location = new Point(29, 125);
+			btnClientesVentas.Location = new Point(31, 169);
 			btnClientesVentas.Margin = new Padding(2);
 			btnClientesVentas.Name = "btnClientesVentas";
 			btnClientesVentas.Size = new Size(292, 35);
@@ -2924,7 +3136,7 @@
 			btnPartidosVentas.Cursor = Cursors.Hand;
 			btnPartidosVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnPartidosVentas.ForeColor = Color.Black;
-			btnPartidosVentas.Location = new Point(29, 175);
+			btnPartidosVentas.Location = new Point(31, 219);
 			btnPartidosVentas.Margin = new Padding(2);
 			btnPartidosVentas.Name = "btnPartidosVentas";
 			btnPartidosVentas.Size = new Size(292, 35);
@@ -2933,28 +3145,13 @@
 			btnPartidosVentas.UseVisualStyleBackColor = false;
 			btnPartidosVentas.Click += btnPartidosVentas_Click;
 			// 
-			// btnFacturasVentas
-			// 
-			btnFacturasVentas.BackColor = Color.White;
-			btnFacturasVentas.Cursor = Cursors.Hand;
-			btnFacturasVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			btnFacturasVentas.ForeColor = Color.Black;
-			btnFacturasVentas.Location = new Point(29, 225);
-			btnFacturasVentas.Margin = new Padding(2);
-			btnFacturasVentas.Name = "btnFacturasVentas";
-			btnFacturasVentas.Size = new Size(292, 35);
-			btnFacturasVentas.TabIndex = 4;
-			btnFacturasVentas.Text = "FACTURAS";
-			btnFacturasVentas.UseVisualStyleBackColor = false;
-			btnFacturasVentas.Click += btnFacturasVentas_Click;
-			// 
 			// btnReportesVentas
 			// 
 			btnReportesVentas.BackColor = Color.White;
 			btnReportesVentas.Cursor = Cursors.Hand;
 			btnReportesVentas.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnReportesVentas.ForeColor = Color.Black;
-			btnReportesVentas.Location = new Point(29, 275);
+			btnReportesVentas.Location = new Point(31, 271);
 			btnReportesVentas.Margin = new Padding(2);
 			btnReportesVentas.Name = "btnReportesVentas";
 			btnReportesVentas.Size = new Size(292, 35);
@@ -2970,7 +3167,6 @@
 			pnlMenu.Controls.Add(btnSalir);
 			pnlMenu.Controls.Add(btnReportesVentas);
 			pnlMenu.Controls.Add(btnVentasVentas);
-			pnlMenu.Controls.Add(btnFacturasVentas);
 			pnlMenu.Controls.Add(btnClientesVentas);
 			pnlMenu.Controls.Add(btnPartidosVentas);
 			pnlMenu.Location = new Point(1100, 100);
@@ -2986,7 +3182,7 @@
 			btnInicio.Cursor = Cursors.Hand;
 			btnInicio.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnInicio.ForeColor = Color.Black;
-			btnInicio.Location = new Point(29, 25);
+			btnInicio.Location = new Point(31, 69);
 			btnInicio.Margin = new Padding(2);
 			btnInicio.Name = "btnInicio";
 			btnInicio.Size = new Size(292, 35);
@@ -3001,7 +3197,7 @@
 			btnSalir.Cursor = Cursors.Hand;
 			btnSalir.Font = new Font("Avenir LT Pro 65 Medium", 15.8571434F, FontStyle.Bold, GraphicsUnit.Point, 0);
 			btnSalir.ForeColor = Color.Black;
-			btnSalir.Location = new Point(29, 325);
+			btnSalir.Location = new Point(31, 325);
 			btnSalir.Margin = new Padding(2);
 			btnSalir.Name = "btnSalir";
 			btnSalir.Size = new Size(292, 35);
@@ -3016,9 +3212,9 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.Black;
 			ClientSize = new Size(1484, 961);
+			Controls.Add(tabCtrlVentas);
 			Controls.Add(lblNombreUsuario);
 			Controls.Add(btnAjustes);
-			Controls.Add(tabCtrlVentas);
 			Controls.Add(pnlMenu);
 			Margin = new Padding(2);
 			MaximizeBox = false;
@@ -3054,17 +3250,20 @@
 			NuevoCliente.PerformLayout();
 			EditarCliente.ResumeLayout(false);
 			EditarCliente.PerformLayout();
+			tabHistorialCliente.ResumeLayout(false);
+			tabHistorialCliente.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)dgvHistorialInHistorialCliente).EndInit();
 			tabPgPartidos.ResumeLayout(false);
 			tabPgPartidos.PerformLayout();
 			tabPgReportes.ResumeLayout(false);
+			tabReportes.ResumeLayout(false);
 			tabReporteVenta.ResumeLayout(false);
-			ReporteVenta.ResumeLayout(false);
-			ReporteVenta.PerformLayout();
+			tabReporteVenta.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)gridReporteInOper).EndInit();
-			tabPage6.ResumeLayout(false);
-			tabPage6.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)dgvAsientosODInOper).EndInit();
-			((System.ComponentModel.ISupportInitialize)dgvDisponibilidadODInOper).EndInit();
+			tabOcupacion.ResumeLayout(false);
+			tabOcupacion.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)dgvAsientosInOcupacion).EndInit();
+			((System.ComponentModel.ISupportInitialize)dgvDisponibilidadInOcupacion).EndInit();
 			pnlMenu.ResumeLayout(false);
 			ResumeLayout(false);
 			PerformLayout();
@@ -3083,7 +3282,6 @@
         private Button btnVentasVentas;
         private Button btnClientesVentas;
         private Button btnPartidosVentas;
-        private Button btnFacturasVentas;
         private Button btnReportesVentas;
         private Label lblBienvenidaInicio;
         private Label lblVentasDelDiaInicio;
@@ -3184,7 +3382,7 @@
         private TabControl tabClientesInVentas;
         private TabPage BuscarCliente;
         private TabPage NuevoCliente;
-        private Button btnHistorialClienteInOper;
+        private Button btnHistorial;
         private Button btnEditarClienteInOper;
         private DataGridView GridClientesInOper;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -3260,8 +3458,8 @@
 		private Label lblEstadoNuevoClienteInOper;
 		private DataGridView dgvAsientosInOper;
 		private Button btnReporteVentaInOper;
-		private TabControl tabReporteVenta;
-		private TabPage ReporteVenta;
+		private TabControl tabReportes;
+		private TabPage tabReporteVenta;
 		private ComboBox cboPartidoReporteInOper;
 		private ComboBox cboEstadioReporteInOper;
 		private Button btnExportarReporteVentaInOper;
@@ -3285,19 +3483,34 @@
 		private Label lblHastaReporteInOper;
 		private Label lblDesdeReporteInOper;
 		private Label label1;
-		private TabPage tabPage6;
+		private TabPage tabOcupacion;
 		private Button btnOcupacionDisponibilidadInOper;
 		private Label label4;
 		private ComboBox cboPartidoODInOper;
 		private ComboBox cboEstadioODInOper;
 		private Label lblPartidoODInOper;
 		private Label lblEstadioODInOper;
-		private DataGridView dgvDisponibilidadODInOper;
-		private DataGridView dgvAsientosODInOper;
+		private DataGridView dgvDisponibilidadInOcupacion;
+		private DataGridView dgvAsientosInOcupacion;
 		private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
 		private DataGridViewTextBoxColumn CAPACIDAD;
 		private DataGridViewTextBoxColumn DISPONIBLES;
 		private DataGridViewTextBoxColumn VENDIDOS;
 		private DataGridViewTextBoxColumn OCUPACION;
+		private TabPage tabHistorialCliente;
+		private Label lblRFCInHistorialCliente;
+		private Label lblNombreInfoInHistorialCliente;
+		private Label lblNombreCompletoInHistorialCliente;
+		private Label lblHistorialInHistorialCliente;
+		private Label lblRegresarInHistorialCliente;
+		private Button btnRegresarInHistorialCliente;
+		private Button btnExportarInHistorialCliente;
+		private DataGridView dgvHistorialInHistorialCliente;
+		private Label lblHistorialComprasInHistorialCliente;
+		private Label lblBoletosInHistorialCliente;
+		private Label lblTotalInHistorialCliente;
+		private Label lblComprasInHistorialCliente;
+		private Label label13;
+		private Label lblClienteInHistorialCliente;
 	}
 }

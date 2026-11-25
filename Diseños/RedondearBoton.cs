@@ -7,6 +7,9 @@ namespace PIA
 {
     public static class RedondearBoton
     {
+        //==================================================
+        // Aplica el radio de esquinas configurado al botón.
+        //==================================================
         public static void Aplicar(Button boton, int radio = 45)
         {
             void Actualizar(object sender, EventArgs e)

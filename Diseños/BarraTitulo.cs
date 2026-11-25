@@ -11,15 +11,24 @@ namespace PIA.Diseños
         private static readonly IntPtr HTCAPTION = new IntPtr(2);
 
         [DllImport("user32.dll")]
+        //=======================================================
+        // Libera la captura del mouse antes de mover la ventana.
+        //=======================================================
         private static extern bool ReleaseCapture();
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        //==================================================
+        // Envía un mensaje nativo de Windows a una ventana.
+        //==================================================
         private static extern IntPtr SendMessage(
             IntPtr hWnd,
             int msg,
             IntPtr wParam,
             IntPtr lParam);
 
+        //=================================================================
+        // Conecta el movimiento del control con el arrastre de la ventana.
+        //=================================================================
         public static void Agregar(Form form, string titulo)
         {
             if (form == null || form.IsDisposed)

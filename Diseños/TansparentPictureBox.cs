@@ -26,11 +26,17 @@ namespace PIA.Diseños
                 BackColor = Color.Transparent;
             }
 
+            //=======================================================
+            // Pinta el fondo transparente del control personalizado.
+            //=======================================================
             protected override void OnPaintBackground(PaintEventArgs e)
             {
                 // No dibujar fondo.
             }
 
+            //===============================================
+            // Dibuja el contenido del control personalizado.
+            //===============================================
             protected override void OnPaint(PaintEventArgs e)
             {
                 if (Image == null)

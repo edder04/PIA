@@ -11,6 +11,9 @@ namespace PIA.Datos
 		public static string NombreUsuario { get; set; } = string.Empty;
 		public static string? Rol { get; set; }
 
+		//=====================================
+		// Cierra la sesión del usuario activo.
+		//=====================================
 		public static void Cerrar()
 		{
 			IdUsuario = 0;

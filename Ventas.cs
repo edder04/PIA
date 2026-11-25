@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PIA.Datos;
 using PIA.Diseños;
 using PIA.Repositorios;
@@ -22,7 +22,13 @@ namespace PIA
 		private bool _cargandoFiltrosReporte;
 		private bool _cargandoFiltrosOcupacion;
 		private bool _ventaRegistrada;
+		private int _versionCargaAsientos;
+		private Label? _lblCargandoAsientos;
+		private bool _cargandoAsientos;
+		private Cursor? _cursorAnteriorCargaAsientos;
+	private readonly RadioButton _radioBtnDebitoVentaPaso4 = new();
 		private int? _idClienteEditando;
+		private HistorialClienteReporte? _historialClienteActual;
 
 		// Método: Ventas. Inicializa controles y enlaza los eventos de la ventana.
 		public Ventas()
@@ -43,6 +49,12 @@ namespace PIA
 			StartPosition = FormStartPosition.CenterScreen;
 
 			ConfigurarGridClientes();
+			ConfigurarGridHistorialCliente();
+			gridReporteInOper.Columns.Add("FECHAPARTIDO", "FECHA DEL PARTIDO");
+			gridReporteInOper.Columns.Add("METODOPAGO", "MÉTODO DE PAGO");
+			btnHistorial.Click += btnHistorial_Click;
+			btnExportarInHistorialCliente.Click += btnExportarHistorialCliente_Click;
+			btnRegresarInHistorialCliente.Click += btnRegresarHistorialCliente_Click;
 			ConfigurarGridAsientos();
 			ConfigurarEstiloGrids(this);
 			ConfigurarGridsOcupacion();
@@ -60,17 +72,27 @@ namespace PIA
 			btnExportarReporteVentaInOper.Click += btnExportarReporteVentaInOper_Click;
 			cboEstadioODInOper.SelectedIndexChanged += cboEstadioODInOper_SelectedIndexChanged;
 			cboPartidoODInOper.SelectedIndexChanged += cboPartidoODInOper_SelectedIndexChanged;
-			dgvDisponibilidadODInOper.CellClick += dgvDisponibilidadODInOper_CellClick;
+			dgvDisponibilidadInOcupacion.CellClick += dgvDisponibilidadODInOper_CellClick;
 			btnReporteVentaInOper.Click += btnReporteVentaInOper_Click;
 			btnOcupacionDisponibilidadInOper.Click += btnOcupacionDisponibilidadInOper_Click;
 			radioBtnEfectivoVentaPaso4.CheckedChanged += radioBtnMetodoPago_CheckedChanged;
 			radioBtnTarjetaVentaPaso4.CheckedChanged += radioBtnMetodoPago_CheckedChanged;
+			_radioBtnDebitoVentaPaso4.AutoSize = true;
+			_radioBtnDebitoVentaPaso4.Font = radioBtnTarjetaVentaPaso4.Font;
+			_radioBtnDebitoVentaPaso4.ForeColor = Color.White;
+			_radioBtnDebitoVentaPaso4.Location = new Point(680, 300);
+			_radioBtnDebitoVentaPaso4.Name = "radioBtnDebitoVentaPaso4";
+			_radioBtnDebitoVentaPaso4.Text = "DÉBITO";
+			_radioBtnDebitoVentaPaso4.CheckedChanged += radioBtnMetodoPago_CheckedChanged;
+			tabPage4.Controls.Add(_radioBtnDebitoVentaPaso4);
 			ActualizarVisibilidadCamposEdicion();
 			ActualizarCamposPago();
 		}
 
 
-		// Método: Ventas_Load.
+		//==================================================================
+		// Carga los catálogos y prepara la pantalla para iniciar una venta.
+		//==================================================================
 		private async void Ventas_Load(object sender, EventArgs e)
 		{
 			string nombreUsuario = string.IsNullOrWhiteSpace(Sesion.NombreUsuario)
@@ -86,7 +108,9 @@ namespace PIA
 			await CargarResumenInicioAsync();
 		}
 
-		// Método: ConfigurarGridClientes.
+		//======================================================================
+		// Define columnas y opciones de visualización para el grid de clientes.
+		//======================================================================
 		private void ConfigurarGridClientes()
 		{
 			gridClientesVentasPaso1.ReadOnly = true;
@@ -101,7 +125,9 @@ namespace PIA
 			GridClientesInOper.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 		}
 
-		// Método: ConfigurarEstiloGrids.
+		//=====================================================
+		// Aplica el estilo visual común a los grids de ventas.
+		//=====================================================
 		private static void ConfigurarEstiloGrids(Control padre)
 		{
 			var fondo = System.Drawing.Color.FromArgb(60, 60, 60);
@@ -118,6 +144,8 @@ namespace PIA
 					grid.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
 					grid.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(0, 90, 160);
 					grid.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+					grid.RowsDefaultCellStyle.BackColor = fondo;
+					grid.RowsDefaultCellStyle.ForeColor = System.Drawing.Color.White;
 					grid.ColumnHeadersDefaultCellStyle.BackColor = fondo;
 					grid.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
 					grid.RowHeadersDefaultCellStyle.BackColor = fondo;
@@ -131,7 +159,9 @@ namespace PIA
 			}
 		}
 
-		// Método: ConfigurarGridAsientos.
+		//======================================================================
+		// Configura el grid virtual y su presentación para el mapa de asientos.
+		//======================================================================
 		private void ConfigurarGridAsientos()
 		{
 			dgvAsientosInOper.AllowUserToAddRows = false;
@@ -139,32 +169,45 @@ namespace PIA
 			dgvAsientosInOper.AllowUserToResizeRows = false;
 			dgvAsientosInOper.ReadOnly = true;
 			dgvAsientosInOper.MultiSelect = false;
+			dgvAsientosInOper.VirtualMode = true;
 			dgvAsientosInOper.RowHeadersVisible = true;
 			dgvAsientosInOper.RowHeadersWidth = 70;
+			dgvAsientosInOper.RowHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(60, 60, 60);
+			dgvAsientosInOper.RowHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+			dgvAsientosInOper.RowHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 			dgvAsientosInOper.SelectionMode = DataGridViewSelectionMode.CellSelect;
 			dgvAsientosInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			dgvAsientosInOper.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 			dgvAsientosInOper.CellClick -= gridAsientos_CellClick;
 			dgvAsientosInOper.CellClick += gridAsientos_CellClick;
+			dgvAsientosInOper.CellValueNeeded -= dgvAsientosInOper_CellValueNeeded;
+			dgvAsientosInOper.CellValueNeeded += dgvAsientosInOper_CellValueNeeded;
+			dgvAsientosInOper.CellFormatting -= dgvAsientosInOper_CellFormatting;
+			dgvAsientosInOper.CellFormatting += dgvAsientosInOper_CellFormatting;
+			dgvAsientosInOper.RowPostPaint -= dgvAsientosInOper_RowPostPaint;
+			dgvAsientosInOper.RowPostPaint += dgvAsientosInOper_RowPostPaint;
 		}
 
-		// Método: ConfigurarTarjeta.
+		//=====================================================
+		// Carga los datos del partido en la tarjeta de inicio.
+		//=====================================================
 		private void ConfigurarTarjeta()
 		{
 			radioBtnEfectivoVentaPaso4.Checked = true;
 		}
-		// Método: CargarResumenInicioAsync.
+		//=================================================================
+		// Consulta y muestra los datos resumidos de la pantalla de inicio.
+		//=================================================================
 		private async Task CargarResumenInicioAsync()
 		{
 			using var db = new AppDbContext();
 			DateTime hoy = DateTime.Today;
 
-			var ventasHoy = await db.vw_Ventas
-				.AsNoTracking()
+			var ventasHoy = (await RepoConsulta.VentasAsync(db))
 				.Where(v => v.FechaHoraVenta >= hoy &&
 							v.FechaHoraVenta < hoy.AddDays(1) &&
 							v.EstadoVenta == "Activa")
-				.ToListAsync();
+				.ToList();
 
 			lblInfoVentasDelDiaInicio.Text = ventasHoy.Count.ToString();
 			lblInfoIngresosInicio.Text = ventasHoy.Sum(v => v.Total).ToString("C2");
@@ -172,7 +215,9 @@ namespace PIA
 				ventasHoy.Sum(v => v.TotalBoletos - v.BoletosCancelados).ToString();
 		}
 
-		// Método: CargarClientesAsync.
+		//=======================================================
+		// Consulta los clientes y enlaza los resultados al grid.
+		//=======================================================
 		private async Task CargarClientesAsync()
 		{
 			string texto = txtNombreCliente.Text.Trim();
@@ -183,22 +228,19 @@ namespace PIA
 			try
 			{
 				using var db = new AppDbContext();
-				var consulta = db.vw_Clientes.AsNoTracking().Where(c => c.Activo);
+				var consulta = (await RepoConsulta.ClientesAsync(db)).Where(c => c.Activo);
 
 				if (!string.IsNullOrWhiteSpace(texto))
 				{
 					consulta = consulta.Where(c =>
-						c.Nombres.Contains(texto) ||
-						c.ApPaterno.Contains(texto) ||
-						(c.ApMaterno != null && c.ApMaterno.Contains(texto)) ||
-						c.RFC.Contains(texto) ||
-						c.CorreoElectronico.Contains(texto));
+						c.Nombres.Contains(texto, StringComparison.OrdinalIgnoreCase) ||
+						c.ApPaterno.Contains(texto, StringComparison.OrdinalIgnoreCase) ||
+						(c.ApMaterno != null && c.ApMaterno.Contains(texto, StringComparison.OrdinalIgnoreCase)) ||
+						c.RFC.Contains(texto, StringComparison.OrdinalIgnoreCase) ||
+						c.CorreoElectronico.Contains(texto, StringComparison.OrdinalIgnoreCase));
 				}
 
-				var clientes = await consulta
-					.OrderBy(c => c.ApPaterno)
-					.ThenBy(c => c.Nombres)
-					.ToListAsync();
+				var clientes = consulta.OrderBy(c => c.ApPaterno).ThenBy(c => c.Nombres).ToList();
 
 				gridClientesVentasPaso1.Rows.Clear();
 
@@ -221,36 +263,41 @@ namespace PIA
 			}
 		}
 
-		// Método: txtNombreCliente_TextChanged.
+		//======================================================
+		// Valida en tiempo real los datos del nombre capturado.
+		//======================================================
 		private async void txtNombreCliente_TextChanged(object? sender, EventArgs e)
 		{
 			if (!_cargandoClientes)
 				await CargarClientesAsync();
 		}
 
-		// Método: txtBuscarClienteInOper_TextChanged.
+		//===================================================================
+		// Filtra los clientes del grid conforme cambia el texto de búsqueda.
+		//===================================================================
 		private async void txtBuscarClienteInOper_TextChanged(object? sender, EventArgs e)
 		{
 			await CargarGridClientesOperAsync();
 		}
 
-		// Método: CargarGridClientesOperAsync.
+		//==========================================================================
+		// Consulta y muestra los clientes que pueden usarse en una venta operativa.
+		//==========================================================================
 		private async Task CargarGridClientesOperAsync()
 		{
 			string texto = txtBuscarClienteInOper.Text.Trim();
 			using var db = new AppDbContext();
-			var consulta = db.vw_Clientes.AsNoTracking().Where(c => c.Activo);
+			var consulta = (await RepoConsulta.ClientesAsync(db)).Where(c => c.Activo);
 
 			if (!string.IsNullOrWhiteSpace(texto))
 			{
 				consulta = consulta.Where(c =>
-					c.Nombres.Contains(texto) || c.ApPaterno.Contains(texto) ||
-					(c.ApMaterno != null && c.ApMaterno.Contains(texto)) ||
-					c.RFC.Contains(texto) || c.CorreoElectronico.Contains(texto));
+					c.Nombres.Contains(texto, StringComparison.OrdinalIgnoreCase) || c.ApPaterno.Contains(texto, StringComparison.OrdinalIgnoreCase) ||
+					(c.ApMaterno != null && c.ApMaterno.Contains(texto, StringComparison.OrdinalIgnoreCase)) ||
+					c.RFC.Contains(texto, StringComparison.OrdinalIgnoreCase) || c.CorreoElectronico.Contains(texto, StringComparison.OrdinalIgnoreCase));
 			}
 
-			var clientes = await consulta.OrderBy(c => c.ApPaterno)
-				.ThenBy(c => c.Nombres).ToListAsync();
+			var clientes = consulta.OrderBy(c => c.ApPaterno).ThenBy(c => c.Nombres).ToList();
 
 			GridClientesInOper.Rows.Clear();
 			foreach (var cliente in clientes)
@@ -264,7 +311,9 @@ namespace PIA
 			GridClientesInOper.ClearSelection();
 		}
 
-		// Método: btnAgregarNuevoClienteInOper_Click.
+		//================================================================
+		// Valida y registra un cliente desde el flujo de venta operativa.
+		//================================================================
 		private async void btnAgregarNuevoClienteInOper_Click(object? sender, EventArgs e)
 		{
 			string nombres = txtNombreNuevoClienteInOper.Text.Trim();
@@ -293,6 +342,12 @@ namespace PIA
 			{
 				MessageBox.Show("El RFC debe tener 12 o 13 caracteres.");
 				txtRFCNuevoClienteInOper.Focus();
+				return;
+			}
+			if (!PoliticaCliente.EsRFCValido(rfc) || !PoliticaCliente.EsCorreoValido(correo) ||
+				!PoliticaCliente.EsTelefonoValido(celular) || nacimiento.Date >= DateTime.Today)
+			{
+				MessageBox.Show("Verifica formato del RFC, correo, celular y que la fecha de nacimiento sea anterior a hoy.");
 				return;
 			}
 
@@ -336,7 +391,9 @@ namespace PIA
 			}
 		}
 
-		// Método: LimpiarFormularioNuevoClienteOper.
+		//=============================================================
+		// Limpia los campos del formulario de nuevo cliente en ventas.
+		//=============================================================
 		private void LimpiarFormularioNuevoClienteOper()
 		{
 			txtNombreNuevoClienteInOper.Clear(); txtApPaternoNuevoClienteInOper.Clear();
@@ -349,7 +406,9 @@ namespace PIA
 			txtEstadoNuevoClienteInOper.Clear(); txtPaisNuevoClienteInOper.Clear();
 		}
 
-		// Método: btnContinuarVentaPaso1_Click.
+		//=======================================================
+		// Valida el cliente y avanza a la selección del partido.
+		//=======================================================
 		private async void btnContinuarVentaPaso1_Click(object sender, EventArgs e)
 		{
 			if (gridClientesVentasPaso1.CurrentRow?.Tag is not vw_Clientes cliente)
@@ -363,15 +422,15 @@ namespace PIA
 			await CargarPartidosAsync();
 		}
 
-		// Método: CargarPartidosAsync.
+		//==========================================================
+		// Consulta los partidos disponibles para iniciar una venta.
+		//==========================================================
 		private async Task CargarPartidosAsync()
 		{
 			using var db = new AppDbContext();
-			var partidos = await db.vw_Partidos
-				.AsNoTracking()
+			var partidos = (await RepoConsulta.PartidosAsync(db))
 				.Where(p => p.Estado == "Programado" && p.FechaHora >= DateTime.Now)
-				.OrderBy(p => p.FechaHora)
-				.ToListAsync();
+				.OrderBy(p => p.FechaHora).ToList();
 
 			flowPanVentasPaso2.Controls.Clear();
 			flowPanVentasPaso2.AutoScroll = true;
@@ -399,7 +458,9 @@ namespace PIA
 			}
 		}
 
-		// Método: PartidoElegidoEnPaso2.
+		//==================================================================
+		// Guarda el partido seleccionado y actualiza las zonas disponibles.
+		//==================================================================
 		private void PartidoElegidoEnPaso2(vw_Partidos partido)
 		{
 			_partidoParaVenta = partido;
@@ -409,7 +470,9 @@ namespace PIA
 			txtEstadioVentaPaso2.Text = partido.Estadio;
 		}
 
-		// Método: btnContinuarVentaPaso2_Click.
+		//===================================================
+		// Valida el partido y avanza a la selección de zona.
+		//===================================================
 		private async void btnContinuarVentaPaso2_Click(object sender, EventArgs e)
 		{
 			if (_partidoParaVenta is null)
@@ -428,12 +491,11 @@ namespace PIA
 				lblFechaVentaPaso3.Text =
 					_partidoParaVenta.FechaHora.ToString("dd/MM/yyyy HH:mm");
 
-				var zonas = await db.vw_DisponibilidadZonas
-					.AsNoTracking()
+				var zonas = (await RepoConsulta.DisponibilidadZonasAsync(db))
 					.Where(z => z.IdPartido == _partidoParaVenta.IdPartido &&
 								z.BoletosDisponibles > 0)
 					.OrderBy(z => z.NombreZona)
-					.ToListAsync();
+					.ToList();
 
 				cboZonaVentaPaso3.DataSource = null;
 				_zonaParaVenta = null;
@@ -444,7 +506,6 @@ namespace PIA
 				cboZonaVentaPaso3.DisplayMember = nameof(vw_DisponibilidadZonas.NombreZona);
 				cboZonaVentaPaso3.ValueMember = nameof(vw_DisponibilidadZonas.IdZona);
 				cboZonaVentaPaso3.DataSource = zonas;
-				cboZonaVentaPaso3.SelectedIndex = -1;
 				ActualizarTotalesVenta();
 
 				if (zonas.Count == 0)
@@ -453,6 +514,7 @@ namespace PIA
 					return;
 				}
 
+				cboZonaVentaPaso3.SelectedIndex = 0;
 				tabCtrlVenta.SelectedIndex = 2;
 			}
 			catch (Exception ex)
@@ -464,7 +526,9 @@ namespace PIA
 			}
 		}
 
-		// Método: cboZonaVentaPaso3_SelectedIndexChanged.
+		//===============================================================
+		// Carga la disponibilidad de asientos para la zona seleccionada.
+		//===============================================================
 		private async void cboZonaVentaPaso3_SelectedIndexChanged(object? sender, EventArgs e)
 		{
 			if (cboZonaVentaPaso3.SelectedItem is not vw_DisponibilidadZonas zona)
@@ -478,95 +542,161 @@ namespace PIA
 			await CargarGridAsientosAsync();
 		}
 
-		// Método: CargarGridAsientosAsync.
+		//===============================================================
+		// Consulta y dibuja de forma asíncrona los asientos disponibles.
+		//===============================================================
 		private async Task CargarGridAsientosAsync()
 		{
 			if (_partidoParaVenta is null || _zonaParaVenta is null)
 				return;
 
-			dgvAsientosInOper.Rows.Clear();
-			dgvAsientosInOper.Columns.Clear();
-			_asientosSeleccionados.Clear();
-			_asientosOcupados.Clear();
+			int version = ++_versionCargaAsientos;
+			int idPartido = _partidoParaVenta.IdPartido;
+			var zona = _zonaParaVenta;
+			if (!_cargandoAsientos)
+				_cursorAnteriorCargaAsientos = Cursor;
+			_cargandoAsientos = true;
+			MostrarCargaAsientos(true);
+			Cursor = Cursors.WaitCursor;
 
-			using var db = new AppDbContext();
-			var ocupados = await db.vw_AsientosOcupados
-				.AsNoTracking()
-				.Where(a => a.IdPartido == _partidoParaVenta.IdPartido &&
-							a.IdZona == _zonaParaVenta.IdZona)
-				.Select(a => new { a.Fila, a.Asiento })
-				.ToListAsync();
-
-			foreach (var asiento in ocupados)
-				_asientosOcupados.Add($"{asiento.Fila.Trim()}-{asiento.Asiento.Trim()}");
-
-			for (int n = 1; n <= AsientosPorFila; n++)
-				dgvAsientosInOper.Columns.Add($"Asiento{n:00}", n.ToString("00"));
-
-			int filas = (_zonaParaVenta.CupoZona + AsientosPorFila - 1) / AsientosPorFila;
-
-			dgvAsientosInOper.SuspendLayout();
 			try
 			{
-				for (int filaIndex = 0; filaIndex < filas; filaIndex++)
-				{
-					int rowIndex = dgvAsientosInOper.Rows.Add();
-					var row = dgvAsientosInOper.Rows[rowIndex];
-					row.HeaderCell.Value = "F" + (filaIndex + 1).ToString("D3");
+				// Deja que WinForms pinte el aviso antes de consultar y preparar el mapa.
+				await Task.Yield();
+				dgvAsientosInOper.Rows.Clear();
+				dgvAsientosInOper.Columns.Clear();
+				_asientosSeleccionados.Clear();
+				_asientosOcupados.Clear();
 
-					for (int columna = 0; columna < AsientosPorFila; columna++)
-					{
-						int indice = filaIndex * AsientosPorFila + columna;
-						var cell = row.Cells[columna];
+				using var db = new AppDbContext();
+				var ocupados = (await RepoConsulta.AsientosOcupadosAsync(db))
+					.Where(a => a.IdPartido == idPartido && a.IdZona == zona.IdZona)
+					.Select(a => new { a.Fila, a.Asiento }).ToList();
 
-						if (indice >= _zonaParaVenta.CupoZona)
-						{
-							cell.Value = string.Empty;
-							cell.Tag = null;
-							continue;
-						}
+				if (version != _versionCargaAsientos || _partidoParaVenta?.IdPartido != idPartido || _zonaParaVenta?.IdZona != zona.IdZona)
+					return;
 
-						string fila = (filaIndex + 1).ToString("D3");
-						string asiento = (columna + 1).ToString("D2");
-						string clave = $"{fila}-{asiento}";
-						bool ocupado = _asientosOcupados.Contains(clave);
+				foreach (var asiento in ocupados)
+					_asientosOcupados.Add($"{asiento.Fila.Trim()}-{asiento.Asiento.Trim()}");
 
-						cell.Value = asiento;
-						cell.Tag = clave;
-						cell.Style.BackColor = ocupado
-							? System.Drawing.Color.IndianRed
-							: System.Drawing.Color.FromArgb(60, 60, 60);
-						cell.Style.ForeColor = System.Drawing.Color.White;
-						cell.Style.SelectionBackColor = cell.Style.BackColor;
-						cell.Style.SelectionForeColor = System.Drawing.Color.White;
-						cell.ToolTipText = ocupado ? "Ocupado" : "Disponible";
-					}
-				}
+				for (int n = 1; n <= AsientosPorFila; n++)
+					dgvAsientosInOper.Columns.Add($"Asiento{n:00}", n.ToString("00"));
+
+				int filas = (zona.CupoZona + AsientosPorFila - 1) / AsientosPorFila;
+				dgvAsientosInOper.RowCount = filas;
+				dgvAsientosInOper.Invalidate();
+				dgvAsientosInOper.Refresh();
+				dgvAsientosInOper.ClearSelection();
+				ActualizarTotalesVenta();
+			}
+			catch (Exception ex)
+			{
+				if (version == _versionCargaAsientos)
+					MessageBox.Show(ex.InnerException?.Message ?? ex.Message,
+						"No se pudieron cargar los asientos", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			finally
 			{
-				dgvAsientosInOper.ResumeLayout();
+				if (version == _versionCargaAsientos)
+				{
+					MostrarCargaAsientos(false);
+					_cargandoAsientos = false;
+					Cursor = _cursorAnteriorCargaAsientos ?? Cursors.Default;
+					_cursorAnteriorCargaAsientos = null;
+				}
 			}
-
-			dgvAsientosInOper.ClearSelection();
-			ActualizarTotalesVenta();
 		}
 
-		// Método: gridAsientos_CellClick.
+		//=============================================================
+		// Muestra u oculta el indicador de carga del grid de asientos.
+		//=============================================================
+		private void MostrarCargaAsientos(bool visible)
+		{
+			if (_lblCargandoAsientos is null)
+			{
+				_lblCargandoAsientos = new Label
+				{
+					Dock = DockStyle.Fill,
+					Text = "Cargando asientos...",
+					TextAlign = ContentAlignment.MiddleCenter,
+					Font = new Font("Segoe UI", 14, FontStyle.Bold),
+					ForeColor = System.Drawing.Color.White,
+					BackColor = System.Drawing.Color.FromArgb(230, 30, 30, 30),
+					Visible = false
+				};
+				dgvAsientosInOper.Controls.Add(_lblCargandoAsientos);
+			}
+
+			_lblCargandoAsientos.Visible = visible;
+			if (visible)
+				_lblCargandoAsientos.BringToFront();
+		}
+
+		//===================================================================================
+		// Proporciona al grid virtual el valor de cada asiento visible en ventas operativas.
+		//===================================================================================
+		private void dgvAsientosInOper_CellValueNeeded(object? sender, DataGridViewCellValueEventArgs e)
+		{
+			if (_zonaParaVenta is null || e.RowIndex < 0 || e.ColumnIndex < 0 ||
+				e.RowIndex * AsientosPorFila + e.ColumnIndex >= _zonaParaVenta.CupoZona)
+			{
+				e.Value = string.Empty;
+				return;
+			}
+
+			e.Value = (e.ColumnIndex + 1).ToString("D2");
+		}
+
+		//====================================================================
+		// Aplica el formato visual correspondiente al estado de cada asiento.
+		//====================================================================
+		private void dgvAsientosInOper_CellFormatting(object? sender, DataGridViewCellFormattingEventArgs e)
+		{
+			if (_zonaParaVenta is null || e.RowIndex < 0 || e.ColumnIndex < 0 ||
+				e.RowIndex * AsientosPorFila + e.ColumnIndex >= _zonaParaVenta.CupoZona)
+				return;
+
+			string clave = $"{e.RowIndex + 1:D3}-{e.ColumnIndex + 1:D2}";
+			e.CellStyle.BackColor = _asientosOcupados.Contains(clave)
+				? System.Drawing.Color.IndianRed
+				: _asientosSeleccionados.Contains(clave)
+					? System.Drawing.Color.SeaGreen
+					: System.Drawing.Color.FromArgb(60, 60, 60);
+			e.CellStyle.ForeColor = System.Drawing.Color.White;
+			e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
+			e.CellStyle.SelectionForeColor = System.Drawing.Color.White;
+		}
+
+		//=====================================================
+		// Dibuja los encabezados de fila del grid de asientos.
+		//=====================================================
+		private void dgvAsientosInOper_RowPostPaint(object? sender, DataGridViewRowPostPaintEventArgs e)
+		{
+			string encabezado = $"F{e.RowIndex + 1:D3}";
+			var bounds = new System.Drawing.Rectangle(e.RowBounds.Left, e.RowBounds.Top,
+				dgvAsientosInOper.RowHeadersWidth, e.RowBounds.Height);
+			TextRenderer.DrawText(e.Graphics, encabezado, dgvAsientosInOper.Font, bounds,
+				System.Drawing.Color.White, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+		}
+
+		//=======================================================
+		// Selecciona o quita de la selección el asiento pulsado.
+		//=======================================================
 		private void gridAsientos_CellClick(object? sender, DataGridViewCellEventArgs e)
 		{
 			if
  (e.RowIndex < 0 || e.ColumnIndex < 0)
 				return;
 
-			var cell = dgvAsientosInOper.Rows[e.RowIndex].Cells[e.ColumnIndex];
-			if (cell.Tag is not string clave || _asientosOcupados.Contains(clave))
+			if (_zonaParaVenta is null || e.RowIndex * AsientosPorFila + e.ColumnIndex >= _zonaParaVenta.CupoZona)
+				return;
+			string clave = $"{e.RowIndex + 1:D3}-{e.ColumnIndex + 1:D2}";
+			if (_asientosOcupados.Contains(clave))
 				return;
 
 			if (_asientosSeleccionados.Contains(clave))
 			{
 				_asientosSeleccionados.Remove(clave);
-				cell.Style.BackColor = System.Drawing.Color.FromArgb(60, 60, 60);
 			}
 			else
 			{
@@ -578,15 +708,16 @@ namespace PIA
 				}
 
 				_asientosSeleccionados.Add(clave);
-				cell.Style.BackColor = System.Drawing.Color.SeaGreen;
 			}
 
-			cell.Style.SelectionBackColor = cell.Style.BackColor;
+			dgvAsientosInOper.InvalidateCell(e.ColumnIndex, e.RowIndex);
 			dgvAsientosInOper.ClearSelection();
 			ActualizarTotalesVenta();
 		}
 
-		// Método: ActualizarTotalesVenta.
+		//=====================================================================
+		// Recalcula el subtotal, IVA y total según los asientos seleccionados.
+		//=====================================================================
 		private void ActualizarTotalesVenta()
 		{
 			decimal subtotal = (_zonaParaVenta?.PrecioBase ?? 0m) *
@@ -600,7 +731,9 @@ namespace PIA
 			lblInfoTotalVentaPaso3.Text = total.ToString("C2");
 		}
 
-		// Método: PrepararPaso4.
+		//=============================================================
+		// Muestra el resumen de la compra antes de confirmar la venta.
+		//=============================================================
 		private bool PrepararPaso4()
 		{
 			if (_clienteParaVenta is null ||
@@ -629,14 +762,18 @@ namespace PIA
 			return true;
 		}
 
-		// Método: btnContinuarVentaPaso3_Click.
+		//====================================================
+		// Valida los asientos seleccionados y avanza al pago.
+		//====================================================
 		private void btnContinuarVentaPaso3_Click(object sender, EventArgs e)
 		{
 			if (PrepararPaso4())
 				tabCtrlVenta.SelectedIndex = 3;
 		}
 
-		// Método: btnConfirmarVentaPaso4_Click.
+		//==========================================================
+		// Registra la venta confirmada y genera los boletos en PDF.
+		//==========================================================
 		private async void btnConfirmarVentaPaso4_Click(object sender, EventArgs e)
 		{
 			if (_ventaRegistrada)
@@ -659,7 +796,7 @@ namespace PIA
 			{
 				metodoPago = "Efectivo";
 			}
-			else if (radioBtnTarjetaVentaPaso4.Checked)
+			else if (radioBtnTarjetaVentaPaso4.Checked || _radioBtnDebitoVentaPaso4.Checked)
 			{
 				if (string.IsNullOrWhiteSpace(txtTitularVentaPaso4.Text))
 				{
@@ -721,8 +858,8 @@ namespace PIA
 					return;
 				}
 
-				// La tarjeta se registra como Crédito; no se guardan PAN ni CVV.
-				metodoPago = "Crédito";
+				// El cobro es simulado: solo guardamos el tipo, nunca el PAN ni el CVV.
+				metodoPago = _radioBtnDebitoVentaPaso4.Checked ? "Débito" : "Crédito";
 			}
 			else
 			{
@@ -811,16 +948,20 @@ namespace PIA
 			}
 		}
 
-		// Método: radioBtnMetodoPago_CheckedChanged.
+		//=================================================================
+		// Actualiza los campos de captura según el método de pago elegido.
+		//=================================================================
 		private void radioBtnMetodoPago_CheckedChanged(object? sender, EventArgs e)
 		{
 			ActualizarCamposPago();
 		}
 
-		// Método: ActualizarCamposPago.
+		//====================================================================
+		// Muestra los campos que corresponden al método de pago seleccionado.
+		//====================================================================
 		private void ActualizarCamposPago()
 		{
-			bool tarjeta = radioBtnTarjetaVentaPaso4.Checked;
+			bool tarjeta = radioBtnTarjetaVentaPaso4.Checked || _radioBtnDebitoVentaPaso4.Checked;
 
 			lblTitularVentaPaso4.Visible = tarjeta;
 			txtTitularVentaPaso4.Visible = tarjeta;
@@ -833,7 +974,9 @@ namespace PIA
 			txtCVVVentaPaso4.Visible = tarjeta;
 		}
 
-		// Método: DetectarMarcaTarjeta.
+		//================================================================
+		// Determina la marca de tarjeta a partir de sus primeros dígitos.
+		//================================================================
 		private static string? DetectarMarcaTarjeta(string numero)
 		{
 			if (numero.StartsWith("4") && numero.Length is 13 or 16 or 19)
@@ -854,7 +997,9 @@ namespace PIA
 			return null;
 		}
 
-		// Método: PasaLuhn.
+		//=========================================================
+		// Comprueba el número de tarjeta con el algoritmo de Luhn.
+		//=========================================================
 		private static bool PasaLuhn(string numero)
 		{
 			int suma = 0;
@@ -877,26 +1022,34 @@ namespace PIA
 			return suma % 10 == 0;
 		}
 
-		// Método: btnAtrasVentaPaso2_Click.
+		//==========================================
+		// Regresa al paso de selección del cliente.
+		//==========================================
 		private void btnAtrasVentaPaso2_Click(object sender, EventArgs e)
 		{
 			tabCtrlVenta.SelectedIndex = 0;
 		}
 
-		// Método: btnAtrasVentaPaso3_Click.
+		//==========================================
+		// Regresa al paso de selección del partido.
+		//==========================================
 		private void btnAtrasVentaPaso3_Click(object sender, EventArgs e)
 		{
 
 			tabCtrlVenta.SelectedIndex = 1;
 		}
 
-		// Método: btnAtrasVentaPaso4_Click.
+		//==========================================
+		// Regresa al paso de selección de asientos.
+		//==========================================
 		private void btnAtrasVentaPaso4_Click(object sender, EventArgs e)
 		{
 			tabCtrlVenta.SelectedIndex = 2;
 		}
 
-		// Método: btnNuevaVentaVentaRealizada_Click.
+		//==================================================
+		// Restablece el formulario para iniciar otra venta.
+		//==================================================
 		private async void btnNuevaVentaVentaRealizada_Click(object sender, EventArgs e)
 		{
 			_clienteParaVenta = null;
@@ -932,42 +1085,54 @@ namespace PIA
 			await CargarPartidosAsync();
 		}
 
-		// Método: btnInicio_Click.
+		//==============================================
+		// Muestra el panel de inicio de administración.
+		//==============================================
 		private void btnInicio_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 0;
 			pnlMenu.Visible = false;
 		}
 
-		// Método: btnVentasVentas_Click_1.
+		//=======================================
+		// Abre la sección para registrar ventas.
+		//=======================================
 		private void btnVentasVentas_Click_1(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 1;
 			pnlMenu.Visible = false;
 		}
 
-		// Método: btnClientesVentas_Click.
+		//====================================================
+		// Abre la sección para buscar y administrar clientes.
+		//====================================================
 		private void btnClientesVentas_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 2;
 			pnlMenu.Visible = false;
 		}
 
-		// Método: btnPartidosVentas_Click.
+		//=======================================================
+		// Abre la sección para consultar y administrar partidos.
+		//=======================================================
 		private void btnPartidosVentas_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 3;
 			pnlMenu.Visible = false;
 		}
 
-		// Método: btnFacturasVentas_Click.
+		//=======================================================
+		// Abre la sección para buscar ventas y generar facturas.
+		//=======================================================
 		private void btnFacturasVentas_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 4;
 			pnlMenu.Visible = false;
 		}
 
-		// Método: btnReportesVentas_Click.
+		//=============================
+		// Abre la sección de reportes.
+		//=============================
 		private void btnReportesVentas_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 5;
@@ -975,7 +1140,9 @@ namespace PIA
 			pnlMenu.Visible = false;
 		}
 
-		// Método: btnSalir_Click.
+		//========================================================
+		// Cierra la sesión del administrador y regresa al acceso.
+		//========================================================
 		private void btnSalir_Click(object sender, EventArgs e)
 		{
 			pnlMenu.Visible = false;
@@ -983,7 +1150,9 @@ namespace PIA
 			Close();
 		}
 
-		// Método: btnAjustes_Click.
+		//=======================================
+		// Abre la sección de ajustes de usuario.
+		//=======================================
 		private void btnAjustes_Click(object sender, EventArgs e)
 		{
 			pnlMenu.Visible = !pnlMenu.Visible;
@@ -991,13 +1160,139 @@ namespace PIA
 				pnlMenu.BringToFront();
 		}
 
-		// Método: btnNuevoClienteInCliente_Click.
+		//=========================================================
+		// Configura la tabla del historial de compras del cliente.
+		//=========================================================
+		private void ConfigurarGridHistorialCliente()
+		{
+			dgvHistorialInHistorialCliente.Columns.Clear();
+			dgvHistorialInHistorialCliente.Columns.Add("Fecha", "FECHA");
+			dgvHistorialInHistorialCliente.Columns.Add("Folio", "FOLIO");
+			dgvHistorialInHistorialCliente.Columns.Add("Partidos", "PARTIDO(S)");
+			dgvHistorialInHistorialCliente.Columns.Add("Boletos", "BOLETOS");
+			dgvHistorialInHistorialCliente.Columns.Add("Total", "TOTAL");
+			dgvHistorialInHistorialCliente.Columns.Add("Estado", "ESTADO");
+			dgvHistorialInHistorialCliente.Columns.Add("Pago", "MÉTODO DE PAGO");
+			dgvHistorialInHistorialCliente.Columns.Add("Factura", "FACTURA");
+			dgvHistorialInHistorialCliente.ReadOnly = true;
+			dgvHistorialInHistorialCliente.AllowUserToAddRows = false;
+			dgvHistorialInHistorialCliente.AllowUserToDeleteRows = false;
+			dgvHistorialInHistorialCliente.MultiSelect = false;
+			dgvHistorialInHistorialCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			dgvHistorialInHistorialCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+		}
+
+		//============================================
+		// Abre el historial del cliente seleccionado.
+		//============================================
+		private async void btnHistorial_Click(object? sender, EventArgs e)
+		{
+			if (GridClientesInOper.SelectedRows.Count == 0 ||
+				GridClientesInOper.SelectedRows[0].Tag is not vw_Clientes cliente)
+			{
+				MessageBox.Show("Selecciona un cliente del grid para consultar su historial.",
+					"Historial del cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
+			try
+			{
+				await MostrarHistorialClienteAsync(cliente.IdCliente);
+				tabClientesInVentas.SelectedTab = tabHistorialCliente;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"No se pudo cargar el historial del cliente.\n{ex.Message}",
+					"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		//===========================================================
+		// Consulta y presenta el historial del cliente seleccionado.
+		//===========================================================
+		private async Task MostrarHistorialClienteAsync(int idCliente)
+		{
+			var reporte = await HistorialClienteRepositorio.ObtenerAsync(idCliente);
+			if (reporte is null)
+				throw new InvalidOperationException("No se encontró el cliente seleccionado.");
+
+			_historialClienteActual = reporte;
+			lblNombreInfoInHistorialCliente.Text =
+				$"{reporte.Cliente.Nombres} {reporte.Cliente.ApPaterno} {reporte.Cliente.ApMaterno}".Trim();
+			lblRFCInHistorialCliente.Text = reporte.Cliente.RFC;
+			lblClienteInHistorialCliente.Text = $"CLIENTE #{reporte.Cliente.IdCliente}";
+			lblComprasInHistorialCliente.Text = $"COMPRAS: {reporte.Ventas.Count}";
+			lblTotalInHistorialCliente.Text = $"TOTAL: {reporte.TotalGastado.ToString("C2", CultureInfo.GetCultureInfo("es-MX"))}";
+			lblBoletosInHistorialCliente.Text = $"BOLETOS: {reporte.TotalBoletosValidos}";
+
+			dgvHistorialInHistorialCliente.Rows.Clear();
+			foreach (var venta in reporte.Ventas)
+			{
+				dgvHistorialInHistorialCliente.Rows.Add(
+					venta.FechaHoraVenta.ToString("dd/MM/yyyy HH:mm"),
+					venta.Folio.ToString(),
+					reporte.ObtenerPartidos(venta.IdVenta),
+					$"{Math.Max(0, venta.TotalBoletos - venta.BoletosCancelados)} de {venta.TotalBoletos}",
+					venta.Total.ToString("C2", CultureInfo.GetCultureInfo("es-MX")),
+					venta.EstadoVenta,
+					venta.MetodoPago,
+					venta.Facturada == 1 ? "Sí" : "No");
+			}
+		}
+
+		//======================================================
+		// Regresa desde el historial a la búsqueda de clientes.
+		//======================================================
+		private void btnRegresarHistorialCliente_Click(object? sender, EventArgs e)
+		{
+			tabClientesInVentas.SelectedTab = BuscarCliente;
+		}
+
+		//=================================================
+		// Exporta a PDF el historial del cliente mostrado.
+		//=================================================
+		private void btnExportarHistorialCliente_Click(object? sender, EventArgs e)
+		{
+			if (_historialClienteActual is null)
+			{
+				MessageBox.Show("Primero abre el historial de un cliente.",
+					"Historial del cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return;
+			}
+
+			using var dialogo = new SaveFileDialog
+			{
+				Filter = "Archivo PDF (*.pdf)|*.pdf",
+				FileName = $"HistorialCliente_{_historialClienteActual.Cliente.IdCliente}_{DateTime.Now:yyyyMMdd_HHmm}.pdf",
+				Title = "Exportar historial del cliente"
+			};
+			if (dialogo.ShowDialog(this) != DialogResult.OK)
+				return;
+
+			try
+			{
+				GeneradorPdfBasico.Guardar(dialogo.FileName, "HISTORIAL DEL CLIENTE",
+					_historialClienteActual.CrearLineasPdf());
+				MessageBox.Show("El historial se exportó correctamente.",
+					"PDF creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"No se pudo crear el PDF.\n{ex.Message}",
+					"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+		//===================================================
+		// Abre el formulario para capturar un cliente nuevo.
+		//===================================================
 		private void btnNuevoClienteInCliente_Click(object sender, EventArgs e)
 		{
 			tabClientesInVentas.SelectedIndex = 1;
 		}
 
-		// Método: btnEditarCliente_Click.
+		//==========================================
+		// Abre la edición del cliente seleccionado.
+		//==========================================
 		private void btnEditarCliente_Click(object sender, EventArgs e)
 		{
 			if (GridClientesInOper.SelectedRows.Count == 0 ||
@@ -1025,13 +1320,17 @@ namespace PIA
 			tabClientesInVentas.SelectedIndex = 2;
 		}
 
-		// Método: cboBoxEditarClienteInOper_SelectedIndexChanged.
+		//=========================================================================
+		// Muestra el campo que corresponde al dato de cliente elegido para editar.
+		//=========================================================================
 		private void cboBoxEditarClienteInOper_SelectedIndexChanged(object? sender, EventArgs e)
 		{
 			ActualizarVisibilidadCamposEdicion();
 		}
 
-		// Método: ActualizarVisibilidadCamposEdicion.
+		//====================================================================
+		// Muestra solo el control necesario para editar el dato seleccionado.
+		//====================================================================
 		private void ActualizarVisibilidadCamposEdicion()
 		{
 			bool editarDomicilio = cboBoxEditarClienteInOper.SelectedItem?.ToString() == "DOMICILIO";
@@ -1061,18 +1360,17 @@ namespace PIA
 			public string Descripcion { get; init; } = string.Empty;
 		}
 
-		// Método: CargarFiltrosReporteAsync.
+		//=========================================================
+		// Carga los estadios disponibles como filtros del reporte.
+		//=========================================================
 		private async Task CargarFiltrosReporteAsync()
 		{
 			_cargandoFiltrosReporte = true;
 			try
 			{
 				using var db = new AppDbContext();
-				var estadios = await db.vw_Estadios.AsNoTracking()
-					.OrderBy(e => e.Nombre)
-					.Select(e => e.Nombre)
-					.Distinct()
-					.ToListAsync();
+				var estadios = (await RepoConsulta.EstadiosAsync(db))
+					.OrderBy(e => e.Nombre).Select(e => e.Nombre).Distinct().ToList();
 
 				cboEstadioReporteInOper.Items.Clear();
 				cboEstadioReporteInOper.Items.Add("Todos los estadios");
@@ -1091,7 +1389,9 @@ namespace PIA
 			await CargarPartidosFiltroReporteAsync("Todos los estadios");
 		}
 
-		// Método: cboEstadioReporteInOper_SelectedIndexChanged.
+		//==============================================================
+		// Actualiza la lista de partidos según el estadio seleccionado.
+		//==============================================================
 		private async void cboEstadioReporteInOper_SelectedIndexChanged(object? sender, EventArgs e)
 		{
 			if (_cargandoFiltrosReporte)
@@ -1102,23 +1402,22 @@ namespace PIA
 			await CargarPartidosFiltroReporteAsync(cboEstadioReporteInOper.SelectedItem?.ToString());
 		}
 
-		//=======================
-		// CARGA LOS ESTADIOS DEL FILTRO DE OCUPACION
-		//=======================
+		//==================================================================
+		// Consulta y carga la información necesaria para filtros ocupacion.
+		//==================================================================
 		private async Task CargarFiltrosOcupacionAsync()
 		{
 			_cargandoFiltrosOcupacion = true;
 			try
 			{
 				using var db = new AppDbContext();
-				var estadios = await db.vw_Estadios.AsNoTracking()
+				var estadios = (await RepoConsulta.EstadiosAsync(db))
 					.OrderBy(e => e.Nombre)
 					.Select(e => new FiltroEstadioOcupacion
 					{
 						IdEstadio = e.IdEstadio,
 						Nombre = e.Nombre
-					})
-					.ToListAsync();
+					}).ToList();
 
 				cboEstadioODInOper.DataSource = null;
 				cboEstadioODInOper.DisplayMember = nameof(FiltroEstadioOcupacion.Nombre);
@@ -1126,9 +1425,9 @@ namespace PIA
 				cboEstadioODInOper.DataSource = estadios;
 				cboEstadioODInOper.SelectedIndex = -1;
 				cboPartidoODInOper.DataSource = null;
-				dgvDisponibilidadODInOper.Rows.Clear();
-				dgvAsientosODInOper.Rows.Clear();
-				dgvAsientosODInOper.Columns.Clear();
+				dgvDisponibilidadInOcupacion.Rows.Clear();
+				dgvAsientosInOcupacion.Rows.Clear();
+				dgvAsientosInOcupacion.Columns.Clear();
 			}
 			catch (Exception ex)
 			{
@@ -1141,29 +1440,29 @@ namespace PIA
 			}
 		}
 
-		//=======================
-		// CONFIGURA LOS GRIDS DE OCUPACION Y DISPONIBILIDAD
-		//=======================
+		//================================================================
+		// Configura los controles y el comportamiento de grids ocupacion.
+		//================================================================
 		private void ConfigurarGridsOcupacion()
 		{
-			dgvDisponibilidadODInOper.ReadOnly = true;
-			dgvDisponibilidadODInOper.AllowUserToAddRows = false;
-			dgvDisponibilidadODInOper.AllowUserToDeleteRows = false;
-			dgvDisponibilidadODInOper.MultiSelect = false;
-			dgvDisponibilidadODInOper.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dgvDisponibilidadODInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvDisponibilidadInOcupacion.ReadOnly = true;
+			dgvDisponibilidadInOcupacion.AllowUserToAddRows = false;
+			dgvDisponibilidadInOcupacion.AllowUserToDeleteRows = false;
+			dgvDisponibilidadInOcupacion.MultiSelect = false;
+			dgvDisponibilidadInOcupacion.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			dgvDisponibilidadInOcupacion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-			dgvAsientosODInOper.ReadOnly = true;
-			dgvAsientosODInOper.AllowUserToAddRows = false;
-			dgvAsientosODInOper.AllowUserToDeleteRows = false;
-			dgvAsientosODInOper.MultiSelect = false;
-			dgvAsientosODInOper.SelectionMode = DataGridViewSelectionMode.CellSelect;
-			dgvAsientosODInOper.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+			dgvAsientosInOcupacion.ReadOnly = true;
+			dgvAsientosInOcupacion.AllowUserToAddRows = false;
+			dgvAsientosInOcupacion.AllowUserToDeleteRows = false;
+			dgvAsientosInOcupacion.MultiSelect = false;
+			dgvAsientosInOcupacion.SelectionMode = DataGridViewSelectionMode.CellSelect;
+			dgvAsientosInOcupacion.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 		}
 
-		//=======================
-		// CARGA LOS PARTIDOS DEL ESTADIO SELECCIONADO
-		//=======================
+		//=======================================================================
+		// Actualiza los datos dependientes cuando cambia la opción seleccionada.
+		//=======================================================================
 		private async void cboEstadioODInOper_SelectedIndexChanged(object? sender, EventArgs e)
 		{
 			if (_cargandoFiltrosOcupacion || cboEstadioODInOper.SelectedValue is not int idEstadio)
@@ -1173,7 +1472,7 @@ namespace PIA
 			try
 			{
 				using var db = new AppDbContext();
-				var partidosDb = await db.vw_Partidos.AsNoTracking()
+				var partidosDb = (await RepoConsulta.PartidosAsync(db))
 					.Where(p => p.IdEstadio == idEstadio)
 					.OrderByDescending(p => p.FechaHora)
 					.Select(p => new
@@ -1183,8 +1482,7 @@ namespace PIA
 						p.EquipoVisitante,
 						p.FechaHora,
 						p.Estado
-					})
-					.ToListAsync();
+					}).ToList();
 
 				var partidos = partidosDb.Select(p => new FiltroPartidoOcupacion
 				{
@@ -1197,9 +1495,9 @@ namespace PIA
 				cboPartidoODInOper.ValueMember = nameof(FiltroPartidoOcupacion.IdPartido);
 				cboPartidoODInOper.DataSource = partidos;
 				cboPartidoODInOper.SelectedIndex = -1;
-				dgvDisponibilidadODInOper.Rows.Clear();
-				dgvAsientosODInOper.Rows.Clear();
-				dgvAsientosODInOper.Columns.Clear();
+				dgvDisponibilidadInOcupacion.Rows.Clear();
+				dgvAsientosInOcupacion.Rows.Clear();
+				dgvAsientosInOcupacion.Columns.Clear();
 			}
 			catch (Exception ex)
 			{
@@ -1212,9 +1510,9 @@ namespace PIA
 			}
 		}
 
-		//=======================
-		// CARGA LA DISPONIBILIDAD POR ZONA DEL PARTIDO
-		//=======================
+		//=======================================================================
+		// Actualiza los datos dependientes cuando cambia la opción seleccionada.
+		//=======================================================================
 		private async void cboPartidoODInOper_SelectedIndexChanged(object? sender, EventArgs e)
 		{
 			if (_cargandoFiltrosOcupacion || cboPartidoODInOper.SelectedValue is not int idPartido)
@@ -1223,26 +1521,24 @@ namespace PIA
 			try
 			{
 				using var db = new AppDbContext();
-				var zonas = await db.vw_DisponibilidadZonas.AsNoTracking()
-					.Where(z => z.IdPartido == idPartido)
-					.OrderBy(z => z.NombreZona)
-					.ToListAsync();
+				var zonas = (await RepoConsulta.DisponibilidadZonasAsync(db))
+					.Where(z => z.IdPartido == idPartido).OrderBy(z => z.NombreZona).ToList();
 
-				dgvDisponibilidadODInOper.Rows.Clear();
-				dgvAsientosODInOper.Rows.Clear();
-				dgvAsientosODInOper.Columns.Clear();
+				dgvDisponibilidadInOcupacion.Rows.Clear();
+				dgvAsientosInOcupacion.Rows.Clear();
+				dgvAsientosInOcupacion.Columns.Clear();
 				foreach (var zona in zonas)
 				{
 					decimal porcentaje = zona.CupoZona <= 0
 						? 0m
 						: zona.BoletosVendidos * 100m / zona.CupoZona;
-					int fila = dgvDisponibilidadODInOper.Rows.Add(
+					int fila = dgvDisponibilidadInOcupacion.Rows.Add(
 						zona.NombreZona,
 						zona.CupoZona,
 						zona.BoletosDisponibles,
 						zona.BoletosVendidos,
 						$"{porcentaje:N1}%");
-					dgvDisponibilidadODInOper.Rows[fila].Tag = zona;
+					dgvDisponibilidadInOcupacion.Rows[fila].Tag = zona;
 				}
 			}
 			catch (Exception ex)
@@ -1252,31 +1548,30 @@ namespace PIA
 			}
 		}
 
-		//=======================
-		// DIBUJA LOS ASIENTOS OCUPADOS Y DISPONIBLES DE LA ZONA ELEGIDA
-		//=======================
+		//=========================================================================
+		// Procesa la selección de la celda y actualiza la información relacionada.
+		//=========================================================================
 		private async void dgvDisponibilidadODInOper_CellClick(object? sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex < 0 || dgvDisponibilidadODInOper.Rows[e.RowIndex].Tag is not vw_DisponibilidadZonas zona)
+			if (e.RowIndex < 0 || dgvDisponibilidadInOcupacion.Rows[e.RowIndex].Tag is not vw_DisponibilidadZonas zona)
 				return;
 
 			if (cboPartidoODInOper.SelectedValue is not int idPartido || idPartido != zona.IdPartido)
 				return;
 
-			dgvAsientosODInOper.Rows.Clear();
-			dgvAsientosODInOper.Columns.Clear();
+			dgvAsientosInOcupacion.Rows.Clear();
+			dgvAsientosInOcupacion.Columns.Clear();
 			const int asientosPorFila = 15;
 			for (int n = 1; n <= asientosPorFila; n++)
-				dgvAsientosODInOper.Columns.Add($"Asiento{n:00}", n.ToString("00"));
+				dgvAsientosInOcupacion.Columns.Add($"Asiento{n:00}", n.ToString("00"));
 
 			HashSet<string> ocupados;
 			try
 			{
 				using var db = new AppDbContext();
-				var ocupadosDb = await db.vw_AsientosOcupados.AsNoTracking()
+				var ocupadosDb = (await RepoConsulta.AsientosOcupadosAsync(db))
 					.Where(a => a.IdPartido == idPartido && a.IdZona == zona.IdZona)
-					.Select(a => new { a.Fila, a.Asiento })
-					.ToListAsync();
+					.Select(a => new { a.Fila, a.Asiento }).ToList();
 				ocupados = ocupadosDb
 					.Select(a => $"{a.Fila.Trim()}-{a.Asiento.Trim()}")
 					.ToHashSet(StringComparer.OrdinalIgnoreCase);
@@ -1291,8 +1586,8 @@ namespace PIA
 			int totalFilas = (zona.CupoZona + asientosPorFila - 1) / asientosPorFila;
 			for (int filaIndex = 0; filaIndex < totalFilas; filaIndex++)
 			{
-				int indexFila = dgvAsientosODInOper.Rows.Add();
-				DataGridViewRow fila = dgvAsientosODInOper.Rows[indexFila];
+				int indexFila = dgvAsientosInOcupacion.Rows.Add();
+				DataGridViewRow fila = dgvAsientosInOcupacion.Rows[indexFila];
 				fila.HeaderCell.Value = $"F{filaIndex + 1:D3}";
 
 				for (int columna = 0; columna < asientosPorFila; columna++)
@@ -1317,23 +1612,23 @@ namespace PIA
 					celda.Style.SelectionForeColor = System.Drawing.Color.White;
 				}
 			}
-			dgvAsientosODInOper.ClearSelection();
+			dgvAsientosInOcupacion.ClearSelection();
 		}
 
-		//=======================
-		// CAMBIA A LA PESTAÑA DE REPORTE DE VENTAS
-		//=======================
+		//======================================
+		// Abre el reporte de ventas operativas.
+		//======================================
 		private void btnReporteVentaInOper_Click(object? sender, EventArgs e)
 		{
-			tabReporteVenta.SelectedIndex = 0;
+			tabReportes.SelectedIndex = 0;
 		}
 
-		//=======================
-		// CAMBIA A LA PESTAÑA DE OCUPACION Y DISPONIBILIDAD
-		//=======================
+		//===============================================
+		// Abre el reporte de ocupación y disponibilidad.
+		//===============================================
 		private void btnOcupacionDisponibilidadInOper_Click(object? sender, EventArgs e)
 		{
-			tabReporteVenta.SelectedIndex = 1;
+			tabReportes.SelectedIndex = 1;
 		}
 
 		private sealed class FiltroEstadioOcupacion
@@ -1348,25 +1643,27 @@ namespace PIA
 			public string Descripcion { get; init; } = string.Empty;
 		}
 
-		// Método: CargarPartidosFiltroReporteAsync.
+		//====================================================================
+		// Carga partidos que corresponden al estadio elegido para el reporte.
+		//====================================================================
 		private async Task CargarPartidosFiltroReporteAsync(string? estadio)
 		{
 			_cargandoFiltrosReporte = true;
 			try
 			{
 				using var db = new AppDbContext();
-				var consulta = db.vw_Partidos.AsNoTracking();
+				var consulta = (await RepoConsulta.PartidosAsync(db)).AsEnumerable();
 				if (!string.IsNullOrWhiteSpace(estadio) && estadio != "Todos los estadios")
 					consulta = consulta.Where(p => p.Estadio == estadio);
 
-				var partidosDb = await consulta.OrderByDescending(p => p.FechaHora)
+				var partidosDb = consulta.OrderByDescending(p => p.FechaHora)
 					.Select(p => new
 					{
 						p.IdPartido,
 						p.EquipoLocal,
 						p.EquipoVisitante,
 						p.FechaHora
-					}).ToListAsync();
+					}).ToList();
 				var partidos = partidosDb.Select(p => new ReportePartidoFiltro
 				{
 					IdPartido = p.IdPartido,
@@ -1391,13 +1688,17 @@ namespace PIA
 			}
 		}
 
-		// Método: btnFiltrarReporteInOper_Click.
+		//==========================================================
+		// Valida fechas y aplica los filtros del reporte de ventas.
+		//==========================================================
 		private async void btnFiltrarReporteInOper_Click(object? sender, EventArgs e)
 		{
 			await FiltrarReporteAsync();
 		}
 
-		// Método: FiltrarReporteAsync.
+		//=======================================================================
+		// Consulta y presenta las ventas que coinciden con los filtros elegidos.
+		//=======================================================================
 		private async Task FiltrarReporteAsync()
 		{
 			DateTime desde = dateTimePicker1.Value.Date;
@@ -1415,7 +1716,7 @@ namespace PIA
 				DateTime hastaExclusivo = hasta.AddDays(1);
 
 				using var db = new AppDbContext();
-				var boletosQuery = db.vw_BoletosVendidos.AsNoTracking()
+				var boletosQuery = (await RepoConsulta.BoletosVendidosAsync(db))
 					.Where(b => b.FechaHoraVenta >= desde && b.FechaHoraVenta < hastaExclusivo &&
 								b.EstadoBoleto == "Vendido" && b.EstadoVenta == "Activa");
 
@@ -1424,12 +1725,11 @@ namespace PIA
 				if (idPartido.HasValue)
 					boletosQuery = boletosQuery.Where(b => b.IdPartido == idPartido.Value);
 
-				var boletos
- = await boletosQuery.ToListAsync();
+				var boletos = boletosQuery.ToList();
 				var idsVenta = boletos.Select(b => b.IdVenta).Distinct().ToList();
-				var ventas = await db.vw_Ventas.AsNoTracking()
+				var ventas = (await RepoConsulta.VentasAsync(db))
 					.Where(v => idsVenta.Contains(v.IdVenta) && v.EstadoVenta == "Activa")
-					.ToDictionaryAsync(v => v.IdVenta);
+					.ToDictionary(v => v.IdVenta);
 
 				gridReporteInOper.Rows.Clear();
 				var grupos = boletos.GroupBy(b => new
@@ -1439,6 +1739,7 @@ namespace PIA
 					b.FechaHoraVenta,
 					b.Estadio,
 					b.IdPartido,
+					b.FechaPartido,
 					b.EquipoLocal,
 					b.EquipoVisitante,
 					b.IdZona,
@@ -1458,7 +1759,9 @@ namespace PIA
 						grupo.Key.NombreZona,
 						grupo.Count(),
 						venta.Subtotal.ToString("C2"),
-						venta.Total.ToString("C2"));
+						venta.Total.ToString("C2"),
+						grupo.Key.FechaPartido.ToString("dd/MMM/yyyy HH:mm", CultureInfo.GetCultureInfo("es-MX")),
+						venta.MetodoPago);
 					gridReporteInOper.Rows[fila].Tag = grupo.Key.IdVenta;
 				}
 
@@ -1474,7 +1777,9 @@ namespace PIA
 			}
 		}
 
-		// Método: btnLimparGridReporteInOper_Click.
+		//=======================================================
+		// Limpia los filtros y resultados del reporte de ventas.
+		//=======================================================
 		private async void btnLimparGridReporteInOper_Click(object? sender, EventArgs e)
 		{
 			_cargandoFiltrosReporte = true;
@@ -1486,7 +1791,9 @@ namespace PIA
 			await FiltrarReporteAsync();
 		}
 
-		// Método: btnGuardarCambiosEditarClienteInOper_Click.
+		//======================================================
+		// Valida y guarda los cambios del cliente seleccionado.
+		//======================================================
 		private async void btnGuardarCambiosEditarClienteInOper_Click(object? sender, EventArgs e)
 		{
 			if (_idClienteEditando is null)
@@ -1579,22 +1886,26 @@ namespace PIA
 			}
 		}
 
-		// Método: button2_Click.
+		//=================================================
+		// Abre la pestaña para registrar un cliente nuevo.
+		//=================================================
 		private void button2_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 2;
 			tabClientesInVentas.SelectedIndex = 1;
 		}
 
-		//=======================
-		// EXPORTA EL REPORTE FILTRADO A PDF
-		//=======================
+		//===============================================
+		// Exporta el reporte de ventas operativas a PDF.
+		//===============================================
 		private void btnExportarReporteVentaInOper_Click(object? sender, EventArgs e)
 		{
 			ExportarReporteVentasPdf();
 		}
 
+		//===================================================================================
 		// Función: abre el diálogo para guardar el boleto PDF de la venta recién registrada.
+		//===================================================================================
 		private void ExportarBoletoVentaPdf(Venta venta, decimal subtotal, decimal iva, decimal total, string metodoPago)
 		{
 			using var dialogo = new SaveFileDialog
@@ -1647,7 +1958,9 @@ namespace PIA
 			}
 		}
 
+		//========================================================================================
 		// Función: exporta a PDF las filas y los totales que están visibles en el reporte actual.
+		//========================================================================================
 		private void ExportarReporteVentasPdf()
 		{
 			if (gridReporteInOper.Rows.Count == 0)
@@ -1687,6 +2000,7 @@ namespace PIA
 				lineas.Add($"Estadio: {valor(2)} | Partido: {valor(3)}");
 				lineas.Add($"Zona: {valor(4)} | Boletos: {valor(5)}");
 				lineas.Add($"Subtotal: {valor(6)} | Total: {valor(7)}");
+				lineas.Add($"Fecha del partido: {valor(8)} | Método de pago: {valor(9)}");
 				lineas.Add(string.Empty);
 			}
 
@@ -1703,9 +2017,5 @@ namespace PIA
 			}
 		}
 
-		private void tabPgReportes_Click(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

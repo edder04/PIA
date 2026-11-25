@@ -3,21 +3,31 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace PIA.Datos{                                                                                    // Indico que este código pertenece al proyecto PIA.
     public class AppDbContext : DbContext                                                               // Creo la clase que me permite conectar mi programa con la base de datos.
     {
-        //==============================================
-        protected override void OnConfiguring(                                                          // Configuro la conexión que voy a utilizar para acceder a la base de datos.
+        //=========================================================================
+        // Configura el proveedor y la conexión de Entity Framework con SQL Server.
+        //=========================================================================
+        protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)                                                     // Recibo las opciones que se utilizan para configurar la conexión.
         {
             if (!optionsBuilder.IsConfigured)                                                           // Compruebo si la conexión todavía no ha sido configurada.
             {
-                optionsBuilder.UseSqlServer(                                                            // Indico que voy a utilizar SQL Server como motor de base de datos.
-                    "Server=Edder\\SQLEXPRESS;" +                                                          // Indico el nombre del servidor y la instancia de SQL Server.
-                    "Database=PIA_V3;" +                                                           // Indico el nombre de la base de datos a la que me voy a conectar.
-                    "Trusted_Connection=True;" +                                                        // Utilizo la autenticación de Windows para conectarme al servidor.
-                    "TrustServerCertificate=True;");                                                    // Permito confiar en el certificado del servidor durante la conexión.
+				var connectionString = Environment.GetEnvironmentVariable("PIA_SQL_CONNECTION");
+				if (string.IsNullOrWhiteSpace(connectionString))
+				{
+					string settingsPath = Path.Combine(AppContext.BaseDirectory, "App.config");
+					if (File.Exists(settingsPath))
+						connectionString = XDocument.Load(settingsPath).Root?.Element("connectionStrings")?
+							.Elements("add").FirstOrDefault(e => (string?)e.Attribute("name") == "DefaultConnection")?
+							.Attribute("connectionString")?.Value;
+				}
+				if (string.IsNullOrWhiteSpace(connectionString))
+					throw new InvalidOperationException("Configura DefaultConnection en App.config o define PIA_SQL_CONNECTION.");
+				optionsBuilder.UseSqlServer(connectionString);
             }
         }
         public DbSet<Usuario> Usuario => Set<Usuario>();                                                // Represento la tabla Usuario para poder consultar y trabajar con sus registros.
@@ -46,11 +56,13 @@ namespace PIA.Datos{                                                            
 		public DbSet<vw_AuditoriaUsuarios> vw_AuditoriaUsuarios => Set<vw_AuditoriaUsuarios>();
 		public DbSet<vw_AuditoriaClientes> vw_AuditoriaClientes => Set<vw_AuditoriaClientes>();
 
-		//==============================================
-		// Mapeo de la tabla Usuario
-		protected override void OnModelCreating(ModelBuilder modelBuilder)                              // Configuro cómo se relaciona la clase Usuario con la tabla de SQL Server.
+
+        //==========================================================================
+        // Configuro la conexión que voy a utilizar para acceder a la base de datos.
+        //==========================================================================
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);                                                         // Ejecuto la configuración básica que proporciona Entity Framework Core.
+            base.OnModelCreating(modelBuilder);                                                   
 
 			modelBuilder.Entity<Usuario>(entity =>
 			{
@@ -78,7 +90,7 @@ namespace PIA.Datos{                                                            
 
 			modelBuilder.Entity<AuditoriaUsuario>(entity =>
 			{
-				entity.ToTable("AuditoriaUsuario");
+				entity.ToTable("AuditoriaUsuarios");
 				entity.HasKey(e => e.IdAuditoria);
 				entity.Property(e => e.IdAuditoria).ValueGeneratedOnAdd();
 				entity.Property(e => e.IdUsuario).HasColumnType("varchar(100)").HasMaxLength(100);
@@ -121,7 +133,7 @@ namespace PIA.Datos{                                                            
 	
 			modelBuilder.Entity<AuditoriaCliente>(entity =>
 			{
-				entity.ToTable("AuditoriaCliente");
+				entity.ToTable("AuditoriaClientes");
 				entity.HasKey(e => e.IdAuditoria);
 				entity.Property(e => e.IdAuditoria).ValueGeneratedOnAdd();
 				entity.Property(e => e.IdCliente).HasColumnType("varchar(100)").HasMaxLength(100);
@@ -208,10 +220,6 @@ namespace PIA.Datos{                                                            
 				entity.Property(e => e.Total).HasColumnType("decimal(10,2)").IsRequired();
 				entity.Property(e => e.MetodoPago).HasColumnType("nvarchar(20)").HasMaxLength(20).IsRequired();
 				entity.Property(e => e.EstadoVenta).HasColumnType("nvarchar(20)").HasMaxLength(20).HasDefaultValue("Activa").IsRequired();
-				entity.Property(e => e.TarjetaTitular).HasColumnType("nvarchar(150)").HasMaxLength(150);
-				entity.Property(e => e.TarjetaNumero).HasColumnType("nvarchar(20)").HasMaxLength(20);
-				entity.Property(e => e.TarjetaExpiracion).HasColumnType("nvarchar(5)").HasMaxLength(5);
-				entity.Property(e => e.TarjetaCVV).HasColumnType("nvarchar(4)").HasMaxLength(4);
 				entity.HasOne<Cliente>().WithMany().HasForeignKey(e => e.IdCliente).HasConstraintName("FK_Ventas_Clientes");
 				entity.HasOne<Usuario>().WithMany().HasForeignKey(e => e.IdUsuario).HasConstraintName("FK_Ventas_Usuarios");
 			});

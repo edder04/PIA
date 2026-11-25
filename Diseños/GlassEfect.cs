@@ -5,21 +5,21 @@ using System.Runtime.InteropServices;
 
 namespace PIA.Diseños
 {
-    /// <summary>Estilo de fondo translúcido.</summary>
+  
     public enum GlassStyle
     {
-        /// <summary>Desenfoque tipo acrílico (Windows 10 1803+ / Windows 11). Permite tinte personalizado.</summary>
+        /// Desenfoque tipo acrílico (Windows 10 1803+ / Windows 11). Permite tinte personalizado.
         Acrylic,
-        /// <summary>Material Mica del sistema (solo Windows 11 22H2+). Si no existe, usa Acrylic.</summary>
+        /// Material Mica del sistema (solo Windows 11 22H2+). Si no existe, usa Acrylic.
         Mica,
-        /// <summary>Desenfoque simple sin ruido (Windows 10 / 11).</summary>
+        /// Desenfoque simple sin ruido (Windows 10 / 11).
         Blur
     }
 
-    /// <summary>
+
     /// Aplica un efecto de vidrio (glassmorphism) a un Form con una sola llamada:
     ///     GlassEffect.Apply(this);
-    /// </summary>
+
     public static class GlassEffect
     {
         // ---------- API pública ----------
@@ -30,6 +30,9 @@ namespace PIA.Diseños
         /// <param name="tintOpacity">0 = muy transparente, 255 = tinte sólido. Solo Acrylic/Blur.</param>
         /// <param name="darkMode">Barra de título y controles del sistema en modo oscuro.</param>
         /// <param name="roundedCorners">Esquinas redondeadas (Windows 11).</param>
+        //================================================
+        // Aplica el efecto visual configurado al control.
+        //================================================
         public static void Apply(
             Form form,
             GlassStyle style = GlassStyle.Acrylic,
@@ -72,7 +75,9 @@ namespace PIA.Diseños
             else form.HandleCreated += (_, _) => Enable();
         }
 
-        /// <summary>Quita el efecto y deja el fondo normal.</summary>
+        //=====================================
+        // Retira el efecto visual del control.
+        //=====================================
         public static void Remove(Form form)
         {
             if (!form.IsHandleCreated) return;
@@ -82,7 +87,6 @@ namespace PIA.Diseños
             form.ForeColor = SystemColors.ControlText;
         }
 
-        // ---------- Implementación (Win32) ----------
 
         private const int ACCENT_DISABLED = 0;
         private const int ACCENT_ENABLE_BLURBEHIND = 3;
@@ -119,20 +123,35 @@ namespace PIA.Diseños
         }
 
         [DllImport("user32.dll")]
+        //===========================================================
+        // Aplica los efectos de composición de Windows a la ventana.
+        //===========================================================
         private static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
 
         [DllImport("dwmapi.dll")]
+        //=======================================================================
+        // Configura un atributo visual de la ventana mediante la API de Windows.
+        //=======================================================================
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
 
         [DllImport("dwmapi.dll")]
+        //===========================================================================
+        // Extiende el marco visual de Windows dentro del área cliente de la ventana.
+        //===========================================================================
         private static extern int DwmExtendFrameIntoClientArea(IntPtr hwnd, ref MARGINS margins);
 
+        //=================================================================
+        // Asigna un atributo entero a la estructura de composición visual.
+        //=================================================================
         private static void SetInt(IntPtr hwnd, int attribute, int value)
         {
             try { DwmSetWindowAttribute(hwnd, attribute, ref value, sizeof(int)); }
             catch { /* sistema sin soporte: se ignora */ }
         }
 
+        //===========================================================
+        // Construye la configuración de acento visual de la ventana.
+        //===========================================================
         private static void SetAccent(IntPtr hwnd, int state, Color tint, byte opacity)
         {
             var accent = new AccentPolicy

@@ -5,7 +5,9 @@ namespace PIA
     /// <summary>Genera documentos PDF sencillos sin dependencias externas.</summary>
     internal static class GeneradorPdfBasico
     {
+        //===========================================================================
         // Función: crea un PDF de una o más páginas con texto en formato imprimible.
+        //===========================================================================
         public static void Guardar(string ruta, string titulo, IEnumerable<string> lineas)
         {
             var renglones = new List<string>();
@@ -80,7 +82,9 @@ namespace PIA
             File.WriteAllBytes(ruta, Encoding.ASCII.GetBytes(pdf.ToString()));
         }
 
-        // Función: convierte texto español a bytes WinAnsi representados en hexadecimal PDF.
+        //===================================================================================
+        // Función: convierte texto a bytes WinAnsi representados en hexadecimal PDF.
+        //===================================================================================
         private static string AHex(string texto)
         {
             var hex = new StringBuilder(texto.Length * 2);
