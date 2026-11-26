@@ -78,8 +78,8 @@ namespace PIA{
 			btnLimparGridReporteInOper.Click += button4_Click;
 			btnFiltrarReporteInOper.Click += btnFiltrarReporte_Click_1;
 			cboEstadioReporteInOper.SelectedIndexChanged += cboEstadioReporteInOper_SelectedIndexChanged;
-			comboBox1.SelectedIndexChanged += filtrosListaPartidos_SelectedIndexChanged;
-			comboBox2.SelectedIndexChanged += filtrosListaPartidos_SelectedIndexChanged;
+			cboFechasInPartidos.SelectedIndexChanged += filtrosListaPartidos_SelectedIndexChanged;
+			cboEstadiosInPartidos.SelectedIndexChanged += filtrosListaPartidos_SelectedIndexChanged;
 			btnTodosInPartidos.Click += (_, _) => SeleccionarFiltroFechaPartidos(0);
 			btnHoyInPartidos.Click += (_, _) => SeleccionarFiltroFechaPartidos(1);
 			btnEstaSemanaInPartidos.Click += (_, _) => SeleccionarFiltroFechaPartidos(2);
@@ -191,12 +191,12 @@ namespace PIA{
 
 			var consulta = (await RepoConsulta.PartidosAsync(db))
 				.Where(p => p.Estado == "Programado" && p.FechaHora >= DateTime.Now);
-			if (comboBox2.SelectedItem is FiltroEstadioPartidos { IdEstadio: int idEstadio })
+			if (cboEstadiosInPartidos.SelectedItem is FiltroEstadioPartidos { IdEstadio: int idEstadio })
 				consulta = consulta.Where(p => p.IdEstadio == idEstadio);
 
 			DateTime hoy = DateTime.Today;
 			DateTime inicioSemana = hoy.AddDays(-(((int)hoy.DayOfWeek + 6) % 7));
-			switch (comboBox1.SelectedIndex)
+			switch (cboFechasInPartidos.SelectedIndex)
 			{
 				case 1:
 					consulta = consulta.Where(p => p.FechaHora.Date == hoy);
@@ -243,8 +243,8 @@ namespace PIA{
 		//===============================================================================
 		private async Task CargarFiltrosEstadioListaPartidosAsync()
 		{
-			int? idEstadioAnterior = comboBox2.SelectedValue is int idEstadio ? idEstadio : null;
-			int indiceFechaAnterior = comboBox1.SelectedIndex;
+			int? idEstadioAnterior = cboEstadiosInPartidos.SelectedValue is int idEstadio ? idEstadio : null;
+			int indiceFechaAnterior = cboFechasInPartidos.SelectedIndex;
 			_cargandoFiltrosListaPartidos = true;
 			try
 			{
@@ -255,25 +255,25 @@ namespace PIA{
 					.ToList();
 				estadios.Insert(0, new FiltroEstadioPartidos { IdEstadio = null, Nombre = "Todos los estadios" });
 
-				comboBox2.DataSource = null;
-				comboBox2.DisplayMember = nameof(FiltroEstadioPartidos.Nombre);
-				comboBox2.ValueMember = nameof(FiltroEstadioPartidos.IdEstadio);
-				comboBox2.DataSource = estadios;
+				cboEstadiosInPartidos.DataSource = null;
+				cboEstadiosInPartidos.DisplayMember = nameof(FiltroEstadioPartidos.Nombre);
+				cboEstadiosInPartidos.ValueMember = nameof(FiltroEstadioPartidos.IdEstadio);
+				cboEstadiosInPartidos.DataSource = estadios;
 				if (idEstadioAnterior.HasValue && estadios.Any(e => e.IdEstadio == idEstadioAnterior.Value))
-					comboBox2.SelectedValue = idEstadioAnterior.Value;
+					cboEstadiosInPartidos.SelectedValue = idEstadioAnterior.Value;
 				else
-					comboBox2.SelectedIndex = 0;
+					cboEstadiosInPartidos.SelectedIndex = 0;
 
-				comboBox1.DataSource = null;
-				comboBox1.Items.Clear();
-				comboBox1.Items.AddRange(new object[]
+				cboFechasInPartidos.DataSource = null;
+				cboFechasInPartidos.Items.Clear();
+				cboFechasInPartidos.Items.AddRange(new object[]
 				{
 					"🗓️ Todas las Fechas",
 					"Hoy",
 					"Esta semana",
 					"Próximos 30 días"
 				});
-				comboBox1.SelectedIndex = indiceFechaAnterior >= 0 && indiceFechaAnterior < comboBox1.Items.Count
+				cboFechasInPartidos.SelectedIndex = indiceFechaAnterior >= 0 && indiceFechaAnterior < cboFechasInPartidos.Items.Count
 					? indiceFechaAnterior
 					: 0;
 			}
@@ -288,8 +288,8 @@ namespace PIA{
 		//===================================================================
 		private void SeleccionarFiltroFechaPartidos(int indice)
 		{
-			if (indice >= 0 && indice < comboBox1.Items.Count)
-				comboBox1.SelectedIndex = indice;
+			if (indice >= 0 && indice < cboFechasInPartidos.Items.Count)
+				cboFechasInPartidos.SelectedIndex = indice;
 		}
 
 		//=======================================================================

@@ -28,15 +28,15 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-			DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+			DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
 			pnlMenuInAdmin = new Panel();
 			btnCancelacion = new Button();
 			btnUsuarios = new Button();
@@ -270,8 +270,8 @@
 			btnEstaSemanaInPartidos = new Button();
 			btnHoyInPartidos = new Button();
 			btnTodosInPartidos = new Button();
-			comboBox2 = new ComboBox();
-			comboBox1 = new ComboBox();
+			cboEstadiosInPartidos = new ComboBox();
+			cboFechasInPartidos = new ComboBox();
 			label18 = new Label();
 			label17 = new Label();
 			pnlPartidos = new FlowLayoutPanel();
@@ -639,7 +639,7 @@
 			tabCtrlInAdmin.Controls.Add(tabPgReportes);
 			tabCtrlInAdmin.Controls.Add(tabPageUsuarios);
 			tabCtrlInAdmin.Controls.Add(tabPage7);
-			tabCtrlInAdmin.ItemSize = new Size(50, 20);
+			tabCtrlInAdmin.ItemSize = new Size(0, 1);
 			tabCtrlInAdmin.Location = new Point(50, 100);
 			tabCtrlInAdmin.Margin = new Padding(2);
 			tabCtrlInAdmin.Name = "tabCtrlInAdmin";
@@ -755,11 +755,11 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 5);
+			tabPgVentas.Location = new Point(4, 24);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 841);
+			tabPgVentas.Size = new Size(1392, 822);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
@@ -828,32 +828,32 @@
 			// 
 			gridClientesVentasInAdmin.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			gridClientesVentasInAdmin.BackgroundColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle1.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle1.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-			gridClientesVentasInAdmin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle10.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle10.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle10.ForeColor = SystemColors.WindowText;
+			dataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight;
+			dataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle10.WrapMode = DataGridViewTriState.True;
+			gridClientesVentasInAdmin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
 			gridClientesVentasInAdmin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle2.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle2.ForeColor = Color.Black;
-			dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-			gridClientesVentasInAdmin.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle11.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle11.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle11.ForeColor = Color.Black;
+			dataGridViewCellStyle11.SelectionBackColor = SystemColors.Highlight;
+			dataGridViewCellStyle11.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle11.WrapMode = DataGridViewTriState.False;
+			gridClientesVentasInAdmin.DefaultCellStyle = dataGridViewCellStyle11;
 			gridClientesVentasInAdmin.GridColor = Color.FromArgb(60, 60, 60);
 			gridClientesVentasInAdmin.Location = new Point(90, 314);
 			gridClientesVentasInAdmin.Margin = new Padding(2);
 			gridClientesVentasInAdmin.Name = "gridClientesVentasInAdmin";
 			gridClientesVentasInAdmin.RowHeadersWidth = 72;
-			dataGridViewCellStyle3.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle3.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle3.ForeColor = Color.White;
-			gridClientesVentasInAdmin.RowsDefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle12.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle12.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle12.ForeColor = Color.White;
+			gridClientesVentasInAdmin.RowsDefaultCellStyle = dataGridViewCellStyle12;
 			gridClientesVentasInAdmin.Size = new Size(1100, 288);
 			gridClientesVentasInAdmin.TabIndex = 22;
 			// 
@@ -922,41 +922,41 @@
 			// 
 			gridPartidosVentaInAdmin.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			gridPartidosVentaInAdmin.BackgroundColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle4.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle4.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-			gridPartidosVentaInAdmin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle13.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle13.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle13.ForeColor = SystemColors.WindowText;
+			dataGridViewCellStyle13.SelectionBackColor = SystemColors.Highlight;
+			dataGridViewCellStyle13.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle13.WrapMode = DataGridViewTriState.True;
+			gridPartidosVentaInAdmin.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
 			gridPartidosVentaInAdmin.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			gridPartidosVentaInAdmin.Columns.AddRange(new DataGridViewColumn[] { FechaHora, EquipoLocal, EquipoVisitante, EstadioVenta, EstadoVenta, CuidadVenta, BoletosDisponibles });
-			dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle5.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle5.ForeColor = Color.Black;
-			dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-			gridPartidosVentaInAdmin.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle14.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle14.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle14.ForeColor = Color.Black;
+			dataGridViewCellStyle14.SelectionBackColor = SystemColors.Highlight;
+			dataGridViewCellStyle14.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle14.WrapMode = DataGridViewTriState.False;
+			gridPartidosVentaInAdmin.DefaultCellStyle = dataGridViewCellStyle14;
 			gridPartidosVentaInAdmin.GridColor = Color.FromArgb(60, 60, 60);
 			gridPartidosVentaInAdmin.Location = new Point(60, 242);
 			gridPartidosVentaInAdmin.Margin = new Padding(2);
 			gridPartidosVentaInAdmin.Name = "gridPartidosVentaInAdmin";
-			dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle6.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
-			dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-			gridPartidosVentaInAdmin.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle15.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle15.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle15.ForeColor = SystemColors.WindowText;
+			dataGridViewCellStyle15.SelectionBackColor = SystemColors.Highlight;
+			dataGridViewCellStyle15.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle15.WrapMode = DataGridViewTriState.True;
+			gridPartidosVentaInAdmin.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
 			gridPartidosVentaInAdmin.RowHeadersWidth = 72;
-			dataGridViewCellStyle7.BackColor = Color.FromArgb(60, 60, 60);
-			dataGridViewCellStyle7.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle7.ForeColor = Color.White;
-			gridPartidosVentaInAdmin.RowsDefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle16.BackColor = Color.FromArgb(60, 60, 60);
+			dataGridViewCellStyle16.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle16.ForeColor = Color.White;
+			gridPartidosVentaInAdmin.RowsDefaultCellStyle = dataGridViewCellStyle16;
 			gridPartidosVentaInAdmin.Size = new Size(1150, 400);
 			gridPartidosVentaInAdmin.TabIndex = 32;
 			// 
@@ -1769,10 +1769,10 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInAdmin);
-			tabPgClientes.Location = new Point(4, 5);
+			tabPgClientes.Location = new Point(4, 24);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 841);
+			tabPgClientes.Size = new Size(1392, 822);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
@@ -1835,10 +1835,10 @@
 			// 
 			// GridClientesInClientes
 			// 
-			dataGridViewCellStyle8.BackColor = Color.Black;
-			dataGridViewCellStyle8.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle8.ForeColor = Color.White;
-			GridClientesInClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle17.BackColor = Color.Black;
+			dataGridViewCellStyle17.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle17.ForeColor = Color.White;
+			GridClientesInClientes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
 			GridClientesInClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			GridClientesInClientes.BackgroundColor = Color.FromArgb(90, 90, 90);
 			GridClientesInClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1847,10 +1847,10 @@
 			GridClientesInClientes.Margin = new Padding(2);
 			GridClientesInClientes.Name = "GridClientesInClientes";
 			GridClientesInClientes.RowHeadersWidth = 72;
-			dataGridViewCellStyle9.BackColor = Color.Black;
-			dataGridViewCellStyle9.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-			dataGridViewCellStyle9.ForeColor = Color.White;
-			GridClientesInClientes.RowsDefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle18.BackColor = Color.Black;
+			dataGridViewCellStyle18.Font = new Font("Avenir LT Pro 35 Light", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+			dataGridViewCellStyle18.ForeColor = Color.White;
+			GridClientesInClientes.RowsDefaultCellStyle = dataGridViewCellStyle18;
 			GridClientesInClientes.Size = new Size(1167, 288);
 			GridClientesInClientes.TabIndex = 35;
 			// 
@@ -2848,15 +2848,15 @@
 			tabPgPartidos.Controls.Add(btnEstaSemanaInPartidos);
 			tabPgPartidos.Controls.Add(btnHoyInPartidos);
 			tabPgPartidos.Controls.Add(btnTodosInPartidos);
-			tabPgPartidos.Controls.Add(comboBox2);
-			tabPgPartidos.Controls.Add(comboBox1);
+			tabPgPartidos.Controls.Add(cboEstadiosInPartidos);
+			tabPgPartidos.Controls.Add(cboFechasInPartidos);
 			tabPgPartidos.Controls.Add(label18);
 			tabPgPartidos.Controls.Add(label17);
 			tabPgPartidos.Controls.Add(pnlPartidos);
-			tabPgPartidos.Location = new Point(4, 24);
+			tabPgPartidos.Location = new Point(4, 5);
 			tabPgPartidos.Margin = new Padding(2);
 			tabPgPartidos.Name = "tabPgPartidos";
-			tabPgPartidos.Size = new Size(1392, 822);
+			tabPgPartidos.Size = new Size(1392, 841);
 			tabPgPartidos.TabIndex = 3;
 			tabPgPartidos.Text = "Partidos";
 			// 
@@ -3358,37 +3358,37 @@
 			btnTodosInPartidos.Text = "Todos";
 			btnTodosInPartidos.UseVisualStyleBackColor = true;
 			// 
-			// comboBox2
+			// cboEstadiosInPartidos
 			// 
-			comboBox2.AllowDrop = true;
-			comboBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			comboBox2.BackColor = SystemColors.ActiveBorder;
-			comboBox2.FlatStyle = FlatStyle.Popup;
-			comboBox2.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			comboBox2.FormattingEnabled = true;
-			comboBox2.ItemHeight = 18;
-			comboBox2.Location = new Point(289, 58);
-			comboBox2.Margin = new Padding(2);
-			comboBox2.Name = "comboBox2";
-			comboBox2.Size = new Size(410, 26);
-			comboBox2.TabIndex = 13;
-			comboBox2.Text = "Todos los Estadios";
+			cboEstadiosInPartidos.AllowDrop = true;
+			cboEstadiosInPartidos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			cboEstadiosInPartidos.BackColor = SystemColors.ActiveBorder;
+			cboEstadiosInPartidos.FlatStyle = FlatStyle.Popup;
+			cboEstadiosInPartidos.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			cboEstadiosInPartidos.FormattingEnabled = true;
+			cboEstadiosInPartidos.ItemHeight = 18;
+			cboEstadiosInPartidos.Location = new Point(289, 58);
+			cboEstadiosInPartidos.Margin = new Padding(2);
+			cboEstadiosInPartidos.Name = "cboEstadiosInPartidos";
+			cboEstadiosInPartidos.Size = new Size(410, 26);
+			cboEstadiosInPartidos.TabIndex = 13;
+			cboEstadiosInPartidos.Text = "Todos los Estadios";
 			// 
-			// comboBox1
+			// cboFechasInPartidos
 			// 
-			comboBox1.AllowDrop = true;
-			comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			comboBox1.BackColor = SystemColors.ActiveBorder;
-			comboBox1.FlatStyle = FlatStyle.Popup;
-			comboBox1.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			comboBox1.FormattingEnabled = true;
-			comboBox1.ItemHeight = 18;
-			comboBox1.Location = new Point(15, 58);
-			comboBox1.Margin = new Padding(2);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(255, 26);
-			comboBox1.TabIndex = 12;
-			comboBox1.Text = "🗓️ Todas las Fechas";
+			cboFechasInPartidos.AllowDrop = true;
+			cboFechasInPartidos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			cboFechasInPartidos.BackColor = SystemColors.ActiveBorder;
+			cboFechasInPartidos.FlatStyle = FlatStyle.Popup;
+			cboFechasInPartidos.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			cboFechasInPartidos.FormattingEnabled = true;
+			cboFechasInPartidos.ItemHeight = 18;
+			cboFechasInPartidos.Location = new Point(15, 58);
+			cboFechasInPartidos.Margin = new Padding(2);
+			cboFechasInPartidos.Name = "cboFechasInPartidos";
+			cboFechasInPartidos.Size = new Size(255, 26);
+			cboFechasInPartidos.TabIndex = 12;
+			cboFechasInPartidos.Text = "🗓️ Todas las Fechas";
 			// 
 			// label18
 			// 
@@ -3455,10 +3455,10 @@
 			tabPgFacturas.Controls.Add(txtCodigoVentaInFactura);
 			tabPgFacturas.Controls.Add(lblCodigoVentaInFactura);
 			tabPgFacturas.Controls.Add(lblFacturarVentaInFactura);
-			tabPgFacturas.Location = new Point(4, 5);
+			tabPgFacturas.Location = new Point(4, 24);
 			tabPgFacturas.Margin = new Padding(2);
 			tabPgFacturas.Name = "tabPgFacturas";
-			tabPgFacturas.Size = new Size(1392, 841);
+			tabPgFacturas.Size = new Size(1392, 822);
 			tabPgFacturas.TabIndex = 4;
 			tabPgFacturas.Text = " Factura";
 			// 
@@ -3791,10 +3791,10 @@
 			tabPgReportes.Controls.Add(lblIngresosReporte);
 			tabPgReportes.Controls.Add(lblBoletosVendidosReporte);
 			tabPgReportes.Controls.Add(button6);
-			tabPgReportes.Location = new Point(4, 5);
+			tabPgReportes.Location = new Point(4, 24);
 			tabPgReportes.Margin = new Padding(2);
 			tabPgReportes.Name = "tabPgReportes";
-			tabPgReportes.Size = new Size(1392, 841);
+			tabPgReportes.Size = new Size(1392, 822);
 			tabPgReportes.TabIndex = 5;
 			tabPgReportes.Text = "Reportes";
 			// 
@@ -4280,11 +4280,11 @@
 			// 
 			tabPageUsuarios.BackColor = Color.Black;
 			tabPageUsuarios.Controls.Add(tabCtrlUsauriosInAdmin);
-			tabPageUsuarios.Location = new Point(4, 5);
+			tabPageUsuarios.Location = new Point(4, 24);
 			tabPageUsuarios.Margin = new Padding(2);
 			tabPageUsuarios.Name = "tabPageUsuarios";
 			tabPageUsuarios.Padding = new Padding(2);
-			tabPageUsuarios.Size = new Size(1392, 841);
+			tabPageUsuarios.Size = new Size(1392, 822);
 			tabPageUsuarios.TabIndex = 6;
 			tabPageUsuarios.Text = "Usuarios";
 			// 
@@ -4784,10 +4784,10 @@
 			tabPage7.Controls.Add(label38);
 			tabPage7.Controls.Add(txtBuscarCancelarInAdmin);
 			tabPage7.Controls.Add(lblBuscarCancelarInAdmin);
-			tabPage7.Location = new Point(4, 5);
+			tabPage7.Location = new Point(4, 24);
 			tabPage7.Name = "tabPage7";
 			tabPage7.Padding = new Padding(3);
-			tabPage7.Size = new Size(1392, 841);
+			tabPage7.Size = new Size(1392, 822);
 			tabPage7.TabIndex = 7;
 			tabPage7.Text = "Cancelacion";
 			// 
@@ -5061,8 +5061,8 @@
         private Button btnEstaSemanaInPartidos;
         private Button btnHoyInPartidos;
         private Button btnTodosInPartidos;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cboEstadiosInPartidos;
+        private ComboBox cboFechasInPartidos;
         private Label label18;
         private Label label17;
         private TabPage tabPgFacturas;

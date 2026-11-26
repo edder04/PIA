@@ -215,8 +215,8 @@
 			btnEstaSemanaInPartidos = new Button();
 			btnHoyInPartidos = new Button();
 			btnTodosInPartidos = new Button();
-			comboBox2 = new ComboBox();
-			comboBox1 = new ComboBox();
+			cboEstadiosInPartidos = new ComboBox();
+			cboFechasInPartidos = new ComboBox();
 			label18 = new Label();
 			label17 = new Label();
 			tabPgReportes = new TabPage();
@@ -308,7 +308,7 @@
 			tabCtrlVentas.Controls.Add(tabPgClientes);
 			tabCtrlVentas.Controls.Add(tabPgPartidos);
 			tabCtrlVentas.Controls.Add(tabPgReportes);
-			tabCtrlVentas.ItemSize = new Size(0, 1);
+			tabCtrlVentas.ItemSize = new Size(50, 20);
 			tabCtrlVentas.Location = new Point(50, 100);
 			tabCtrlVentas.Margin = new Padding(0);
 			tabCtrlVentas.Name = "tabCtrlVentas";
@@ -330,11 +330,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 5);
+			tabPgInicio.Location = new Point(4, 24);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 841);
+			tabPgInicio.Size = new Size(1392, 822);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -446,11 +446,11 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 24);
+			tabPgVentas.Location = new Point(4, 5);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 822);
+			tabPgVentas.Size = new Size(1392, 841);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
@@ -1397,10 +1397,10 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInVentas);
-			tabPgClientes.Location = new Point(4, 24);
+			tabPgClientes.Location = new Point(4, 5);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 822);
+			tabPgClientes.Size = new Size(1392, 841);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
@@ -2494,8 +2494,8 @@
 			tabPgPartidos.Controls.Add(btnEstaSemanaInPartidos);
 			tabPgPartidos.Controls.Add(btnHoyInPartidos);
 			tabPgPartidos.Controls.Add(btnTodosInPartidos);
-			tabPgPartidos.Controls.Add(comboBox2);
-			tabPgPartidos.Controls.Add(comboBox1);
+			tabPgPartidos.Controls.Add(cboEstadiosInPartidos);
+			tabPgPartidos.Controls.Add(cboFechasInPartidos);
 			tabPgPartidos.Controls.Add(label18);
 			tabPgPartidos.Controls.Add(label17);
 			tabPgPartidos.Location = new Point(4, 24);
@@ -2563,37 +2563,37 @@
 			btnTodosInPartidos.Text = "Todos";
 			btnTodosInPartidos.UseVisualStyleBackColor = true;
 			// 
-			// comboBox2
+			// cboEstadiosInPartidos
 			// 
-			comboBox2.AllowDrop = true;
-			comboBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			comboBox2.BackColor = SystemColors.ActiveBorder;
-			comboBox2.FlatStyle = FlatStyle.Popup;
-			comboBox2.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			comboBox2.FormattingEnabled = true;
-			comboBox2.ItemHeight = 18;
-			comboBox2.Location = new Point(289, 58);
-			comboBox2.Margin = new Padding(2);
-			comboBox2.Name = "comboBox2";
-			comboBox2.Size = new Size(410, 26);
-			comboBox2.TabIndex = 13;
-			comboBox2.Text = "Todos los Estadios";
+			cboEstadiosInPartidos.AllowDrop = true;
+			cboEstadiosInPartidos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			cboEstadiosInPartidos.BackColor = SystemColors.ActiveBorder;
+			cboEstadiosInPartidos.FlatStyle = FlatStyle.Popup;
+			cboEstadiosInPartidos.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			cboEstadiosInPartidos.FormattingEnabled = true;
+			cboEstadiosInPartidos.ItemHeight = 18;
+			cboEstadiosInPartidos.Location = new Point(289, 58);
+			cboEstadiosInPartidos.Margin = new Padding(2);
+			cboEstadiosInPartidos.Name = "cboEstadiosInPartidos";
+			cboEstadiosInPartidos.Size = new Size(410, 26);
+			cboEstadiosInPartidos.TabIndex = 13;
+			cboEstadiosInPartidos.Text = "Todos los Estadios";
 			// 
-			// comboBox1
+			// cboFechasInPartidos
 			// 
-			comboBox1.AllowDrop = true;
-			comboBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			comboBox1.BackColor = SystemColors.ActiveBorder;
-			comboBox1.FlatStyle = FlatStyle.Popup;
-			comboBox1.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
-			comboBox1.FormattingEnabled = true;
-			comboBox1.ItemHeight = 18;
-			comboBox1.Location = new Point(15, 58);
-			comboBox1.Margin = new Padding(2);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(255, 26);
-			comboBox1.TabIndex = 12;
-			comboBox1.Text = "🗓️ Todas las Fechas";
+			cboFechasInPartidos.AllowDrop = true;
+			cboFechasInPartidos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+			cboFechasInPartidos.BackColor = SystemColors.ActiveBorder;
+			cboFechasInPartidos.FlatStyle = FlatStyle.Popup;
+			cboFechasInPartidos.Font = new Font("Avenir LT Pro 65 Medium", 11.1428576F, FontStyle.Bold, GraphicsUnit.Point, 0);
+			cboFechasInPartidos.FormattingEnabled = true;
+			cboFechasInPartidos.ItemHeight = 18;
+			cboFechasInPartidos.Location = new Point(15, 58);
+			cboFechasInPartidos.Margin = new Padding(2);
+			cboFechasInPartidos.Name = "cboFechasInPartidos";
+			cboFechasInPartidos.Size = new Size(255, 26);
+			cboFechasInPartidos.TabIndex = 12;
+			cboFechasInPartidos.Text = "🗓️ Todas las Fechas";
 			// 
 			// label18
 			// 
@@ -2625,10 +2625,10 @@
 			tabPgReportes.Controls.Add(btnOcupacionDisponibilidadInOper);
 			tabPgReportes.Controls.Add(btnReporteVentaInOper);
 			tabPgReportes.Controls.Add(tabReportes);
-			tabPgReportes.Location = new Point(4, 24);
+			tabPgReportes.Location = new Point(4, 5);
 			tabPgReportes.Margin = new Padding(2);
 			tabPgReportes.Name = "tabPgReportes";
-			tabPgReportes.Size = new Size(1392, 822);
+			tabPgReportes.Size = new Size(1392, 841);
 			tabPgReportes.TabIndex = 5;
 			tabPgReportes.Text = "Reportes";
 			// 
@@ -3311,8 +3311,8 @@
         private Label label18;
         private Label label17;
         private Button btnTodosInPartidos;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cboEstadiosInPartidos;
+        private ComboBox cboFechasInPartidos;
         private FlowLayoutPanel flowPanelPartidos;
         private Button btnProximosInPartidos;
         private Button btnEstaSemanaInPartidos;

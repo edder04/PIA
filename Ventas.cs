@@ -21,6 +21,7 @@ namespace PIA
 		private bool _cargandoClientes;
 		private bool _cargandoFiltrosReporte;
 		private bool _cargandoFiltrosOcupacion;
+		private bool _filtrosReporteInicializados;
 		private bool _ventaRegistrada;
 		private int _versionCargaAsientos;
 		private Label? _lblCargandoAsientos;
@@ -1111,10 +1112,11 @@ namespace PIA
 		//=======================================
 		// Abre la sección para registrar ventas.
 		//=======================================
-		private void btnVentasVentas_Click_1(object sender, EventArgs e)
+		private async void btnVentasVentas_Click_1(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 1;
 			pnlMenu.Visible = false;
+			await CargarPartidosAsync();
 		}
 
 		//====================================================
@@ -1129,20 +1131,23 @@ namespace PIA
 		//=======================================================
 		// Abre la sección para consultar y administrar partidos.
 		//=======================================================
-		private void btnPartidosVentas_Click(object sender, EventArgs e)
+		private async void btnPartidosVentas_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 3;
 			pnlMenu.Visible = false;
+			await CargarPartidosAsync();
 		}
 
 		//=============================
 		// Abre la sección de reportes.
 		//=============================
-		private void btnReportesVentas_Click(object sender, EventArgs e)
+		private async void btnReportesVentas_Click(object sender, EventArgs e)
 		{
 			tabCtrlVentas.SelectedIndex = 4;
 
 			pnlMenu.Visible = false;
+			await CargarFiltrosReporteAsync();
+			await CargarFiltrosOcupacionAsync();
 		}
 
 		//========================================================
@@ -1370,6 +1375,8 @@ namespace PIA
 		//=========================================================
 		private async Task CargarFiltrosReporteAsync()
 		{
+			string estadioAnterior = cboEstadioReporteInOper.SelectedItem?.ToString() ?? "Todos los estadios";
+			int? partidoAnterior = cboPartidoReporteInOper.SelectedValue is int idPartido ? idPartido : null;
 			_cargandoFiltrosReporte = true;
 			try
 			{
@@ -1381,17 +1388,22 @@ namespace PIA
 				cboEstadioReporteInOper.Items.Add("Todos los estadios");
 				foreach (string estadio in estadios)
 					cboEstadioReporteInOper.Items.Add(estadio);
-				cboEstadioReporteInOper.SelectedIndex = 0;
+				int indiceEstadio = cboEstadioReporteInOper.Items.IndexOf(estadioAnterior);
+				cboEstadioReporteInOper.SelectedIndex = indiceEstadio >= 0 ? indiceEstadio : 0;
 
-				dateTimePicker1.Value = DateTime.Today.AddDays(-30);
-				dateTimePicker2.Value = DateTime.Today;
+				if (!_filtrosReporteInicializados)
+				{
+					dateTimePicker1.Value = DateTime.Today.AddDays(-30);
+					dateTimePicker2.Value = DateTime.Today;
+					_filtrosReporteInicializados = true;
+				}
 			}
 			finally
 			{
 				_cargandoFiltrosReporte = false;
 			}
 
-			await CargarPartidosFiltroReporteAsync("Todos los estadios");
+			await CargarPartidosFiltroReporteAsync(cboEstadioReporteInOper.SelectedItem?.ToString() ?? "Todos los estadios", partidoAnterior);
 		}
 
 		//==============================================================
@@ -1623,17 +1635,19 @@ namespace PIA
 		//======================================
 		// Abre el reporte de ventas operativas.
 		//======================================
-		private void btnReporteVentaInOper_Click(object? sender, EventArgs e)
+		private async void btnReporteVentaInOper_Click(object? sender, EventArgs e)
 		{
 			tabReportes.SelectedIndex = 0;
+			await CargarFiltrosReporteAsync();
 		}
 
 		//===============================================
 		// Abre el reporte de ocupación y disponibilidad.
 		//===============================================
-		private void btnOcupacionDisponibilidadInOper_Click(object? sender, EventArgs e)
+		private async void btnOcupacionDisponibilidadInOper_Click(object? sender, EventArgs e)
 		{
 			tabReportes.SelectedIndex = 1;
+			await CargarFiltrosOcupacionAsync();
 		}
 
 		private sealed class FiltroEstadioOcupacion
@@ -1651,7 +1665,7 @@ namespace PIA
 		//====================================================================
 		// Carga partidos que corresponden al estadio elegido para el reporte.
 		//====================================================================
-		private async Task CargarPartidosFiltroReporteAsync(string? estadio)
+		private async Task CargarPartidosFiltroReporteAsync(string? estadio, int? partidoSeleccionado = null)
 		{
 			_cargandoFiltrosReporte = true;
 			try
@@ -1685,7 +1699,10 @@ namespace PIA
 				cboPartidoReporteInOper.DisplayMember = nameof(ReportePartidoFiltro.Descripcion);
 				cboPartidoReporteInOper.ValueMember = nameof(ReportePartidoFiltro.IdPartido);
 				cboPartidoReporteInOper.DataSource = partidos;
-				cboPartidoReporteInOper.SelectedIndex = 0;
+				if (partidoSeleccionado.HasValue && partidos.Any(p => p.IdPartido == partidoSeleccionado.Value))
+					cboPartidoReporteInOper.SelectedValue = partidoSeleccionado.Value;
+				else
+					cboPartidoReporteInOper.SelectedIndex = 0;
 			}
 			finally
 			{
