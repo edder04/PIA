@@ -34,6 +34,7 @@ namespace PIA{
 		private bool _recargarVentasCancelables;
 		private bool _cargandoFiltrosOcupacion;
 		private bool _cargandoFiltrosReporte;
+		private bool _filtrosReporteInicializados;
 		private bool _cargandoFiltrosListaPartidos;
 		private int _versionCargaAsientos;
 		private Label? _lblCargandoAsientos;
@@ -242,6 +243,8 @@ namespace PIA{
 		//===============================================================================
 		private async Task CargarFiltrosEstadioListaPartidosAsync()
 		{
+			int? idEstadioAnterior = comboBox2.SelectedValue is int idEstadio ? idEstadio : null;
+			int indiceFechaAnterior = comboBox1.SelectedIndex;
 			_cargandoFiltrosListaPartidos = true;
 			try
 			{
@@ -256,7 +259,10 @@ namespace PIA{
 				comboBox2.DisplayMember = nameof(FiltroEstadioPartidos.Nombre);
 				comboBox2.ValueMember = nameof(FiltroEstadioPartidos.IdEstadio);
 				comboBox2.DataSource = estadios;
-				comboBox2.SelectedIndex = 0;
+				if (idEstadioAnterior.HasValue && estadios.Any(e => e.IdEstadio == idEstadioAnterior.Value))
+					comboBox2.SelectedValue = idEstadioAnterior.Value;
+				else
+					comboBox2.SelectedIndex = 0;
 
 				comboBox1.DataSource = null;
 				comboBox1.Items.Clear();
@@ -267,7 +273,9 @@ namespace PIA{
 					"Esta semana",
 					"Próximos 30 días"
 				});
-				comboBox1.SelectedIndex = 0;
+				comboBox1.SelectedIndex = indiceFechaAnterior >= 0 && indiceFechaAnterior < comboBox1.Items.Count
+					? indiceFechaAnterior
+					: 0;
 			}
 			finally
 			{
@@ -336,17 +344,44 @@ namespace PIA{
 
 			try
 			{
-				var repo = new RepoEstadio();
-
-				cboEstadioInAdmin.DataSource = await repo.ObtenerTodosAsync();
-				cboEstadioInAdmin.DisplayMember = "Nombre";
-				cboEstadioInAdmin.ValueMember = "IdEstadio";
-				cboEstadioInAdmin.SelectedIndex = -1;
+				await CargarEstadiosComboAdminAsync();
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"No se pudieron cargar los estadios.\n{ex.Message}");
+				MessageBox.Show($"No se pudieron cargar los estadios.\n{ex.GetBaseException().Message}");
 			}
+		}
+
+		//=========================================================
+		// Actualiza los combos y el panel después de cambiar catálogos.
+		//=========================================================
+		private async Task RefrescarCatalogosEstadioPartidoAsync(int? idEstadioSeleccionado = null)
+		{
+			await CargarEstadiosComboAdminAsync(idEstadioSeleccionado);
+			await CargarFiltrosEstadioListaPartidosAsync();
+			await CargarFiltrosReporteAsync();
+			await CargarFiltrosOcupacionAsync();
+			await CargarPartidos();
+		}
+
+		//========================================================
+		// Carga y selecciona un estadio en el combo de captura.
+		//========================================================
+		private async Task CargarEstadiosComboAdminAsync(int? idEstadioSeleccionado = null)
+		{
+			int? idSeleccionado = idEstadioSeleccionado ??
+				(cboEstadioInAdmin.SelectedValue is int idActual ? idActual : null);
+			var estadios = await new RepoEstadio().ObtenerTodosAsync();
+
+			cboEstadioInAdmin.DataSource = null;
+			cboEstadioInAdmin.DisplayMember = nameof(Estadio.Nombre);
+			cboEstadioInAdmin.ValueMember = nameof(Estadio.IdEstadio);
+			cboEstadioInAdmin.DataSource = estadios;
+
+			if (idSeleccionado.HasValue && estadios.Any(e => e.IdEstadio == idSeleccionado.Value))
+				cboEstadioInAdmin.SelectedValue = idSeleccionado.Value;
+			else
+				cboEstadioInAdmin.SelectedIndex = -1;
 		}
 
 		//===============================================================
@@ -373,6 +408,9 @@ namespace PIA{
 		//==================================================================
 		private async Task CargarFiltrosOcupacionAsync()
 		{
+			int? idEstadioAnterior = cboEstadioInOcupacion.SelectedValue is int idEstadio ? idEstadio : null;
+			int? idPartidoAnterior = cboPartidoInOcupacion.SelectedValue is int idPartido ? idPartido : null;
+			bool conservarEstadio = false;
 			_cargandoFiltrosOcupacion = true;
 			try
 			{
@@ -381,12 +419,17 @@ namespace PIA{
 					.OrderBy(e => e.Nombre)
 					.Select(e => new { e.IdEstadio, e.Nombre })
 					.ToList();
+				conservarEstadio = idEstadioAnterior.HasValue &&
+					estadios.Any(e => e.IdEstadio == idEstadioAnterior.Value);
 
 				cboEstadioInOcupacion.DataSource = null;
 				cboEstadioInOcupacion.DisplayMember = "Nombre";
 				cboEstadioInOcupacion.ValueMember = "IdEstadio";
 				cboEstadioInOcupacion.DataSource = estadios;
-				cboEstadioInOcupacion.SelectedIndex = -1;
+				if (conservarEstadio)
+					cboEstadioInOcupacion.SelectedValue = idEstadioAnterior.GetValueOrDefault();
+				else
+					cboEstadioInOcupacion.SelectedIndex = -1;
 				cboPartidoInOcupacion.DataSource = null;
 				LimpiarGridsOcupacion();
 			}
@@ -400,6 +443,9 @@ namespace PIA{
 			{
 				_cargandoFiltrosOcupacion = false;
 			}
+
+			if (conservarEstadio && idEstadioAnterior.HasValue)
+				await CargarPartidosOcupacionAsync(idEstadioAnterior.Value, idPartidoAnterior);
 		}
 
 		//================================================================
@@ -437,6 +483,14 @@ namespace PIA{
 			if (_cargandoFiltrosOcupacion || cboEstadioInOcupacion.SelectedValue is not int idEstadio)
 				return;
 
+			await CargarPartidosOcupacionAsync(idEstadio);
+		}
+
+		//====================================================================
+		// Carga los partidos del estadio y conserva el partido si sigue disponible.
+		//====================================================================
+		private async Task CargarPartidosOcupacionAsync(int idEstadio, int? idPartidoSeleccionado = null)
+		{
 			_cargandoFiltrosOcupacion = true;
 			try
 			{
@@ -455,7 +509,10 @@ namespace PIA{
 				cboPartidoInOcupacion.DisplayMember = "Descripcion";
 				cboPartidoInOcupacion.ValueMember = "IdPartido";
 				cboPartidoInOcupacion.DataSource = partidos;
-				cboPartidoInOcupacion.SelectedIndex = -1;
+				if (idPartidoSeleccionado.HasValue && partidos.Any(p => p.IdPartido == idPartidoSeleccionado.Value))
+					cboPartidoInOcupacion.SelectedValue = idPartidoSeleccionado.Value;
+				else
+					cboPartidoInOcupacion.SelectedIndex = -1;
 				LimpiarGridsOcupacion();
 				lblEstadioInOcupacion.Text = "ESTADIO:";
 				lblPartidoInOcupacion.Text = "PARTIDO:";
@@ -469,6 +526,9 @@ namespace PIA{
 			{
 				_cargandoFiltrosOcupacion = false;
 			}
+
+			if (cboPartidoInOcupacion.SelectedValue is int partidoSeleccionado)
+				await CargarDisponibilidadOcupacionAsync(partidoSeleccionado);
 		}
 
 		//=======================================================================
@@ -479,6 +539,14 @@ namespace PIA{
 			if (_cargandoFiltrosOcupacion || cboPartidoInOcupacion.SelectedValue is not int idPartido)
 				return;
 
+			await CargarDisponibilidadOcupacionAsync(idPartido);
+		}
+
+		//===============================================================
+		// Carga las zonas y la disponibilidad del partido seleccionado.
+		//===============================================================
+		private async Task CargarDisponibilidadOcupacionAsync(int idPartido)
+		{
 			try
 			{
 				using var db = new AppDbContext();
@@ -1573,14 +1641,33 @@ namespace PIA{
 			string rol = textBox38.Text.Trim();
 			string usuarioNombre = textBox37.Text.Trim();
 			string password = textBox30.Text;
-			if (new[] { nombres, paterno, nomina, correo, rol, usuarioNombre, password }.Any(string.IsNullOrWhiteSpace) || !PoliticaContrasena.EsValida(password) ||
-				!DateTime.TryParse(textBox36.Text.Trim(), CultureInfo.GetCultureInfo("es-MX"), DateTimeStyles.None, out var fechaNacimiento) ||
-				fechaNacimiento.Date >= DateTime.Today || !Regex.IsMatch(correo, @"^[^\s@]+@[^\s@]+\.[^\s@]+$") ||
-				(!rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) && !rol.Equals("Operativo", StringComparison.OrdinalIgnoreCase)))
+			bool Error(Control control, string mensaje)
 			{
-				MessageBox.Show($"Completa los campos; {PoliticaContrasena.Mensaje} Verifica también la fecha, el correo y el rol.", "Datos inválidos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				return;
+				MessageBox.Show(mensaje, "Datos del usuario", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				control.Focus();
+				return true;
 			}
+			if (string.IsNullOrWhiteSpace(nombres)) { Error(textBox43, "Nombre(s): captura este dato."); return; }
+			if (nombres.Length > 100) { Error(textBox43, "Nombre(s): no puede exceder 100 caracteres."); return; }
+			if (string.IsNullOrWhiteSpace(paterno)) { Error(textBox42, "Apellido paterno: captura este dato."); return; }
+			if (paterno.Length > 100) { Error(textBox42, "Apellido paterno: no puede exceder 100 caracteres."); return; }
+			if (materno.Length > 100) { Error(textBox41, "Apellido materno: no puede exceder 100 caracteres."); return; }
+			if (string.IsNullOrWhiteSpace(nomina)) { Error(textBox40, "Número de nómina: captura este dato."); return; }
+			if (nomina.Length > 50) { Error(textBox40, "Número de nómina: no puede exceder 50 caracteres."); return; }
+			if (string.IsNullOrWhiteSpace(correo)) { Error(textBox39, "Correo electrónico: captura este dato."); return; }
+			if (correo.Length > 100 || !Regex.IsMatch(correo, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
+			{ Error(textBox39, "Correo electrónico: escribe un correo válido de hasta 100 caracteres."); return; }
+			if (!DateTime.TryParse(textBox36.Text.Trim(), CultureInfo.GetCultureInfo("es-MX"), DateTimeStyles.None, out var fechaNacimiento))
+			{ Error(textBox36, "Fecha de nacimiento: escribe una fecha válida con formato dd/MM/aaaa."); return; }
+			if (fechaNacimiento.Date >= DateTime.Today)
+			{ Error(textBox36, "Fecha de nacimiento: debe ser anterior al día de hoy."); return; }
+			if (string.IsNullOrWhiteSpace(rol)) { Error(textBox38, "Rol: selecciona Administrador u Operativo."); return; }
+			if (!rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) && !rol.Equals("Operativo", StringComparison.OrdinalIgnoreCase))
+			{ Error(textBox38, "Rol: solo se permite Administrador u Operativo."); return; }
+			if (string.IsNullOrWhiteSpace(usuarioNombre)) { Error(textBox37, "Nombre de usuario: captura este dato."); return; }
+			if (usuarioNombre.Length > 100) { Error(textBox37, "Nombre de usuario: no puede exceder 100 caracteres."); return; }
+			if (string.IsNullOrWhiteSpace(password)) { Error(textBox30, "Contraseña: captura este dato."); return; }
+			if (!PoliticaContrasena.EsValida(password)) { Error(textBox30, PoliticaContrasena.Mensaje); return; }
 			try
 			{
 				rol = rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ? "Administrador" : "Operativo";
@@ -1594,7 +1681,13 @@ namespace PIA{
 				MessageBox.Show("Usuario agregado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				tabCtrlUsauriosInAdmin.SelectedIndex = 0;
 			}
-			catch (Exception ex) { MessageBox.Show("No se pudo guardar el usuario.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+			catch (Exception ex)
+			{
+				string detalle = ex.GetBaseException().Message;
+				if (detalle.Contains("duplicate", StringComparison.OrdinalIgnoreCase) || detalle.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase))
+					detalle = "Número de nómina o correo electrónico: ya existe un usuario con ese dato.";
+				MessageBox.Show("Usuario: no se pudo guardar.\n" + detalle, "Datos del usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 
 		//====================================================
@@ -1602,19 +1695,51 @@ namespace PIA{
 		//====================================================
 		private async void button14_Click(object sender, EventArgs e)
 		{
-			if (_usuarioSeleccionadoParaEditar is not int id || comboBox3.SelectedItem is not string campo || string.IsNullOrWhiteSpace(textBox1.Text))
-			{ MessageBox.Show("Selecciona un usuario, un campo y captura el nuevo valor.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+			if (_usuarioSeleccionadoParaEditar is not int id)
+			{
+				MessageBox.Show("Usuario: selecciona primero un registro de la lista.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				dataGridView3.Focus();
+				return;
+			}
+			if (comboBox3.SelectedItem is not string campo)
+			{
+				MessageBox.Show("Dato a editar: selecciona el campo que quieres cambiar.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				comboBox3.Focus();
+				return;
+			}
+			if (string.IsNullOrWhiteSpace(textBox1.Text))
+			{
+				MessageBox.Show($"{campo}: captura el nuevo valor.", "Datos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				textBox1.Focus();
+				return;
+			}
 			string valor = textBox1.Text.Trim();
 			try
 			{
 				string campoDb = campo;
 				switch (campo)
 				{
-					case "CORREO ELECTRONICO": if (!Regex.IsMatch(valor, @"^[^\s@]+@[^\s@]+\.[^\s@]+$")) throw new InvalidOperationException("Captura un correo válido."); break;
-					case "ROL": if (!valor.Equals("Administrador", StringComparison.OrdinalIgnoreCase) && !valor.Equals("Operativo", StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException("El rol debe ser Administrador u Operativo."); valor = valor.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ? "Administrador" : "Operativo"; break;
-					case "NOMBRE DE USUARIO": break;
-					case "CONTRASEÑA": if (!PoliticaContrasena.EsValida(valor)) throw new InvalidOperationException(PoliticaContrasena.Mensaje); var usuarioTemporal = new Usuario { IdUsuario = id }; valor = PasswordHasher.HashPassword(usuarioTemporal, valor); break;
-					case "ACTIVO": if (!bool.TryParse(valor, out bool activo)) throw new InvalidOperationException("Para Activo captura true o false."); valor = activo ? "1" : "0"; break;
+					case "CORREO ELECTRONICO":
+						if (valor.Length > 100 || !Regex.IsMatch(valor, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
+						{ MessageBox.Show("Correo electrónico: escribe una dirección válida de hasta 100 caracteres.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); textBox1.Focus(); return; }
+						break;
+					case "ROL":
+						if (!valor.Equals("Administrador", StringComparison.OrdinalIgnoreCase) && !valor.Equals("Operativo", StringComparison.OrdinalIgnoreCase))
+						{ MessageBox.Show("Rol: captura Administrador u Operativo.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); textBox1.Focus(); return; }
+						valor = valor.Equals("Administrador", StringComparison.OrdinalIgnoreCase) ? "Administrador" : "Operativo";
+						break;
+					case "NOMBRE DE USUARIO":
+						if (valor.Length > 100) { MessageBox.Show("Nombre de usuario: no puede exceder 100 caracteres.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); textBox1.Focus(); return; }
+						break;
+					case "CONTRASEÑA":
+						if (!PoliticaContrasena.EsValida(valor)) { MessageBox.Show("Contraseña: " + PoliticaContrasena.Mensaje, "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); textBox1.Focus(); return; }
+						var usuarioTemporal = new Usuario { IdUsuario = id };
+						valor = PasswordHasher.HashPassword(usuarioTemporal, valor);
+						break;
+					case "ACTIVO":
+						if (!bool.TryParse(valor, out bool activo)) { MessageBox.Show("Estado activo: captura true o false.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning); textBox1.Focus(); return; }
+						valor = activo ? "1" : "0";
+						break;
 					default: throw new InvalidOperationException("Campo no válido.");
 				}
 				await new RepoUsuario().ActualizarAsync(id, campoDb, valor, Sesion.IdUsuario);
@@ -1622,7 +1747,14 @@ namespace PIA{
 				MessageBox.Show("Usuario editado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				tabCtrlUsauriosInAdmin.SelectedIndex = 0;
 			}
-			catch (Exception ex) { MessageBox.Show("No se pudo editar el usuario.\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+			catch (Exception ex)
+			{
+				string detalle = ex.GetBaseException().Message;
+				if (detalle.Contains("duplicate", StringComparison.OrdinalIgnoreCase) || detalle.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase))
+					detalle = $"{campo}: ese valor ya está registrado en otro usuario.";
+				MessageBox.Show($"{campo}: no se pudo actualizar.\n{detalle}", "Edición de usuario", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				textBox1.Focus();
+			}
 		}
 
 		//=============================================
@@ -1630,37 +1762,57 @@ namespace PIA{
 		//=============================================
 		private async void btnAgregarClienteInAdmin_Click(object sender, EventArgs e)
 		{
+			string nombres = txtNombreClienteInAdmin.Text.Trim();
+			string paterno = txtApPaternoClienteInAdmin.Text.Trim();
+			string materno = txtApMaternoClienteInAdmin.Text.Trim();
 			string rfc = txtRFCClienteInAdmin.Text.Trim().ToUpperInvariant();
 			string correo = txtCorreoClienteInAdmin.Text.Trim();
 			string celular = txtCelularClienteInAdmin.Text.Trim();
-			if (string.IsNullOrWhiteSpace(txtNombreClienteInAdmin.Text) ||
-				string.IsNullOrWhiteSpace(txtApPaternoClienteInAdmin.Text) ||
-				dateFechaNacimientoClienteinAdmin.Value.Date >= DateTime.Today ||
-				!PoliticaCliente.EsRFCValido(rfc) ||
-				!PoliticaCliente.EsCorreoValido(correo) ||
-				!PoliticaCliente.EsTelefonoValido(celular) ||
-				new[] { txtCalleClienteInAdmin.Text, txtNoExteriorCleinteInAdmin.Text, txtCPClienteInAdmin.Text,
-					txtColoniaClienteInAdmin.Text, txtCiudadClienteInAdmin.Text, txtEstadoClienteInAdmin.Text,
-					txtPaisClienteInAdmin.Text }.Any(string.IsNullOrWhiteSpace))
+			bool Error(Control control, string mensaje)
 			{
-				MessageBox.Show("Completa los datos obligatorios y verifica fecha, RFC, correo, celular y domicilio.");
-				return;
+				MessageBox.Show(mensaje, "Datos del cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				control.Focus();
+				return true;
 			}
-			else
+			if (string.IsNullOrWhiteSpace(nombres)) { Error(txtNombreClienteInAdmin, "Nombre(s): captura este dato."); return; }
+			if (nombres.Length > 150) { Error(txtNombreClienteInAdmin, "Nombre(s): no puede exceder 150 caracteres."); return; }
+			if (string.IsNullOrWhiteSpace(paterno)) { Error(txtApPaternoClienteInAdmin, "Apellido paterno: captura este dato."); return; }
+			if (paterno.Length > 100) { Error(txtApPaternoClienteInAdmin, "Apellido paterno: no puede exceder 100 caracteres."); return; }
+			if (materno.Length > 100) { Error(txtApMaternoClienteInAdmin, "Apellido materno: no puede exceder 100 caracteres."); return; }
+			if (dateFechaNacimientoClienteinAdmin.Value.Date >= DateTime.Today)
+			{ Error(dateFechaNacimientoClienteinAdmin, "Fecha de nacimiento: debe ser anterior al día de hoy."); return; }
+			if (!PoliticaCliente.EsRFCValido(rfc)) { Error(txtRFCClienteInAdmin, "RFC: captura un RFC válido de persona física o moral."); return; }
+			if (!PoliticaCliente.EsCorreoValido(correo) || correo.Length > 100)
+			{ Error(txtCorreoClienteInAdmin, "Correo electrónico: captura un correo válido de hasta 100 caracteres."); return; }
+			if (!PoliticaCliente.EsTelefonoValido(celular)) { Error(txtCelularClienteInAdmin, "Celular: captura de 7 a 15 dígitos; puedes usar +, espacios, paréntesis o guiones."); return; }
+			if (txtTelefonoCasaInAdmin.Text.Trim().Length > 15 || (txtTelefonoCasaInAdmin.Text.Trim().Length > 0 && !PoliticaCliente.EsTelefonoValido(txtTelefonoCasaInAdmin.Text)))
+			{ Error(txtTelefonoCasaInAdmin, "Teléfono de casa: usa de 7 a 15 dígitos o deja el campo vacío."); return; }
+			var requeridos = new (Control Control, string Etiqueta)[]
 			{
-				try
-				{
+				(txtCalleClienteInAdmin, "Calle"), (txtNoExteriorCleinteInAdmin, "Número exterior"),
+				(txtCPClienteInAdmin, "Código postal"), (txtColoniaClienteInAdmin, "Colonia"),
+				(txtCiudadClienteInAdmin, "Ciudad"), (txtEstadoClienteInAdmin, "Estado"), (txtPaisClienteInAdmin, "País")
+			};
+			foreach (var (control, etiqueta) in requeridos)
+				if (string.IsNullOrWhiteSpace(control.Text)) { Error(control, $"{etiqueta}: captura este dato del domicilio."); return; }
+			string domicilio = $"{txtCalleClienteInAdmin.Text.Trim()} {txtNoExteriorCleinteInAdmin.Text.Trim()}" +
+				(string.IsNullOrWhiteSpace(txtNoInteriorClienteInAdmin.Text) ? "" : $" Int. {txtNoInteriorClienteInAdmin.Text.Trim()}") +
+				$", {txtCPClienteInAdmin.Text.Trim()}, {txtColoniaClienteInAdmin.Text.Trim()}, {txtCiudadClienteInAdmin.Text.Trim()}, {txtEstadoClienteInAdmin.Text.Trim()}, {txtPaisClienteInAdmin.Text.Trim()}";
+			if (domicilio.Length > 250)
+			{ Error(txtPaisClienteInAdmin, "Domicilio: la dirección completa supera 250 caracteres; acorta alguno de sus campos."); return; }
+			try
+			{
 					var cliente = new Cliente
 					{
-						Nombres = txtNombreClienteInAdmin.Text,
-						ApPaterno = txtApPaternoClienteInAdmin.Text,
-						ApMaterno = txtApMaternoClienteInAdmin.Text,
+						Nombres = nombres,
+						ApPaterno = paterno,
+						ApMaterno = string.IsNullOrWhiteSpace(materno) ? null : materno,
 						FechaNacimiento = dateFechaNacimientoClienteinAdmin.Value,
 						RFC = rfc,
 						CorreoElectronico = correo,
-						TelefonoCasa = txtTelefonoCasaInAdmin.Text,
+						TelefonoCasa = string.IsNullOrWhiteSpace(txtTelefonoCasaInAdmin.Text) ? null : txtTelefonoCasaInAdmin.Text.Trim(),
 						TelefonoCelular = celular,
-						Domicilio = $@"{txtCalleClienteInAdmin.Text} {txtNoExteriorCleinteInAdmin.Text} {txtNoInteriorClienteInAdmin.Text}, {txtCPClienteInAdmin.Text}, {txtColoniaClienteInAdmin.Text}, {txtCiudadClienteInAdmin.Text}, {txtEstadoClienteInAdmin.Text}, {txtPaisClienteInAdmin.Text}",
+						Domicilio = domicilio,
 						CreadoPor = Sesion.IdUsuario,
 						Activo = true
 					};
@@ -1674,13 +1826,15 @@ namespace PIA{
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message, "No se pudo agregar el cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					string detalle = ex.GetBaseException().Message;
+					if (detalle.Contains("duplicate", StringComparison.OrdinalIgnoreCase) || detalle.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase))
+						detalle = "RFC o correo electrónico: ya existe un cliente registrado con ese dato.";
+					MessageBox.Show("Cliente: no se pudo guardar.\n" + detalle, "Datos del cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 				finally
 				{
 					LimpiarCamposNuevoCliente();
 				}
-			}
 		}
 
 		//========================================
@@ -1813,14 +1967,16 @@ namespace PIA{
 			if (fila is null || fila.IsNewRow ||
 				fila.Cells["IdCliente"].Value is null)
 			{
-				MessageBox.Show("Selecciona un cliente del grid.");
+				MessageBox.Show("Cliente: selecciona un registro del grid.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				GridClientesInClientes.Focus();
 				return;
 			}
 			int idCliente = Convert.ToInt32(fila.Cells["IdCliente"].Value);
 
 			if (cboBoxEditarClienteInAdmin.SelectedItem is null)
 			{
-				MessageBox.Show("Selecciona qué dato quieres cambiar.");
+				MessageBox.Show("Dato a editar: selecciona qué información del cliente quieres cambiar.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				cboBoxEditarClienteInAdmin.Focus();
 				return;
 			}
 
@@ -1829,17 +1985,20 @@ namespace PIA{
 
 			if (cboBoxEditarClienteInAdmin.SelectedIndex == 3)
 			{
-				if (string.IsNullOrWhiteSpace(txtCalleEditarClienteInAdmin.Text) ||
-					string.IsNullOrWhiteSpace(txtNoExteriorEditarClienteInAdmin.Text) ||
-					string.IsNullOrWhiteSpace(txtCPEditarClienteInAdmin.Text) ||
-					string.IsNullOrWhiteSpace(txtColoniaEditarClienteInAdmin.Text) ||
-					string.IsNullOrWhiteSpace(txtCiudadEditarClienteInAdmin.Text) ||
-					string.IsNullOrWhiteSpace(txtEstadoEditarClienteInAdmin.Text) ||
-					string.IsNullOrWhiteSpace(txtPaisEditarClienteInAdmin.Text))
+				var requeridos = new (Control Control, string Etiqueta)[]
 				{
-					MessageBox.Show("Completa los campos obligatorios del domicilio.");
-					return;
-				}
+					(txtCalleEditarClienteInAdmin, "Calle"), (txtNoExteriorEditarClienteInAdmin, "Número exterior"),
+					(txtCPEditarClienteInAdmin, "Código postal"), (txtColoniaEditarClienteInAdmin, "Colonia"),
+					(txtCiudadEditarClienteInAdmin, "Ciudad"), (txtEstadoEditarClienteInAdmin, "Estado"),
+					(txtPaisEditarClienteInAdmin, "País")
+				};
+				foreach (var (control, etiqueta) in requeridos)
+					if (string.IsNullOrWhiteSpace(control.Text))
+					{
+						MessageBox.Show($"{etiqueta}: captura este dato del domicilio.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						control.Focus();
+						return;
+					}
 
 				string numeroInterior = string.IsNullOrWhiteSpace(
 					txtNoInteriorEditarClienteInAdmin.Text)
@@ -1851,7 +2010,7 @@ namespace PIA{
 					$"No. {txtNoExteriorEditarClienteInAdmin.Text.Trim()}" +
 					$"{numeroInterior}, " +
 					$"C.P. {txtCPEditarClienteInAdmin.Text.Trim()}, " +
-					$"{txtColoniaClienteInAdmin.Text.Trim()}, " +
+					$"{txtColoniaEditarClienteInAdmin.Text.Trim()}, " +
 					$"{txtCiudadEditarClienteInAdmin.Text.Trim()}, " +
 					$"{txtEstadoEditarClienteInAdmin.Text.Trim()}, " +
 					$"{txtPaisEditarClienteInAdmin.Text.Trim()}";
@@ -1862,9 +2021,29 @@ namespace PIA{
 
 				if (string.IsNullOrWhiteSpace(nuevoDato))
 				{
-					MessageBox.Show("Escribe el nuevo valor.");
+					MessageBox.Show($"{campoSeleccionado}: escribe el nuevo valor.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					txtNuevoDatoEditarClienteInAdmin.Focus();
 					return;
 				}
+			}
+			if (nuevoDato.Length > 250 && campoSeleccionado == "DOMICILIO")
+			{
+				MessageBox.Show("Domicilio: la dirección completa no puede exceder 250 caracteres.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtPaisEditarClienteInAdmin.Focus();
+				return;
+			}
+			if (campoSeleccionado == "CORREO ELECTRONICO" &&
+				(nuevoDato.Length > 100 || !PoliticaCliente.EsCorreoValido(nuevoDato)))
+			{
+				MessageBox.Show("Correo electrónico: escribe una dirección válida de hasta 100 caracteres.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNuevoDatoEditarClienteInAdmin.Focus();
+				return;
+			}
+			if (campoSeleccionado.StartsWith("TELEFONO", StringComparison.Ordinal) && !PoliticaCliente.EsTelefonoValido(nuevoDato))
+			{
+				MessageBox.Show($"{campoSeleccionado}: captura de 7 a 15 dígitos; puedes usar +, espacios, paréntesis o guiones.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNuevoDatoEditarClienteInAdmin.Focus();
+				return;
 			}
 
 			try
@@ -1883,7 +2062,13 @@ namespace PIA{
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "No se pudieron guardar los cambios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				string detalle = ex.GetBaseException().Message;
+				if (detalle.Contains("duplicate", StringComparison.OrdinalIgnoreCase) || detalle.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase))
+					detalle = $"{campoSeleccionado}: ese valor ya está registrado en otro cliente.";
+				MessageBox.Show($"{campoSeleccionado}: no se pudo actualizar.\n{detalle}", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				if (campoSeleccionado == "DOMICILIO") txtPaisEditarClienteInAdmin.Focus();
+				else txtNuevoDatoEditarClienteInAdmin.Focus();
+				return;
 			}
 
 			tabClientesInAdmin.SelectedIndex = 0;
@@ -2060,11 +2245,46 @@ namespace PIA{
 		{
 			string nombre = txtNombreEstadioInAdmin.Text.Trim();
 			string ciudad = txtCiudadEstadioInAdmin.Text.Trim();
-			if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(ciudad) ||
-				!int.TryParse(txtCapacidadEstadioInAdmin.Text.Trim(), out int capacidad) || capacidad <= 0)
+			if (string.IsNullOrWhiteSpace(nombre))
 			{
-				MessageBox.Show("Captura el nombre, la ciudad y una capacidad total mayor que cero.",
+				MessageBox.Show("Nombre del estadio: captura este dato.",
 					"Datos del estadio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNombreEstadioInAdmin.Focus();
+				return;
+			}
+			if (nombre.Length > 100)
+			{
+				MessageBox.Show("Nombre del estadio: no puede exceder 100 caracteres.", "Datos del estadio",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNombreEstadioInAdmin.Focus();
+				return;
+			}
+			if (string.IsNullOrWhiteSpace(ciudad))
+			{
+				MessageBox.Show("Ciudad: captura la ciudad del estadio.",
+					"Datos del estadio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtCiudadEstadioInAdmin.Focus();
+				return;
+			}
+			if (ciudad.Length > 100)
+			{
+				MessageBox.Show("Ciudad: no puede exceder 100 caracteres.", "Datos del estadio",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtCiudadEstadioInAdmin.Focus();
+				return;
+			}
+			if (!int.TryParse(txtCapacidadEstadioInAdmin.Text.Trim(), out int capacidad))
+			{
+				MessageBox.Show("Capacidad total: escribe un número entero.",
+					"Datos del estadio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtCapacidadEstadioInAdmin.Focus();
+				return;
+			}
+			if (capacidad <= 0)
+			{
+				MessageBox.Show("Capacidad total: debe ser mayor que cero.",
+					"Datos del estadio", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtCapacidadEstadioInAdmin.Focus();
 				return;
 			}
 
@@ -2088,13 +2308,23 @@ namespace PIA{
 				txtCapacidadEstadioInAdmin.ReadOnly = true;
 				btnAgregarEstadioInAdmin.Enabled = false;
 				btnAgregarZonaInAdmin.Enabled = true;
+				try
+				{
+					await RefrescarCatalogosEstadioPartidoAsync(_idEstadioEnCaptura);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(
+						$"El estadio se guardó, pero no se pudieron actualizar los combos y el panel.\n{ex.GetBaseException().Message}",
+						"Catálogos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				}
 
 				MessageBox.Show(
 					$"Estadio guardado. ID: {_idEstadioEnCaptura}. Ahora agrega sus zonas.");
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"No se pudo agregar el estadio.\n{ex.Message}");
+				MessageBox.Show($"Estadio: no se pudo guardar.\n{ex.GetBaseException().Message}");
 			}
 		}
 	
@@ -2109,16 +2339,55 @@ namespace PIA{
 				return;
 			}
 
-			if (string.IsNullOrWhiteSpace(txtNombreZonaInAdmin.Text) ||
-				!decimal.TryParse(txtPrecioZonaInAdmin.Text, out decimal precio) || precio < 0 ||
-				!int.TryParse(txtAsientosZonaInAdmin.Text, out int cupo) || cupo <= 0)
+			string nombreZona = txtNombreZonaInAdmin.Text.Trim();
+			if (string.IsNullOrWhiteSpace(nombreZona))
 			{
-				MessageBox.Show("Captura el nombre de la zona, un precio no negativo y un cupo mayor que cero.");
+				MessageBox.Show("Nombre de zona: captura este dato.", "Datos de la zona",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNombreZonaInAdmin.Focus();
+				return;
+			}
+			if (nombreZona.Length > 50)
+			{
+				MessageBox.Show("Nombre de zona: no puede exceder 50 caracteres.", "Datos de la zona",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNombreZonaInAdmin.Focus();
+				return;
+			}
+			if (!decimal.TryParse(txtPrecioZonaInAdmin.Text.Trim(), out decimal precio))
+			{
+				MessageBox.Show("Precio base: escribe una cantidad válida, por ejemplo 850.00.", "Datos de la zona",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtPrecioZonaInAdmin.Focus();
+				return;
+			}
+			if (precio < 0)
+			{
+				MessageBox.Show("Precio base: no puede ser negativo.", "Datos de la zona",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtPrecioZonaInAdmin.Focus();
+				return;
+			}
+			if (!int.TryParse(txtAsientosZonaInAdmin.Text.Trim(), out int cupo))
+			{
+				MessageBox.Show("Cupo de la zona: escribe un número entero.", "Datos de la zona",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtAsientosZonaInAdmin.Focus();
+				return;
+			}
+			if (cupo <= 0)
+			{
+				MessageBox.Show("Cupo de la zona: debe ser mayor que cero.", "Datos de la zona",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtAsientosZonaInAdmin.Focus();
 				return;
 			}
 			if ((long)_cupoZonasAgregado + cupo > _capacidadEstadioEnCaptura)
 			{
-				MessageBox.Show($"El cupo acumulado de las zonas no puede superar la capacidad del estadio ({_capacidadEstadioEnCaptura:N0}).");
+				MessageBox.Show(
+					$"Cupo de la zona: el total acumulado no puede superar la capacidad del estadio ({_capacidadEstadioEnCaptura:N0}).",
+					"Capacidad excedida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtAsientosZonaInAdmin.Focus();
 				return;
 			}
 
@@ -2127,7 +2396,7 @@ namespace PIA{
 				var zona = new Zona
 				{
 					IdEstadio = _idEstadioEnCaptura.Value,
-					NombreZona = txtNombreZonaInAdmin.Text.Trim(),
+					NombreZona = nombreZona,
 					PrecioBase = precio,
 					CupoZona = cupo,
 					CreadoPor = Sesion.IdUsuario
@@ -2141,11 +2410,26 @@ namespace PIA{
 				txtPrecioZonaInAdmin.Clear();
 				txtAsientosZonaInAdmin.Clear();
 
-				MessageBox.Show("Zona agregada al estadio.");
+				try
+				{
+					await RefrescarCatalogosEstadioPartidoAsync(_idEstadioEnCaptura);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(
+						$"La zona se guardó, pero no se pudieron actualizar los combos y el panel.\n{ex.GetBaseException().Message}",
+						"Catálogos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				}
+
+				MessageBox.Show("Zona agregada al estadio.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"No se pudo agregar la zona.\n{ex.Message}");
+				string detalle = ex.GetBaseException().Message;
+				if (detalle.Contains("UQ_Zona_Estadio", StringComparison.OrdinalIgnoreCase))
+					detalle = "Ya existe una zona con ese nombre para este estadio.";
+				MessageBox.Show($"Zona: no se pudo guardar.\n{detalle}",
+					"Datos de la zona", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -2157,15 +2441,19 @@ namespace PIA{
 		{
 			if (_idEstadioEnCaptura is null)
 			{
-				MessageBox.Show("Primero agrega un estadio.");
+				MessageBox.Show("Estadio: primero captura y guarda el estadio.", "Datos incompletos",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 
 			if (_zonasAgregadas == 0)
 			{
-				MessageBox.Show("Agrega al menos una zona antes de finalizar.");
+				MessageBox.Show("Zonas: agrega al menos una zona antes de finalizar el estadio.", "Datos incompletos",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
+
+			int idEstadioRegistrado = _idEstadioEnCaptura.Value;
 
 			txtNombreEstadioInAdmin.ReadOnly = false;
 			txtNombreEstadioInAdmin.Clear();
@@ -2181,26 +2469,19 @@ namespace PIA{
 			_capacidadEstadioEnCaptura = 0;
 			_cupoZonasAgregado = 0;
 
-			MessageBox.Show("Registro del estadio y sus zonas finalizado.");
-
 			tabCtrlPartidoEstadio.Visible = false;
 			pnlPartidos.Size = new Size(1390, 690);
 			try
 			{
-				using var db = new AppDbContext();
-				var estadios = await new RepoEstadio().ObtenerTodosAsync();
-				cboEstadioInAdmin.DataSource = null;
-				cboEstadioInAdmin.DisplayMember = nameof(Estadio.Nombre);
-				cboEstadioInAdmin.ValueMember = nameof(Estadio.IdEstadio);
-				cboEstadioInAdmin.DataSource = estadios;
-				cboEstadioInAdmin.SelectedIndex = -1;
-				await CargarFiltrosReporteAsync();
-				await CargarFiltrosOcupacionAsync();
-				await CargarPartidos();
+				await RefrescarCatalogosEstadioPartidoAsync(idEstadioRegistrado);
+				MessageBox.Show("Estadio y zonas guardados. Los combos y el panel ya están actualizados.",
+					"Catálogos actualizados", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.InnerException?.Message ?? ex.Message, "No se actualizaron los filtros del estadio",
+				MessageBox.Show(
+					$"Estadio y zonas guardados, pero no se pudieron actualizar todos los combos y el panel.\n{ex.GetBaseException().Message}",
+					"Catálogos", 
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -2211,41 +2492,96 @@ namespace PIA{
 		//==============================================
 		private async void btnAgregarPartidoInAdmin_Click(object sender, EventArgs e)
 		{
-			if (cboEstadioInAdmin.SelectedValue is null ||
-				string.IsNullOrWhiteSpace(txtHoraPartidoInAdmin.Text) ||
-				string.IsNullOrWhiteSpace(txtEquipoLocalPartidoInAdmin.Text) ||
-				string.IsNullOrWhiteSpace(txtEquipoVisitantePartidoInAdmin.Text))
+			if (cboEstadioInAdmin.SelectedValue is null)
 			{
-				MessageBox.Show("Verifica que todos los campos estén completos.");
+				MessageBox.Show("Estadio: selecciona el estadio donde se jugará el partido.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				cboEstadioInAdmin.Focus();
 				return;
 			}
 
 			if (!int.TryParse(cboEstadioInAdmin.SelectedValue.ToString(), out int idEstadio))
 			{
-				MessageBox.Show("Selecciona un estadio válido.");
+				MessageBox.Show("Estadio: selecciona un registro válido.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				cboEstadioInAdmin.Focus();
 				return;
 			}
 
+			if (string.IsNullOrWhiteSpace(txtEquipoLocalPartidoInAdmin.Text))
+			{
+				MessageBox.Show("Equipo local: captura el nombre del equipo.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEquipoLocalPartidoInAdmin.Focus();
+				return;
+			}
+			if (string.IsNullOrWhiteSpace(txtEquipoVisitantePartidoInAdmin.Text))
+			{
+				MessageBox.Show("Equipo visitante: captura el nombre del equipo.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEquipoVisitantePartidoInAdmin.Focus();
+				return;
+			}
+			if (txtEquipoLocalPartidoInAdmin.Text.Trim().Length > 100)
+			{
+				MessageBox.Show("Equipo local: no puede exceder 100 caracteres.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEquipoLocalPartidoInAdmin.Focus();
+				return;
+			}
+			if (txtEquipoVisitantePartidoInAdmin.Text.Trim().Length > 100)
+			{
+				MessageBox.Show("Equipo visitante: no puede exceder 100 caracteres.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEquipoVisitantePartidoInAdmin.Focus();
+				return;
+			}
+			if (string.IsNullOrWhiteSpace(txtHoraPartidoInAdmin.Text))
+			{
+				MessageBox.Show("Hora del partido: captura la hora, por ejemplo 19:30.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtHoraPartidoInAdmin.Focus();
+				return;
+			}
 			if (!TimeSpan.TryParse(txtHoraPartidoInAdmin.Text.Trim(), out TimeSpan hora))
 			{
-				MessageBox.Show("Escribe una hora válida, por ejemplo: 19:30.");
+				MessageBox.Show("Hora del partido: escribe una hora válida, por ejemplo 19:30.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtHoraPartidoInAdmin.Focus();
 				return;
 			}
 
-			if (string.IsNullOrWhiteSpace(txtEstadoPartidoInAdmin.Text))
+			string estado = txtEstadoPartidoInAdmin.Text.Trim();
+			if (string.IsNullOrWhiteSpace(estado))
 			{
-				MessageBox.Show("Indica el estado del partido.");
+				MessageBox.Show("Estado del partido: selecciona Programado, Terminado o Cancelado.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEstadoPartidoInAdmin.Focus();
+				return;
+			}
+			string[] estadosPermitidos = { "Programado", "Terminado", "Cancelado" };
+			string? estadoCanonico = estadosPermitidos.FirstOrDefault(e =>
+				string.Equals(e, estado, StringComparison.OrdinalIgnoreCase));
+			if (estadoCanonico is null)
+			{
+				MessageBox.Show("Estado del partido: elige Programado, Terminado o Cancelado.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEstadoPartidoInAdmin.Focus();
 				return;
 			}
 			if (string.Equals(txtEquipoLocalPartidoInAdmin.Text.Trim(), txtEquipoVisitantePartidoInAdmin.Text.Trim(), StringComparison.OrdinalIgnoreCase))
 			{
-				MessageBox.Show("El equipo local y el visitante deben ser distintos.");
+				MessageBox.Show("Equipo visitante: debe ser distinto del equipo local.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtEquipoVisitantePartidoInAdmin.Focus();
 				return;
 			}
 			DateTime fechaHoraPartido = dteFechaPartidoInAdmin.Value.Date.Add(hora);
 			if (fechaHoraPartido <= DateTime.Now)
 			{
-				MessageBox.Show("La fecha y hora del partido deben ser futuras.");
+				MessageBox.Show("Fecha y hora del partido: selecciona una fecha y hora futuras.", "Datos del partido",
+					MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				dteFechaPartidoInAdmin.Focus();
 				return;
 			}
 
@@ -2257,27 +2593,35 @@ namespace PIA{
 					FechaHora = fechaHoraPartido,
 					EquipoLocal = txtEquipoLocalPartidoInAdmin.Text.Trim(),
 					EquipoVisitante = txtEquipoVisitantePartidoInAdmin.Text.Trim(),
-					Estado = txtEstadoPartidoInAdmin.Text.Trim(),
+					Estado = estadoCanonico,
 					CreadoPor = Sesion.IdUsuario
 				};
 
 				await new RepoPartido().AgregarPartidoAsync(partido);
 
-				MessageBox.Show("Partido agregado correctamente.");
+				MessageBox.Show("Partido agregado correctamente.", "Éxito",
+					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				cboEstadioInAdmin.SelectedIndex = -1;
 				dteFechaPartidoInAdmin.Value = DateTime.Today;
 				txtHoraPartidoInAdmin.Clear();
 				txtEquipoLocalPartidoInAdmin.Clear();
 				txtEquipoVisitantePartidoInAdmin.Clear();
 				txtEstadoPartidoInAdmin.Clear();
-				await CargarFiltrosReporteAsync();
-				await CargarFiltrosOcupacionAsync();
-				await CargarPartidos();
+				try
+				{
+					await RefrescarCatalogosEstadioPartidoAsync(idEstadio);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(
+						$"El partido se guardó, pero no se pudieron actualizar los combos y el panel.\n{ex.GetBaseException().Message}",
+						"Catálogos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"No se pudo agregar el partido.\n{ex.Message}");
+				MessageBox.Show($"Partido: no se pudo guardar.\n{ex.GetBaseException().Message}",
+					"Datos del partido", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -2650,6 +2994,7 @@ namespace PIA{
 		//================================================================
 		private async Task CargarFiltrosReporteAsync()
 		{
+			string? estadioAnterior = cboEstadioReporteInOper.SelectedItem as string;
 			_cargandoFiltrosReporte = true;
 			try
 			{
@@ -2659,16 +3004,23 @@ namespace PIA{
 				estadios.Insert(0, "Todos");
 				cboEstadioReporteInOper.DataSource = null;
 				cboEstadioReporteInOper.DataSource = estadios;
-				cboEstadioReporteInOper.SelectedIndex = 0;
-				dateTimePicker1.Value = DateTime.Today.AddDays(-30);
-				dateTimePicker2.Value = DateTime.Today;
+				int indiceEstadio = estadioAnterior is null ? -1 : estadios.FindIndex(e =>
+					string.Equals(e, estadioAnterior, StringComparison.OrdinalIgnoreCase));
+				cboEstadioReporteInOper.SelectedIndex = indiceEstadio >= 0 ? indiceEstadio : 0;
+
+				if (!_filtrosReporteInicializados)
+				{
+					dateTimePicker1.Value = DateTime.Today.AddDays(-30);
+					dateTimePicker2.Value = DateTime.Today;
+					_filtrosReporteInicializados = true;
+				}
 			}
 			finally
 			{
 				_cargandoFiltrosReporte = false;
 			}
 
-			await CargarPartidosFiltroReporteAsync("Todos");
+			await CargarPartidosFiltroReporteAsync(cboEstadioReporteInOper.SelectedItem?.ToString());
 		}
 
 
@@ -2687,6 +3039,7 @@ namespace PIA{
 		//========================================================================
 		private async Task CargarPartidosFiltroReporteAsync(string? estadio)
 		{
+			int? idPartidoAnterior = cboPartidoReporteInOper.SelectedValue is int idPartido ? idPartido : null;
 			_cargandoFiltrosReporte = true;
 			try
 			{
@@ -2705,7 +3058,10 @@ namespace PIA{
 				cboPartidoReporteInOper.DisplayMember = nameof(FiltroPartidoReporte.Descripcion);
 				cboPartidoReporteInOper.ValueMember = nameof(FiltroPartidoReporte.IdPartido);
 				cboPartidoReporteInOper.DataSource = partidos;
-				cboPartidoReporteInOper.SelectedIndex = 0;
+				if (idPartidoAnterior.HasValue && partidos.Any(p => p.IdPartido == idPartidoAnterior.Value))
+					cboPartidoReporteInOper.SelectedValue = idPartidoAnterior.Value;
+				else
+					cboPartidoReporteInOper.SelectedIndex = 0;
 			}
 			catch (Exception ex)
 			{
@@ -2759,6 +3115,7 @@ namespace PIA{
 				var filas = boletos
 					.GroupBy(b => new
 					{
+						b.IdVenta,
 						b.FolioVenta,
 						b.Estadio,
 						b.IdPartido,
@@ -2773,6 +3130,7 @@ namespace PIA{
 
 						return new
 						{
+							g.Key.IdVenta,
 							Folio = g.Key.FolioVenta,
 							FechaVenta = g.Min(b => b.FechaHoraVenta),
 							g.Key.Estadio,
@@ -2791,6 +3149,7 @@ namespace PIA{
 				foreach (var fila in filas)
 				{
 					gridReporteInOper.Rows.Add(
+						fila.IdVenta,
 						fila.Folio.ToString(),
 						fila.FechaVenta.ToString("dd/MM/yyyy HH:mm"),
 						fila.Estadio,
@@ -2833,6 +3192,7 @@ namespace PIA{
 			gridReporteInOper.AutoSizeColumnsMode =
 				DataGridViewAutoSizeColumnsMode.Fill;
 
+			gridReporteInOper.Columns.Add("IdVenta", "ID VENTA");
 			gridReporteInOper.Columns.Add("Folio", "FOLIO");
 			gridReporteInOper.Columns.Add("FechaVenta", "FECHA DE VENTA");
 			gridReporteInOper.Columns.Add("Estadio", "ESTADIO");
@@ -2911,9 +3271,9 @@ namespace PIA{
 					continue;
 
 				string Valor(int indice) => Convert.ToString(fila.Cells[indice].Value) ?? string.Empty;
-				lineas.Add($"Folio: {Valor(0)} | Fecha: {Valor(1)}");
-				lineas.Add($"Estadio: {Valor(2)} | Partido: {Valor(3)}");
-				lineas.Add($"Zona: {Valor(4)} | Boletos: {Valor(5)} | Subtotal: {Valor(6)} | Total: {Valor(7)}");
+				lineas.Add($"ID de venta: {Valor(0)} | Folio: {Valor(1)} | Fecha: {Valor(2)}");
+				lineas.Add($"Estadio: {Valor(3)} | Partido: {Valor(4)}");
+				lineas.Add($"Zona: {Valor(5)} | Boletos: {Valor(6)} | Subtotal: {Valor(7)} | Total: {Valor(8)}");
 				lineas.Add(string.Empty);
 			}
 

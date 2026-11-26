@@ -50,6 +50,12 @@ namespace PIA
 
 			ConfigurarGridClientes();
 			ConfigurarGridHistorialCliente();
+			gridReporteInOper.Columns.Insert(0, new DataGridViewTextBoxColumn
+			{
+				Name = "IDVENTA",
+				HeaderText = "ID VENTA",
+				ReadOnly = true
+			});
 			gridReporteInOper.Columns.Add("FECHAPARTIDO", "FECHA DEL PARTIDO");
 			gridReporteInOper.Columns.Add("METODOPAGO", "MÉTODO DE PAGO");
 			btnHistorial.Click += btnHistorial_Click;
@@ -318,44 +324,51 @@ namespace PIA
 		{
 			string nombres = txtNombreNuevoClienteInOper.Text.Trim();
 			string paterno = txtApPaternoNuevoClienteInOper.Text.Trim();
+			string materno = txtApMaternoNuevoClienteInOper.Text.Trim();
 			string rfc = txtRFCNuevoClienteInOper.Text.Trim().ToUpperInvariant();
 			string correo = txtCorreoNuevoClienteInOper.Text.Trim();
 			string celular = txtTelefonoCelularNuevoClienteInOper.Text.Trim();
-
-			if (string.IsNullOrWhiteSpace(nombres) || string.IsNullOrWhiteSpace(paterno) ||
-				string.IsNullOrWhiteSpace(rfc) || string.IsNullOrWhiteSpace(correo) ||
-				string.IsNullOrWhiteSpace(celular) ||
-				!DateTime.TryParse(txtFechaNacimientoNuevoClienteInOper.Text.Trim(),
-					CultureInfo.CurrentCulture, DateTimeStyles.None, out DateTime nacimiento) ||
-				string.IsNullOrWhiteSpace(txtCalleNuevoClienteInOper.Text) ||
-				string.IsNullOrWhiteSpace(txtNoExteriorNuevoClienteInOper.Text) ||
-				string.IsNullOrWhiteSpace(txtCPNuevoClienteInOper.Text) ||
-				string.IsNullOrWhiteSpace(txtColoniaNuevoClienteInOper.Text) ||
-				string.IsNullOrWhiteSpace(txtCiudadNuevoClienteInOper.Text) ||
-				string.IsNullOrWhiteSpace(txtEstadoNuevoClienteInOper.Text) ||
-				string.IsNullOrWhiteSpace(txtPaisNuevoClienteInOper.Text))
+			bool Error(Control control, string mensaje)
 			{
-				MessageBox.Show("Completa los campos obligatorios y verifica la fecha (dd/MM/aaaa).");
-				return;
+				MessageBox.Show(mensaje, "Datos del cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				control.Focus();
+				return true;
 			}
-			if (rfc.Length is not (12 or 13))
+			if (string.IsNullOrWhiteSpace(nombres)) { Error(txtNombreNuevoClienteInOper, "Nombre(s): captura este dato."); return; }
+			if (nombres.Length > 150) { Error(txtNombreNuevoClienteInOper, "Nombre(s): no puede exceder 150 caracteres."); return; }
+			if (string.IsNullOrWhiteSpace(paterno)) { Error(txtApPaternoNuevoClienteInOper, "Apellido paterno: captura este dato."); return; }
+			if (paterno.Length > 100) { Error(txtApPaternoNuevoClienteInOper, "Apellido paterno: no puede exceder 100 caracteres."); return; }
+			if (materno.Length > 100) { Error(txtApMaternoNuevoClienteInOper, "Apellido materno: no puede exceder 100 caracteres."); return; }
+			if (!DateTime.TryParse(txtFechaNacimientoNuevoClienteInOper.Text.Trim(),
+				CultureInfo.GetCultureInfo("es-MX"), DateTimeStyles.None, out DateTime nacimiento))
+			{ Error(txtFechaNacimientoNuevoClienteInOper, "Fecha de nacimiento: escribe una fecha válida con formato dd/MM/aaaa."); return; }
+			if (nacimiento.Date >= DateTime.Today)
+			{ Error(txtFechaNacimientoNuevoClienteInOper, "Fecha de nacimiento: debe ser anterior al día de hoy."); return; }
+			if (!PoliticaCliente.EsRFCValido(rfc)) { Error(txtRFCNuevoClienteInOper, "RFC: captura un RFC válido de persona física o moral."); return; }
+			if (!PoliticaCliente.EsCorreoValido(correo) || correo.Length > 100)
+			{ Error(txtCorreoNuevoClienteInOper, "Correo electrónico: captura un correo válido de hasta 100 caracteres."); return; }
+			if (!PoliticaCliente.EsTelefonoValido(celular))
+			{ Error(txtTelefonoCelularNuevoClienteInOper, "Celular: captura de 7 a 15 dígitos; puedes usar +, espacios, paréntesis o guiones."); return; }
+			string telefonoCasa = txtTelefonoCasaNuevoClienteInOper.Text.Trim();
+			if (telefonoCasa.Length > 0 && !PoliticaCliente.EsTelefonoValido(telefonoCasa))
+			{ Error(txtTelefonoCasaNuevoClienteInOper, "Teléfono de casa: usa de 7 a 15 dígitos o deja el campo vacío."); return; }
+			var requeridos = new (Control Control, string Etiqueta)[]
 			{
-				MessageBox.Show("El RFC debe tener 12 o 13 caracteres.");
-				txtRFCNuevoClienteInOper.Focus();
-				return;
-			}
-			if (!PoliticaCliente.EsRFCValido(rfc) || !PoliticaCliente.EsCorreoValido(correo) ||
-				!PoliticaCliente.EsTelefonoValido(celular) || nacimiento.Date >= DateTime.Today)
-			{
-				MessageBox.Show("Verifica formato del RFC, correo, celular y que la fecha de nacimiento sea anterior a hoy.");
-				return;
-			}
+				(txtCalleNuevoClienteInOper, "Calle"), (txtNoExteriorNuevoClienteInOper, "Número exterior"),
+				(txtCPNuevoClienteInOper, "Código postal"), (txtColoniaNuevoClienteInOper, "Colonia"),
+				(txtCiudadNuevoClienteInOper, "Ciudad"), (txtEstadoNuevoClienteInOper, "Estado"),
+				(txtPaisNuevoClienteInOper, "País")
+			};
+			foreach (var (control, etiqueta) in requeridos)
+				if (string.IsNullOrWhiteSpace(control.Text)) { Error(control, $"{etiqueta}: captura este dato del domicilio."); return; }
 
 			string interior = txtNoInteriorNuevoClienteInOper.Text.Trim();
 			string domicilio = $"{txtCalleNuevoClienteInOper.Text.Trim()} {txtNoExteriorNuevoClienteInOper.Text.Trim()}" +
 				(interior.Length > 0 ? $" Int. {interior}" : "") +
 				$", C.P. {txtCPNuevoClienteInOper.Text.Trim()}, {txtColoniaNuevoClienteInOper.Text.Trim()}, " +
 				$"{txtCiudadNuevoClienteInOper.Text.Trim()}, {txtEstadoNuevoClienteInOper.Text.Trim()}, {txtPaisNuevoClienteInOper.Text.Trim()}";
+			if (domicilio.Length > 250)
+			{ Error(txtPaisNuevoClienteInOper, "Domicilio: la dirección completa supera 250 caracteres; acorta alguno de sus campos."); return; }
 
 			try
 			{
@@ -363,13 +376,11 @@ namespace PIA
 				{
 					Nombres = nombres,
 					ApPaterno = paterno,
-					ApMaterno = string.IsNullOrWhiteSpace(txtApMaternoNuevoClienteInOper.Text)
-						? null : txtApMaternoNuevoClienteInOper.Text.Trim(),
+					ApMaterno = string.IsNullOrWhiteSpace(materno) ? null : materno,
 					FechaNacimiento = nacimiento.Date,
 					RFC = rfc,
 					CorreoElectronico = correo,
-					TelefonoCasa = string.IsNullOrWhiteSpace(txtTelefonoCasaNuevoClienteInOper.Text)
-						? null : txtTelefonoCasaNuevoClienteInOper.Text.Trim(),
+					TelefonoCasa = string.IsNullOrWhiteSpace(telefonoCasa) ? null : telefonoCasa,
 					TelefonoCelular = celular,
 					Domicilio = domicilio,
 					CreadoPor = Sesion.IdUsuario,
@@ -386,8 +397,11 @@ namespace PIA
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.InnerException?.Message ?? ex.Message,
-					"No se pudo agregar el cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				string detalle = ex.GetBaseException().Message;
+				if (detalle.Contains("duplicate", StringComparison.OrdinalIgnoreCase) || detalle.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase))
+					detalle = "RFC o correo electrónico: ya existe un cliente registrado con ese dato.";
+				MessageBox.Show("Cliente: no se pudo guardar.\n" + detalle,
+					"Datos del cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -1743,6 +1757,7 @@ namespace PIA
 						continue;
 
 					int fila = gridReporteInOper.Rows.Add(
+						grupo.Key.IdVenta,
 						grupo.Key.FolioVenta.ToString(),
 						grupo.Key.FechaHoraVenta.ToString("dd/MM/yyyy HH:mm"),
 						grupo.Key.Estadio,
@@ -1789,12 +1804,14 @@ namespace PIA
 		{
 			if (_idClienteEditando is null)
 			{
-				MessageBox.Show("Selecciona un cliente desde el grid antes de editar.");
+				MessageBox.Show("Cliente: selecciona primero un registro del grid.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				GridClientesInOper.Focus();
 				return;
 			}
 			if (cboBoxEditarClienteInOper.SelectedItem is not string campo)
 			{
-				MessageBox.Show("Selecciona qué dato deseas cambiar.");
+				MessageBox.Show("Dato a editar: selecciona qué información del cliente quieres cambiar.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				cboBoxEditarClienteInOper.Focus();
 				return;
 			}
 
@@ -1813,19 +1830,29 @@ namespace PIA
 
 				if (direccionEstructurada)
 				{
-					if (string.IsNullOrWhiteSpace(calle) || string.IsNullOrWhiteSpace(exterior) ||
-						string.IsNullOrWhiteSpace(txtCPEditarClienteInOper.Text) ||
-						string.IsNullOrWhiteSpace(txtColoniaEditarClienteInOper.Text) ||
-						string.IsNullOrWhiteSpace(txtCiudadEditarClienteInOper.Text) ||
-						string.IsNullOrWhiteSpace(txtEstadoEditarClienteInOper.Text) ||
-						string.IsNullOrWhiteSpace(txtPaisEditarClienteInOper.Text))
+					var requeridos = new (Control Control, string Etiqueta)[]
 					{
-						MessageBox.Show("Completa calle, número exterior, C.P., colonia, ciudad, estado y país.");
-						return;
-					}
+						(txtCalleEditarClienteInOper, "Calle"), (txtNoExteriorEditarClienteInOper, "Número exterior"),
+						(txtCPEditarClienteInOper, "Código postal"), (txtColoniaEditarClienteInOper, "Colonia"),
+						(txtCiudadEditarClienteInOper, "Ciudad"), (txtEstadoEditarClienteInOper, "Estado"),
+						(txtPaisEditarClienteInOper, "País")
+					};
+					foreach (var (control, etiqueta) in requeridos)
+						if (string.IsNullOrWhiteSpace(control.Text))
+						{
+							MessageBox.Show($"{etiqueta}: captura este dato del domicilio.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+							control.Focus();
+							return;
+						}
 					valor = $"{calle} {exterior}" + (interior.Length > 0 ? $" Int. {interior}" : "") +
 						$", C.P. {txtCPEditarClienteInOper.Text.Trim()}, {txtColoniaEditarClienteInOper.Text.Trim()}, " +
 						$"{txtCiudadEditarClienteInOper.Text.Trim()}, {txtEstadoEditarClienteInOper.Text.Trim()}, {txtPaisEditarClienteInOper.Text.Trim()}";
+					if (valor.Length > 250)
+					{
+						MessageBox.Show("Domicilio: la dirección completa no puede exceder 250 caracteres.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						txtPaisEditarClienteInOper.Focus();
+						return;
+					}
 				}
 				else
 				{
@@ -1837,21 +1864,23 @@ namespace PIA
 				valor = txtNuevoDatoEditarClienteInOper.Text.Trim();
 				if (string.IsNullOrWhiteSpace(valor))
 				{
-					MessageBox.Show("Escribe el nuevo valor.");
+					MessageBox.Show($"{campo}: escribe el nuevo valor.", "Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 					txtNuevoDatoEditarClienteInOper.Focus();
 					return;
 				}
 			}
 
-			if (campo == "CORREO ELECTRONICO" && !Regex.IsMatch(valor, @"^[^\s@]+@[^\s@]+\.[^\s@]+$"))
+			if (campo == "CORREO ELECTRONICO" && (valor.Length > 100 || !PoliticaCliente.EsCorreoValido(valor)))
 			{
-				MessageBox.Show("Escribe un correo electrónico válido.");
+				MessageBox.Show("Correo electrónico: escribe una dirección válida de hasta 100 caracteres.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNuevoDatoEditarClienteInOper.Focus();
 				return;
 			}
 			if (campo.StartsWith("TELEFONO", StringComparison.Ordinal) &&
-				!Regex.IsMatch(valor, @"^\+?[0-9\s()-]{7,15}$"))
+				!PoliticaCliente.EsTelefonoValido(valor))
 			{
-				MessageBox.Show("Escribe un teléfono válido.");
+				MessageBox.Show($"{campo}: captura de 7 a 15 dígitos; puedes usar +, espacios, paréntesis o guiones.", "Dato inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				txtNuevoDatoEditarClienteInOper.Focus();
 				return;
 			}
 
@@ -1868,8 +1897,13 @@ namespace PIA
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.InnerException?.Message ?? ex.Message,
-					"No se pudieron guardar los cambios", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				string detalle = ex.GetBaseException().Message;
+				if (detalle.Contains("duplicate", StringComparison.OrdinalIgnoreCase) || detalle.Contains("UNIQUE", StringComparison.OrdinalIgnoreCase))
+					detalle = $"{campo}: ese valor ya está registrado en otro cliente.";
+				MessageBox.Show($"{campo}: no se pudo actualizar.\n{detalle}",
+					"Edición de cliente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				if (campo == "DOMICILIO") txtPaisEditarClienteInOper.Focus();
+				else txtNuevoDatoEditarClienteInOper.Focus();
 			}
 			finally
 			{
@@ -1987,11 +2021,11 @@ namespace PIA
 			{
 				if (fila.IsNewRow) continue;
 				string valor(int indice) => Convert.ToString(fila.Cells[indice].Value) ?? string.Empty;
-				lineas.Add($"Folio: {valor(0)} | Fecha: {valor(1)}");
-				lineas.Add($"Estadio: {valor(2)} | Partido: {valor(3)}");
-				lineas.Add($"Zona: {valor(4)} | Boletos: {valor(5)}");
-				lineas.Add($"Subtotal: {valor(6)} | Total: {valor(7)}");
-				lineas.Add($"Fecha del partido: {valor(8)} | Método de pago: {valor(9)}");
+				lineas.Add($"ID de venta: {valor(0)} | Folio: {valor(1)} | Fecha: {valor(2)}");
+				lineas.Add($"Estadio: {valor(3)} | Partido: {valor(4)}");
+				lineas.Add($"Zona: {valor(5)} | Boletos: {valor(6)}");
+				lineas.Add($"Subtotal: {valor(7)} | Total: {valor(8)}");
+				lineas.Add($"Fecha del partido: {valor(9)} | Método de pago: {valor(10)}");
 				lineas.Add(string.Empty);
 			}
 

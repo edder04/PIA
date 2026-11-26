@@ -639,7 +639,7 @@
 			tabCtrlInAdmin.Controls.Add(tabPgReportes);
 			tabCtrlInAdmin.Controls.Add(tabPageUsuarios);
 			tabCtrlInAdmin.Controls.Add(tabPage7);
-			tabCtrlInAdmin.ItemSize = new Size(0, 1);
+			tabCtrlInAdmin.ItemSize = new Size(50, 20);
 			tabCtrlInAdmin.Location = new Point(50, 100);
 			tabCtrlInAdmin.Margin = new Padding(2);
 			tabCtrlInAdmin.Name = "tabCtrlInAdmin";
@@ -659,11 +659,11 @@
 			tabPgInicio.Controls.Add(lblBoletosVendidosInicio);
 			tabPgInicio.Controls.Add(lblVentasDelDiaInicio);
 			tabPgInicio.Controls.Add(lblBienvenidaInicio);
-			tabPgInicio.Location = new Point(4, 5);
+			tabPgInicio.Location = new Point(4, 24);
 			tabPgInicio.Margin = new Padding(2);
 			tabPgInicio.Name = "tabPgInicio";
 			tabPgInicio.Padding = new Padding(2);
-			tabPgInicio.Size = new Size(1392, 841);
+			tabPgInicio.Size = new Size(1392, 822);
 			tabPgInicio.TabIndex = 0;
 			tabPgInicio.Text = "Inicio";
 			// 
@@ -755,11 +755,11 @@
 			// 
 			tabPgVentas.BackColor = Color.Black;
 			tabPgVentas.Controls.Add(tabCtrlVenta);
-			tabPgVentas.Location = new Point(4, 24);
+			tabPgVentas.Location = new Point(4, 5);
 			tabPgVentas.Margin = new Padding(2);
 			tabPgVentas.Name = "tabPgVentas";
 			tabPgVentas.Padding = new Padding(2);
-			tabPgVentas.Size = new Size(1392, 822);
+			tabPgVentas.Size = new Size(1392, 841);
 			tabPgVentas.TabIndex = 1;
 			tabPgVentas.Text = "Ventas";
 			// 
@@ -1769,10 +1769,10 @@
 			// 
 			tabPgClientes.BackColor = Color.Black;
 			tabPgClientes.Controls.Add(tabClientesInAdmin);
-			tabPgClientes.Location = new Point(4, 24);
+			tabPgClientes.Location = new Point(4, 5);
 			tabPgClientes.Margin = new Padding(2);
 			tabPgClientes.Name = "tabPgClientes";
-			tabPgClientes.Size = new Size(1392, 822);
+			tabPgClientes.Size = new Size(1392, 841);
 			tabPgClientes.TabIndex = 2;
 			tabPgClientes.Text = "Clientes";
 			// 
@@ -1940,10 +1940,10 @@
 			NuevoCliente.Controls.Add(label27);
 			NuevoCliente.Controls.Add(label28);
 			NuevoCliente.Controls.Add(label29);
-			NuevoCliente.Location = new Point(4, 24);
+			NuevoCliente.Location = new Point(4, 5);
 			NuevoCliente.Name = "NuevoCliente";
 			NuevoCliente.Padding = new Padding(3);
-			NuevoCliente.Size = new Size(1378, 772);
+			NuevoCliente.Size = new Size(1378, 791);
 			NuevoCliente.TabIndex = 1;
 			NuevoCliente.Text = "NuevoCliente";
 			// 
@@ -2360,9 +2360,9 @@
 			EditarClienteInAdmin.Controls.Add(lblFechaNacimientoEditarClienteInAdmin);
 			EditarClienteInAdmin.Controls.Add(lblCampoAEditarClienteInAdmin);
 			EditarClienteInAdmin.Controls.Add(label46);
-			EditarClienteInAdmin.Location = new Point(4, 24);
+			EditarClienteInAdmin.Location = new Point(4, 5);
 			EditarClienteInAdmin.Name = "EditarClienteInAdmin";
-			EditarClienteInAdmin.Size = new Size(1378, 772);
+			EditarClienteInAdmin.Size = new Size(1378, 791);
 			EditarClienteInAdmin.TabIndex = 2;
 			EditarClienteInAdmin.Text = "EditarCliente";
 			// 
@@ -2660,10 +2660,10 @@
 			tabHistorialCliente.Controls.Add(lblHistorialInHistorialCliente);
 			tabHistorialCliente.Controls.Add(lblRegresarInHistorialCliente);
 			tabHistorialCliente.Controls.Add(btnRegresarInHistorialCliente);
-			tabHistorialCliente.Location = new Point(4, 24);
+			tabHistorialCliente.Location = new Point(4, 5);
 			tabHistorialCliente.Name = "tabHistorialCliente";
 			tabHistorialCliente.Padding = new Padding(3);
-			tabHistorialCliente.Size = new Size(1378, 772);
+			tabHistorialCliente.Size = new Size(1378, 791);
 			tabHistorialCliente.TabIndex = 3;
 			tabHistorialCliente.Text = "HistorialCliente";
 			// 
@@ -3455,10 +3455,10 @@
 			tabPgFacturas.Controls.Add(txtCodigoVentaInFactura);
 			tabPgFacturas.Controls.Add(lblCodigoVentaInFactura);
 			tabPgFacturas.Controls.Add(lblFacturarVentaInFactura);
-			tabPgFacturas.Location = new Point(4, 24);
+			tabPgFacturas.Location = new Point(4, 5);
 			tabPgFacturas.Margin = new Padding(2);
 			tabPgFacturas.Name = "tabPgFacturas";
-			tabPgFacturas.Size = new Size(1392, 822);
+			tabPgFacturas.Size = new Size(1392, 841);
 			tabPgFacturas.TabIndex = 4;
 			tabPgFacturas.Text = " Factura";
 			// 
@@ -3791,10 +3791,10 @@
 			tabPgReportes.Controls.Add(lblIngresosReporte);
 			tabPgReportes.Controls.Add(lblBoletosVendidosReporte);
 			tabPgReportes.Controls.Add(button6);
-			tabPgReportes.Location = new Point(4, 24);
+			tabPgReportes.Location = new Point(4, 5);
 			tabPgReportes.Margin = new Padding(2);
 			tabPgReportes.Name = "tabPgReportes";
-			tabPgReportes.Size = new Size(1392, 822);
+			tabPgReportes.Size = new Size(1392, 841);
 			tabPgReportes.TabIndex = 5;
 			tabPgReportes.Text = "Reportes";
 			// 
@@ -4112,10 +4112,10 @@
 			tabOcupacion.Controls.Add(cboEstadioInOcupacion);
 			tabOcupacion.Controls.Add(lblPartidoInOcupacion);
 			tabOcupacion.Controls.Add(lblEstadioInOcupacion);
-			tabOcupacion.Location = new Point(4, 24);
+			tabOcupacion.Location = new Point(4, 5);
 			tabOcupacion.Name = "tabOcupacion";
 			tabOcupacion.Padding = new Padding(3);
-			tabOcupacion.Size = new Size(1355, 723);
+			tabOcupacion.Size = new Size(1355, 742);
 			tabOcupacion.TabIndex = 1;
 			tabOcupacion.Text = "Ocupacion";
 			// 
@@ -4131,7 +4131,7 @@
 			dgvAsientosInOcupacion.Margin = new Padding(2);
 			dgvAsientosInOcupacion.Name = "dgvAsientosInOcupacion";
 			dgvAsientosInOcupacion.RowHeadersWidth = 72;
-			dgvAsientosInOcupacion.Size = new Size(1167, 259);
+			dgvAsientosInOcupacion.Size = new Size(1167, 278);
 			dgvAsientosInOcupacion.TabIndex = 72;
 			// 
 			// dgvDisponibilidadInOcupacion
@@ -4147,7 +4147,7 @@
 			dgvDisponibilidadInOcupacion.Margin = new Padding(2);
 			dgvDisponibilidadInOcupacion.Name = "dgvDisponibilidadInOcupacion";
 			dgvDisponibilidadInOcupacion.RowHeadersWidth = 72;
-			dgvDisponibilidadInOcupacion.Size = new Size(1167, 259);
+			dgvDisponibilidadInOcupacion.Size = new Size(1167, 278);
 			dgvDisponibilidadInOcupacion.TabIndex = 71;
 			// 
 			// dataGridViewTextBoxColumn8
@@ -4280,11 +4280,11 @@
 			// 
 			tabPageUsuarios.BackColor = Color.Black;
 			tabPageUsuarios.Controls.Add(tabCtrlUsauriosInAdmin);
-			tabPageUsuarios.Location = new Point(4, 24);
+			tabPageUsuarios.Location = new Point(4, 5);
 			tabPageUsuarios.Margin = new Padding(2);
 			tabPageUsuarios.Name = "tabPageUsuarios";
 			tabPageUsuarios.Padding = new Padding(2);
-			tabPageUsuarios.Size = new Size(1392, 822);
+			tabPageUsuarios.Size = new Size(1392, 841);
 			tabPageUsuarios.TabIndex = 6;
 			tabPageUsuarios.Text = "Usuarios";
 			// 
@@ -4784,10 +4784,10 @@
 			tabPage7.Controls.Add(label38);
 			tabPage7.Controls.Add(txtBuscarCancelarInAdmin);
 			tabPage7.Controls.Add(lblBuscarCancelarInAdmin);
-			tabPage7.Location = new Point(4, 24);
+			tabPage7.Location = new Point(4, 5);
 			tabPage7.Name = "tabPage7";
 			tabPage7.Padding = new Padding(3);
-			tabPage7.Size = new Size(1392, 822);
+			tabPage7.Size = new Size(1392, 841);
 			tabPage7.TabIndex = 7;
 			tabPage7.Text = "Cancelacion";
 			// 
