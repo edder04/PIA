@@ -106,6 +106,8 @@ namespace PIA{
 			{
 				if (tabCtrlInAdmin.SelectedIndex == 1)
 					await CargarGridClientesInVentasAsync();
+				else if (tabCtrlInAdmin.SelectedIndex == 3)
+					await CargarPartidos();
 			};
 			tabCtrlVenta.SelectedIndexChanged += async (_, _) =>
 			{
@@ -185,50 +187,79 @@ namespace PIA{
 		//=========================================================
 		private async Task CargarPartidos()
 		{
+			pnlPartidos.SuspendLayout();
 			pnlPartidos.Controls.Clear();
-
-			using var db = new AppDbContext();
-
-			var consulta = (await RepoConsulta.PartidosAsync(db))
-				.Where(p => p.Estado == "Programado" && p.FechaHora >= DateTime.Now);
-			if (cboEstadiosInPartidos.SelectedItem is FiltroEstadioPartidos { IdEstadio: int idEstadio })
-				consulta = consulta.Where(p => p.IdEstadio == idEstadio);
-
-			DateTime hoy = DateTime.Today;
-			DateTime inicioSemana = hoy.AddDays(-(((int)hoy.DayOfWeek + 6) % 7));
-			switch (cboFechasInPartidos.SelectedIndex)
+			try
 			{
-				case 1:
-					consulta = consulta.Where(p => p.FechaHora.Date == hoy);
-					break;
-				case 2:
-					consulta = consulta.Where(p => p.FechaHora.Date >= inicioSemana && p.FechaHora.Date < inicioSemana.AddDays(7));
-					break;
-				case 3:
-					consulta = consulta.Where(p => p.FechaHora.Date >= hoy && p.FechaHora.Date < hoy.AddDays(31));
-					break;
-			}
+				using var db = new AppDbContext();
+				var consulta = (await RepoConsulta.PartidosAsync(db))
+					.Where(p => string.Equals(p.Estado?.Trim(), "Programado", StringComparison.OrdinalIgnoreCase) &&
+							p.FechaHora >= DateTime.Now);
+				if (cboEstadiosInPartidos.SelectedItem is FiltroEstadioPartidos { IdEstadio: int idEstadio })
+					consulta = consulta.Where(p => p.IdEstadio == idEstadio);
 
-			var partidos = consulta.OrderBy(p => p.FechaHora).ToList();
-
-			foreach (var partido in partidos)
-			{
-				var tarjeta = new UcCardPartido();
-				tarjeta.CargarPartido(partido);
-
-				tarjeta.PartidoElegido += partidoElegido =>
+				DateTime hoy = DateTime.Today;
+				DateTime inicioSemana = hoy.AddDays(-(((int)hoy.DayOfWeek + 6) % 7));
+				switch (cboFechasInPartidos.SelectedIndex)
 				{
-					_partidoParaVenta = partidoElegido;
+					case 1:
+						consulta = consulta.Where(p => p.FechaHora.Date == hoy);
+						break;
+					case 2:
+						consulta = consulta.Where(p => p.FechaHora.Date >= inicioSemana && p.FechaHora.Date < inicioSemana.AddDays(7));
+						break;
+					case 3:
+						consulta = consulta.Where(p => p.FechaHora.Date >= hoy && p.FechaHora.Date < hoy.AddDays(31));
+						break;
+				}
 
-					txtBuscarEquipoVentaPaso2.Text =
-						$"{partidoElegido.EquipoLocal} vs. {partidoElegido.EquipoVisitante}";
+				var partidos = consulta.OrderBy(p => p.FechaHora).ToList();
+				if (partidos.Count == 0)
+				{
+					pnlPartidos.Controls.Add(new Label
+					{
+						Text = "No hay partidos programados futuros con los filtros seleccionados. Cambia los filtros o agrega un partido futuro.",
+						TextAlign = ContentAlignment.MiddleCenter,
+						ForeColor = Color.White,
+						BackColor = Color.FromArgb(60, 60, 60),
+						Font = new Font("Segoe UI", 12, FontStyle.Bold),
+						Size = new Size(Math.Max(400, pnlPartidos.ClientSize.Width - 30), 70),
+						Margin = new Padding(10)
+					});
+					return;
+				}
 
-					tabCtrlInAdmin.SelectedIndex = 1; // Pestaña principal de Ventas
-					tabCtrlVenta.SelectedIndex = 0;  // Primer paso del flujo de venta
-
-				};
-
-				pnlPartidos.Controls.Add(tarjeta);
+				foreach (var partido in partidos)
+				{
+					var tarjeta = new UcCardPartido();
+					tarjeta.CargarPartido(partido);
+					tarjeta.PartidoElegido += partidoElegido =>
+					{
+						_partidoParaVenta = partidoElegido;
+						txtBuscarEquipoVentaPaso2.Text = $"{partidoElegido.EquipoLocal} vs. {partidoElegido.EquipoVisitante}";
+						tabCtrlInAdmin.SelectedIndex = 1;
+						tabCtrlVenta.SelectedIndex = 0;
+					};
+					pnlPartidos.Controls.Add(tarjeta);
+				}
+			}
+			catch (Exception ex)
+			{
+				pnlPartidos.Controls.Add(new Label
+				{
+					Text = "No se pudieron cargar los partidos. Revisa la conexión con la base de datos.",
+					TextAlign = ContentAlignment.MiddleCenter,
+					ForeColor = Color.White,
+					BackColor = Color.FromArgb(110, 35, 35),
+					Size = new Size(Math.Max(400, pnlPartidos.ClientSize.Width - 30), 70),
+					Margin = new Padding(10)
+				});
+				MessageBox.Show($"No se pudo cargar el panel de partidos.\n{ex.GetBaseException().Message}",
+					"Partidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				pnlPartidos.ResumeLayout();
 			}
 		}
 
@@ -355,10 +386,23 @@ namespace PIA{
 		//=========================================================
 		// Actualiza los combos y el panel después de cambiar catálogos.
 		//=========================================================
-		private async Task RefrescarCatalogosEstadioPartidoAsync(int? idEstadioSeleccionado = null)
+		private async Task RefrescarCatalogosEstadioPartidoAsync(int? idEstadioSeleccionado = null, bool mostrarEstadioEnPanel = false)
 		{
 			await CargarEstadiosComboAdminAsync(idEstadioSeleccionado);
 			await CargarFiltrosEstadioListaPartidosAsync();
+			if (mostrarEstadioEnPanel && idEstadioSeleccionado.HasValue)
+			{
+				_cargandoFiltrosListaPartidos = true;
+				try
+				{
+					cboEstadiosInPartidos.SelectedValue = idEstadioSeleccionado.Value;
+					cboFechasInPartidos.SelectedIndex = 0;
+				}
+				finally
+				{
+					_cargandoFiltrosListaPartidos = false;
+				}
+			}
 			await CargarFiltrosReporteAsync();
 			await CargarFiltrosOcupacionAsync();
 			await CargarPartidos();
@@ -2609,7 +2653,7 @@ namespace PIA{
 				txtEstadoPartidoInAdmin.Clear();
 				try
 				{
-					await RefrescarCatalogosEstadioPartidoAsync(idEstadio);
+					await RefrescarCatalogosEstadioPartidoAsync(idEstadio, mostrarEstadioEnPanel: true);
 				}
 				catch (Exception ex)
 				{
@@ -2686,7 +2730,8 @@ namespace PIA{
 				.Where(p => (string.IsNullOrWhiteSpace(texto) || p.EquipoLocal.Contains(texto, StringComparison.OrdinalIgnoreCase) ||
 					p.EquipoVisitante.Contains(texto, StringComparison.OrdinalIgnoreCase) || p.Estadio.Contains(texto, StringComparison.OrdinalIgnoreCase) ||
 					$"{p.EquipoLocal} vs. {p.EquipoVisitante}".Contains(texto, StringComparison.OrdinalIgnoreCase)) &&
-					p.Estado == "Programado" && p.FechaHora >= DateTime.Now && p.BoletosDisponibles > 0)
+					string.Equals(p.Estado?.Trim(), "Programado", StringComparison.OrdinalIgnoreCase) &&
+					p.FechaHora >= DateTime.Now && p.BoletosDisponibles > 0)
 				.OrderBy(p => p.FechaHora).ToList();
 
 			gridPartidosVentaInAdmin.Rows.Clear();

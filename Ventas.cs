@@ -444,7 +444,8 @@ namespace PIA
 		{
 			using var db = new AppDbContext();
 			var partidos = (await RepoConsulta.PartidosAsync(db))
-				.Where(p => p.Estado == "Programado" && p.FechaHora >= DateTime.Now)
+				.Where(p => string.Equals(p.Estado?.Trim(), "Programado", StringComparison.OrdinalIgnoreCase) &&
+						p.FechaHora >= DateTime.Now)
 				.OrderBy(p => p.FechaHora).ToList();
 
 			flowPanVentasPaso2.Controls.Clear();
